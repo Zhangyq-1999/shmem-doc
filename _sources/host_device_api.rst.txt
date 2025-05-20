@@ -1,0 +1,8 @@
+HOST_DEVICE API
+=================================
+
+shmem_types.h
+---------------------------------
+
+.. doxygenfile:: shmem_types.h
+    :project: SHMEM_CPP_API

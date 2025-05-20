@@ -1,0 +1,35 @@
+Welcome to Shmem's Documentation!
+=================================
+
+.. toctree::
+    :maxdepth: 2
+    :caption: Getting Started
+    :name: Getting Started
+
+    quickstart.md
+    api.md
+    related_scripts.md
+
+.. toctree::
+    :maxdepth: 2
+    :caption: Architecture
+    :name: Architecture
+
+    code_organization.md
+
+.. toctree::
+    :maxdepth: 2
+    :caption: API
+    :name: API
+
+    host_device_api.rst
+    host_api.rst
+    device_api.rst
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

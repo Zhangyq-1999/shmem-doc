@@ -1,0 +1,446 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DEVICE API &mdash; Shmem Guidebook 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="HOST API" href="host_api.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Shmem Guidebook
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">快速开始</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">SHMEM API 样例</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#init-api">Init API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#id1">初始化状态</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#attributes">初始化所需的attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#id2">初始化样例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#team-api">Team API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#mem-api">Mem API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#rma-api">RMA API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#sync-api">Sync API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="related_scripts.html#build-sh">build.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="related_scripts.html#install-sh">install.sh</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="related_scripts.html#id2">安装目录</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="related_scripts.html#run-sh">run.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="related_scripts.html#set-env-sh">set_env.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="related_scripts.html#uninstall-sh">uninstall.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="related_scripts.html#release-sh">release.sh</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="code_organization.html">代码组织结构</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="code_organization.html#shmem">SHMEM组织结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_organization.html#include">include</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_organization.html#src">src</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_organization.html#examples">examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_organization.html#tests">tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_organization.html#docs">docs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_organization.html#scrips">scrips</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="host_device_api.html">HOST_DEVICE API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="host_device_api.html#shmem-types-h">shmem_types.h</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="host_device_api.html#_CPPv412shmem_team_t"><code class="docutils literal notranslate"><span class="pre">shmem_team_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="host_device_api.html#_CPPv418shmem_team_index_t"><code class="docutils literal notranslate"><span class="pre">shmem_team_index_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="host_device_api.html#_CPPv4N18shmem_team_index_t18SHMEM_TEAM_INVALIDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_TEAM_INVALID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="host_device_api.html#_CPPv4N18shmem_team_index_t16SHMEM_TEAM_WORLDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_TEAM_WORLD</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="host_device_api.html#_CPPv421data_op_engine_type_t"><code class="docutils literal notranslate"><span class="pre">data_op_engine_type_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="host_device_api.html#_CPPv4N21data_op_engine_type_t17SHMEM_DATA_OP_MTEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_DATA_OP_MTE</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="host_api.html">HOST API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="host_api.html#shmem-host-def-h">shmem_host_def.h</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="host_api.html#c.SHMEM_HOST_API"><code class="docutils literal notranslate"><span class="pre">SHMEM_HOST_API</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="host_api.html#_CPPv418shmem_error_code_t"><code class="docutils literal notranslate"><span class="pre">shmem_error_code_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="host_api.html#_CPPv4N18shmem_error_code_t13SHMEM_SUCCESSE"><code class="docutils literal notranslate"><span class="pre">SHMEM_SUCCESS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="host_api.html#_CPPv4N18shmem_error_code_t19SHMEM_INVALID_PARAME"><code class="docutils literal notranslate"><span class="pre">SHMEM_INVALID_PARAM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="host_api.html#_CPPv4N18shmem_error_code_t19SHMEM_INVALID_VALUEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_INVALID_VALUE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="host_api.html#_CPPv4N18shmem_error_code_t16SHMEM_SMEM_ERRORE"><code class="docutils literal notranslate"><span class="pre">SHMEM_SMEM_ERROR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="host_api.html#_CPPv4N18shmem_error_code_t17SHMEM_INNER_ERRORE"><code class="docutils literal notranslate"><span class="pre">SHMEM_INNER_ERROR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="host_api.html#_CPPv4N18shmem_error_code_t16SHMEM_NOT_INITEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_NOT_INITED</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="host_api.html#_CPPv419shmem_init_status_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_status_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="host_api.html#_CPPv4N19shmem_init_status_t27SHMEM_STATUS_NOT_INITALIZEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_NOT_INITALIZED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="host_api.html#_CPPv4N19shmem_init_status_t24SHMEM_STATUS_SHM_CREATEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_SHM_CREATED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="host_api.html#_CPPv4N19shmem_init_status_t26SHMEM_STATUS_IS_INITALIZEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_IS_INITALIZED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="host_api.html#_CPPv4N19shmem_init_status_t20SHMEM_STATUS_INVALIDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_INVALID</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="host_api.html#_CPPv426shmem_init_optional_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_optional_attr_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="host_api.html#_CPPv4N26shmem_init_optional_attr_t7versionE"><code class="docutils literal notranslate"><span class="pre">version</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="host_api.html#_CPPv4N26shmem_init_optional_attr_t16dataOpEngineTypeE"><code class="docutils literal notranslate"><span class="pre">dataOpEngineType</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="host_api.html#_CPPv4N26shmem_init_optional_attr_t14shmInitTimeoutE"><code class="docutils literal notranslate"><span class="pre">shmInitTimeout</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="host_api.html#_CPPv4N26shmem_init_optional_attr_t16shmCreateTimeoutE"><code class="docutils literal notranslate"><span class="pre">shmCreateTimeout</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="host_api.html#_CPPv4N26shmem_init_optional_attr_t23controlOperationTimeoutE"><code class="docutils literal notranslate"><span class="pre">controlOperationTimeout</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="host_api.html#_CPPv417shmem_init_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_attr_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="host_api.html#_CPPv4N17shmem_init_attr_t6myRankE"><code class="docutils literal notranslate"><span class="pre">myRank</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="host_api.html#_CPPv4N17shmem_init_attr_t6nRanksE"><code class="docutils literal notranslate"><span class="pre">nRanks</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="host_api.html#_CPPv4N17shmem_init_attr_t6ipPortE"><code class="docutils literal notranslate"><span class="pre">ipPort</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="host_api.html#_CPPv4N17shmem_init_attr_t12localMemSizeE"><code class="docutils literal notranslate"><span class="pre">localMemSize</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="host_api.html#_CPPv4N17shmem_init_attr_t10optionAttrE"><code class="docutils literal notranslate"><span class="pre">optionAttr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="host_api.html#shmem-host-heap-h">shmem_host_heap.h</a></li>
+<li class="toctree-l2"><a class="reference internal" href="host_api.html#shmem-host-init-h">shmem_host_init.h</a></li>
+<li class="toctree-l2"><a class="reference internal" href="host_api.html#shmem-host-rma-h">shmem_host_rma.h</a></li>
+<li class="toctree-l2"><a class="reference internal" href="host_api.html#shmem-host-sync-h">shmem_host_sync.h</a></li>
+<li class="toctree-l2"><a class="reference internal" href="host_api.html#shmem-host-team-h">shmem_host_team.h</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DEVICE API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#shmem-device-def-h">shmem_device_def.h</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_GLOBAL"><code class="docutils literal notranslate"><span class="pre">SHMEM_GLOBAL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_DEVICE"><code class="docutils literal notranslate"><span class="pre">SHMEM_DEVICE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#shmem-device-rma-h">shmem_device_rma.h</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_TYPE_FUNC"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPE_FUNC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_TYPENAME_P_AICORE"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPENAME_P_AICORE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_TYPENAME_G_AICORE"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPENAME_G_AICORE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_GET_TYPENAME_MEM"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_GET_TYPENAME_MEM_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_TENSOR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_PUT_TYPENAME_MEM"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_PUT_TYPENAME_MEM_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_TENSOR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv415SHMEM_TYPE_FUNC23SHMEM_TYPENAME_P_AICORE"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPE_FUNC()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv415SHMEM_TYPE_FUNC23SHMEM_TYPENAME_G_AICORE"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPE_FUNC()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv415SHMEM_TYPE_FUNC22SHMEM_GET_TYPENAME_MEM"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPE_FUNC()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv415SHMEM_TYPE_FUNC29SHMEM_GET_TYPENAME_MEM_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPE_FUNC()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv415SHMEM_TYPE_FUNC22SHMEM_PUT_TYPENAME_MEM"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPE_FUNC()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv415SHMEM_TYPE_FUNC29SHMEM_PUT_TYPENAME_MEM_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPE_FUNC()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#shmem-device-sync-h">shmem_device_sync.h</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shmem-device-team-h">shmem_device_team.h</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Shmem Guidebook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">DEVICE API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/device_api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="device-api">
+<h1>DEVICE API<a class="headerlink" href="#device-api" title="Link to this heading"></a></h1>
+<section id="shmem-device-def-h">
+<h2>shmem_device_def.h<a class="headerlink" href="#shmem-device-def-h" title="Link to this heading"></a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SHMEM_GLOBAL">
+<span class="target" id="shmem__device__def_8h_1a5266bb1990f1b297f74303cee9f9b953"></span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_GLOBAL</span></span></span><a class="headerlink" href="#c.SHMEM_GLOBAL" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SHMEM_DEVICE">
+<span class="target" id="shmem__device__def_8h_1a62f2e385b6c788cc4cf7ef566507cac1"></span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_DEVICE</span></span></span><a class="headerlink" href="#c.SHMEM_DEVICE" title="Link to this definition"></a><br /></dt>
+<dd><p>A macro that identifies a function on the device side. </p>
+</dd></dl>
+
+</div>
+</section>
+<section id="shmem-device-rma-h">
+<h2>shmem_device_rma.h<a class="headerlink" href="#shmem-device-rma-h" title="Link to this heading"></a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SHMEM_TYPE_FUNC">
+<span class="target" id="shmem__device__rma_8h_1a8da5cc8ea6e0858c4aefb3e5fa7d13c8"></span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_TYPE_FUNC</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">FUNC</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.SHMEM_TYPE_FUNC" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SHMEM_TYPENAME_P_AICORE">
+<span class="target" id="shmem__device__rma_8h_1ada5894dcefe8bc1044ce2113d9fc5e8d"></span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_TYPENAME_P_AICORE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.SHMEM_TYPENAME_P_AICORE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SHMEM_TYPENAME_G_AICORE">
+<span class="target" id="shmem__device__rma_8h_1a61fdd299864e1114bda200e1f87c78d4"></span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_TYPENAME_G_AICORE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.SHMEM_TYPENAME_G_AICORE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SHMEM_GET_TYPENAME_MEM">
+<span class="target" id="shmem__device__rma_8h_1abfb51a41a1841c36b833602d0cca9153"></span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_GET_TYPENAME_MEM</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.SHMEM_GET_TYPENAME_MEM" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SHMEM_GET_TYPENAME_MEM_TENSOR">
+<span class="target" id="shmem__device__rma_8h_1a9890cba64e43c8e4d1526f449626bbef"></span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_GET_TYPENAME_MEM_TENSOR</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.SHMEM_GET_TYPENAME_MEM_TENSOR" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SHMEM_PUT_TYPENAME_MEM">
+<span class="target" id="shmem__device__rma_8h_1a652d90f64cf7353569418e939322f204"></span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_PUT_TYPENAME_MEM</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.SHMEM_PUT_TYPENAME_MEM" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SHMEM_PUT_TYPENAME_MEM_TENSOR">
+<span class="target" id="shmem__device__rma_8h_1a6087baff013ce9255911d18bb991d2ae"></span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_PUT_TYPENAME_MEM_TENSOR</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.SHMEM_PUT_TYPENAME_MEM_TENSOR" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rma_8h_1a025b6b148862c5c38b3993dc9926940c"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">__gm__</span> <span class="pre">void</span> <span class="pre">*</span> <span class="pre">shmem_ptr</span> <span class="pre">(__gm__</span> <span class="pre">void</span> <span class="pre">*ptr,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pointer. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv415SHMEM_TYPE_FUNC23SHMEM_TYPENAME_P_AICORE">
+<span id="_CPPv315SHMEM_TYPE_FUNC23SHMEM_TYPENAME_P_AICORE"></span><span id="_CPPv215SHMEM_TYPE_FUNC23SHMEM_TYPENAME_P_AICORE"></span><span id="SHMEM_TYPE_FUNC__SHMEM_TYPENAME_P_AICORE"></span><span class="target" id="shmem__device__rma_8h_1aab578b8e0ad7f68df7036fa9fc76eeff"></span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_TYPE_FUNC</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">SHMEM_TYPENAME_P_AICORE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415SHMEM_TYPE_FUNC23SHMEM_TYPENAME_P_AICORE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv415SHMEM_TYPE_FUNC23SHMEM_TYPENAME_G_AICORE">
+<span id="_CPPv315SHMEM_TYPE_FUNC23SHMEM_TYPENAME_G_AICORE"></span><span id="_CPPv215SHMEM_TYPE_FUNC23SHMEM_TYPENAME_G_AICORE"></span><span id="SHMEM_TYPE_FUNC__SHMEM_TYPENAME_G_AICORE"></span><span class="target" id="shmem__device__rma_8h_1a0ca51579bfd6ab12ecda81684431ca09"></span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_TYPE_FUNC</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">SHMEM_TYPENAME_G_AICORE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415SHMEM_TYPE_FUNC23SHMEM_TYPENAME_G_AICORE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rma_8h_1ae9d7c0459caf1265d3c9c9825a9ce49b"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_mte_get_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*buf,</span> <span class="pre">uint32_t</span> <span class="pre">ubSize,</span> <span class="pre">uint32_t</span> <span class="pre">elemSize,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rma_8h_1a848620c742855e4bd31abb37373618a1"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_mte_get_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">buf,</span> <span class="pre">uint32_t</span> <span class="pre">elemSize,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rma_8h_1acb112cfa167098dff4cdcb4312910a5f"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_mte_put_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*buf,</span> <span class="pre">uint32_t</span> <span class="pre">ubSize,</span> <span class="pre">uint32_t</span> <span class="pre">elemSize,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rma_8h_1a5c5b7777f6d81e2d34d730d185164c54"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_mte_put_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">buf,</span> <span class="pre">uint32_t</span> <span class="pre">elemSize,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv415SHMEM_TYPE_FUNC22SHMEM_GET_TYPENAME_MEM">
+<span id="_CPPv315SHMEM_TYPE_FUNC22SHMEM_GET_TYPENAME_MEM"></span><span id="_CPPv215SHMEM_TYPE_FUNC22SHMEM_GET_TYPENAME_MEM"></span><span id="SHMEM_TYPE_FUNC__SHMEM_GET_TYPENAME_MEM"></span><span class="target" id="shmem__device__rma_8h_1aa557c660245d57650b7566ea246489fe"></span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_TYPE_FUNC</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">SHMEM_GET_TYPENAME_MEM</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415SHMEM_TYPE_FUNC22SHMEM_GET_TYPENAME_MEM" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv415SHMEM_TYPE_FUNC29SHMEM_GET_TYPENAME_MEM_TENSOR">
+<span id="_CPPv315SHMEM_TYPE_FUNC29SHMEM_GET_TYPENAME_MEM_TENSOR"></span><span id="_CPPv215SHMEM_TYPE_FUNC29SHMEM_GET_TYPENAME_MEM_TENSOR"></span><span id="SHMEM_TYPE_FUNC__SHMEM_GET_TYPENAME_MEM_TENSOR"></span><span class="target" id="shmem__device__rma_8h_1ae9fafd2b1c374d6c95c4c0765c39978f"></span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_TYPE_FUNC</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">SHMEM_GET_TYPENAME_MEM_TENSOR</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415SHMEM_TYPE_FUNC29SHMEM_GET_TYPENAME_MEM_TENSOR" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv415SHMEM_TYPE_FUNC22SHMEM_PUT_TYPENAME_MEM">
+<span id="_CPPv315SHMEM_TYPE_FUNC22SHMEM_PUT_TYPENAME_MEM"></span><span id="_CPPv215SHMEM_TYPE_FUNC22SHMEM_PUT_TYPENAME_MEM"></span><span id="SHMEM_TYPE_FUNC__SHMEM_PUT_TYPENAME_MEM"></span><span class="target" id="shmem__device__rma_8h_1aa3b11266183b2753c7f5ccccc606335f"></span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_TYPE_FUNC</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">SHMEM_PUT_TYPENAME_MEM</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415SHMEM_TYPE_FUNC22SHMEM_PUT_TYPENAME_MEM" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv415SHMEM_TYPE_FUNC29SHMEM_PUT_TYPENAME_MEM_TENSOR">
+<span id="_CPPv315SHMEM_TYPE_FUNC29SHMEM_PUT_TYPENAME_MEM_TENSOR"></span><span id="_CPPv215SHMEM_TYPE_FUNC29SHMEM_PUT_TYPENAME_MEM_TENSOR"></span><span id="SHMEM_TYPE_FUNC__SHMEM_PUT_TYPENAME_MEM_TENSOR"></span><span class="target" id="shmem__device__rma_8h_1a3607be2043d09f48506a08c76d3a9ac4"></span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_TYPE_FUNC</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">SHMEM_PUT_TYPENAME_MEM_TENSOR</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415SHMEM_TYPE_FUNC29SHMEM_PUT_TYPENAME_MEM_TENSOR" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</section>
+<section id="shmem-device-sync-h">
+<h2>shmem_device_sync.h<a class="headerlink" href="#shmem-device-sync-h" title="Link to this heading"></a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__sync_8h_1a79eaed91ac7eff387fac7d81c5b2f91e"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_barrier</span> <span class="pre">(shmem_team_t</span> <span class="pre">tid)</span></span></dt>
+<dd><p>Both the host and device have a function named <strong><a class="reference internal" href="host_api.html#shmem__host__sync_8h_1a79eaed91ac7eff387fac7d81c5b2f91e"><span class="std std-ref">shmem_barrier()</span></a></strong><p>, which is distinguished by prefix macros SHMEM_HOST_API and SHMEM_DEVICE.</p>
+<p>On the host side, this method is a barrier of team on default stream.</p>
+</p>
+<p>On the device side, this method is a barrier of a specific team.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tid</strong> – [in] team to do barrier </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__sync_8h_1ace58a1f501941628458942f68eca918e"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_barrier_all</span> <span class="pre">()</span></span></dt>
+<dd><p>Both the host and device have a function named <strong><a class="reference internal" href="host_api.html#shmem__host__sync_8h_1ace58a1f501941628458942f68eca918e"><span class="std std-ref">shmem_barrier_all()</span></a></strong><p>, which is distinguished by prefix macros SHMEM_HOST_API and SHMEM_DEVICE.</p>
+<p>On the host side, this method is a barrier of all teams on default stream.</p>
+</p>
+<p>On the device side, this method is a barrier of all ranks. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__sync_8h_1aa2dccfae52084fce068ede2768694774"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmemx_barrier_vec</span> <span class="pre">(shmem_team_t</span> <span class="pre">tid)</span></span></dt>
+<dd><p>barrier of a specific team. Different from shmem_barrier that only vector cores participate. Useful in communication-over-compute operators. Cube core may call the api but takes no effect. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tid</strong> – [in] team to do barrier </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__sync_8h_1a91b3f3974a770efcc5564d51dd912961"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmemx_barrier_all_vec</span> <span class="pre">()</span></span></dt>
+<dd><p>barrier of all ranks. Different from shmem_barrier_all that only vector cores participate. Useful in communication-over-compute operators. Cube core may call the api but takes no effect. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tid</strong> – [in] team to do barrier </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__sync_8h_1a74d04cface7b8fd615e5420a679ec6bf"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_quiet</span> <span class="pre">()</span></span></dt>
+<dd><p>Sync primitive that ensures completion: All operations of the calling thread before the primitive are completed. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__sync_8h_1aecd120d551d7c9574d2e71ff594c82d6"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_fence</span> <span class="pre">()</span></span></dt>
+<dd><p>Sync primitive that preservers order: All operations of the calling thread before the primitive are visible to the calling thread after the primitive. Implemented same as <a class="reference internal" href="#shmem__device__sync_8h_1a74d04cface7b8fd615e5420a679ec6bf"><span class="std std-ref">shmem_quiet()</span></a>. </p>
+</dd></dl>
+
+</div>
+</section>
+<section id="shmem-device-team-h">
+<h2>shmem_device_team.h<a class="headerlink" href="#shmem-device-team-h" title="Link to this heading"></a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__team_8h_1a749f1fea6c7c46ec17f179b809625164"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">int</span> <span class="pre">shmem_my_pe</span> <span class="pre">(void)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__team_8h_1a60db3648472d2e8e789db50b53fc7b9d"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">int</span> <span class="pre">shmem_n_pes</span> <span class="pre">(void)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__team_8h_1ad63e348290461160c916d3d33ebf9d54"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">int</span> <span class="pre">shmem_team_my_pe</span> <span class="pre">(shmem_team_t</span> <span class="pre">team)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__team_8h_1a4b36c76c362b14b3333b4a40351996b9"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">int</span> <span class="pre">shmem_team_n_pes</span> <span class="pre">(shmem_team_t</span> <span class="pre">team)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__team_8h_1a936475ea6fc1569bc31250b05f906d88"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">int</span> <span class="pre">shmem_team_translate_pe</span> <span class="pre">(shmem_team_t</span> <span class="pre">srcTeam,</span> <span class="pre">int</span> <span class="pre">srcPe,</span> <span class="pre">shmem_team_t</span> <span class="pre">destTeam)</span></span></dt>
+<dd></dd></dl>
+
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="host_api.html" class="btn btn-neutral float-left" title="HOST API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
