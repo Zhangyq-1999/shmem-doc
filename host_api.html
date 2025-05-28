@@ -410,7 +410,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__sync_8h_1af448e9a20b82defd8c15af70bb4a4cb5"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">shmem_barrier_on_stream</span> <span class="pre">(shmem_team_t</span> <span class="pre">tid,</span> <span class="pre">aclrtStream</span> <span class="pre">stream)</span></span></dt>
-<dd><p>barrier of team on specific stream </p>
+<dd><p>Barrier of team on specific stream </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -424,7 +424,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__sync_8h_1a7cb82cacc90b3d868319637aceea9986"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">shmem_barrier_all_on_stream</span> <span class="pre">(aclrtStream</span> <span class="pre">stream)</span></span></dt>
-<dd><p>barrier of all ranks on specific stream </p>
+<dd><p>Barrier of all ranks on specific stream </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>stream</strong> – [in] stream the barrier will be executed on </p>
@@ -435,10 +435,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__sync_8h_1a79eaed91ac7eff387fac7d81c5b2f91e"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">shmem_barrier</span> <span class="pre">(shmem_team_t</span> <span class="pre">tid)</span></span></dt>
-<dd><p>Both the host and device have a function named <strong><a class="reference internal" href="#shmem__host__sync_8h_1a79eaed91ac7eff387fac7d81c5b2f91e"><span class="std std-ref">shmem_barrier()</span></a></strong><p>and has different meanings, which is distinguished by prefix macros SHMEM_HOST_API and SHMEM_DEVICE.</p>
-<p>On the host side, this method is a barrier of team on default stream.</p>
-</p>
-<p>On the device side, this method is a barrier of a specific team.</p>
+<dd><p>On the host side, this method is a barrier of team on default stream.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>tid</strong> – [in] team to do barrier </p>
@@ -449,10 +446,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__sync_8h_1ace58a1f501941628458942f68eca918e"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">shmem_barrier_all</span> <span class="pre">()</span></span></dt>
-<dd><p>Both the host and device have a function named <strong><a class="reference internal" href="#shmem__host__sync_8h_1ace58a1f501941628458942f68eca918e"><span class="std std-ref">shmem_barrier_all()</span></a></strong><p>and has different meanings, which is distinguished by prefix macros SHMEM_HOST_API and SHMEM_DEVICE.</p>
-<p>On the host side, this method is a barrier of all teams on default stream.</p>
-</p>
-<p>On the device side, this method is a barrier of all ranks. </p>
+<dd><p>On the host side, this method is a barrier of all teams on default stream.</p>
 </dd></dl>
 
 </div>

@@ -267,7 +267,6 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__rma_8h_1a257c44b5be82f1e4cc480c2e6c3e860b"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_##NAME##_p</span> <span class="pre">(__gm__</span> <span class="pre">half</span> <span class="pre">*dst,</span> <span class="pre">const</span> <span class="pre">half</span> <span class="pre">value,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Provide a low latency put capability for single element of most basic types.  </p>
-<p>*</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -283,7 +282,6 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__rma_8h_1a68c4ab596bf950fb9e99a8037410d6ed"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">half</span> <span class="pre">shmem_##NAME##_g</span> <span class="pre">(__gm__</span> <span class="pre">half</span> <span class="pre">*src,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Provide a low latency get capability for single element of most basic types.  </p>
-<p>*</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -301,7 +299,6 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__rma_8h_1a44bd735e8f93fd038e2f2198463e0b2e"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_get_##NAME##_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">half</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">half</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE.  </p>
-<p>*</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -318,7 +315,6 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__rma_8h_1af2bc0415c0e2e71da5666661cd8cb0a2"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_get_##NAME##_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">half</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">half</span> <span class="pre">*src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data * on symmetric memory from the specified PE to address on the local device.  </p>
-<p>*</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -335,7 +331,6 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__rma_8h_1a7136847cdb15d1f732cea61cb5d42241"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_get_##NAME##_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">half</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">half</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE.  </p>
-<p>*</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -352,7 +347,6 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__rma_8h_1aecf4d69d547748058d3a69d908730d44"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_get_##NAME##_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">half</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">half</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data * on symmetric memory from the specified PE to address on the local device.  </p>
-<p>*</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -369,7 +363,6 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__rma_8h_1aca52b87f01934b313df61edde4dafd04"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_put_##NAME##_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">half</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">half</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Copy a contiguous data on local PE to symmetric address on the specified PE.  </p>
-<p>*</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -386,7 +379,6 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__rma_8h_1acbc067f4fdd8afece0a5966ec528608b"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_put_##NAME##_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">half</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">half</span> <span class="pre">*src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data * on local PE to symmetric address on the specified PE.  </p>
-<p>*</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -403,7 +395,6 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__rma_8h_1a1b9ca52001217b1ec2cde3536845b1f8"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_put_##NAME##_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">half</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">half</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Copy a contiguous data on local PE to symmetric address on the specified PE.  </p>
-<p>*</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -420,7 +411,6 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__rma_8h_1a0026841c1fec988a78699311fcab9d59"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_put_##NAME##_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">half</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">half</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data * on local PE to symmetric address on the specified PE.  </p>
-<p>*</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -437,7 +427,6 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__rma_8h_1a3ff223d6b7aaab5a17255d82d31e5f42"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_get_##NAME##_mem_nbi</span> <span class="pre">(__ubuf__</span> <span class="pre">half</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">half</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local UB.  </p>
-<p>*</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -454,7 +443,6 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__rma_8h_1a6af23df40b3c82e4876865a5371e4086"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_get_##NAME##_mem_nbi</span> <span class="pre">(AscendC::LocalTensor&lt;</span> <span class="pre">half</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">half</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local UB.  </p>
-<p>*</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -471,7 +459,6 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__rma_8h_1adc6084878abfad4686de6c1a989feacd"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_get_##NAME##_mem_nbi</span> <span class="pre">(__ubuf__</span> <span class="pre">half</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">half</span> <span class="pre">*src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data * on symmetric memory from the specified PE to address on the local UB.  </p>
-<p>*</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -488,7 +475,6 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__rma_8h_1a4174c27824a01998f22b27581bc6a847"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_get_##NAME##_mem_nbi</span> <span class="pre">(AscendC::LocalTensor&lt;</span> <span class="pre">half</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">half</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data * on symmetric memory from the specified PE to address on the local UB.  </p>
-<p>*</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -505,7 +491,6 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__rma_8h_1a628025529bda074d5d0616ceb32322b8"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_put_##NAME##_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">half</span> <span class="pre">*dst,</span> <span class="pre">__ubuf__</span> <span class="pre">half</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE.  </p>
-<p>*</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -522,7 +507,6 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__rma_8h_1a63f27ed0ad498bec03a1f4897fa0d2f1"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_put_##NAME##_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">half</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">half</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE.  </p>
-<p>*</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -539,7 +523,6 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__rma_8h_1a729649e16fe78177a911aa6975194b73"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_put_##NAME##_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">half</span> <span class="pre">*dst,</span> <span class="pre">__ubuf__</span> <span class="pre">half</span> <span class="pre">*src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data * on local UB to symmetric address on the specified PE.  </p>
-<p>*</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -556,7 +539,7 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__rma_8h_1a9d1e7c2fdf67d474638ea0795eedf02b"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_put_##NAME##_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">half</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">half</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data * on local UB to symmetric address on the specified PE.  </p>
-<p>*</p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -882,10 +865,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__sync_8h_1a79eaed91ac7eff387fac7d81c5b2f91e"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_barrier</span> <span class="pre">(shmem_team_t</span> <span class="pre">tid)</span></span></dt>
-<dd><p>Both the host and device have a function named <strong><a class="reference internal" href="host_api.html#shmem__host__sync_8h_1a79eaed91ac7eff387fac7d81c5b2f91e"><span class="std std-ref">shmem_barrier()</span></a></strong><p>and has different meanings, which is distinguished by prefix macros SHMEM_HOST_API and SHMEM_DEVICE.</p>
-<p>On the host side, this method is a barrier of team on default stream.</p>
-</p>
-<p>On the device side, this method is a barrier of a specific team.</p>
+<dd><p>On the device side, this method is a barrier of a specific team.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>tid</strong> – [in] team to do barrier </p>
@@ -896,16 +876,13 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__sync_8h_1ace58a1f501941628458942f68eca918e"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_barrier_all</span> <span class="pre">()</span></span></dt>
-<dd><p>Both the host and device have a function named <strong><a class="reference internal" href="host_api.html#shmem__host__sync_8h_1ace58a1f501941628458942f68eca918e"><span class="std std-ref">shmem_barrier_all()</span></a></strong><p>and has different meanings, which is distinguished by prefix macros SHMEM_HOST_API and SHMEM_DEVICE.</p>
-<p>On the host side, this method is a barrier of all teams on default stream.</p>
-</p>
-<p>On the device side, this method is a barrier of all ranks. </p>
+<dd><p>On the device side, this method is a barrier of all ranks. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__sync_8h_1aa2dccfae52084fce068ede2768694774"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmemx_barrier_vec</span> <span class="pre">(shmem_team_t</span> <span class="pre">tid)</span></span></dt>
-<dd><p>barrier of a specific team. Different from shmem_barrier that only vector cores participate. Useful in communication-over-compute operators. Cube core may call the api but takes no effect. </p>
+<dd><p>Barrier of a specific team. Different from shmem_barrier that only vector cores participate. Useful in communication-over-compute operators. Cube core may call the api but takes no effect. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>tid</strong> – [in] team to do barrier </p>
@@ -916,7 +893,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__sync_8h_1a91b3f3974a770efcc5564d51dd912961"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmemx_barrier_all_vec</span> <span class="pre">()</span></span></dt>
-<dd><p>barrier of all ranks. Different from shmem_barrier_all that only vector cores participate. Useful in communication-over-compute operators. Cube core may call the api but takes no effect. </p>
+<dd><p>Barrier of all ranks. Different from shmem_barrier_all that only vector cores participate. Useful in communication-over-compute operators. Cube core may call the api but takes no effect. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>tid</strong> – [in] team to do barrier </p>
