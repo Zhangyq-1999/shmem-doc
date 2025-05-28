@@ -1,12 +1,6 @@
 HOST API
 =================================
 
-shmem_host_def.h
----------------------------------
-
-.. doxygenfile:: shmem_host_def.h
-    :project: SHMEM_CPP_API
-
 shmem_host_heap.h
 ---------------------------------
 

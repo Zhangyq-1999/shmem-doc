@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="DEVICE API" href="device_api.html" />
-    <link rel="prev" title="HOST_DEVICE API" href="host_device_api.html" /> 
+    <link rel="prev" title="SHMEM DEF" href="def.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,18 +44,14 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">快速开始</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">SHMEM API 样例</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api.html#init-api">Init API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id1">初始化状态</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#attributes">初始化所需的attributes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id2">初始化样例</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#team-api">Team API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#mem-api">Mem API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#rma-api">RMA API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#sync-api">Sync API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">快速开始</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id2">介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id3">软件架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id4">目录结构说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id5">软件硬件配套说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id6">快速上手</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#matmul-allreduce">执行样例 matmul_allreduce算子。</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id7">功能自测用例</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a><ul>
@@ -71,6 +67,96 @@
 </ul>
 </li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Using SHMEM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api_demo.html">SHMEM API 样例</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_demo.html#init-api">Init API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_demo.html#id1">初始化状态</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_demo.html#attributes">初始化所需的attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_demo.html#id2">初始化样例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_demo.html#team-api">Team API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_demo.html#host">host侧接口样例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_demo.html#device">device侧接口样例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_demo.html#mem-api">Mem API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_demo.html#rma-api">RMA API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_demo.html#sync-api">Sync API</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="def.html">SHMEM DEF</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="def.html#enumerations">Enumerations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv418shmem_error_code_t"><code class="docutils literal notranslate"><span class="pre">shmem_error_code_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N18shmem_error_code_t13SHMEM_SUCCESSE"><code class="docutils literal notranslate"><span class="pre">SHMEM_SUCCESS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N18shmem_error_code_t19SHMEM_INVALID_PARAME"><code class="docutils literal notranslate"><span class="pre">SHMEM_INVALID_PARAM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N18shmem_error_code_t19SHMEM_INVALID_VALUEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_INVALID_VALUE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N18shmem_error_code_t16SHMEM_SMEM_ERRORE"><code class="docutils literal notranslate"><span class="pre">SHMEM_SMEM_ERROR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N18shmem_error_code_t17SHMEM_INNER_ERRORE"><code class="docutils literal notranslate"><span class="pre">SHMEM_INNER_ERROR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N18shmem_error_code_t16SHMEM_NOT_INITEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_NOT_INITED</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv419shmem_init_status_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_status_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N19shmem_init_status_t27SHMEM_STATUS_NOT_INITALIZEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_NOT_INITALIZED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N19shmem_init_status_t24SHMEM_STATUS_SHM_CREATEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_SHM_CREATED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N19shmem_init_status_t26SHMEM_STATUS_IS_INITALIZEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_IS_INITALIZED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N19shmem_init_status_t20SHMEM_STATUS_INVALIDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_INVALID</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv418shmem_team_index_t"><code class="docutils literal notranslate"><span class="pre">shmem_team_index_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N18shmem_team_index_t18SHMEM_TEAM_INVALIDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_TEAM_INVALID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N18shmem_team_index_t16SHMEM_TEAM_WORLDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_TEAM_WORLD</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv421data_op_engine_type_t"><code class="docutils literal notranslate"><span class="pre">data_op_engine_type_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N21data_op_engine_type_t17SHMEM_DATA_OP_MTEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_DATA_OP_MTE</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="def.html#typedefs">Typedefs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv412shmem_team_t"><code class="docutils literal notranslate"><span class="pre">shmem_team_t</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="def.html#macros">Macros</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="def.html#c.SHMEM_HOST_API"><code class="docutils literal notranslate"><span class="pre">SHMEM_HOST_API</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="def.html#c.SHMEM_DEVICE"><code class="docutils literal notranslate"><span class="pre">SHMEM_DEVICE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv425non_contiguous_copy_param"><code class="docutils literal notranslate"><span class="pre">non_contiguous_copy_param</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="def.html#structs">Structs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv426shmem_init_optional_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_optional_attr_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv417shmem_init_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_attr_t</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">HOST API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#shmem-host-heap-h">shmem_host_heap.h</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shmem-host-init-h">shmem_host_init.h</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shmem-host-rma-h">shmem_host_rma.h</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shmem-host-sync-h">shmem_host_sync.h</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shmem-host-team-h">shmem_host_team.h</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-rma-h">shmem_device_rma.h</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_TYPE_FUNC"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPE_FUNC</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-sync-h">shmem_device_sync.h</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-team-h">shmem_device_team.h</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Example</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Matmul Allreduce</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="code_organization.html">代码组织结构</a><ul>
@@ -84,94 +170,9 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">API</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="host_device_api.html">HOST_DEVICE API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="host_device_api.html#shmem-types-h">shmem_types.h</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="host_device_api.html#_CPPv412shmem_team_t"><code class="docutils literal notranslate"><span class="pre">shmem_team_t</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="host_device_api.html#_CPPv418shmem_team_index_t"><code class="docutils literal notranslate"><span class="pre">shmem_team_index_t</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="host_device_api.html#_CPPv4N18shmem_team_index_t18SHMEM_TEAM_INVALIDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_TEAM_INVALID</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="host_device_api.html#_CPPv4N18shmem_team_index_t16SHMEM_TEAM_WORLDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_TEAM_WORLD</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="host_device_api.html#_CPPv421data_op_engine_type_t"><code class="docutils literal notranslate"><span class="pre">data_op_engine_type_t</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="host_device_api.html#_CPPv4N21data_op_engine_type_t17SHMEM_DATA_OP_MTEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_DATA_OP_MTE</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">HOST API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#shmem-host-def-h">shmem_host_def.h</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_HOST_API"><code class="docutils literal notranslate"><span class="pre">SHMEM_HOST_API</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv418shmem_error_code_t"><code class="docutils literal notranslate"><span class="pre">shmem_error_code_t</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N18shmem_error_code_t13SHMEM_SUCCESSE"><code class="docutils literal notranslate"><span class="pre">SHMEM_SUCCESS</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N18shmem_error_code_t19SHMEM_INVALID_PARAME"><code class="docutils literal notranslate"><span class="pre">SHMEM_INVALID_PARAM</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N18shmem_error_code_t19SHMEM_INVALID_VALUEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_INVALID_VALUE</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N18shmem_error_code_t16SHMEM_SMEM_ERRORE"><code class="docutils literal notranslate"><span class="pre">SHMEM_SMEM_ERROR</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N18shmem_error_code_t17SHMEM_INNER_ERRORE"><code class="docutils literal notranslate"><span class="pre">SHMEM_INNER_ERROR</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N18shmem_error_code_t16SHMEM_NOT_INITEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_NOT_INITED</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv419shmem_init_status_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_status_t</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N19shmem_init_status_t27SHMEM_STATUS_NOT_INITALIZEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_NOT_INITALIZED</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N19shmem_init_status_t24SHMEM_STATUS_SHM_CREATEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_SHM_CREATED</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N19shmem_init_status_t26SHMEM_STATUS_IS_INITALIZEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_IS_INITALIZED</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N19shmem_init_status_t20SHMEM_STATUS_INVALIDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_INVALID</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv426shmem_init_optional_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_optional_attr_t</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N26shmem_init_optional_attr_t7versionE"><code class="docutils literal notranslate"><span class="pre">version</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N26shmem_init_optional_attr_t16dataOpEngineTypeE"><code class="docutils literal notranslate"><span class="pre">dataOpEngineType</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N26shmem_init_optional_attr_t14shmInitTimeoutE"><code class="docutils literal notranslate"><span class="pre">shmInitTimeout</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N26shmem_init_optional_attr_t16shmCreateTimeoutE"><code class="docutils literal notranslate"><span class="pre">shmCreateTimeout</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N26shmem_init_optional_attr_t23controlOperationTimeoutE"><code class="docutils literal notranslate"><span class="pre">controlOperationTimeout</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv417shmem_init_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_attr_t</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N17shmem_init_attr_t6myRankE"><code class="docutils literal notranslate"><span class="pre">myRank</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N17shmem_init_attr_t6nRanksE"><code class="docutils literal notranslate"><span class="pre">nRanks</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N17shmem_init_attr_t6ipPortE"><code class="docutils literal notranslate"><span class="pre">ipPort</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N17shmem_init_attr_t12localMemSizeE"><code class="docutils literal notranslate"><span class="pre">localMemSize</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N17shmem_init_attr_t10optionAttrE"><code class="docutils literal notranslate"><span class="pre">optionAttr</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#shmem-host-heap-h">shmem_host_heap.h</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#shmem-host-init-h">shmem_host_init.h</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#shmem-host-rma-h">shmem_host_rma.h</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#shmem-host-sync-h">shmem_host_sync.h</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#shmem-host-team-h">shmem_host_team.h</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-def-h">shmem_device_def.h</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_GLOBAL"><code class="docutils literal notranslate"><span class="pre">SHMEM_GLOBAL</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_DEVICE"><code class="docutils literal notranslate"><span class="pre">SHMEM_DEVICE</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-rma-h">shmem_device_rma.h</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_TYPE_FUNC"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPE_FUNC</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_TYPENAME_P_AICORE"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPENAME_P_AICORE</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_TYPENAME_G_AICORE"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPENAME_G_AICORE</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_GET_TYPENAME_MEM"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_GET_TYPENAME_MEM_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_TENSOR</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_TENSOR</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#_CPPv415SHMEM_TYPE_FUNC23SHMEM_TYPENAME_P_AICORE"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPE_FUNC()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#_CPPv415SHMEM_TYPE_FUNC23SHMEM_TYPENAME_G_AICORE"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPE_FUNC()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#_CPPv415SHMEM_TYPE_FUNC22SHMEM_GET_TYPENAME_MEM"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPE_FUNC()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#_CPPv415SHMEM_TYPE_FUNC29SHMEM_GET_TYPENAME_MEM_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPE_FUNC()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#_CPPv415SHMEM_TYPE_FUNC22SHMEM_PUT_TYPENAME_MEM"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPE_FUNC()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#_CPPv415SHMEM_TYPE_FUNC29SHMEM_PUT_TYPENAME_MEM_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPE_FUNC()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-sync-h">shmem_device_sync.h</a></li>
-<li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-team-h">shmem_device_team.h</a></li>
-</ul>
-</li>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting And FAQs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html">SHMEM 常见问题</a></li>
 </ul>
 
         </div>
@@ -200,177 +201,6 @@
              
   <section id="host-api">
 <h1>HOST API<a class="headerlink" href="#host-api" title="Link to this heading"></a></h1>
-<section id="shmem-host-def-h">
-<h2>shmem_host_def.h<a class="headerlink" href="#shmem-host-def-h" title="Link to this heading"></a></h2>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
-<dl class="cpp macro">
-<dt class="sig sig-object cpp" id="c.SHMEM_HOST_API">
-<span class="target" id="shmem__host__def_8h_1a777c020707fc64e524294ce1e737eabf"></span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_HOST_API</span></span></span><a class="headerlink" href="#c.SHMEM_HOST_API" title="Link to this definition"></a><br /></dt>
-<dd><p>A macro that identifies a function on the host side. </p>
-</dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
-<dl class="cpp enum">
-<dt class="sig sig-object cpp" id="_CPPv418shmem_error_code_t">
-<span id="_CPPv318shmem_error_code_t"></span><span id="_CPPv218shmem_error_code_t"></span><span class="target" id="shmem__host__def_8h_1a4363ef47185dc6fed458ec8fc22c2429"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">shmem_error_code_t</span></span></span><a class="headerlink" href="#_CPPv418shmem_error_code_t" title="Link to this definition"></a><br /></dt>
-<dd><p>Error code for the SHMEM library. </p>
-<p><em>Values:</em></p>
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N18shmem_error_code_t13SHMEM_SUCCESSE">
-<span id="_CPPv3N18shmem_error_code_t13SHMEM_SUCCESSE"></span><span id="_CPPv2N18shmem_error_code_t13SHMEM_SUCCESSE"></span><span class="target" id="shmem__host__def_8h_1a4363ef47185dc6fed458ec8fc22c2429a54641536d7f68ba6f785fe713ca8cfbc"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_SUCCESS</span></span></span><a class="headerlink" href="#_CPPv4N18shmem_error_code_t13SHMEM_SUCCESSE" title="Link to this definition"></a><br /></dt>
-<dd><p>Task execution was successful. </p>
-</dd></dl>
-
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N18shmem_error_code_t19SHMEM_INVALID_PARAME">
-<span id="_CPPv3N18shmem_error_code_t19SHMEM_INVALID_PARAME"></span><span id="_CPPv2N18shmem_error_code_t19SHMEM_INVALID_PARAME"></span><span class="target" id="shmem__host__def_8h_1a4363ef47185dc6fed458ec8fc22c2429a76ed8a640d6c89d19f81deecbfb5aaf2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_INVALID_PARAM</span></span></span><a class="headerlink" href="#_CPPv4N18shmem_error_code_t19SHMEM_INVALID_PARAME" title="Link to this definition"></a><br /></dt>
-<dd><p>There is a problem with the parameters. </p>
-</dd></dl>
-
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N18shmem_error_code_t19SHMEM_INVALID_VALUEE">
-<span id="_CPPv3N18shmem_error_code_t19SHMEM_INVALID_VALUEE"></span><span id="_CPPv2N18shmem_error_code_t19SHMEM_INVALID_VALUEE"></span><span class="target" id="shmem__host__def_8h_1a4363ef47185dc6fed458ec8fc22c2429a1a124f14d2be089865ed0ee50f607f35"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_INVALID_VALUE</span></span></span><a class="headerlink" href="#_CPPv4N18shmem_error_code_t19SHMEM_INVALID_VALUEE" title="Link to this definition"></a><br /></dt>
-<dd><p>There is a problem with the range of the value of the parameter. </p>
-</dd></dl>
-
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N18shmem_error_code_t16SHMEM_SMEM_ERRORE">
-<span id="_CPPv3N18shmem_error_code_t16SHMEM_SMEM_ERRORE"></span><span id="_CPPv2N18shmem_error_code_t16SHMEM_SMEM_ERRORE"></span><span class="target" id="shmem__host__def_8h_1a4363ef47185dc6fed458ec8fc22c2429a5aecaefc84d00f14f0877217e8c2b5b6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_SMEM_ERROR</span></span></span><a class="headerlink" href="#_CPPv4N18shmem_error_code_t16SHMEM_SMEM_ERRORE" title="Link to this definition"></a><br /></dt>
-<dd><p>There is a problem with SMEM. </p>
-</dd></dl>
-
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N18shmem_error_code_t17SHMEM_INNER_ERRORE">
-<span id="_CPPv3N18shmem_error_code_t17SHMEM_INNER_ERRORE"></span><span id="_CPPv2N18shmem_error_code_t17SHMEM_INNER_ERRORE"></span><span class="target" id="shmem__host__def_8h_1a4363ef47185dc6fed458ec8fc22c2429a9c8da058bdc639440761a0621a5d3ef4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_INNER_ERROR</span></span></span><a class="headerlink" href="#_CPPv4N18shmem_error_code_t17SHMEM_INNER_ERRORE" title="Link to this definition"></a><br /></dt>
-<dd><p>This is a problem caused by an internal error. </p>
-</dd></dl>
-
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N18shmem_error_code_t16SHMEM_NOT_INITEDE">
-<span id="_CPPv3N18shmem_error_code_t16SHMEM_NOT_INITEDE"></span><span id="_CPPv2N18shmem_error_code_t16SHMEM_NOT_INITEDE"></span><span class="target" id="shmem__host__def_8h_1a4363ef47185dc6fed458ec8fc22c2429a20f55cd03e31579114793d94738f23cc"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_NOT_INITED</span></span></span><a class="headerlink" href="#_CPPv4N18shmem_error_code_t16SHMEM_NOT_INITEDE" title="Link to this definition"></a><br /></dt>
-<dd><p>This is a problem caused by an uninitialization. </p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="cpp enum">
-<dt class="sig sig-object cpp" id="_CPPv419shmem_init_status_t">
-<span id="_CPPv319shmem_init_status_t"></span><span id="_CPPv219shmem_init_status_t"></span><span class="target" id="shmem__host__def_8h_1a76b42d805d319f016366959082cd36c9"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">shmem_init_status_t</span></span></span><a class="headerlink" href="#_CPPv419shmem_init_status_t" title="Link to this definition"></a><br /></dt>
-<dd><p>The state of the SHMEM library initialization. </p>
-<p><em>Values:</em></p>
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N19shmem_init_status_t27SHMEM_STATUS_NOT_INITALIZEDE">
-<span id="_CPPv3N19shmem_init_status_t27SHMEM_STATUS_NOT_INITALIZEDE"></span><span id="_CPPv2N19shmem_init_status_t27SHMEM_STATUS_NOT_INITALIZEDE"></span><span class="target" id="shmem__host__def_8h_1a76b42d805d319f016366959082cd36c9a539a3e2fd921980d4896fc389f49f77b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_STATUS_NOT_INITALIZED</span></span></span><a class="headerlink" href="#_CPPv4N19shmem_init_status_t27SHMEM_STATUS_NOT_INITALIZEDE" title="Link to this definition"></a><br /></dt>
-<dd><p>Uninitialized. </p>
-</dd></dl>
-
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N19shmem_init_status_t24SHMEM_STATUS_SHM_CREATEDE">
-<span id="_CPPv3N19shmem_init_status_t24SHMEM_STATUS_SHM_CREATEDE"></span><span id="_CPPv2N19shmem_init_status_t24SHMEM_STATUS_SHM_CREATEDE"></span><span class="target" id="shmem__host__def_8h_1a76b42d805d319f016366959082cd36c9a289d0c3c442a265dd4f1c3ae7e5670a3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_STATUS_SHM_CREATED</span></span></span><a class="headerlink" href="#_CPPv4N19shmem_init_status_t24SHMEM_STATUS_SHM_CREATEDE" title="Link to this definition"></a><br /></dt>
-<dd><p>Shared memory heap creation is complete. </p>
-</dd></dl>
-
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N19shmem_init_status_t26SHMEM_STATUS_IS_INITALIZEDE">
-<span id="_CPPv3N19shmem_init_status_t26SHMEM_STATUS_IS_INITALIZEDE"></span><span id="_CPPv2N19shmem_init_status_t26SHMEM_STATUS_IS_INITALIZEDE"></span><span class="target" id="shmem__host__def_8h_1a76b42d805d319f016366959082cd36c9ac1823bd52fbca1751593a0b8a7383c87"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_STATUS_IS_INITALIZED</span></span></span><a class="headerlink" href="#_CPPv4N19shmem_init_status_t26SHMEM_STATUS_IS_INITALIZEDE" title="Link to this definition"></a><br /></dt>
-<dd><p>Initialization is complete. </p>
-</dd></dl>
-
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N19shmem_init_status_t20SHMEM_STATUS_INVALIDE">
-<span id="_CPPv3N19shmem_init_status_t20SHMEM_STATUS_INVALIDE"></span><span id="_CPPv2N19shmem_init_status_t20SHMEM_STATUS_INVALIDE"></span><span class="target" id="shmem__host__def_8h_1a76b42d805d319f016366959082cd36c9ac2e29ab7885779df05d920a1a1c26233"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_STATUS_INVALID</span></span></span><a class="headerlink" href="#_CPPv4N19shmem_init_status_t20SHMEM_STATUS_INVALIDE" title="Link to this definition"></a><br /></dt>
-<dd><p>Invalid status code. </p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<dl class="cpp struct">
-<dt class="sig sig-object cpp" id="_CPPv426shmem_init_optional_attr_t">
-<span id="_CPPv326shmem_init_optional_attr_t"></span><span id="_CPPv226shmem_init_optional_attr_t"></span><span id="shmem_init_optional_attr_t"></span><span class="target" id="structshmem__init__optional__attr__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">shmem_init_optional_attr_t</span></span></span><a class="headerlink" href="#_CPPv426shmem_init_optional_attr_t" title="Link to this definition"></a><br /></dt>
-<dd><div class="docutils container">
-<em>#include &lt;shmem_host_def.h&gt;</em></div>
-<p>Optional parameter for the attributes used for initialization. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N26shmem_init_optional_attr_t7versionE">
-<span id="_CPPv3N26shmem_init_optional_attr_t7versionE"></span><span id="_CPPv2N26shmem_init_optional_attr_t7versionE"></span><span id="shmem_init_optional_attr_t::version__i"></span><span class="target" id="structshmem__init__optional__attr__t_1abe3ace671a3dc5ea98d459ebf104254c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">version</span></span></span><a class="headerlink" href="#_CPPv4N26shmem_init_optional_attr_t7versionE" title="Link to this definition"></a><br /></dt>
-<dd><p>version </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N26shmem_init_optional_attr_t16dataOpEngineTypeE">
-<span id="_CPPv3N26shmem_init_optional_attr_t16dataOpEngineTypeE"></span><span id="_CPPv2N26shmem_init_optional_attr_t16dataOpEngineTypeE"></span><span id="shmem_init_optional_attr_t::dataOpEngineType__data_op_engine_type_t"></span><span class="target" id="structshmem__init__optional__attr__t_1a2fcfe9b52e3460b253dc69fb5fd87552"></span><a class="reference internal" href="host_device_api.html#_CPPv421data_op_engine_type_t" title="data_op_engine_type_t"><span class="n"><span class="pre">data_op_engine_type_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dataOpEngineType</span></span></span><a class="headerlink" href="#_CPPv4N26shmem_init_optional_attr_t16dataOpEngineTypeE" title="Link to this definition"></a><br /></dt>
-<dd><p>dataOpEngineType </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N26shmem_init_optional_attr_t14shmInitTimeoutE">
-<span id="_CPPv3N26shmem_init_optional_attr_t14shmInitTimeoutE"></span><span id="_CPPv2N26shmem_init_optional_attr_t14shmInitTimeoutE"></span><span id="shmem_init_optional_attr_t::shmInitTimeout__uint32_t"></span><span class="target" id="structshmem__init__optional__attr__t_1a6fa7487dcd1ff29f8da6bea115f0a98f"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">shmInitTimeout</span></span></span><a class="headerlink" href="#_CPPv4N26shmem_init_optional_attr_t14shmInitTimeoutE" title="Link to this definition"></a><br /></dt>
-<dd><p>shmInitTimeout </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N26shmem_init_optional_attr_t16shmCreateTimeoutE">
-<span id="_CPPv3N26shmem_init_optional_attr_t16shmCreateTimeoutE"></span><span id="_CPPv2N26shmem_init_optional_attr_t16shmCreateTimeoutE"></span><span id="shmem_init_optional_attr_t::shmCreateTimeout__uint32_t"></span><span class="target" id="structshmem__init__optional__attr__t_1a6e45e573cf00bbec4b81a9ea43a5cff7"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">shmCreateTimeout</span></span></span><a class="headerlink" href="#_CPPv4N26shmem_init_optional_attr_t16shmCreateTimeoutE" title="Link to this definition"></a><br /></dt>
-<dd><p>shmCreateTimeout </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N26shmem_init_optional_attr_t23controlOperationTimeoutE">
-<span id="_CPPv3N26shmem_init_optional_attr_t23controlOperationTimeoutE"></span><span id="_CPPv2N26shmem_init_optional_attr_t23controlOperationTimeoutE"></span><span id="shmem_init_optional_attr_t::controlOperationTimeout__uint32_t"></span><span class="target" id="structshmem__init__optional__attr__t_1afdaa8bba77e81d931a0e035adb17f704"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">controlOperationTimeout</span></span></span><a class="headerlink" href="#_CPPv4N26shmem_init_optional_attr_t23controlOperationTimeoutE" title="Link to this definition"></a><br /></dt>
-<dd><p>controlOperationTimeout </p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-<dl class="cpp struct">
-<dt class="sig sig-object cpp" id="_CPPv417shmem_init_attr_t">
-<span id="_CPPv317shmem_init_attr_t"></span><span id="_CPPv217shmem_init_attr_t"></span><span id="shmem_init_attr_t"></span><span class="target" id="structshmem__init__attr__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">shmem_init_attr_t</span></span></span><a class="headerlink" href="#_CPPv417shmem_init_attr_t" title="Link to this definition"></a><br /></dt>
-<dd><div class="docutils container">
-<em>#include &lt;shmem_host_def.h&gt;</em></div>
-<p>Mandatory parameter for attributes used for initialization. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N17shmem_init_attr_t6myRankE">
-<span id="_CPPv3N17shmem_init_attr_t6myRankE"></span><span id="_CPPv2N17shmem_init_attr_t6myRankE"></span><span id="shmem_init_attr_t::myRank__i"></span><span class="target" id="structshmem__init__attr__t_1a229e9b2e3600dafbef3dc5a85df1af74"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">myRank</span></span></span><a class="headerlink" href="#_CPPv4N17shmem_init_attr_t6myRankE" title="Link to this definition"></a><br /></dt>
-<dd><p>The rank of the current process. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N17shmem_init_attr_t6nRanksE">
-<span id="_CPPv3N17shmem_init_attr_t6nRanksE"></span><span id="_CPPv2N17shmem_init_attr_t6nRanksE"></span><span id="shmem_init_attr_t::nRanks__i"></span><span class="target" id="structshmem__init__attr__t_1a55141ade083d16101c8b289ad2550f06"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nRanks</span></span></span><a class="headerlink" href="#_CPPv4N17shmem_init_attr_t6nRanksE" title="Link to this definition"></a><br /></dt>
-<dd><p>The total rank number of all processes. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N17shmem_init_attr_t6ipPortE">
-<span id="_CPPv3N17shmem_init_attr_t6ipPortE"></span><span id="_CPPv2N17shmem_init_attr_t6ipPortE"></span><span id="shmem_init_attr_t::ipPort__cCP"></span><span class="target" id="structshmem__init__attr__t_1a4332f477cd0ece0a614fda829a4d7158"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">ipPort</span></span></span><a class="headerlink" href="#_CPPv4N17shmem_init_attr_t6ipPortE" title="Link to this definition"></a><br /></dt>
-<dd><p>The ip and port of the communication server. The port must not conflict with other modules and processes. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N17shmem_init_attr_t12localMemSizeE">
-<span id="_CPPv3N17shmem_init_attr_t12localMemSizeE"></span><span id="_CPPv2N17shmem_init_attr_t12localMemSizeE"></span><span id="shmem_init_attr_t::localMemSize__uint64_t"></span><span class="target" id="structshmem__init__attr__t_1abf5b3f9e473f6bcd1ba616f79137453c"></span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">localMemSize</span></span></span><a class="headerlink" href="#_CPPv4N17shmem_init_attr_t12localMemSizeE" title="Link to this definition"></a><br /></dt>
-<dd><p>The size of shared memory currently occupied by current rank. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N17shmem_init_attr_t10optionAttrE">
-<span id="_CPPv3N17shmem_init_attr_t10optionAttrE"></span><span id="_CPPv2N17shmem_init_attr_t10optionAttrE"></span><span id="shmem_init_attr_t::optionAttr__shmem_init_optional_attr_t"></span><span class="target" id="structshmem__init__attr__t_1ab7ff93640ac488ab184195160edccbdf"></span><a class="reference internal" href="#_CPPv426shmem_init_optional_attr_t" title="shmem_init_optional_attr_t"><span class="n"><span class="pre">shmem_init_optional_attr_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">optionAttr</span></span></span><a class="headerlink" href="#_CPPv4N17shmem_init_attr_t10optionAttrE" title="Link to this definition"></a><br /></dt>
-<dd><p>Optional Parameters. </p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-</section>
 <section id="shmem-host-heap-h">
 <h2>shmem_host_heap.h<a class="headerlink" href="#shmem-host-heap-h" title="Link to this heading"></a></h2>
 <div class="breathe-sectiondef docutils container">
@@ -378,7 +208,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__heap_8h_1a7ca5edaea9edc7ddce81de2d51dae1e9"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">*</span> <span class="pre">shmem_malloc</span> <span class="pre">(size_t</span> <span class="pre">size)</span></span></dt>
-<dd><p>Allocate <em>size</em> bytes and returns a pointer to the allocated memory. The memory is not initialized. If <em>size</em> is 0, then <strong><a class="reference internal" href="#shmem__host__heap_8h_1a7ca5edaea9edc7ddce81de2d51dae1e9"><span class="std std-ref">shmem_malloc()</span></a></strong> returns NULL. </p>
+<dd><p>allocate <em>size</em> bytes and returns a pointer to the allocated memory. The memory is not initialized. If <em>size</em> is 0, then <strong><a class="reference internal" href="#shmem__host__heap_8h_1a7ca5edaea9edc7ddce81de2d51dae1e9"><span class="std std-ref">shmem_malloc()</span></a></strong> returns NULL. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>size</strong> – [in] bytes to be allocated </p>
@@ -392,7 +222,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__heap_8h_1a4c1d8ba28b252252ab01ed70def0860c"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">*</span> <span class="pre">shmem_calloc</span> <span class="pre">(size_t</span> <span class="pre">nmemb,</span> <span class="pre">size_t</span> <span class="pre">size)</span></span></dt>
-<dd><p>Allocate memory for an array of <em>nmemb</em> elements of <em>size</em> bytes each and returns a pointer to the allocated memory. The memory is set to zero. If <em>nmemb</em> or <em>size</em> is 0, then <strong>calloc()</strong> returns either NULL. </p>
+<dd><p>allocate memory for an array of <em>nmemb</em> elements of <em>size</em> bytes each and returns a pointer to the allocated memory. The memory is set to zero. If <em>nmemb</em> or <em>size</em> is 0, then <strong>calloc()</strong> returns either NULL. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -409,7 +239,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__heap_8h_1a75997450cc41c58b84fce478d5fa5e56"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">*</span> <span class="pre">shmem_align</span> <span class="pre">(size_t</span> <span class="pre">alignment,</span> <span class="pre">size_t</span> <span class="pre">size)</span></span></dt>
-<dd><p>Allocate <em>size</em> bytes and returns a pointer to the allocated memory. The memory address will be a multiple of <em>alignment</em>, which must be a power of two. </p>
+<dd><p>allocate <em>size</em> bytes and returns a pointer to the allocated memory. The memory address will be a multiple of <em>alignment</em>, which must be a power of two. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -453,15 +283,15 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__init_8h_1aa02fd78a338e1643769caaa759075775"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_set_attr</span> <span class="pre">(int</span> <span class="pre">myRank,</span> <span class="pre">int</span> <span class="pre">nRanks,</span> <span class="pre">uint64_t</span> <span class="pre">localMemSize,</span> <span class="pre">const</span> <span class="pre">char</span> <span class="pre">*ipPort,</span> <span class="pre">shmem_init_attr_t</span> <span class="pre">**attributes)</span></span></dt>
+<span class="target" id="shmem__host__init_8h_1af0a3123b7a8eb83200402393e3a9ff45"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_set_attr</span> <span class="pre">(int</span> <span class="pre">my_rank,</span> <span class="pre">int</span> <span class="pre">n_ranks,</span> <span class="pre">uint64_t</span> <span class="pre">local_mem_size,</span> <span class="pre">const</span> <span class="pre">char</span> <span class="pre">*ip_port,</span> <span class="pre">shmem_init_attr_t</span> <span class="pre">**attributes)</span></span></dt>
 <dd><p>Set the default attributes to be used in <strong><a class="reference internal" href="#shmem__host__init_8h_1a509e6905d316a83e093d04a6b300767b"><span class="std std-ref">shmem_init_attr()</span></a></strong>. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>myRank</strong> – [in] Current rank </p></li>
-<li><p><strong>nRanks</strong> – [in] Total number of ranks </p></li>
-<li><p><strong>localMemSize</strong> – [in] The size of shared memory currently occupied by current rank </p></li>
-<li><p><strong>ipPort</strong> – [in] The ip and port number of the sever, e.g. tcp://ip:port </p></li>
+<li><p><strong>my_rank</strong> – [in] Current rank </p></li>
+<li><p><strong>n_ranks</strong> – [in] Total number of ranks </p></li>
+<li><p><strong>local_mem_size</strong> – [in] The size of shared memory currently occupied by current rank </p></li>
+<li><p><strong>ip_port</strong> – [in] The ip and port number of the sever, e.g. tcp://ip:port </p></li>
 <li><p><strong>attributes</strong> – [out] Pointer to the default attributes used for initialization </p></li>
 </ul>
 </dd>
@@ -474,7 +304,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__init_8h_1aaffb11ce1ab3c3999621746f0514a194"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_set_data_op_engine_type</span> <span class="pre">(shmem_init_attr_t</span> <span class="pre">*attributes,</span> <span class="pre">data_op_engine_type_t</span> <span class="pre">value)</span></span></dt>
-<dd><p>Modify the data operation engine type in the attributes that will be used for initialization. If this method is not used, the default dataOpEngineType value is SHMEM_DATA_OP_MTE if method <strong><a class="reference internal" href="#shmem__host__init_8h_1aa02fd78a338e1643769caaa759075775"><span class="std std-ref">shmem_set_attr()</span></a></strong> is used after this method, the dataOpEngineType param will be overwritten by the default value. </p>
+<dd><p>Modify the data operation engine type in the attributes that will be used for initialization. If this method is not used, the default data_op_engine_type value is SHMEM_DATA_OP_MTE if method <strong><a class="reference internal" href="#shmem__host__init_8h_1af0a3123b7a8eb83200402393e3a9ff45"><span class="std std-ref">shmem_set_attr()</span></a></strong> is used after this method, the data_op_engine_type param will be overwritten by the default value. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -491,7 +321,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__init_8h_1a4c53011267f5ec9607f08b665005bf77"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_set_timeout</span> <span class="pre">(shmem_init_attr_t</span> <span class="pre">*attributes,</span> <span class="pre">uint32_t</span> <span class="pre">value)</span></span></dt>
-<dd><p>Modify the timeout in the attributes that will be used for initialization. If this method is not used, the default timeout value is 120 if method <strong><a class="reference internal" href="#shmem__host__init_8h_1aa02fd78a338e1643769caaa759075775"><span class="std std-ref">shmem_set_attr()</span></a></strong> is used after this method, the timeout param will be overwritten by the default value. </p>
+<dd><p>Modify the timeout in the attributes that will be used for initialization. If this method is not used, the default timeout value is 120 if method <strong><a class="reference internal" href="#shmem__host__init_8h_1af0a3123b7a8eb83200402393e3a9ff45"><span class="std std-ref">shmem_set_attr()</span></a></strong> is used after this method, the timeout param will be overwritten by the default value. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -508,7 +338,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__init_8h_1a509e6905d316a83e093d04a6b300767b"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_init_attr</span> <span class="pre">(shmem_init_attr_t</span> <span class="pre">*attributes)</span></span></dt>
-<dd><p>Initialization based on attributes and build the shmem library. Attributes can be created by users or obtained by calling <strong><a class="reference internal" href="#shmem__host__init_8h_1aa02fd78a338e1643769caaa759075775"><span class="std std-ref">shmem_set_attr()</span></a></strong>. if the self-created attr structure is incorrect, the initialization will fail. It is recommended to build the attributes by <strong><a class="reference internal" href="#shmem__host__init_8h_1aa02fd78a338e1643769caaa759075775"><span class="std std-ref">shmem_set_attr()</span></a></strong>. </p>
+<dd><p>Initialization based on attributes and build the shmem library. Attributes can be created by users or obtained by calling <strong><a class="reference internal" href="#shmem__host__init_8h_1af0a3123b7a8eb83200402393e3a9ff45"><span class="std std-ref">shmem_set_attr()</span></a></strong>. if the self-created attr structure is incorrect, the initialization will fail. It is recommended to build the attributes by <strong><a class="reference internal" href="#shmem__host__init_8h_1af0a3123b7a8eb83200402393e3a9ff45"><span class="std std-ref">shmem_set_attr()</span></a></strong>. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>attributes</strong> – [in] Pointer to the user-defined attributes. </p>
@@ -522,7 +352,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__init_8h_1acabd5cecaa0043f3e928f10afb6e9ca3"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_finalize</span> <span class="pre">()</span></span></dt>
-<dd><p>Ends the program previously initialized by <strong><a class="reference internal" href="#shmem__host__init_8h_1a509e6905d316a83e093d04a6b300767b"><span class="std std-ref">shmem_init_attr()</span></a></strong>. Release all resources used by the SHMEM library. </p>
+<dd><p>Ends the program previously initialized by <strong><a class="reference internal" href="#shmem__host__init_8h_1a509e6905d316a83e093d04a6b300767b"><span class="std std-ref">shmem_init_attr()</span></a></strong>. release all resources used by the SHMEM library. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Returns 0 on success or an error code on failure </p>
@@ -539,12 +369,37 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__rma_8h_1a5ee121913e79a916ad568609602f1daf"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">*</span> <span class="pre">shmem_ptr</span> <span class="pre">(void</span> <span class="pre">*ptr,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd></dd></dl>
+<dd><p>Translate an local symmetric address to remote symmetric address on the specified PE. Firstly, check whether the input address is legal on local PE. Then translate it into remote address on specified PE. Otherwise, returns a null pointer. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ptr</strong> – [in] Symmetric address on local PE. </p></li>
+<li><p><strong>pe</strong> – [in] The number of the remote PE. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If the input address is legal, returns a remote symmetric address on the specified PE that can be accessed using memory loads and stores. Otherwise, a null pointer is returned. </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__rma_8h_1a17fbfd70f32782324a8ce7698a948a55"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_mte_set_ub_params</span> <span class="pre">(uint64_t</span> <span class="pre">offset,</span> <span class="pre">uint32_t</span> <span class="pre">ubSize,</span> <span class="pre">uint32_t</span> <span class="pre">eventID)</span></span></dt>
-<dd></dd></dl>
+<span class="target" id="shmem__host__rma_8h_1abe213c9a3f16d786604b40a64954d4ad"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_mte_set_ub_params</span> <span class="pre">(uint64_t</span> <span class="pre">offset,</span> <span class="pre">uint32_t</span> <span class="pre">ub_size,</span> <span class="pre">uint32_t</span> <span class="pre">event_id)</span></span></dt>
+<dd><p>Set necessary parameters for put\get. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offset</strong> – [in] The start address on UB. </p></li>
+<li><p><strong>ub_size</strong> – [in] The Size of Temp UB Buffer. </p></li>
+<li><p><strong>event_id</strong> – [in] Sync ID for put\get interfaces. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns 0 on success or an error code on failure. </p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </section>
@@ -580,7 +435,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__sync_8h_1a79eaed91ac7eff387fac7d81c5b2f91e"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">shmem_barrier</span> <span class="pre">(shmem_team_t</span> <span class="pre">tid)</span></span></dt>
-<dd><p>Both the host and device have a function named <strong><a class="reference internal" href="#shmem__host__sync_8h_1a79eaed91ac7eff387fac7d81c5b2f91e"><span class="std std-ref">shmem_barrier()</span></a></strong><p>, which is distinguished by prefix macros SHMEM_HOST_API and SHMEM_DEVICE.</p>
+<dd><p>Both the host and device have a function named <strong><a class="reference internal" href="#shmem__host__sync_8h_1a79eaed91ac7eff387fac7d81c5b2f91e"><span class="std std-ref">shmem_barrier()</span></a></strong><p>and has different meanings, which is distinguished by prefix macros SHMEM_HOST_API and SHMEM_DEVICE.</p>
 <p>On the host side, this method is a barrier of team on default stream.</p>
 </p>
 <p>On the device side, this method is a barrier of a specific team.</p>
@@ -594,7 +449,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__sync_8h_1ace58a1f501941628458942f68eca918e"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">shmem_barrier_all</span> <span class="pre">()</span></span></dt>
-<dd><p>Both the host and device have a function named <strong><a class="reference internal" href="#shmem__host__sync_8h_1ace58a1f501941628458942f68eca918e"><span class="std std-ref">shmem_barrier_all()</span></a></strong><p>, which is distinguished by prefix macros SHMEM_HOST_API and SHMEM_DEVICE.</p>
+<dd><p>Both the host and device have a function named <strong><a class="reference internal" href="#shmem__host__sync_8h_1ace58a1f501941628458942f68eca918e"><span class="std std-ref">shmem_barrier_all()</span></a></strong><p>and has different meanings, which is distinguished by prefix macros SHMEM_HOST_API and SHMEM_DEVICE.</p>
 <p>On the host side, this method is a barrier of all teams on default stream.</p>
 </p>
 <p>On the device side, this method is a barrier of all ranks. </p>
@@ -608,38 +463,102 @@
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__team_8h_1aa3adc33b242f8cc518a76c994db83b3b"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_team_split_strided</span> <span class="pre">(shmem_team_t</span> <span class="pre">parentTeam,</span> <span class="pre">int</span> <span class="pre">peStart,</span> <span class="pre">int</span> <span class="pre">peStride,</span> <span class="pre">int</span> <span class="pre">peSize,</span> <span class="pre">shmem_team_t</span> <span class="pre">*newTeam)</span></span></dt>
-<dd></dd></dl>
+<span class="target" id="shmem__host__team_8h_1a15f0d5071aaa444b264ff63d78d2df17"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_team_split_strided</span> <span class="pre">(shmem_team_t</span> <span class="pre">parent_team,</span> <span class="pre">int</span> <span class="pre">pe_start,</span> <span class="pre">int</span> <span class="pre">pe_stride,</span> <span class="pre">int</span> <span class="pre">pe_size,</span> <span class="pre">shmem_team_t</span> <span class="pre">*new_team)</span></span></dt>
+<dd><p>Collective Interface. Creates a new SHMEM team from an existing parent team. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parent_team</strong> – [in] A team handle. </p></li>
+<li><p><strong>pe_start</strong> – [in] The first PE number of the subset of PEs from the parent team. </p></li>
+<li><p><strong>pe_stride</strong> – [in] The stride between team PE numbers in the parent team. </p></li>
+<li><p><strong>pe_size</strong> – [in] The total number of PEs in new team. </p></li>
+<li><p><strong>new_team</strong> – [out] A team handle.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>0 on successful creation of new_team; otherwise nonzero. </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__team_8h_1ae16b62017ecfe85c2b0cf12700e011a1"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_team_translate_pe</span> <span class="pre">(shmem_team_t</span> <span class="pre">srcTeam,</span> <span class="pre">int</span> <span class="pre">srcPe,</span> <span class="pre">shmem_team_t</span> <span class="pre">destTeam)</span></span></dt>
-<dd></dd></dl>
+<span class="target" id="shmem__host__team_8h_1a7fb1f867fc809a7ed84682fcb489005e"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_team_translate_pe</span> <span class="pre">(shmem_team_t</span> <span class="pre">src_team,</span> <span class="pre">int</span> <span class="pre">src_pe,</span> <span class="pre">shmem_team_t</span> <span class="pre">dest_team)</span></span></dt>
+<dd><p>Translate a given PE number in one team into the corresponding PE number in another team. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src_team</strong> – [in] A team handle. </p></li>
+<li><p><strong>src_pe</strong> – [in] The PE number in src_team. </p></li>
+<li><p><strong>dest_team</strong> – [in] A team handle.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The number of PEs in the specified team. If the team handle is NVSHMEM_TEAM_INVALID, returns -1. </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__team_8h_1a5f2c0e38303dbdbb565a35c6bb5db808"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">shmem_team_destroy</span> <span class="pre">(shmem_team_t</span> <span class="pre">team)</span></span></dt>
-<dd></dd></dl>
+<dd><p>Collective Interface. Destroys the team referenced by the team handle. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>team</strong> – [in] A team handle. </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__team_8h_1a48cb97bf8b61f45b324326c609a6489c"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_my_pe</span> <span class="pre">()</span></span></dt>
-<dd></dd></dl>
+<dd><p>Returns the PE number of the local PE. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Integer between 0 and npes - 1 </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__team_8h_1a6a0d6c1d4821a15d71d8773171143957"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_n_pes</span> <span class="pre">()</span></span></dt>
-<dd></dd></dl>
+<dd><p>Returns the number of PEs running in the program. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Number of PEs in the program. </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__team_8h_1a1bfef2e7d4bb3ef664d83746643efd21"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_team_my_pe</span> <span class="pre">(shmem_team_t</span> <span class="pre">team)</span></span></dt>
-<dd></dd></dl>
+<dd><p>Returns the number of the calling PE in the specified team. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>team</strong> – [in] A team handle.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The number of the calling PE within the specified team. If the team handle is NVSHMEM_TEAM_INVALID, returns -1. </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__team_8h_1a5a00427e2bd8ab1ad51fa9ab99c1e378"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_team_n_pes</span> <span class="pre">(shmem_team_t</span> <span class="pre">team)</span></span></dt>
-<dd></dd></dl>
+<dd><p>Returns the number of PEs in the team. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>team</strong> – [in] A team handle.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The number of PEs in the specified team. If the team handle is NVSHMEM_TEAM_INVALID, returns -1. </p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </section>
@@ -649,7 +568,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="host_device_api.html" class="btn btn-neutral float-left" title="HOST_DEVICE API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="def.html" class="btn btn-neutral float-left" title="SHMEM DEF" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="device_api.html" class="btn btn-neutral float-right" title="DEVICE API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
