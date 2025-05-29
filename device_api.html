@@ -865,7 +865,9 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__sync_8h_1a79eaed91ac7eff387fac7d81c5b2f91e"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_barrier</span> <span class="pre">(shmem_team_t</span> <span class="pre">tid)</span></span></dt>
-<dd><p>shmem_barrier is a collective synchronization routine over a team. Control returns from shmem_barrier after all PEs in the team have called shmem_barrier. shmem_barrier ensures that all previously issued stores and remote memory updates, including AMOs and RMA operations, done by any of the PEs in the active set are complete before returning. On systems with only scale-up network (HCCS), updates are globally visible, whereas on systems with both scale-up network HCCS and scale-out network (RDMA), SHMEM only guarantees that updates to the memory of a given PE are visible to that PE. Barrier operations issued on the CPU and the NPU only complete communication operations that were issued from the CPU and the NPU, respectively. To ensure completion of GPU-side operations from the CPU, using aclrtSynchronizeStream/aclrtDeviceSynchronize or stream-based API. </p>
+<dd><p>shmem_barrier is a collective synchronization routine over a team. Control returns from shmem_barrier after all PEs in the team have called shmem_barrier. </p>
+<p>shmem_barrier ensures that all previously issued stores and remote memory updates, including AMOs and RMA operations, done by any of the PEs in the active set are complete before returning. On systems with only scale-up network (HCCS), updates are globally visible, whereas on systems with both scale-up network HCCS and scale-out network (RDMA), SHMEM only guarantees that updates to the memory of a given PE are visible to that PE. </p>
+<p>Barrier operations issued on the CPU and the NPU only complete communication operations that were issued from the CPU and the NPU, respectively. To ensure completion of GPU-side operations from the CPU, using aclrtSynchronizeStream/aclrtDeviceSynchronize or stream-based API. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>tid</strong> – [in] team to do barrier </p>
@@ -904,13 +906,17 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__sync_8h_1a74d04cface7b8fd615e5420a679ec6bf"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_quiet</span> <span class="pre">()</span></span></dt>
-<dd><p>The shmem_quiet routine ensures completion of all operations on symmetric data objects issued by the calling PE. On systems with only scale-up network (HCCS), updates are globally visible, whereas on systems with both scale-up network HCCS and scale-out network (RDMA), SHMEM only guarantees that updates to the memory of a given PE are visible to that PE. Quiet operations issued on the CPU and the NPU only complete communication operations that were issued from the CPU and the NPU, respectively. To ensure completion of GPU-side operations from the CPU, using aclrtSynchronizeStream/aclrtDeviceSynchronize or stream-based API. </p>
+<dd><p>The shmem_quiet routine ensures completion of all operations on symmetric data objects issued by the calling PE. </p>
+<p>On systems with only scale-up network (HCCS), updates are globally visible, whereas on systems with both scale-up network HCCS and scale-out network (RDMA), SHMEM only guarantees that updates to the memory of a given PE are visible to that PE. </p>
+<p>Quiet operations issued on the CPU and the NPU only complete communication operations that were issued from the CPU and the NPU, respectively. To ensure completion of GPU-side operations from the CPU, using aclrtSynchronizeStream/aclrtDeviceSynchronize or stream-based API. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__sync_8h_1aecd120d551d7c9574d2e71ff594c82d6"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_fence</span> <span class="pre">()</span></span></dt>
-<dd><p>In OpenSHMEM specification, shmem_fence assures ordering of delivery of Put, AMOs, and memory store routines to symmetric data objects, but does not guarantee the completion of these operations. However, due to hardware capabilities, we implemented shmem_fence same as shmem_quiet, ensuring both ordering and completion. Fence operations issued on the CPU and the NPU only order communication operations that were issued from the CPU and the NPU, respectively. To ensure completion of GPU-side operations from the CPU, using aclrtSynchronizeStream/aclrtDeviceSynchronize or stream-based API. </p>
+<dd><p>In OpenSHMEM specification, shmem_fence assures ordering of delivery of Put, AMOs, and memory store routines to symmetric data objects, but does not guarantee the completion of these operations. </p>
+<p>However, due to hardware capabilities, we implemented shmem_fence same as shmem_quiet, ensuring both ordering and completion. </p>
+<p>Fence operations issued on the CPU and the NPU only order communication operations that were issued from the CPU and the NPU, respectively. To ensure completion of GPU-side operations from the CPU, using aclrtSynchronizeStream/aclrtDeviceSynchronize or stream-based API. </p>
 </dd></dl>
 
 </div>
