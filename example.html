@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Matmul Allreduce &mdash; Shmem Guidebook 1.0.0 documentation</title>
+  <title>AllGather &mdash; Shmem Guidebook 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -116,6 +116,20 @@
 <li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N21data_op_engine_type_t17SHMEM_DATA_OP_MTEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_DATA_OP_MTE</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv4Ut1_0"><code class="docutils literal notranslate"><span class="pre">&#64;0</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_016SHMEM_SIGNAL_SETE"><code class="docutils literal notranslate"><span class="pre">SHMEM_SIGNAL_SET</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_016SHMEM_SIGNAL_ADDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_SIGNAL_ADD</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv4Ut1_1"><code class="docutils literal notranslate"><span class="pre">&#64;1</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_EQE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_EQ</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_NEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_NE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_GTE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_GT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_GEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_GE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_LTE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_LT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_LEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_LE</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="def.html#typedefs">Typedefs</a><ul>
@@ -124,7 +138,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="def.html#macros">Macros</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="def.html#c.SHMEM_HOST_API"><code class="docutils literal notranslate"><span class="pre">SHMEM_HOST_API</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="def.html#c.SHMEM_DEVICE"><code class="docutils literal notranslate"><span class="pre">SHMEM_DEVICE</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv425non_contiguous_copy_param"><code class="docutils literal notranslate"><span class="pre">non_contiguous_copy_param</span></code></a></li>
 </ul>
 </li>
@@ -146,6 +159,14 @@
 <li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-rma-h">shmem_device_rma.h</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_TYPE_FUNC"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPE_FUNC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_GET_TYPENAME_MEM_UB"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_GET_TYPENAME_MEM_UB_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB_TENSOR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_GET_TYPENAME_MEM_UB_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB_DETAILED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_GET_TYPENAME_MEM_UB_TENSOR_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB_TENSOR_DETAILED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_TENSOR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_DETAILED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-sync-h">shmem_device_sync.h</a></li>
@@ -155,7 +176,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Matmul Allreduce</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AllGather</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">核函数实现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#host">host调用</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
 <ul>
@@ -189,7 +214,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Matmul Allreduce</li>
+      <li class="breadcrumb-item active">AllGather</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/example.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -199,8 +224,163 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="matmul-allreduce">
-<h1>Matmul Allreduce<a class="headerlink" href="#matmul-allreduce" title="Link to this heading"></a></h1>
+  <section id="allgather">
+<h1>AllGather<a class="headerlink" href="#allgather" title="Link to this heading"></a></h1>
+<p>该样例工程位于examples\allgather文件夹下。</p>
+<p>实现了对各卡上16个int32_t数据的allgather功能。</p>
+<section id="id1">
+<h2>核函数实现<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef _KERNEL_ALLGATHER_</span>
+<span class="cp">#define _KERNEL_ALLGATHER_</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kernel_operator.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;shmem_api.h&quot;</span>
+
+<span class="c1">// 纯vec不能全核同步，需添加cube逻辑</span>
+<span class="n">SHMEM_DEVICE</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">cube_guard</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">AscendC</span><span class="p">;</span>
+
+<span class="cp">#ifdef __DAV_C220_CUBE__</span>
+<span class="w">    </span><span class="n">LocalTensor</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">    </span><span class="n">result</span><span class="p">.</span><span class="n">address_</span><span class="p">.</span><span class="n">logicPos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="p">)</span><span class="n">TPosition</span><span class="o">::</span><span class="n">CO1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">result</span><span class="p">.</span><span class="n">InitBuffer</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">256</span><span class="p">);</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">LocalTensor</span><span class="o">&lt;</span><span class="n">half</span><span class="o">&gt;</span><span class="w"> </span><span class="n">left</span><span class="p">;</span>
+<span class="w">    </span><span class="n">left</span><span class="p">.</span><span class="n">address_</span><span class="p">.</span><span class="n">logicPos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="p">)</span><span class="n">TPosition</span><span class="o">::</span><span class="n">A2</span><span class="p">;</span>
+<span class="w">    </span><span class="n">left</span><span class="p">.</span><span class="n">InitBuffer</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">256</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">LocalTensor</span><span class="o">&lt;</span><span class="n">half</span><span class="o">&gt;</span><span class="w"> </span><span class="n">right</span><span class="p">;</span>
+<span class="w">    </span><span class="n">right</span><span class="p">.</span><span class="n">address_</span><span class="p">.</span><span class="n">logicPos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="p">)</span><span class="n">TPosition</span><span class="o">::</span><span class="n">B2</span><span class="p">;</span>
+<span class="w">    </span><span class="n">right</span><span class="p">.</span><span class="n">InitBuffer</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">256</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">MmadParams</span><span class="w"> </span><span class="n">param</span><span class="p">;</span>
+<span class="w">    </span><span class="n">param</span><span class="p">.</span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span>
+<span class="w">    </span><span class="n">param</span><span class="p">.</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span>
+<span class="w">    </span><span class="n">param</span><span class="p">.</span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Mmad</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span><span class="w"> </span><span class="n">half</span><span class="p">,</span><span class="w"> </span><span class="n">half</span><span class="o">&gt;</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="n">right</span><span class="p">,</span><span class="w"> </span><span class="n">param</span><span class="p">);</span>
+<span class="cp">#endif</span>
+<span class="p">}</span>
+
+<span class="c1">// all_gather简易实现</span>
+<span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="n">__global__</span><span class="w"> </span><span class="n">__aicore__</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">device_all_gather_test</span><span class="p">(</span><span class="n">GM_ADDR</span><span class="w"> </span><span class="n">gva</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">elements</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">my_rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_my_pe</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">pe_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_n_pes</span><span class="p">();</span>
+<span class="w">    </span><span class="n">__gm__</span><span class="w"> </span><span class="kt">int32_t</span><span class="o">*</span><span class="w"> </span><span class="n">gva_gm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">__gm__</span><span class="w"> </span><span class="kt">int32_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">gva</span><span class="p">;</span>
+<span class="w">    </span><span class="n">AscendC</span><span class="o">::</span><span class="n">PipeBarrier</span><span class="o">&lt;</span><span class="n">PIPE_ALL</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">cube_guard</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// All Gather</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">pe_size</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">shmem_put_int32_mem_nbi</span><span class="p">(</span><span class="n">gva_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">elements</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">my_rank</span><span class="p">,</span><span class="w"> </span><span class="n">gva_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">elements</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">my_rank</span><span class="p">,</span><span class="w"> </span><span class="n">elements</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="n">AscendC</span><span class="o">::</span><span class="n">SetFlag</span><span class="o">&lt;</span><span class="n">AscendC</span><span class="o">::</span><span class="n">HardEvent</span><span class="o">::</span><span class="n">MTE3_MTE2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">EVENT_ID0</span><span class="p">);</span>
+<span class="w">        </span><span class="n">AscendC</span><span class="o">::</span><span class="n">WaitFlag</span><span class="o">&lt;</span><span class="n">AscendC</span><span class="o">::</span><span class="n">HardEvent</span><span class="o">::</span><span class="n">MTE3_MTE2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">EVENT_ID0</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">shmem_barrier_all</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">allgather_demo</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">block_dim</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">stream</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">gva</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">elements</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">device_all_gather_test</span><span class="o">&lt;&lt;&lt;</span><span class="n">block_dim</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="n">stream</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">gva</span><span class="p">,</span><span class="w"> </span><span class="n">elements</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cp">#endif  </span><span class="c1">// _KERNEL_ALLGATHER_</span>
+</pre></div>
+</div>
+</section>
+<section id="host">
+<h2>host调用<a class="headerlink" href="#host" title="Link to this heading"></a></h2>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;acl/acl.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;shmem_api.h&quot;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">g_npus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">ipport</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">f_rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">f_npu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">extern</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">allgather_demo</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">block_dim</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">stream</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">gva</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">elements</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">test_shmem_team_all_gather</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">rank_id</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n_ranks</span><span class="p">,</span><span class="w"> </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">local_mem_size</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// 初始化ACL和SHMEM</span>
+<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">device_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rank_id</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">g_npus</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">f_npu</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aclrtStream</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclInit</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclrtSetDevice</span><span class="p">(</span><span class="n">device_id</span><span class="p">);</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclrtCreateStream</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stream</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">shmem_init_attr_t</span><span class="w"> </span><span class="o">*</span><span class="n">attributes</span><span class="p">;</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_set_attr</span><span class="p">(</span><span class="n">rank_id</span><span class="p">,</span><span class="w"> </span><span class="n">n_ranks</span><span class="p">,</span><span class="w"> </span><span class="n">local_mem_size</span><span class="p">,</span><span class="w"> </span><span class="n">ipport</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">);</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_init_attr</span><span class="p">(</span><span class="n">attributes</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_malloc</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// 初始化数据</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">trans_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">input</span><span class="p">(</span><span class="n">trans_size</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">trans_size</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">rank_id</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclrtMemcpy</span><span class="p">(</span><span class="n">ptr</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">shmem_my_pe</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">trans_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">),</span><span class="w"> </span><span class="n">trans_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">),</span>
+<span class="w">                         </span><span class="n">input</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">trans_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">),</span><span class="w"> </span><span class="n">ACL_MEMCPY_HOST_TO_DEVICE</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// AllGather</span>
+<span class="w">    </span><span class="n">allgather_demo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">stream</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="n">trans_size</span><span class="p">);</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclrtSynchronizeStream</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// 结果校验打印</span>
+<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="o">*</span><span class="n">y_host</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">input_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_ranks</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">trans_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">);</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclrtMallocHost</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">**&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">y_host</span><span class="p">),</span><span class="w"> </span><span class="n">input_size</span><span class="p">);</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclrtMemcpy</span><span class="p">(</span><span class="n">y_host</span><span class="p">,</span><span class="w"> </span><span class="n">input_size</span><span class="p">,</span><span class="w"> </span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="n">input_size</span><span class="p">,</span><span class="w"> </span><span class="n">ACL_MEMCPY_DEVICE_TO_HOST</span><span class="p">);</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n_ranks</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">y_host</span><span class="p">[</span><span class="n">trans_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">y_host</span><span class="p">[</span><span class="n">trans_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; != &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;rank: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rank_id</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; [&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">trans_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_ranks</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">y_host</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;]&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// 去初始化</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclrtFreeHost</span><span class="p">(</span><span class="n">y_host</span><span class="p">);</span>
+<span class="w">    </span><span class="n">shmem_free</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclrtDestroyStream</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclrtResetDevice</span><span class="p">(</span><span class="n">device_id</span><span class="p">);</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclFinalize</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span><span class="w">   </span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n_ranks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+<span class="w">    </span><span class="n">ipport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="w">    </span><span class="n">g_npus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+<span class="w">    </span><span class="n">f_rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span>
+<span class="w">    </span><span class="n">f_npu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">]);</span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">local_mem_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024UL</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024UL</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">test_shmem_team_all_gather</span><span class="p">(</span><span class="n">rank_id</span><span class="p">,</span><span class="w"> </span><span class="n">n_ranks</span><span class="p">,</span><span class="w"> </span><span class="n">local_mem_size</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[SUCCESS] demo run success in rank &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rank_id</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
