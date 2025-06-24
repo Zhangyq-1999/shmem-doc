@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>相关脚本 &mdash; Shmem Guidebook 1.0.0 documentation</title>
+  <title>安全加固 &mdash; Shmem Guidebook 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -19,8 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="SHMEM API 样例" href="api_demo.html" />
-    <link rel="prev" title="快速开始" href="quickstart.html" /> 
+    <link rel="prev" title="SHMEM 常见问题" href="Troubleshooting_FAQs.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,7 +42,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">快速开始</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id2">介绍</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id3">软件架构</a></li>
@@ -54,16 +53,16 @@
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id7">功能自测用例</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">相关脚本</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#build-sh">build.sh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#install-sh">install.sh</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">安装目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="related_scripts.html#build-sh">build.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="related_scripts.html#install-sh">install.sh</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="related_scripts.html#id2">安装目录</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#run-sh">run.sh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#set-env-sh">set_env.sh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#uninstall-sh">uninstall.sh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#release-sh">release.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="related_scripts.html#run-sh">run.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="related_scripts.html#set-env-sh">set_env.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="related_scripts.html#uninstall-sh">uninstall.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="related_scripts.html#release-sh">release.sh</a></li>
 </ul>
 </li>
 </ul>
@@ -116,6 +115,20 @@
 <li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N21data_op_engine_type_t17SHMEM_DATA_OP_MTEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_DATA_OP_MTE</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv4Ut1_0"><code class="docutils literal notranslate"><span class="pre">&#64;0</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_016SHMEM_SIGNAL_SETE"><code class="docutils literal notranslate"><span class="pre">SHMEM_SIGNAL_SET</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_016SHMEM_SIGNAL_ADDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_SIGNAL_ADD</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv4Ut1_1"><code class="docutils literal notranslate"><span class="pre">&#64;1</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_EQE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_EQ</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_NEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_NE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_GTE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_GT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_GEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_GE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_LTE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_LT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_LEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_LE</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="def.html#typedefs">Typedefs</a><ul>
@@ -124,7 +137,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="def.html#macros">Macros</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="def.html#c.SHMEM_HOST_API"><code class="docutils literal notranslate"><span class="pre">SHMEM_HOST_API</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="def.html#c.SHMEM_DEVICE"><code class="docutils literal notranslate"><span class="pre">SHMEM_DEVICE</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv425non_contiguous_copy_param"><code class="docutils literal notranslate"><span class="pre">non_contiguous_copy_param</span></code></a></li>
 </ul>
 </li>
@@ -146,6 +158,14 @@
 <li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-rma-h">shmem_device_rma.h</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_TYPE_FUNC"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPE_FUNC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_GET_TYPENAME_MEM_UB"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_GET_TYPENAME_MEM_UB_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB_TENSOR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_GET_TYPENAME_MEM_UB_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB_DETAILED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_GET_TYPENAME_MEM_UB_TENSOR_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB_TENSOR_DETAILED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_TENSOR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_DETAILED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-sync-h">shmem_device_sync.h</a></li>
@@ -155,7 +175,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="example.html">AllGather</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">AllGather</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example.html#id1">核函数实现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#host">host调用</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
 <ul>
@@ -175,15 +199,16 @@
 <li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html">SHMEM 常见问题</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="security.html">安全加固</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id2">加固须知</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id3">运行用户建议</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id4">内存地址随机化机制安全加固</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">安全加固</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">加固须知</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">运行用户建议</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">内存地址随机化机制安全加固</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="security.html#id5">公网地址</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#id5">公网地址</a></li>
 </ul>
+
         </div>
       </div>
     </nav>
@@ -198,9 +223,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">相关脚本</li>
+      <li class="breadcrumb-item active">安全加固</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/related_scripts.md.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/security.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -209,74 +234,71 @@
            <div itemprop="articleBody">
              
   <section id="id1">
-<h1>相关脚本<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
-<section id="build-sh">
-<h2>build.sh<a class="headerlink" href="#build-sh" title="Link to this heading"></a></h2>
-<p>使用方式</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>build.sh
-</pre></div>
-</div>
-<p>SHMEM自动编译脚本，会自动完成依赖库的下载，工程编译，UT用例编译，库打包</p>
-</section>
-<section id="install-sh">
-<h2>install.sh<a class="headerlink" href="#install-sh" title="Link to this heading"></a></h2>
-<p>打包生成的run包安装卸载依赖的脚本，提供安装卸载功能。</p>
+<h1>安全加固<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
 <section id="id2">
-<h3>安装目录<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>${INSTALL_PATH}
-    |--shmem
-        |--latest
-        |--${version}
-            |--shmem
-                |--include  (头文件)
-                |--lib      (so库)
-            |--memfabric_hybrid
-                |--include  (头文件)
-                |--lib      (so库)
-            |--scripts      (卸载脚本)
-</pre></div>
-</div>
+<h2>加固须知<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>本文中列出的安全加固措施为基本的加固建议项。用户应根据自身业务，重新审视整个系统的网络安全加固措施。用户应按照所在组织的安全策略进行相关配置，包括并不局限于软件版本、口令复杂度要求、安全配置（协议、加密套件、密钥长度等）， 权限配置、防火墙设置等。必要时可参考业界优秀加固方案和安全专家的建议。</p>
+</section>
+<section id="id3">
+<h2>运行用户建议<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>root是Linux系统中的超级特权用户，具有所有Linux系统资源的访问权限。如果允许直接使用root账号登录Linux系统对系统进行操作，会带来很多潜在的安全风险。通常情况下，建议将在“/etc/ssh/sshd_config”文件中将“PermitRootLogin”参数设置为“no”，设置后root用户无法通过SSH登录到系统，增加了系统的安全性。如果需要使用root权限进行管理操作，可以通过其他普通用户登录系统后，再使用su或sudo命令切换到root用户进行操作。这样可以避免直接使用root用户登录系统，从而减少系统被攻击的风险。出于安全性及权限最小化角度考虑，不建议使用root等管理员类型账户使用shmem。</p>
+</section>
+<section id="id4">
+<h2>内存地址随机化机制安全加固<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>ASLR（address space layout randomization）开启后能增强漏洞攻击防护能力，建议用户将/proc/sys/kernel/randomize_va_space里面的值设置为2，开启该功能。</p>
 </section>
 </section>
-<section id="run-sh">
-<h2>run.sh<a class="headerlink" href="#run-sh" title="Link to this heading"></a></h2>
-<p>UT测试用例运行脚本。</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>run.sh
-</pre></div>
-</div>
-<p>提供多种参数支持自定义用例执行</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-ranks<span class="w">          </span><span class="c1"># 总rank数</span>
--frank<span class="w">          </span><span class="c1"># 该服务器第一个rank</span>
--ipport<span class="w">         </span><span class="c1"># ip端口</span>
--fnpu<span class="w">           </span><span class="c1"># 每个服务器起的第一个npu</span>
--gnpus<span class="w">          </span><span class="c1"># 单机使用的卡数</span>
--test_filter<span class="w">    </span><span class="c1"># gtest_filter</span>
-
-<span class="c1"># 例如</span>
-bash<span class="w"> </span>run.sh<span class="w"> </span>-ranks<span class="w"> </span><span class="m">4</span><span class="w"> </span>-fnpu<span class="w"> </span><span class="m">2</span><span class="w"> </span>-gnpus<span class="w"> </span><span class="m">4</span><span class="w"> </span>-test_filter<span class="w"> </span>ScalarP<span class="w"> </span><span class="c1"># 会在2-6卡</span>
-</pre></div>
-</div>
-</section>
-<section id="set-env-sh">
-<h2>set_env.sh<a class="headerlink" href="#set-env-sh" title="Link to this heading"></a></h2>
-<p>环境变量设置脚本。</p>
-</section>
-<section id="uninstall-sh">
-<h2>uninstall.sh<a class="headerlink" href="#uninstall-sh" title="Link to this heading"></a></h2>
-<p>卸载脚本，可以卸载对应路径安装的shmem库或通过run包的–uninstall卸载默认路径下的shmem。</p>
-</section>
-<section id="release-sh">
-<h2>release.sh<a class="headerlink" href="#release-sh" title="Link to this heading"></a></h2>
-<p>出包脚本，编译后使用。对编译产物打包后会删除install目录下其他文件。推荐使用build.sh完成打包。</p>
-</section>
+<section id="id5">
+<h1>公网地址<a class="headerlink" href="#id5" title="Link to this heading"></a></h1>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>类型</p></th>
+<th class="head"><p>开源代码地址</p></th>
+<th class="head"><p>文件名</p></th>
+<th class="head"><p>公网IP地址/公网URL地址/域名/邮箱地址</p></th>
+<th class="head"><p>用途说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>自研</p></td>
+<td><p>不涉及</p></td>
+<td><p>README.md/quickstart.md</p></td>
+<td><p>https://gitee.com/ascend/catlass.git</p></td>
+<td><p>依赖的开源代码仓</p></td>
+</tr>
+<tr class="row-odd"><td><p>文档</p></td>
+<td><p>不涉及</p></td>
+<td><p>README.md</p></td>
+<td><p>https://www.hiascend.com/document/detail/zh/canncommercial/81RC1/softwareinst/instg/instg_0000.html?Mode=PmIns&amp;InstallType=local&amp;OS=Ubuntu&amp;Software=cannToolKit</p></td>
+<td><p>CANN商发文档</p></td>
+</tr>
+<tr class="row-even"><td><p>文档</p></td>
+<td><p>不涉及</p></td>
+<td><p>shmemi_device_barrier.h</p></td>
+<td><p>https://www.inf.ed.ac.uk/teaching/courses/ppls/BarrierPaper.pdf</p></td>
+<td><p>并行编程语言和系统</p></td>
+</tr>
+<tr class="row-odd"><td><p>开源引入</p></td>
+<td><p>https://github.com/google/googletest</p></td>
+<td><p>build.sh</p></td>
+<td><p>https://github.com/google/googletest.git</p></td>
+<td><p>gtest测试框架</p></td>
+</tr>
+<tr class="row-even"><td><p>开源引入</p></td>
+<td><p>https://github.com/doxygen</p></td>
+<td><p>build.sh</p></td>
+<td><p>https://github.com/doxygen/doxygen/releases/download/Release_1_9_3/doxygen-1.9.3.src.tar.gz</p></td>
+<td><p>doxygen文档生成工具</p></td>
+</tr>
+</tbody>
+</table>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="quickstart.html" class="btn btn-neutral float-left" title="快速开始" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="api_demo.html" class="btn btn-neutral float-right" title="SHMEM API 样例" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Troubleshooting_FAQs.html" class="btn btn-neutral float-left" title="SHMEM 常见问题" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
