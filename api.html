@@ -101,9 +101,9 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv419shmem_init_status_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_status_t</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N19shmem_init_status_t27SHMEM_STATUS_NOT_INITALIZEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_NOT_INITALIZED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N19shmem_init_status_t27SHMEM_STATUS_NOT_INITIALIZEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_NOT_INITIALIZED</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N19shmem_init_status_t24SHMEM_STATUS_SHM_CREATEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_SHM_CREATED</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N19shmem_init_status_t26SHMEM_STATUS_IS_INITALIZEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_IS_INITALIZED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N19shmem_init_status_t26SHMEM_STATUS_IS_INITIALIZEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_IS_INITIALIZED</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N19shmem_init_status_t20SHMEM_STATUS_INVALIDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_INVALID</span></code></a></li>
 </ul>
 </li>
@@ -218,9 +218,9 @@
 <section id="id1">
 <h3>初始化状态<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">SHMEM_STATUS_NOT_INITALIZED</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="c1">// 未初始化</span>
+<span class="w">    </span><span class="n">SHMEM_STATUS_NOT_INITIALIZED</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="c1">// 未初始化</span>
 <span class="w">    </span><span class="n">SHMEM_STATUS_SHM_CREATED</span><span class="p">,</span><span class="w">           </span><span class="c1">// 完成共享内存堆创建 </span>
-<span class="w">    </span><span class="n">SHMEM_STATUS_IS_INITALIZED</span><span class="p">,</span><span class="w">         </span><span class="c1">// 初始化完成 </span>
+<span class="w">    </span><span class="n">SHMEM_STATUS_IS_INITIALIZED</span><span class="p">,</span><span class="w">         </span><span class="c1">// 初始化完成 </span>
 <span class="w">    </span><span class="n">SHMEM_STATUS_INVALID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INT_MAX</span><span class="p">,</span>
 <span class="p">};</span>
 </pre></div>
@@ -265,7 +265,7 @@
 <span class="c1">// delete attributes; // 销毁自定义attr</span>
 
 <span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_init_status</span><span class="p">();</span>
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SHMEM_STATUS_IS_INITALIZED</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SHMEM_STATUS_IS_INITIALIZED</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Init success!&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="c1">//################你的任务#################</span>
