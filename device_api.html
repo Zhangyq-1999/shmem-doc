@@ -887,6 +887,17 @@
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__sync_8h_1afb287efcb0a395c8339c2387b81b9b71"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmemx_set_ffts_config</span> <span class="pre">(uint64_t</span> <span class="pre">config)</span></span></dt>
+<dd><p>set runtime ffts address. Call this at mix kernel entry point (if the kernel contains barrier calls). </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> – [config] ffts config, acquired by <a class="reference internal" href="host_api.html#shmem__host__sync_8h_1a4e347706c1affc6e49afcd2a401657ed"><span class="std std-ref">shmemx_get_ffts_config()</span></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__sync_8h_1a79eaed91ac7eff387fac7d81c5b2f91e"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_barrier</span> <span class="pre">(shmem_team_t</span> <span class="pre">tid)</span></span></dt>
 <dd><p>shmem_barrier is a collective synchronization routine over a team. Control returns from shmem_barrier after all PEs in the team have called shmem_barrier. </p>
 <p>shmem_barrier ensures that all previously issued stores and remote memory updates, including AMOs and RMA operations, done by any of the PEs in the active set are complete before returning. On systems with only scale-up network (HCCS), updates are globally visible, whereas on systems with both scale-up network HCCS and scale-out network (RDMA), SHMEM only guarantees that updates to the memory of a given PE are visible to that PE. </p>
