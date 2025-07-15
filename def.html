@@ -138,12 +138,12 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#macros">Macros</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_HOST_API"><code class="docutils literal notranslate"><span class="pre">SHMEM_HOST_API</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv425non_contiguous_copy_param"><code class="docutils literal notranslate"><span class="pre">non_contiguous_copy_param</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#structs">Structs</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv426shmem_init_optional_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_optional_attr_t</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv417shmem_init_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_attr_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv425non_contiguous_copy_param"><code class="docutils literal notranslate"><span class="pre">non_contiguous_copy_param</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -444,14 +444,6 @@
 <dd><p>A macro that identifies a function on the global. </p>
 </dd></dl>
 
-</div>
-<dl class="cpp struct">
-<dt class="sig sig-object cpp" id="_CPPv425non_contiguous_copy_param">
-<span id="_CPPv325non_contiguous_copy_param"></span><span id="_CPPv225non_contiguous_copy_param"></span><span id="non_contiguous_copy_param"></span><span class="target" id="structnon__contiguous__copy__param"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">non_contiguous_copy_param</span></span></span><a class="headerlink" href="#_CPPv425non_contiguous_copy_param" title="Link to this definition"></a><br /></dt>
-<dd><div class="docutils container">
-<em>#include &lt;shmem_device_def.h&gt;</em></div>
-</dd></dl>
-
 </dd></dl>
 
 </section>
@@ -488,6 +480,21 @@
 <li><p>const char* ip_port: The ip and port of the communication server. The port must not conflict with other modules and processes.</p></li>
 <li><p>uint64_t local_mem_size: The size of shared memory currently occupied by current rank.</p></li>
 <li><p><a class="reference internal" href="#structshmem__init__optional__attr__t"><span class="std std-ref">shmem_init_optional_attr_t</span></a> option_attr: Optional Parameters. </p></li>
+</ul>
+</p>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv425non_contiguous_copy_param">
+<span id="_CPPv325non_contiguous_copy_param"></span><span id="_CPPv225non_contiguous_copy_param"></span><span id="non_contiguous_copy_param"></span><span class="target" id="structnon__contiguous__copy__param"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">non_contiguous_copy_param</span></span></span><a class="headerlink" href="#_CPPv425non_contiguous_copy_param" title="Link to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;shmem_device_def.h&gt;</em></div>
+<p>Non-Contiguous Datacopy Param. </p>
+<p><ul class="simple">
+<li><p>uint32_t repeat: Data move times</p></li>
+<li><p>uint32_t length: Data move unit length</p></li>
+<li><p>uint32_t src_ld: Src data leading dimension. Interval between the head of the repeat and the head of the following repeat.</p></li>
+<li><p>uint32_t dst_ld: Dst data leading dimension. </p></li>
 </ul>
 </p>
 </dd></dl>
