@@ -361,7 +361,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__init_8h_1a509e6905d316a83e093d04a6b300767b"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_init_attr</span> <span class="pre">(shmem_init_attr_t</span> <span class="pre">*attributes)</span></span></dt>
-<dd><p>Initialization based on attributes and build the shmem library. Attributes can be created by users or obtained by calling <strong><a class="reference internal" href="#shmem__host__init_8h_1af0a3123b7a8eb83200402393e3a9ff45"><span class="std std-ref">shmem_set_attr()</span></a></strong>. if the self-created attr structure is incorrect, the initialization will fail. It is recommended to build the attributes by <strong><a class="reference internal" href="#shmem__host__init_8h_1af0a3123b7a8eb83200402393e3a9ff45"><span class="std std-ref">shmem_set_attr()</span></a></strong>. </p>
+<dd><p>Initialize the resources required for SHMEM task based on attributes. Attributes can be created by users or obtained by calling <strong><a class="reference internal" href="#shmem__host__init_8h_1af0a3123b7a8eb83200402393e3a9ff45"><span class="std std-ref">shmem_set_attr()</span></a></strong>. if the self-created attr structure is incorrect, the initialization will fail. It is recommended to build the attributes by <strong><a class="reference internal" href="#shmem__host__init_8h_1af0a3123b7a8eb83200402393e3a9ff45"><span class="std std-ref">shmem_set_attr()</span></a></strong>. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>attributes</strong> – [in] Pointer to the user-defined attributes. </p>
@@ -375,7 +375,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__init_8h_1acabd5cecaa0043f3e928f10afb6e9ca3"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_finalize</span> <span class="pre">()</span></span></dt>
-<dd><p>Ends the program previously initialized by <strong><a class="reference internal" href="#shmem__host__init_8h_1a509e6905d316a83e093d04a6b300767b"><span class="std std-ref">shmem_init_attr()</span></a></strong>. release all resources used by the SHMEM library. </p>
+<dd><p>Release all resources used by the SHMEM library. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Returns 0 on success or an error code on failure </p>
