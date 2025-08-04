@@ -25,7 +25,7 @@
   - Atlas 800I A2/A3 系列产品
   - Atlas 800T A2/A3 系列产品
 - 平台：aarch64/x86
-- 配套软件：驱动固件 Ascend HDK 25.0.RC1.1、 CANN 8.1.RC1及之后版本（参考《[CANN软件安装指南](https://www.hiascend.com/document/detail/zh/canncommercial/81RC1/softwareinst/instg/instg_0000.html?Mode=PmIns&InstallType=local&OS=Ubuntu&Software=cannToolKit)》安装CANN开发套件包以及配套固件和驱动）  
+- 配套软件：驱动固件 Ascend HDK 24.1.RC2、 CANN 8.2.RC1.alpha003及之后版本。CANN版本为社区版本，暂无支持商用版本。（参考《[CANN软件安装指南](https://www.hiascend.com/document/detail/zh/canncommercial/81RC1/softwareinst/instg/instg_0000.html?Mode=PmIns&InstallType=local&OS=Ubuntu&Software=cannToolKit)》安装CANN开发套件包以及配套固件和驱动）
 cmake >= 3.19  
 GLIBC >= 2.28
 
@@ -54,35 +54,25 @@ GLIBC >= 2.28
     ```
     出现提示`xxx install success!`则安装成功
 
-## 执行样例 matmul_allreduce算子 
-1.在3rdparty目录下, clone AscendC Templates代码仓：
+shmem 默认开启tls通信加密。如果想关闭，需要启动前手动设置环境变量：
+```
+export MEMFABRIC_HYBRID_TLS_ENABLE=0
+```
+具体细节详见安全声明章节
+
+执行一个样例matmul_allreduce算子。  
+1.在shmem/目录编译:
 
 ```sh
-git clone https://gitee.com/ascend/ascendc-templates.git
+bash scripts/build.sh
 ```
 
-2.在example/matmul_allreduce目录下进行demo编译: 
+2.在shmem/examples/matmul_allreduce目录执行demo:
 
 ```sh
-bash build.sh
+bash scripts/run.sh -ranks 2 -M 1024 -K 2048 -N 8192
 ```
 
-3.在example/matmul_allreduce目录下生成golden数据：
-
-```sh
-python3 utils/gen_data.py 1 2 1024 1024 16 0 0
-```
-
-4.在example/matmul_allreduce目录执行demo：
-
-```sh
-bash run.sh
-```
-5.在example/matmul_allreduce目录验证算子精度：
-    
-```sh
-python3 utils/verify_result.py ./out/output.bin ./out/golden.bin 1 1024 1024 16
-```
 ## 功能自测用例
 
  - 共享内存库接口单元测试
@@ -99,3 +89,16 @@ run.sh脚本提供-ranks -ipport -test_filter等参数自定义执行用例的�
 # 8卡，ip:port 127.0.0.1:8666，运行所有*Init*用例
 bash scripts/run.sh -ranks 8 -ipport tcp://127.0.0.1:8666 -test_filter Init
 ```
+
+
+## 安全声明
+[安全声明](security.md)
+
+## 合作贡献者
+待补充
+
+## 版权声明
+待补充
+
+## 许可证
+待补充

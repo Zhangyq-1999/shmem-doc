@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
@@ -50,8 +48,11 @@
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id4">目录结构说明</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id5">软件硬件配套说明</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id6">快速上手</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#matmul-allreduce">执行样例 matmul_allreduce算子</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id7">功能自测用例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id8">安全声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id9">合作贡献者</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id10">版权声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id11">许可证</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a><ul>
@@ -101,9 +102,9 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv419shmem_init_status_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_status_t</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N19shmem_init_status_t27SHMEM_STATUS_NOT_INITIALIZEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_NOT_INITIALIZED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N19shmem_init_status_t28SHMEM_STATUS_NOT_INITIALIZEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_NOT_INITIALIZED</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#_CPPv4N19shmem_init_status_t24SHMEM_STATUS_SHM_CREATEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_SHM_CREATED</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N19shmem_init_status_t26SHMEM_STATUS_IS_INITIALIZEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_IS_INITIALIZED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N19shmem_init_status_t27SHMEM_STATUS_IS_INITIALIZEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_IS_INITIALIZED</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#_CPPv4N19shmem_init_status_t20SHMEM_STATUS_INVALIDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_INVALID</span></code></a></li>
 </ul>
 </li>
@@ -178,7 +179,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="example.html">AllGather</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="example.html#id1">核函数实现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example.html#host">host调用</a></li>
 </ul>
 </li>
 </ul>
@@ -197,17 +197,19 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Troubleshooting And FAQs</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html">SHMEM 常见问题</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="security.html">安全加固</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id2">加固须知</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id3">运行用户建议</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id4">内存地址随机化机制安全加固</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id2">通信矩阵</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id3">加固须知</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id4">运行用户建议</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id5">内存地址随机化机制安全加固</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="security.html#id5">公网地址</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html#id6">公网地址</a></li>
 </ul>
 
         </div>
@@ -292,8 +294,8 @@
 <dd><p>The state of the SHMEM library initialization. </p>
 <p><em>Values:</em></p>
 <dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N19shmem_init_status_t27SHMEM_STATUS_NOT_INITIALIZEDE">
-<span id="_CPPv3N19shmem_init_status_t27SHMEM_STATUS_NOT_INITIALIZEDE"></span><span id="_CPPv2N19shmem_init_status_t27SHMEM_STATUS_NOT_INITIALIZEDE"></span><span class="target" id="group__group__enums_1gga76b42d805d319f016366959082cd36c9a539a3e2fd921980d4896fc389f49f77b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_STATUS_NOT_INITIALIZED</span></span></span><a class="headerlink" href="#_CPPv4N19shmem_init_status_t27SHMEM_STATUS_NOT_INITIALIZEDE" title="Link to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N19shmem_init_status_t28SHMEM_STATUS_NOT_INITIALIZEDE">
+<span id="_CPPv3N19shmem_init_status_t28SHMEM_STATUS_NOT_INITIALIZEDE"></span><span id="_CPPv2N19shmem_init_status_t28SHMEM_STATUS_NOT_INITIALIZEDE"></span><span class="target" id="group__group__enums_1gga76b42d805d319f016366959082cd36c9a3c8bb2f5b201fc33f6abcd81ac8232d5"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_STATUS_NOT_INITIALIZED</span></span></span><a class="headerlink" href="#_CPPv4N19shmem_init_status_t28SHMEM_STATUS_NOT_INITIALIZEDE" title="Link to this definition"></a><br /></dt>
 <dd><p>Uninitialized. </p>
 </dd></dl>
 
@@ -304,8 +306,8 @@
 </dd></dl>
 
 <dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N19shmem_init_status_t26SHMEM_STATUS_IS_INITIALIZEDE">
-<span id="_CPPv3N19shmem_init_status_t26SHMEM_STATUS_IS_INITIALIZEDE"></span><span id="_CPPv2N19shmem_init_status_t26SHMEM_STATUS_IS_INITIALIZEDE"></span><span class="target" id="group__group__enums_1gga76b42d805d319f016366959082cd36c9ac1823bd52fbca1751593a0b8a7383c87"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_STATUS_IS_INITIALIZED</span></span></span><a class="headerlink" href="#_CPPv4N19shmem_init_status_t26SHMEM_STATUS_IS_INITIALIZEDE" title="Link to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N19shmem_init_status_t27SHMEM_STATUS_IS_INITIALIZEDE">
+<span id="_CPPv3N19shmem_init_status_t27SHMEM_STATUS_IS_INITIALIZEDE"></span><span id="_CPPv2N19shmem_init_status_t27SHMEM_STATUS_IS_INITIALIZEDE"></span><span class="target" id="group__group__enums_1gga76b42d805d319f016366959082cd36c9a7cb5e49cd6fdb35e8a57a6cbb84ecacd"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_STATUS_IS_INITIALIZED</span></span></span><a class="headerlink" href="#_CPPv4N19shmem_init_status_t27SHMEM_STATUS_IS_INITIALIZEDE" title="Link to this definition"></a><br /></dt>
 <dd><p>Initialization is complete. </p>
 </dd></dl>
 
@@ -444,6 +446,7 @@
 <dd><p>A macro that identifies a function on the global. </p>
 </dd></dl>
 
+</div>
 </dd></dl>
 
 </section>
@@ -515,7 +518,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024.</p>
+    <p>&#169; Copyright 2025.</p>
   </div>
 
    

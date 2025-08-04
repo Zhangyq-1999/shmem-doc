@@ -14,7 +14,7 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=8d563738"></script>
-      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -50,8 +50,11 @@
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id4">目录结构说明</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id5">软件硬件配套说明</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id6">快速上手</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#matmul-allreduce">执行样例 matmul_allreduce算子</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id7">功能自测用例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id8">安全声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id9">合作贡献者</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id10">版权声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id11">许可证</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a><ul>
@@ -138,12 +141,12 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="def.html#macros">Macros</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="def.html#c.SHMEM_HOST_API"><code class="docutils literal notranslate"><span class="pre">SHMEM_HOST_API</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv425non_contiguous_copy_param"><code class="docutils literal notranslate"><span class="pre">non_contiguous_copy_param</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="def.html#structs">Structs</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv426shmem_init_optional_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_optional_attr_t</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv417shmem_init_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_attr_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv425non_contiguous_copy_param"><code class="docutils literal notranslate"><span class="pre">non_contiguous_copy_param</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -202,12 +205,13 @@
 <p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="security.html">安全加固</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id2">加固须知</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id3">运行用户建议</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id4">内存地址随机化机制安全加固</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id2">通信矩阵</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id3">加固须知</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id4">运行用户建议</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id5">内存地址随机化机制安全加固</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="security.html#id5">公网地址</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html#id6">公网地址</a></li>
 </ul>
 
         </div>
@@ -288,6 +292,7 @@
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aivIndex</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">core_per_rank</span><span class="p">;</span>
 
 <span class="w">    </span><span class="c1">// Sync Ensure Corresponding Tasks Done.</span>
+<span class="w">    </span><span class="n">shmem_fence</span><span class="p">();</span>
 <span class="w">    </span><span class="n">shmemx_signal_op</span><span class="p">(</span><span class="n">gva_sync_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">flag_offset</span><span class="p">,</span><span class="w"> </span><span class="n">magic</span><span class="p">,</span><span class="w"> </span><span class="n">SHMEM_SIGNAL_SET</span><span class="p">,</span><span class="w"> </span><span class="n">my_rank</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int64_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">aivNum</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>

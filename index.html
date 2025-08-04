@@ -49,8 +49,11 @@
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id4">目录结构说明</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id5">软件硬件配套说明</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id6">快速上手</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#matmul-allreduce">执行样例 matmul_allreduce算子</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id7">功能自测用例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id8">安全声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id9">合作贡献者</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id10">版权声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id11">许可证</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a><ul>
@@ -100,9 +103,9 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv419shmem_init_status_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_status_t</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N19shmem_init_status_t27SHMEM_STATUS_NOT_INITIALIZEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_NOT_INITIALIZED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N19shmem_init_status_t28SHMEM_STATUS_NOT_INITIALIZEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_NOT_INITIALIZED</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N19shmem_init_status_t24SHMEM_STATUS_SHM_CREATEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_SHM_CREATED</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N19shmem_init_status_t26SHMEM_STATUS_IS_INITIALIZEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_IS_INITIALIZED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N19shmem_init_status_t27SHMEM_STATUS_IS_INITIALIZEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_IS_INITIALIZED</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N19shmem_init_status_t20SHMEM_STATUS_INVALIDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_INVALID</span></code></a></li>
 </ul>
 </li>
@@ -137,13 +140,12 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="def.html#macros">Macros</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="def.html#c.SHMEM_HOST_API"><code class="docutils literal notranslate"><span class="pre">SHMEM_HOST_API</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="def.html#c.SHMEM_DEVICE"><code class="docutils literal notranslate"><span class="pre">SHMEM_DEVICE</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv425non_contiguous_copy_param"><code class="docutils literal notranslate"><span class="pre">non_contiguous_copy_param</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="def.html#structs">Structs</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv426shmem_init_optional_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_optional_attr_t</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv417shmem_init_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_attr_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv425non_contiguous_copy_param"><code class="docutils literal notranslate"><span class="pre">non_contiguous_copy_param</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -159,6 +161,14 @@
 <li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-rma-h">shmem_device_rma.h</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_TYPE_FUNC"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPE_FUNC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_GET_TYPENAME_MEM_UB"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_GET_TYPENAME_MEM_UB_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB_TENSOR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_GET_TYPENAME_MEM_UB_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB_DETAILED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_GET_TYPENAME_MEM_UB_TENSOR_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB_TENSOR_DETAILED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_TENSOR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_DETAILED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-sync-h">shmem_device_sync.h</a></li>
@@ -168,7 +178,10 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="example.html">AllGather</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">AllGather</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example.html#id1">核函数实现</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
 <ul>
@@ -185,18 +198,21 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Troubleshooting And FAQs</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html">SHMEM 常见问题</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="security.html">安全加固</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id2">加固须知</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id3">运行用户建议</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id4">内存地址随机化机制安全加固</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id2">通信矩阵</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id3">加固须知</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id4">运行用户建议</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id5">内存地址随机化机制安全加固</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="security.html#id5">公网地址</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html#id6">公网地址</a></li>
 </ul>
+
         </div>
       </div>
     </nav>
@@ -232,8 +248,11 @@
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id4">目录结构说明</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id5">软件硬件配套说明</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id6">快速上手</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#matmul-allreduce">执行样例 matmul_allreduce算子</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id7">功能自测用例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id8">安全声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id9">合作贡献者</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id10">版权声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id11">许可证</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a><ul>
@@ -289,7 +308,10 @@
 <div class="toctree-wrapper compound" id="example">
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="example.html">AllGather</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">AllGather</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example.html#id1">核函数实现</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="toctree-wrapper compound" id="architecture">
@@ -310,19 +332,21 @@
 <div class="toctree-wrapper compound" id="troubleshooting-and-faqs">
 <p class="caption" role="heading"><span class="caption-text">Troubleshooting And FAQs</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html">SHMEM 常见问题</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound" id="security-harding-and-public-ip-address">
 <p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="security.html">安全加固</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id2">加固须知</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id3">运行用户建议</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id4">内存地址随机化机制安全加固</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id2">通信矩阵</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id3">加固须知</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id4">运行用户建议</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id5">内存地址随机化机制安全加固</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="security.html#id5">公网地址</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html#id6">公网地址</a></li>
 </ul>
 </div>
 </section>
@@ -345,7 +369,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024.</p>
+    <p>&#169; Copyright 2025.</p>
   </div>
 
    
