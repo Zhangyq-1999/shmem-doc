@@ -14,7 +14,7 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=8d563738"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -50,10 +50,7 @@
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id5">软件硬件配套说明</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id6">快速上手</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id7">功能自测用例</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id8">安全声明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id9">合作贡献者</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id10">版权声明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id11">许可证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#pythontest">python侧test用例</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a><ul>
@@ -76,9 +73,9 @@
 <li class="toctree-l3"><a class="reference internal" href="api_demo.html#id1">初始化状态</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_demo.html#attributes">初始化所需的attributes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_demo.html#id2">初始化样例</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api_demo.html#team-api">Team API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_demo.html#id3">自定义日志打印</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_demo.html#id4">注册私钥口令解密函数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_demo.html#team-api">Team API</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_demo.html#host">host侧接口样例</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_demo.html#device">device侧接口样例</a></li>
 </ul>
@@ -143,6 +140,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="def.html#structs">Structs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv421shmem_decrypt_handler"><code class="docutils literal notranslate"><span class="pre">shmem_decrypt_handler</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv426shmem_init_optional_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_optional_attr_t</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv417shmem_init_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_attr_t</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv425non_contiguous_copy_param"><code class="docutils literal notranslate"><span class="pre">non_contiguous_copy_param</span></code></a></li>
@@ -169,6 +167,7 @@
 <li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_TENSOR</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_DETAILED</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#_CPPv48ub_limit"><code class="docutils literal notranslate"><span class="pre">ub_limit</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-sync-h">shmem_device_sync.h</a></li>
@@ -293,24 +292,24 @@
 </tbody>
 </table>
 <p>说明：
-支持通过环境变量 <code class="docutils literal notranslate"><span class="pre">MEMFABRIC_HYBRID_TLS_ENABLE</span></code>和<code class="docutils literal notranslate"><span class="pre">MEMFABRIC_HYBRID_TLS_INFO</span></code> 配置TLS秘钥证书等，进行tls安全连接。系统启动后，建议删除本地秘钥证书等信息敏感文件。
-用户通过json字符串形式从环境变量 MEMFABRIC_HYBRID_TLS_INFO 传入tlsOption相关参数。
-例如，在终端输入：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>配置关闭tls:
-export MEMFABRIC_HYBRID_TLS_ENABLE=0
-配置打开tls:
-export MEMFABRIC_HYBRID_TLS_ENABLE=1(或者不设置MEMFABRIC_HYBRID_TLS_ENABLE环境变量)
-export MEMFABRIC_HYBRID_TLS_INFO=$&#39;\
-{
-    &quot;tlsCaPath&quot;: &quot;/etc/ssl/certs/&quot;,
-    &quot;tlsCert&quot;: &quot;/etc/ssl/certs/server.crt&quot;,
-    &quot;tlsPk&quot;: &quot;/etc/ssl/private/server.key&quot;,
-    &quot;tlsPkPwd&quot;: &quot;/etc/ssl/private/key_pwd.txt&quot;,
-    &quot;tlsCrlPath&quot;: &quot;/etc/ssl/crl/&quot;,
-    &quot;tlsCrlFile&quot;: [ &quot;server_crl.pem&quot; ],
-    &quot;tlsCaFile&quot;: [ &quot;ca.pem&quot; ]，
-    &quot;packagePath&quot;: &quot;/etc/lib&quot;
-}&#39;
+支持通过接口 <code class="docutils literal notranslate"><span class="pre">shmem_set_conf_store_tls</span></code> 配置TLS秘钥证书等，进行tls安全连接，建议用户开启TLS加密配置，保证通信通信安全。系统启动后，建议删除本地秘钥证书等信息敏感文件。调用该接口时，传入的文件路径不能包含英文分号、逗号、冒号。
+支持通过环境变量 <code class="docutils literal notranslate"><span class="pre">ACCLINK_CHECK_PERIOD_HOURS</span></code>和<code class="docutils literal notranslate"><span class="pre">ACCLINK_CERT_CHECK_AHEAD_DAYS</span></code> 配置证书检查周期与证书过期预警时间</p>
+<p>使用接口里子：</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// 配置关闭tls:</span>
+<span class="n">smem_set_conf_store_tls</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="n">nullptr</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="c1">// 配置打开tls:</span>
+
+<span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">tls_info</span><span class="w"> </span><span class="o">=</span><span class="s">&quot;                               \</span>
+<span class="s">    tlsCaPath: /etc/ssl/certs/;                 \</span>
+<span class="s">    tlsCert: /etc/ssl/certs/server.crt;         \</span>
+<span class="s">    tlsPk: /etc/ssl/private/server.key;         \</span>
+<span class="s">    tlsPkPwd: /etc/ssl/private/key_pwd.txt;     \</span>
+<span class="s">    tlsCrlPath: /etc/ssl/crl/;                  \</span>
+<span class="s">    tlsCrlFile: server_crl1.pem,server_crl2.pem;\</span>
+<span class="s">    tlsCaFile: ca.pem1,ca.pem2;                 \</span>
+<span class="s">    packagePath: /etc/lib&quot;</span>
+<span class="kt">int32_t</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">smem_set_conf_store_tls</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">tls_info</span><span class="p">,</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="n">tls_info</span><span class="p">));</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -320,11 +319,23 @@ export MEMFABRIC_HYBRID_TLS_INFO=$&#39;\
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>MEMFABRIC_HYBRID_TLS_ENABLE</p></td>
-<td><p>只支持配置0和1。其中0代表关闭tls，1代表打开tls。不配置的时候默认打开tls</p></td>
+<tr class="row-even"><td><p>SHMEM_MASTER_ADDR</p></td>
+<td><p>通信面IP</p></td>
 </tr>
-<tr class="row-odd"><td><p>MEMFABRIC_HYBRID_TLS_INFO</p></td>
-<td><p>tls相关参数配置，json格式字符串。当tls打开时，必须配置MEMFABRIC_HYBRID_TLS_INFO</p></td>
+<tr class="row-odd"><td><p>SHMEM_MASTER_PORT</p></td>
+<td><p>通信面端口</p></td>
+</tr>
+<tr class="row-even"><td><p>MASTER_ADDR</p></td>
+<td><p>备用通信面IP</p></td>
+</tr>
+<tr class="row-odd"><td><p>MASTER_PORT</p></td>
+<td><p>备用通信面端口</p></td>
+</tr>
+<tr class="row-even"><td><p>SHMEM_HOME_PATH</p></td>
+<td><p>shmem安装路径</p></td>
+</tr>
+<tr class="row-odd"><td><p>VERSION</p></td>
+<td><p>编译whl包默认版本号</p></td>
 </tr>
 </tbody>
 </table>
@@ -369,7 +380,7 @@ export MEMFABRIC_HYBRID_TLS_INFO=$&#39;\
 <tr class="row-even"><td><p>文档</p></td>
 <td><p>不涉及</p></td>
 <td><p>README.md</p></td>
-<td><p>https://www.hiascend.com/document/detail/zh/canncommercial/81RC1/softwareinst/instg/instg_0000.html?Mode=PmIns&amp;InstallType=local&amp;OS=Ubuntu&amp;Software=cannToolKit</p></td>
+<td><p>https://www.hiascend.com/document/detail/zh/canncommercial/82RC1/index/index.html</p></td>
 <td><p>CANN商发文档</p></td>
 </tr>
 <tr class="row-odd"><td><p>文档</p></td>

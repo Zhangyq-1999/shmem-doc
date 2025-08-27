@@ -14,7 +14,7 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=8d563738"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -51,10 +51,7 @@
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id5">软件硬件配套说明</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id6">快速上手</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id7">功能自测用例</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id8">安全声明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id9">合作贡献者</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id10">版权声明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id11">许可证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#pythontest">python侧test用例</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a><ul>
@@ -77,9 +74,9 @@
 <li class="toctree-l3"><a class="reference internal" href="api_demo.html#id1">初始化状态</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_demo.html#attributes">初始化所需的attributes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_demo.html#id2">初始化样例</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api_demo.html#team-api">Team API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_demo.html#id3">自定义日志打印</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_demo.html#id4">注册私钥口令解密函数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_demo.html#team-api">Team API</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_demo.html#host">host侧接口样例</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_demo.html#device">device侧接口样例</a></li>
 </ul>
@@ -144,6 +141,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="def.html#structs">Structs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv421shmem_decrypt_handler"><code class="docutils literal notranslate"><span class="pre">shmem_decrypt_handler</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv426shmem_init_optional_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_optional_attr_t</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv417shmem_init_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_attr_t</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv425non_contiguous_copy_param"><code class="docutils literal notranslate"><span class="pre">non_contiguous_copy_param</span></code></a></li>
@@ -170,6 +168,7 @@
 <li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_TENSOR</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_DETAILED</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#_CPPv48ub_limit"><code class="docutils literal notranslate"><span class="pre">ub_limit</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-sync-h">shmem_device_sync.h</a></li>
@@ -330,7 +329,7 @@
 <li><p><strong>my_rank</strong> – [in] Current rank </p></li>
 <li><p><strong>n_ranks</strong> – [in] Total number of ranks </p></li>
 <li><p><strong>local_mem_size</strong> – [in] The size of shared memory currently occupied by current rank </p></li>
-<li><p><strong>ip_port</strong> – [in] The ip and port number of the sever, e.g. tcp://ip:port </p></li>
+<li><p><strong>ip_port</strong> – [in] The ip and port number of the sever, e.g. tcp://ip:port Security warning: ip_port should be a null-terminated C string, unless it may result in out-of-bounds memory access </p></li>
 <li><p><strong>attributes</strong> – [out] Pointer to the default attributes used for initialization </p></li>
 </ul>
 </dd>
@@ -390,6 +389,66 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__init_8h_1ae847104a805310ebd379197df1a4ae48"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int32_t</span> <span class="pre">shmem_register_decrypt_handler</span> <span class="pre">(const</span> <span class="pre">shmem_decrypt_handler</span> <span class="pre">decrypt_handler)</span></span></dt>
+<dd><p>Register a decrypt key password handler. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>decrypt_handler</strong> – decrypt function pointer </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns 0 on success or an error code on failure </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__init_8h_1aac2408ecfd749a12115981449cf30138"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int32_t</span> <span class="pre">shmem_set_extern_logger</span> <span class="pre">(void(*func)(int</span> <span class="pre">level,</span> <span class="pre">const</span> <span class="pre">char</span> <span class="pre">*msg))</span></span></dt>
+<dd><p>Set the log print function for the SHMEM library. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> – the logging function, takes level and msg as parameter </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns 0 on success or an error code on failure </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__init_8h_1aa4255e29d0bb0299e720dbd21a48acd9"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int32_t</span> <span class="pre">shmem_set_log_level</span> <span class="pre">(int</span> <span class="pre">level)</span></span></dt>
+<dd><p>Set the logging level. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>level</strong> – the logging level. 0-debug, 1-info, 2-warn, 3-error </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns 0 on success or an error code on failure </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__init_8h_1a0c37d5e1609c94c7d083fed60a2925e6"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int32_t</span> <span class="pre">shmem_set_conf_store_tls</span> <span class="pre">(bool</span> <span class="pre">enable,</span> <span class="pre">const</span> <span class="pre">char</span> <span class="pre">*tls_info,</span> <span class="pre">const</span> <span class="pre">uint32_t</span> <span class="pre">tls_info_len)</span></span></dt>
+<dd><p>Initialize the config store tls info. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>enable</strong> – whether to enable tls </p></li>
+<li><p><strong>tls_info</strong> – the format describle in memfabric SECURITYNOTE.md, if disabled tls_info won’t be use </p></li>
+<li><p><strong>tls_info_len</strong> – length of tls_info, if disabled tls_info_len won’t be use </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns 0 on success or an error code on failure </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__init_8h_1acabd5cecaa0043f3e928f10afb6e9ca3"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_finalize</span> <span class="pre">()</span></span></dt>
 <dd><p>Release all resources used by the SHMEM library. </p>
 <dl class="field-list simple">
@@ -425,13 +484,13 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__rma_8h_1abe213c9a3f16d786604b40a64954d4ad"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_mte_set_ub_params</span> <span class="pre">(uint64_t</span> <span class="pre">offset,</span> <span class="pre">uint32_t</span> <span class="pre">ub_size,</span> <span class="pre">uint32_t</span> <span class="pre">event_id)</span></span></dt>
-<dd><p>Set necessary parameters for put\get. </p>
+<dd><p>Set necessary parameters for put or get. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>offset</strong> – [in] The start address on UB. </p></li>
 <li><p><strong>ub_size</strong> – [in] The Size of Temp UB Buffer. </p></li>
-<li><p><strong>event_id</strong> – [in] Sync ID for put\get interfaces. </p></li>
+<li><p><strong>event_id</strong> – [in] Sync ID for put or get. </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -490,9 +549,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>src_team</strong> – [in] A team handle. </p></li>
+<li><p><strong>src_team</strong> – [in] A SHMEM team handle. </p></li>
 <li><p><strong>src_pe</strong> – [in] The PE number in src_team. </p></li>
-<li><p><strong>dest_team</strong> – [in] A team handle.</p></li>
+<li><p><strong>dest_team</strong> – [in] A SHMEM team handle.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -551,7 +610,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__team_8h_1a5a00427e2bd8ab1ad51fa9ab99c1e378"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">shmem_team_n_pes</span> <span class="pre">(shmem_team_t</span> <span class="pre">team)</span></span></dt>
-<dd><p>Returns the number of PEs in the team. </p>
+<dd><p>Returns the number of PEs in the specified team. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>team</strong> – [in] A team handle.</p>

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
@@ -12,7 +14,7 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=8d563738"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -49,10 +51,7 @@
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id5">软件硬件配套说明</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id6">快速上手</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id7">功能自测用例</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id8">安全声明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id9">合作贡献者</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id10">版权声明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id11">许可证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#pythontest">python侧test用例</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a><ul>
@@ -75,9 +74,9 @@
 <li class="toctree-l3"><a class="reference internal" href="api_demo.html#id1">初始化状态</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_demo.html#attributes">初始化所需的attributes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_demo.html#id2">初始化样例</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api_demo.html#team-api">Team API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_demo.html#id3">自定义日志打印</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_demo.html#id4">注册私钥口令解密函数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_demo.html#team-api">Team API</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_demo.html#host">host侧接口样例</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_demo.html#device">device侧接口样例</a></li>
 </ul>
@@ -142,6 +141,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#structs">Structs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv421shmem_decrypt_handler"><code class="docutils literal notranslate"><span class="pre">shmem_decrypt_handler</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv426shmem_init_optional_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_optional_attr_t</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv417shmem_init_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_attr_t</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv425non_contiguous_copy_param"><code class="docutils literal notranslate"><span class="pre">non_contiguous_copy_param</span></code></a></li>
@@ -168,6 +168,7 @@
 <li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_TENSOR</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_DETAILED</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#_CPPv48ub_limit"><code class="docutils literal notranslate"><span class="pre">ub_limit</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-sync-h">shmem_device_sync.h</a></li>
@@ -455,6 +456,29 @@
 <dl>
 <dt class="sig sig-object cpp">
 <span class="target" id="group__group__structs"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">Structs</span></span></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv421shmem_decrypt_handler">
+<span id="_CPPv321shmem_decrypt_handler"></span><span id="_CPPv221shmem_decrypt_handler"></span><span id="shmem_decrypt_handler"></span><span class="target" id="group__group__structs_1ga2d04e74889dc3f878ba2e2d3b7c9a628"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">shmem_decrypt_handler</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">cipherText</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">cipherTextLen</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">plainText</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n"><span class="pre">plainTextLen</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv421shmem_decrypt_handler" title="Link to this definition"></a><br /></dt>
+<dd><p>Callback function of private key password decryptor, see shmem_register_decrypt_handler. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param cipherText<span class="colon">:</span></dt>
+<dd class="field-odd"><p>[in] the encrypted text(private password) </p>
+</dd>
+<dt class="field-even">Param cipherTextLen<span class="colon">:</span></dt>
+<dd class="field-even"><p>[in] the length of encrypted text </p>
+</dd>
+<dt class="field-odd">Param plainText<span class="colon">:</span></dt>
+<dd class="field-odd"><p>[out] the decrypted text(private password) </p>
+</dd>
+<dt class="field-even">Param plainTextLen<span class="colon">:</span></dt>
+<dd class="field-even"><p>[out] the length of plainText </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
 <dd><dl class="cpp struct">
 <dt class="sig sig-object cpp" id="_CPPv426shmem_init_optional_attr_t">
 <span id="_CPPv326shmem_init_optional_attr_t"></span><span id="_CPPv226shmem_init_optional_attr_t"></span><span id="shmem_init_optional_attr_t"></span><span class="target" id="structshmem__init__optional__attr__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">shmem_init_optional_attr_t</span></span></span><a class="headerlink" href="#_CPPv426shmem_init_optional_attr_t" title="Link to this definition"></a><br /></dt>

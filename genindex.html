@@ -13,7 +13,7 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=8d563738"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="#" />
@@ -48,10 +48,7 @@
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id5">软件硬件配套说明</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id6">快速上手</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id7">功能自测用例</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id8">安全声明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id9">合作贡献者</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id10">版权声明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id11">许可证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#pythontest">python侧test用例</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a><ul>
@@ -74,9 +71,9 @@
 <li class="toctree-l3"><a class="reference internal" href="api_demo.html#id1">初始化状态</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_demo.html#attributes">初始化所需的attributes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_demo.html#id2">初始化样例</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api_demo.html#team-api">Team API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_demo.html#id3">自定义日志打印</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_demo.html#id4">注册私钥口令解密函数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_demo.html#team-api">Team API</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_demo.html#host">host侧接口样例</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_demo.html#device">device侧接口样例</a></li>
 </ul>
@@ -141,6 +138,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="def.html#structs">Structs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv421shmem_decrypt_handler"><code class="docutils literal notranslate"><span class="pre">shmem_decrypt_handler</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv426shmem_init_optional_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_optional_attr_t</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv417shmem_init_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_attr_t</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv425non_contiguous_copy_param"><code class="docutils literal notranslate"><span class="pre">non_contiguous_copy_param</span></code></a></li>
@@ -167,6 +165,7 @@
 <li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_TENSOR</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_DETAILED</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_api.html#_CPPv48ub_limit"><code class="docutils literal notranslate"><span class="pre">ub_limit</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-sync-h">shmem_device_sync.h</a></li>
@@ -242,6 +241,7 @@
  | <a href="#D"><strong>D</strong></a>
  | <a href="#N"><strong>N</strong></a>
  | <a href="#S"><strong>S</strong></a>
+ | <a href="#U"><strong>U</strong></a>
  
 </div>
 <h2 id="Symbols">Symbols</h2>
@@ -293,6 +293,8 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="def.html#_CPPv421shmem_decrypt_handler">shmem_decrypt_handler (C++ type)</a>
+</li>
       <li><a href="def.html#_CPPv418shmem_error_code_t">shmem_error_code_t (C++ enum)</a>
 </li>
       <li><a href="def.html#_CPPv4N18shmem_error_code_t17SHMEM_INNER_ERRORE">shmem_error_code_t::SHMEM_INNER_ERROR (C++ enumerator)</a>
@@ -319,10 +321,10 @@
 </li>
       <li><a href="def.html#_CPPv417shmem_init_attr_t">shmem_init_attr_t (C++ struct)</a>
 </li>
-      <li><a href="def.html#_CPPv426shmem_init_optional_attr_t">shmem_init_optional_attr_t (C++ struct)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="def.html#_CPPv426shmem_init_optional_attr_t">shmem_init_optional_attr_t (C++ struct)</a>
+</li>
       <li><a href="def.html#_CPPv419shmem_init_status_t">shmem_init_status_t (C++ enum)</a>
 </li>
       <li><a href="def.html#_CPPv4N19shmem_init_status_t20SHMEM_STATUS_INVALIDE">shmem_init_status_t::SHMEM_STATUS_INVALID (C++ enumerator)</a>
@@ -350,6 +352,14 @@
       <li><a href="def.html#_CPPv412shmem_team_t">shmem_team_t (C++ type)</a>
 </li>
       <li><a href="device_api.html#c.SHMEM_TYPE_FUNC">SHMEM_TYPE_FUNC (C macro)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="device_api.html#_CPPv48ub_limit">ub_limit (C++ member)</a>
 </li>
   </ul></td>
 </tr></table>
