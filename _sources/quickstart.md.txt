@@ -56,7 +56,7 @@ GLIBC >= 2.28
 
 shmem 默认开启tls通信加密。如果需要关闭，需要调用接口主动关闭：
 ```c
-int32_t ret = shmem_set_conf_store_tls(false, null, 0);
+int32_t ret = shmem_set_conf_store_tls(false, NULL, 0);
 ```
 具体细节详见安全声明章节
 
@@ -92,6 +92,7 @@ bash scripts/run.sh -ranks 8 -ipport tcp://127.0.0.1:8666 -test_filter Init
 ```
 
 ## python侧test用例     
+
 [python接口API列表](./pythonAPI.md)
 1. 在scripts目录下编译的时候，带上build python的选项
 
@@ -133,6 +134,6 @@ shm.set_conf_store_tls(True, tls_info)      # 开启TLS认证
 6. 使用torchrun运行测试demo
 
 ```sh
-torchrun --nproc-per-node=k test.py // k为想运行的ranksize
+torchrun --nproc-per-node=k test.py # k为想运行的ranksize
 ```
 看到日志中打印出“test.py running success!”即为demo运行成功

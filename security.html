@@ -297,7 +297,7 @@
 </tbody>
 </table>
 <p>说明：
-支持通过接口 <code class="docutils literal notranslate"><span class="pre">shmem_set_conf_store_tls</span></code> 配置TLS秘钥证书等，进行tls安全连接，建议用户开启TLS加密配置，保证通信安全。系统启动后，建议删除本地密钥证书等信息敏感文件。调用该接口时，传入的文件路径不能包含英文分号、逗号、冒号。
+支持通过接口 <code class="docutils literal notranslate"><span class="pre">shmem_set_conf_store_tls</span></code> 配置TLS密钥证书等，进行tls安全连接，建议用户开启TLS加密配置，保证通信安全。系统启动后，建议删除本地密钥证书等信息敏感文件。调用该接口时，传入的文件路径不能包含英文分号、逗号、冒号。
 支持通过环境变量 <code class="docutils literal notranslate"><span class="pre">ACCLINK_CHECK_PERIOD_HOURS</span></code>和<code class="docutils literal notranslate"><span class="pre">ACCLINK_CERT_CHECK_AHEAD_DAYS</span></code> 配置证书检查周期与证书过期预警时间</p>
 <p>使用接口示例：</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// 配置关闭tls:</span>
@@ -313,7 +313,7 @@
 <span class="s">    tlsCrlPath: /etc/ssl/crl/;                  \</span>
 <span class="s">    tlsCrlFile: server_crl1.pem,server_crl2.pem;\</span>
 <span class="s">    tlsCaFile: ca.pem1,ca.pem2;                 \</span>
-<span class="s">    packagePath: /etc/lib&quot;</span>
+<span class="s">    packagePath: /etc/lib&quot;</span><span class="p">;</span>
 <span class="kt">int32_t</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_set_conf_store_tls</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">tls_info</span><span class="p">,</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="n">tls_info</span><span class="p">));</span>
 </pre></div>
 </div>
@@ -350,7 +350,7 @@
 </section>
 <section id="id3">
 <h2>加固须知<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
-<p>本文中列出的安全加固措施为基本的加固建议项。用户应根据自身业务，重新审视整个系统的网络安全加固措施。用户应按照所在组织的安全策略进行相关配置，包括并不局限于软件版本、口令复杂度要求、安全配置（协议、加密套件、密钥长度等）， 权限配置、防火墙设置等。必要时可参考业界优秀加固方案和安全专家的建议。</p>
+<p>本文中列出的安全加固措施为基本的加固建议项。用户应根据自身业务，重新审视整个系统的网络安全加固措施。用户应按照所在组织的安全策略进行相关配置，包括并不局限于软件版本、口令复杂度要求、安全配置（协议、加密套件、密钥长度等），权限配置、防火墙设置等。必要时可参考业界优秀加固方案和安全专家的建议。</p>
 </section>
 <section id="id4">
 <h2>运行用户建议<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>

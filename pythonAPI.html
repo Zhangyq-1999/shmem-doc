@@ -272,7 +272,7 @@
 </table>
 </li>
 <li><p>完成共享内存模块</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_finialize</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_finalize</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 </li>
@@ -326,7 +326,7 @@
 </table>
 </li>
 <li><p>修改将用于初始化的属性中的数据操作引擎类型</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_set_data_op_engine_type</span><span class="p">(</span><span class="n">attributes</span><span class="p">,</span> <span class="n">vaue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_set_data_op_engine_type</span><span class="p">(</span><span class="n">attributes</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -339,7 +339,7 @@
 <tr class="row-even"><td><p>attributes</p></td>
 <td><p>InitAttr类型，属性集</p></td>
 </tr>
-<tr class="row-odd"><td><p>vaue</p></td>
+<tr class="row-odd"><td><p>value</p></td>
 <td><p>int类型，数据操作引擎类型的值</p></td>
 </tr>
 <tr class="row-even"><td><p>返回值</p></td>
@@ -349,7 +349,7 @@
 </table>
 </li>
 <li><p>修改用于初始化的属性中的超时设置</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_set_timeout</span><span class="p">(</span><span class="n">attributes</span><span class="p">,</span> <span class="n">vaue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_set_timeout</span><span class="p">(</span><span class="n">attributes</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -362,8 +362,8 @@
 <tr class="row-even"><td><p>attributes</p></td>
 <td><p>InitAttr类型，属性集</p></td>
 </tr>
-<tr class="row-odd"><td><p>vaue</p></td>
-<td><p>int类型，数据操作引擎类型的值</p></td>
+<tr class="row-odd"><td><p>value</p></td>
+<td><p>int类型，超时时间（毫秒）</p></td>
 </tr>
 <tr class="row-even"><td><p>返回值</p></td>
 <td><p>成功时返回0,失败时返回错误代码</p></td>
@@ -372,7 +372,7 @@
 </table>
 </li>
 <li><p>注册一个Python解密处理程序</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">register_decrypt_handler</span><span class="p">(</span><span class="n">py_decrypt_func</span><span class="p">:</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">register_decrypt_handler</span><span class="p">(</span><span class="n">py_decrypt_func</span><span class="p">:</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -398,7 +398,7 @@
 </table>
 </li>
 <li><p>分配内存</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_malloc</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_malloc</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -418,7 +418,7 @@
 </table>
 </li>
 <li><p>为多个元素分配内存</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_calloc</span><span class="p">(</span><span class="n">nmemb</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_calloc</span><span class="p">(</span><span class="n">nmemb</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -441,7 +441,7 @@
 </table>
 </li>
 <li><p>分配指定对齐方式内存</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_align</span><span class="p">(</span><span class="n">alignment</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_align</span><span class="p">(</span><span class="n">alignment</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -464,7 +464,7 @@
 </table>
 </li>
 <li><p>释放被分配的内存空间</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_free</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_free</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -498,13 +498,13 @@
 <td><p>PE编号</p></td>
 </tr>
 <tr class="row-even"><td><p>返回值</p></td>
-<td><p>分配成功返回指向已分配内存的指针；该内存未被成功分配或size为0，则返回NULL</p></td>
+<td><p>返回远程 PE 上对应对称地址的指针；若获取失败返回 None</p></td>
 </tr>
 </tbody>
 </table>
 </li>
 <li><p>获取PE值</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">my_pe</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_my_pe</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -541,7 +541,7 @@
 </table>
 </li>
 <li><p>程序中运行的PE数量</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pe_count</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_pe_count</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -666,7 +666,7 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>parent</p></td>
+<tr class="row-even"><td><p>team</p></td>
 <td><p>team id</p></td>
 </tr>
 <tr class="row-odd"><td><p>返回值</p></td>
@@ -949,7 +949,7 @@
 </table>
 </li>
 <li><p>获取团队中的PE编号，即PE的索引</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">my_pe</span><span class="p">(</span><span class="n">team</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_team_my_pe</span><span class="p">(</span><span class="n">team</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -968,7 +968,8 @@
 </tbody>
 </table>
 </li>
-<li><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pe_count</span><span class="p">(</span><span class="n">team</span><span class="p">)</span>
+<li><p>获取团队中PE的数目</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_team_pe_count</span><span class="p">(</span><span class="n">team</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
