@@ -176,6 +176,11 @@
 </ul>
 </li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM对外接口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html#id1">SHMEM类</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="example.html">AllGather</a><ul>
@@ -192,7 +197,7 @@
 <li class="toctree-l2"><a class="reference internal" href="code_organization.html#examples">examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="code_organization.html#tests">tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="code_organization.html#docs">docs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="code_organization.html#scrips">scrips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_organization.html#scripts">scripts</a></li>
 </ul>
 </li>
 </ul>
@@ -260,7 +265,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__heap_8h_1a4c1d8ba28b252252ab01ed70def0860c"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">*</span> <span class="pre">shmem_calloc</span> <span class="pre">(size_t</span> <span class="pre">nmemb,</span> <span class="pre">size_t</span> <span class="pre">size)</span></span></dt>
-<dd><p>allocate memory for an array of <em>nmemb</em> elements of <em>size</em> bytes each and returns a pointer to the allocated memory. The memory is set to zero. If <em>nmemb</em> or <em>size</em> is 0, then <strong>calloc()</strong> returns either NULL. </p>
+<dd><p>allocate memory for an array of <em>nmemb</em> elements of <em>size</em> bytes each and returns a pointer to the allocated memory. The memory is set to zero. If <em>nmemb</em> or <em>size</em> is 0, then <strong><a class="reference internal" href="#shmem__host__heap_8h_1a4c1d8ba28b252252ab01ed70def0860c"><span class="std std-ref">shmem_calloc()</span></a></strong> returns either NULL. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -294,7 +299,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__heap_8h_1a71fdbce07ba44ebff808be63eac3351a"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">shmem_free</span> <span class="pre">(void</span> <span class="pre">*ptr)</span></span></dt>
-<dd><p>Free the memory space pointed to by <em>ptr</em>, which must have been returned by a previous call to <strong><a class="reference internal" href="#shmem__host__heap_8h_1a7ca5edaea9edc7ddce81de2d51dae1e9"><span class="std std-ref">shmem_malloc()</span></a></strong>, <strong>calloc()</strong>, <strong><a class="reference internal" href="#shmem__host__heap_8h_1a75997450cc41c58b84fce478d5fa5e56"><span class="std std-ref">shmem_align()</span></a></strong> or <strong>realloc()</strong>. If <em>ptr</em> is NULL, no operation is performed. </p>
+<dd><p>Free the memory space pointed to by <em>ptr</em>, which must have been returned by a previous call to <strong><a class="reference internal" href="#shmem__host__heap_8h_1a7ca5edaea9edc7ddce81de2d51dae1e9"><span class="std std-ref">shmem_malloc()</span></a></strong>, <strong><a class="reference internal" href="#shmem__host__heap_8h_1a4c1d8ba28b252252ab01ed70def0860c"><span class="std std-ref">shmem_calloc()</span></a></strong> or <strong><a class="reference internal" href="#shmem__host__heap_8h_1a75997450cc41c58b84fce478d5fa5e56"><span class="std std-ref">shmem_align()</span></a></strong>. If <em>ptr</em> is NULL, no operation is performed. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>ptr</strong> – [in] point to memory block to be free. </p>
@@ -389,11 +394,17 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__init_8h_1ae847104a805310ebd379197df1a4ae48"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int32_t</span> <span class="pre">shmem_register_decrypt_handler</span> <span class="pre">(const</span> <span class="pre">shmem_decrypt_handler</span> <span class="pre">decrypt_handler)</span></span></dt>
-<dd><p>Register a decrypt key password handler. </p>
+<span class="target" id="shmem__host__init_8h_1a753ad16f5979d8fed5dbdd0f01a2797f"></span><span class="sig-name descname"><span class="pre">SHMEM_HOST_API</span> <span class="pre">int32_t</span> <span class="pre">shmem_set_config_store_tls_key</span> <span class="pre">(const</span> <span class="pre">char</span> <span class="pre">*tls_pk,</span> <span class="pre">const</span> <span class="pre">uint32_t</span> <span class="pre">tls_pk_len,</span> <span class="pre">const</span> <span class="pre">char</span> <span class="pre">*tls_pk_pw,</span> <span class="pre">const</span> <span class="pre">uint32_t</span> <span class="pre">tls_pk_pw_len,</span> <span class="pre">const</span> <span class="pre">shmem_decrypt_handler</span> <span class="pre">decrypt_handler)</span></span></dt>
+<dd><p>Set the TLS private key and password, and register a decrypt key password handler. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>decrypt_handler</strong> – decrypt function pointer </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tls_pk</strong> – the content of tls private key </p></li>
+<li><p><strong>tls_pk_len</strong> – length of tls private key </p></li>
+<li><p><strong>tls_pk_pw</strong> – the content of tls private key password </p></li>
+<li><p><strong>tls_pk_pw_len</strong> – length of tls private key password </p></li>
+<li><p><strong>decrypt_handler</strong> – decrypt function pointer </p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Returns 0 on success or an error code on failure </p>

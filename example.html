@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="代码组织结构" href="code_organization.html" />
-    <link rel="prev" title="DEVICE API" href="device_api.html" /> 
+    <link rel="prev" title="SHMEM对外接口" href="pythonAPI.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -176,6 +176,11 @@
 </ul>
 </li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM对外接口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html#id1">SHMEM类</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">AllGather</a><ul>
@@ -192,7 +197,7 @@
 <li class="toctree-l2"><a class="reference internal" href="code_organization.html#examples">examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="code_organization.html#tests">tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="code_organization.html#docs">docs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="code_organization.html#scrips">scrips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_organization.html#scripts">scripts</a></li>
 </ul>
 </li>
 </ul>
@@ -291,12 +296,11 @@
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aivIndex</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">core_per_rank</span><span class="p">;</span>
 
 <span class="w">    </span><span class="c1">// Sync Ensure Corresponding Tasks Done.</span>
-<span class="w">    </span><span class="n">shmem_fence</span><span class="p">();</span>
-<span class="w">    </span><span class="n">shmemx_signal_op</span><span class="p">(</span><span class="n">gva_sync_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">flag_offset</span><span class="p">,</span><span class="w"> </span><span class="n">magic</span><span class="p">,</span><span class="w"> </span><span class="n">SHMEM_SIGNAL_SET</span><span class="p">,</span><span class="w"> </span><span class="n">my_rank</span><span class="p">);</span>
+<span class="w">    </span><span class="n">shmem_quiet</span><span class="p">();</span>
+<span class="w">    </span><span class="n">shmemi_barrier_core_soft</span><span class="p">();</span>
 
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int64_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">aivNum</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">shmem_signal_wait_until</span><span class="p">((</span><span class="n">__gm__</span><span class="w"> </span><span class="kt">int32_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">shmem_ptr</span><span class="p">(</span><span class="n">gva_sync_gm</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">flag_offset</span><span class="p">,</span><span class="w"> </span><span class="n">SHMEM_CMP_EQ</span><span class="p">,</span><span class="w"> </span><span class="n">magic</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">shmemx_signal_op</span><span class="p">(</span><span class="n">gva_sync_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">flag_offset</span><span class="p">,</span><span class="w"> </span><span class="n">magic</span><span class="p">,</span><span class="w"> </span><span class="n">SHMEM_SIGNAL_SET</span><span class="p">,</span><span class="w"> </span><span class="n">my_rank</span><span class="p">);</span>
+<span class="w">    </span><span class="n">shmem_signal_wait_until</span><span class="p">((</span><span class="n">__gm__</span><span class="w"> </span><span class="kt">int32_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">shmem_ptr</span><span class="p">(</span><span class="n">gva_sync_gm</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">flag_offset</span><span class="p">,</span><span class="w"> </span><span class="n">SHMEM_CMP_EQ</span><span class="p">,</span><span class="w"> </span><span class="n">magic</span><span class="p">);</span>
 
 <span class="w">    </span><span class="c1">// [AllGather Step 2] symmetric mem -&gt; local output.</span>
 <span class="w">    </span><span class="n">num_per_core</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">elements</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">core_per_rank</span><span class="p">;</span>
@@ -317,7 +321,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="device_api.html" class="btn btn-neutral float-left" title="DEVICE API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pythonAPI.html" class="btn btn-neutral float-left" title="SHMEM对外接口" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="code_organization.html" class="btn btn-neutral float-right" title="代码组织结构" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

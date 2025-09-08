@@ -175,6 +175,11 @@
 </ul>
 </li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM对外接口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html#id1">SHMEM类</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="example.html">AllGather</a><ul>
@@ -191,7 +196,7 @@
 <li class="toctree-l2"><a class="reference internal" href="code_organization.html#examples">examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="code_organization.html#tests">tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="code_organization.html#docs">docs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="code_organization.html#scrips">scrips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_organization.html#scripts">scripts</a></li>
 </ul>
 </li>
 </ul>
@@ -275,13 +280,13 @@
 <td><p>是</p></td>
 </tr>
 <tr class="row-odd"><td><p>认证方式</p></td>
-<td><p>支持，由初始化入参指定是否开启</p></td>
+<td><p>数字证书认证</p></td>
 </tr>
 <tr class="row-even"><td><p>加密方式</p></td>
-<td><p>无</p></td>
+<td><p>TLS 1.3</p></td>
 </tr>
 <tr class="row-odd"><td><p>所属平面</p></td>
-<td><p>管理面</p></td>
+<td><p>业务面</p></td>
 </tr>
 <tr class="row-even"><td><p>版本</p></td>
 <td><p>所有版本</p></td>
@@ -292,11 +297,11 @@
 </tbody>
 </table>
 <p>说明：
-支持通过接口 <code class="docutils literal notranslate"><span class="pre">shmem_set_conf_store_tls</span></code> 配置TLS秘钥证书等，进行tls安全连接，建议用户开启TLS加密配置，保证通信通信安全。系统启动后，建议删除本地秘钥证书等信息敏感文件。调用该接口时，传入的文件路径不能包含英文分号、逗号、冒号。
+支持通过接口 <code class="docutils literal notranslate"><span class="pre">shmem_set_conf_store_tls</span></code> 配置TLS秘钥证书等，进行tls安全连接，建议用户开启TLS加密配置，保证通信安全。系统启动后，建议删除本地密钥证书等信息敏感文件。调用该接口时，传入的文件路径不能包含英文分号、逗号、冒号。
 支持通过环境变量 <code class="docutils literal notranslate"><span class="pre">ACCLINK_CHECK_PERIOD_HOURS</span></code>和<code class="docutils literal notranslate"><span class="pre">ACCLINK_CERT_CHECK_AHEAD_DAYS</span></code> 配置证书检查周期与证书过期预警时间</p>
-<p>使用接口里子：</p>
+<p>使用接口示例：</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// 配置关闭tls:</span>
-<span class="n">smem_set_conf_store_tls</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="n">nullptr</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="n">shmem_set_conf_store_tls</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="n">nullptr</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
 
 <span class="c1">// 配置打开tls:</span>
 
@@ -309,7 +314,7 @@
 <span class="s">    tlsCrlFile: server_crl1.pem,server_crl2.pem;\</span>
 <span class="s">    tlsCaFile: ca.pem1,ca.pem2;                 \</span>
 <span class="s">    packagePath: /etc/lib&quot;</span>
-<span class="kt">int32_t</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">smem_set_conf_store_tls</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">tls_info</span><span class="p">,</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="n">tls_info</span><span class="p">));</span>
+<span class="kt">int32_t</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_set_conf_store_tls</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">tls_info</span><span class="p">,</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="n">tls_info</span><span class="p">));</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -331,10 +336,13 @@
 <tr class="row-odd"><td><p>MASTER_PORT</p></td>
 <td><p>备用通信面端口</p></td>
 </tr>
-<tr class="row-even"><td><p>SHMEM_HOME_PATH</p></td>
+<tr class="row-even"><td><p>SHMEM_LOG_LEVEL</p></td>
+<td><p>shmem日志级别</p></td>
+</tr>
+<tr class="row-odd"><td><p>SHMEM_HOME_PATH</p></td>
 <td><p>shmem安装路径</p></td>
 </tr>
-<tr class="row-odd"><td><p>VERSION</p></td>
+<tr class="row-even"><td><p>VERSION</p></td>
 <td><p>编译whl包默认版本号</p></td>
 </tr>
 </tbody>
@@ -380,7 +388,7 @@
 <tr class="row-even"><td><p>文档</p></td>
 <td><p>不涉及</p></td>
 <td><p>README.md</p></td>
-<td><p>https://www.hiascend.com/document/detail/zh/canncommercial/82RC1/index/index.html</p></td>
+<td><p>https://www.hiascend.com/document/detail/zh/canncommercial/81RC1/softwareinst/instg/instg_0000.html?Mode=PmIns&amp;InstallType=local&amp;OS=Ubuntu&amp;Software=cannToolKit</p></td>
 <td><p>CANN商发文档</p></td>
 </tr>
 <tr class="row-odd"><td><p>文档</p></td>
@@ -390,9 +398,9 @@
 <td><p>并行编程语言和系统</p></td>
 </tr>
 <tr class="row-even"><td><p>开源引入</p></td>
-<td><p>https://github.com/google/googletest</p></td>
+<td><p>https://gitee.com/mirrors/googletest.git</p></td>
 <td><p>build.sh</p></td>
-<td><p>https://github.com/google/googletest.git</p></td>
+<td><p>https://gitee.com/mirrors/googletest.git</p></td>
 <td><p>gtest测试框架</p></td>
 </tr>
 <tr class="row-odd"><td><p>开源引入</p></td>

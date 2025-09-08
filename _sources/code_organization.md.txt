@@ -14,7 +14,7 @@
 ```
 include目录下的头文件是按照如下文件层级进行组织的
 |── include
-|    |── shmem_api.h                            // shmem所有对外api
+|    |── shmem_api.h                            // shmem所有对外API
 |    |── device
 |       |── low_level
 |           |── shmem_device_low_level_rma.h    // device侧远端内存访问低阶接口
@@ -44,7 +44,7 @@ include目录下的头文件是按照如下文件层级进行组织的
 │    │    ├─init            // host侧初始化接口实现
 │    │    ├─mem             // host侧内存管理接口实现
 │    │    ├─python_wrapper  // Py接口封装
-│    │    └─team            // host侧通信域管理接口实现
+│    │    ├─team            // host侧通信域管理接口实现
 |    └── transport          // 建链相关内容
 ```
 ## examples
@@ -70,9 +70,10 @@ include目录下的头文件是按照如下文件层级进行组织的
 │    ├─example.md               // 使用样例
 │    ├─quickstart.md            // 快速开始
 │    ├─related_scripts.md       // 相关脚本介绍
+|    ├─pythonAPI.md             // shmem python api列表
 │    └─Troubleshooting_FAQs.md  // QA
 ```
 
-## scrips
+## scripts
 存放相关脚本。  
 [脚本具体功能和使用](related_scripts.md)

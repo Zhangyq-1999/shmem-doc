@@ -176,6 +176,11 @@
 </ul>
 </li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM对外接口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html#id1">SHMEM类</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="example.html">AllGather</a><ul>
@@ -192,7 +197,7 @@
 <li class="toctree-l2"><a class="reference internal" href="code_organization.html#examples">examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="code_organization.html#tests">tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="code_organization.html#docs">docs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="code_organization.html#scrips">scrips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_organization.html#scripts">scripts</a></li>
 </ul>
 </li>
 </ul>
@@ -285,6 +290,12 @@
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;acl/acl.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;shmem_api.h&quot;</span>
 <span class="n">aclInit</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">device_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">rank_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">n_ranks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="kt">uint64_t</span><span class="w"> </span><span class="n">local_mem_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024UL</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024UL</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">test_global_ipport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;tcp://127.0.0.1:8666&quot;</span><span class="p">;</span>
 <span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclrtSetDevice</span><span class="p">(</span><span class="n">device_id</span><span class="p">);</span>
 
 <span class="n">shmem_init_attr_t</span><span class="o">*</span><span class="w"> </span><span class="n">attributes</span><span class="p">;</span>
@@ -324,7 +335,7 @@
 </section>
 <section id="id4">
 <h3>注册私钥口令解密函数<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
-<p>shmem的多卡之间业务面TCP通信，通过memfabric_hybrid提供的能力实现，为了保证通信安全，该特性默认开启，使用时传入初始化TLS信息，TLS信息格式参考docs/security.md样例，其中私钥是密文，私钥口令是密文，私钥口令解密函数通过如下方式注册，调用者实现解密过程。</p>
+<p>shmem的多卡之间业务面TCP通信，通过memfabric_hybrid提供的能力实现，为了保证通信安全，该特性默认开启，使用时传入初始化TLS信息，TLS信息格式参考docs/security.md样例，其中私钥是密文，私钥口令以密文形式存储，需通过注册的解密回调函数进行解密，调用者实现具体的解密逻辑。</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">my_key_password_decrypt_handler</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">cipherText</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">cipherTextLen</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">plainText</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="o">&amp;</span><span class="n">plainTextLen</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// cipherText: input encrypted key password</span>
@@ -333,7 +344,12 @@
 <span class="w">    </span><span class="c1">// do decrypt here</span>
 <span class="p">}</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_register_decrypt_handler</span><span class="p">(</span><span class="n">my_key_password_decrypt_handler</span><span class="p">);</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">pk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;xxx&quot;</span><span class="p">;</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">pk_len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="n">pk</span><span class="p">);</span>
+
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;xxxx&quot;</span><span class="p">;</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">pw_len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="n">password</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_set_config_store_tls_key</span><span class="p">(</span><span class="n">pk</span><span class="p">,</span><span class="w"> </span><span class="n">pk_len</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">,</span><span class="w"> </span><span class="n">pw_len</span><span class="p">,</span><span class="w"> </span><span class="n">my_key_password_decrypt_handler</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>如需关闭加密特性，则调用如下接口。关闭后，则无需调用shmem_register_decrypt_handler注册接口。</p>
@@ -364,7 +380,7 @@
 <span class="w">    </span><span class="c1">// shmem_team_my_pe(team_odd): Returns the number of the calling PE in the specified team.</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">team_my_pe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_team_my_pe</span><span class="p">(</span><span class="n">team_odd</span><span class="p">);</span><span class="w"> </span><span class="c1">// team_my_pe == rank_id / stride</span>
 <span class="w">    </span><span class="c1">// shmem_n_pes(): Returns the number of PEs running in the program.</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">my_pe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_n_pes</span><span class="p">();</span><span class="w"> </span><span class="c1">// n_pes == n_ranks</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n_pes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_n_pes</span><span class="p">();</span><span class="w"> </span><span class="c1">// n_pes == n_ranks</span>
 <span class="w">    </span><span class="c1">// shmem_my_pe(): Returns the PE number of the local PE</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">my_pe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_my_pe</span><span class="p">();</span><span class="w"> </span><span class="c1">// my_pe == rank_id</span>
 <span class="p">}</span>
@@ -386,7 +402,7 @@
 <span class="w">        </span><span class="n">gva_gm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">__gm__</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">gva</span><span class="p">;</span>
 <span class="w">        </span><span class="n">team_idx</span><span class="o">=</span><span class="w"> </span><span class="n">team_id</span><span class="p">;</span>
 
-<span class="w">        </span><span class="n">rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">smem_shm_get_global_rank</span><span class="p">();</span><span class="w">          </span><span class="c1">// 获取当前ank</span>
+<span class="w">        </span><span class="n">rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">smem_shm_get_global_rank</span><span class="p">();</span><span class="w">          </span><span class="c1">// 获取当前rank</span>
 <span class="w">        </span><span class="n">rank_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">smem_shm_get_global_rank_size</span><span class="p">();</span><span class="w"> </span><span class="c1">// 获取总rank数</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="n">__aicore__</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Process</span><span class="p">()</span>
@@ -455,12 +471,12 @@
 <span class="w">        </span><span class="n">gva_gm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">__gm__</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">gva</span><span class="p">;</span>
 <span class="w">        </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
 
-<span class="w">        </span><span class="n">rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">smem_shm_get_global_rank</span><span class="p">();</span><span class="w">          </span><span class="c1">// 获取当前ank</span>
+<span class="w">        </span><span class="n">rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">smem_shm_get_global_rank</span><span class="p">();</span><span class="w">          </span><span class="c1">// 获取当前rank</span>
 <span class="w">        </span><span class="n">rank_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">smem_shm_get_global_rank_size</span><span class="p">();</span><span class="w"> </span><span class="c1">// 获取总rank数</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="n">__aicore__</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Process</span><span class="p">()</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// 把value的值put到共享内存gvaGm在pe=(rank + 1) % rankSize中的对应位置。</span>
+<span class="w">        </span><span class="c1">// 把value的值put到共享内存gva_gm在(rank + 1) % rank_size中的对应位置。</span>
 <span class="w">        </span><span class="n">shmem_float_p</span><span class="p">(</span><span class="n">gva_gm</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">rank_size</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="k">private</span><span class="o">:</span>
@@ -491,7 +507,7 @@
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// 任务1</span>
 <span class="c1">// ...</span>
 <span class="c1">// 阻塞直到所有任务完成。</span>
-<span class="n">shmem_barrier_all</span><span class="p">()</span>
+<span class="n">shmem_barrier_all</span><span class="p">();</span>
 <span class="c1">// 任务2</span>
 <span class="c1">// ...</span>
 </pre></div>
