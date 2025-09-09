@@ -320,7 +320,7 @@ bash<span class="w"> </span>scripts/build.sh
 <p>具体细节详见安全声明章节</p>
 <p>执行一个样例matmul_allreduce算子。<br />
 1.在shmem/目录编译:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/build.sh
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>-examples
 </pre></div>
 </div>
 <p>2.在shmem/examples/matmul_allreduce目录执行demo:</p>
@@ -386,7 +386,7 @@ bash<span class="w"> </span>scripts/run.sh<span class="w"> </span>-ranks<span cl
 </pre></div>
 </div>
 <ol class="arabic simple" start="6">
-<li><p>使用torchrun运行测试demo</p></li>
+<li><p>进入src/python目录，在该目录下使用torchrun运行测试demo</p></li>
 </ol>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>torchrun<span class="w"> </span>--nproc-per-node<span class="o">=</span>k<span class="w"> </span>test.py<span class="w"> </span><span class="c1"># k为想运行的ranksize</span>
 </pre></div>
