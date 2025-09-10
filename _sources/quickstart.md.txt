@@ -88,7 +88,7 @@ run.sh脚本提供-ranks -ipport -test_filter等参数自定义执行用例的�
 
 ```sh
 # 8卡，ip:port 127.0.0.1:8666，运行所有*Init*用例
-bash scripts/run.sh -ranks 8 -ipport tcp://127.0.0.1:8666 -test_filter Init
+bash scripts/run.sh -ranks 8 -ipport "tcp://127.0.0.1:8666" -test_filter Init
 ```
 
 ## python侧test用例     
