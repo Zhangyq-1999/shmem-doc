@@ -297,7 +297,7 @@
 
 <span class="w">    </span><span class="c1">// Sync Ensure Corresponding Tasks Done.</span>
 <span class="w">    </span><span class="n">shmem_quiet</span><span class="p">();</span>
-<span class="w">    </span><span class="n">shmemi_barrier_core_soft</span><span class="p">();</span>
+<span class="w">    </span><span class="n">shmemx_barrier_all_vec</span><span class="p">();</span>
 
 <span class="w">    </span><span class="n">shmemx_signal_op</span><span class="p">(</span><span class="n">gva_sync_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">flag_offset</span><span class="p">,</span><span class="w"> </span><span class="n">magic</span><span class="p">,</span><span class="w"> </span><span class="n">SHMEM_SIGNAL_SET</span><span class="p">,</span><span class="w"> </span><span class="n">my_rank</span><span class="p">);</span>
 <span class="w">    </span><span class="n">shmem_signal_wait_until</span><span class="p">((</span><span class="n">__gm__</span><span class="w"> </span><span class="kt">int32_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">shmem_ptr</span><span class="p">(</span><span class="n">gva_sync_gm</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">flag_offset</span><span class="p">,</span><span class="w"> </span><span class="n">SHMEM_CMP_EQ</span><span class="p">,</span><span class="w"> </span><span class="n">magic</span><span class="p">);</span>
