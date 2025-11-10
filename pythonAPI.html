@@ -206,7 +206,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
+<p class="caption" role="heading"><span class="caption-text">Security hardening and public IP address</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="security.html">安全加固</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="security.html#id2">通信矩阵</a></li>
@@ -675,7 +675,7 @@
 </tbody>
 </table>
 </li>
-<li><p>同步接口,将对称内存中连续的数据从本地处理单元（PE）复制到指定PE的地址上</p>
+<li><p>同步接口，将对称内存中连续的数据从本地处理单元（PE）复制到指定PE的地址上</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_putmem</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -701,7 +701,7 @@
 </tbody>
 </table>
 </li>
-<li><p>同步接口,将对称内存中指定处理单元（PE）上的连续数据复制到本地PE的地址上。</p>
+<li><p>同步接口，将对称内存中指定处理单元（PE）上的连续数据复制到本地PE的地址上。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_getmem</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -809,7 +809,7 @@
 </pre></div>
 </div>
 </li>
-<li><p>异步接口,将本地处理单元（PE）上的连续数据复制到指定处理单元（PE）上的对称地址</p>
+<li><p>异步接口，将本地处理单元（PE）上的连续数据复制到指定处理单元（PE）上的对称地址</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_putmem_nbi</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -835,7 +835,7 @@
 </tbody>
 </table>
 </li>
-<li><p>异步接口,将对称内存中指定处理单元（PE）上的连续数据复制到本地PE的地址上</p>
+<li><p>异步接口，将对称内存中指定处理单元（PE）上的连续数据复制到本地PE的地址上</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_getmem_nbi</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -861,7 +861,7 @@
 </tbody>
 </table>
 </li>
-<li><p>异步接口,从指定的PE复制对称内存中的连续数据到本地PE的地址</p>
+<li><p>异步接口，从指定的PE复制对称内存中的连续数据到本地PE的地址</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_putmem_signal_nbi</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">sig</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">sig_op</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -896,7 +896,7 @@
 </tbody>
 </table>
 </li>
-<li><p>同步接口,从指定的PE复制对称内存中的连续数据到本地PE的地址</p>
+<li><p>同步接口，从指定的PE复制对称内存中的连续数据到本地PE的地址</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_putmem_signal</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">sig</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">sig_op</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
 </pre></div>
 </div>
