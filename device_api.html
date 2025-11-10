@@ -160,14 +160,14 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">DEVICE API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#shmem-device-rma-h">shmem_device_rma.h</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_TYPE_FUNC"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPE_FUNC</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_GET_TYPENAME_MEM"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_GET_TYPENAME_MEM_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB_DETAILED</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_GET_TYPENAME_MEM_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB_TENSOR</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_GET_TYPENAME_MEM_TENSOR_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB_TENSOR_DETAILED</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_PUT_TYPENAME_MEM"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_PUT_TYPENAME_MEM_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_DETAILED</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_PUT_TYPENAME_MEM_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_TENSOR</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_PUT_TYPENAME_MEM_TENSOR_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_GET_TYPENAME_MEM"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_GET_TYPENAME_MEM_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_DETAILED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_GET_TYPENAME_MEM_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_TENSOR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_GET_TYPENAME_MEM_TENSOR_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_TENSOR_DETAILED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_PUT_TYPENAME_MEM"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_PUT_TYPENAME_MEM_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_DETAILED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_PUT_TYPENAME_MEM_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_TENSOR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_PUT_TYPENAME_MEM_TENSOR_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_TENSOR_DETAILED</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_GET_TYPENAME_MEM_UB"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_GET_TYPENAME_MEM_UB_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB_DETAILED</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_GET_TYPENAME_MEM_UB_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB_TENSOR</span></code></a></li>
@@ -379,7 +379,7 @@
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="c.SHMEM_GET_TYPENAME_MEM_UB_TENSOR">
+<dt class="sig sig-object cpp" id="c.SHMEM_GET_TYPENAME_MEM_TENSOR">
 <span class="target" id="shmem__device__rma_8h_1a7136847cdb15d1f732cea61cb5d42241"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_get_NAME_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Copy a contiguous data on symmetric memory from the specified PE to address on the local PE.  </p>
 <dl class="field-list simple">
