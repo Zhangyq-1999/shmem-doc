@@ -52,6 +52,7 @@
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id6">快速上手</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id7">功能自测用例</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#pythontest">python侧test用例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#unique-id">unique id 初始化方式</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a><ul>
@@ -176,7 +177,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_PUT_TYPENAME_MEM_UB_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_DETAILED</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_PUT_TYPENAME_MEM_UB_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_TENSOR</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.SHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#_CPPv48ub_limit"><code class="docutils literal notranslate"><span class="pre">ub_limit</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#shmem-device-sync-h">shmem_device_sync.h</a></li>
@@ -216,14 +216,22 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Security hardening and public IP address</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="security.html">安全加固</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id2">通信矩阵</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id3">加固须知</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id4">运行用户建议</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id5">内存地址随机化机制安全加固</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">安全声明</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id2">安全加固</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="security.html#id3">加固须知</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#id4">通信矩阵</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="security.html#id6">公网地址</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id5">运行用户建议</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id6">文件权限控制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id7">构建安全声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id8">运行安全声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id9">内存地址随机化机制安全加固</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id10">公网地址声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id11">漏洞机制说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id12">附录</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -342,6 +350,124 @@
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A single element of type specified in the input pointer. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rma_8h_1a901c677997c29c9aa4873899de1c20ee"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_getmem</span> <span class="pre">(__gm__</span> <span class="pre">void</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rma_8h_1a0c5213d1857cc253ed9a92834dc0540d"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_get_NAME_mem</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Copy contiguous data on symmetric memory from the specified PE to * address on the local PE.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays.</p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rma_8h_1a94aceaf85c743359b43a0ad17456bc46"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_putmem</span> <span class="pre">(__gm__</span> <span class="pre">void</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rma_8h_1a76a331cf57cead38a7b89e1373450350"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_put_NAME_mem</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Copy a contiguous data on local PE to symmetric address on the specified PE.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] Pointer on local device of the source data.</p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the destination and source arrays.</p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rma_8h_1a8daaddb56b8f591fb541e8ee3a437f4d"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_getmem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">void</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rma_8h_1a0b6a79e821244d25303752880edbf77c"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_putmem_signal</span> <span class="pre">(__gm__</span> <span class="pre">void</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE then update sig_addr. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
+<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
+<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
+<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: SHMEM_SIGNAL_SET/SHMEM_SIGNAL_ADD </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rma_8h_1a3ce29a6689d8a01430d3b31bc9c421ba"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_putmem_signal_nbi</span> <span class="pre">(__gm__</span> <span class="pre">void</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE then update sig_addr. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
+<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
+<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
+<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: SHMEM_SIGNAL_SET/SHMEM_SIGNAL_ADD </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -605,7 +731,7 @@
 
 </div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Low-level Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__low__level__rma_8h_1a025b6b148862c5c38b3993dc9926940c"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">__gm__</span> <span class="pre">void</span> <span class="pre">*</span> <span class="pre">shmem_ptr</span> <span class="pre">(__gm__</span> <span class="pre">void</span> <span class="pre">*ptr,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
@@ -644,6 +770,23 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__low__level__rma_8h_1a1276ef21fe1ee3574d0ddf9d9b9ce60e"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_roce_get_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*buf,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local device. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>buf</strong> – [in] Pointer on local UB, available space larger than 64 Bytes. </p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the destination and source arrays. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__low__level__rma_8h_1a760e27c38f381ed6b0987eaefc78109a"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_mte_get_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*buf,</span> <span class="pre">uint32_t</span> <span class="pre">ub_size,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on symmetric memory from the specified PE to address on the local device. </p>
 <dl class="field-list simple">
@@ -656,6 +799,23 @@
 <li><p><strong>copy_params</strong> – [in] Params to describe how non-contiguous data is managed in src and dst. </p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 <li><p><strong>EVENT_ID</strong> – [in] ID used to Sync MTE2\MTE3 Event. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__low__level__rma_8h_1ab2681094d318909e1a971e69d3473cde"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_roce_get_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">buf,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] GlobalTensor on local device of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] GlobalTensor on Symmetric memory of the source data. </p></li>
+<li><p><strong>buf</strong> – [in] LocalTensor on local UB, available space larger than 64 Bytes. </p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the destination and source arrays. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
 </dd>
 </dl>
@@ -699,6 +859,23 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__low__level__rma_8h_1ac4f38bf201937772118852858e04ff98"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_roce_put_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*buf,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on Symmetric memory of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on local device of the source data. </p></li>
+<li><p><strong>buf</strong> – [in] Pointer on local UB, available space larger than 64 Bytes. </p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the destination and source arrays. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__low__level__rma_8h_1a78bb0eb0dd2d1f16109d9bf8b4823f68"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_mte_put_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*buf,</span> <span class="pre">uint32_t</span> <span class="pre">ub_size,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
 <dd><p>Asynchronous interface. Copy a contiguous data on local PE to symmetric address on the specified PE. </p>
 <dl class="field-list simple">
@@ -728,6 +905,24 @@
 <li><p><strong>buf</strong> – [in] Pointer on local UB. </p></li>
 <li><p><strong>ub_size</strong> – [in] The size of temp Buffer on UB. (In Bytes) </p></li>
 <li><p><strong>copy_params</strong> – [in] Params to describe how non-contiguous data is organized in src and dst. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+<li><p><strong>EVENT_ID</strong> – [in] ID used to Sync MTE2\MTE3 Event. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__low__level__rma_8h_1a10921b8d5913035785e3f23c0ffce0c3"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmem_roce_put_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">buf,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<dd><p>Asynchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] GlobalTensor on Symmetric memory of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] GlobalTensor on local device of the source data. </p></li>
+<li><p><strong>buf</strong> – [in] Pointer on local UB, available space larger than 64 Bytes. </p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the destination and source arrays. </p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 <li><p><strong>EVENT_ID</strong> – [in] ID used to Sync MTE2\MTE3 Event. </p></li>
 </ul>
@@ -911,8 +1106,13 @@
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-variables">Variables</p>
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv48ub_limit">
-<span id="_CPPv38ub_limit"></span><span id="_CPPv28ub_limit"></span><span id="ub_limit__i"></span><span class="target" id="shmem__device__low__level__rma_8h_1a29d46063854440e0afd493a0d74426b8"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ub_limit</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">192</span></span><span class="w"> </span><span class="o"><span class="pre">*</span></span><span class="w"> </span><span class="m"><span class="pre">1024</span></span><a class="headerlink" href="#_CPPv48ub_limit" title="Link to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv432SHMEM_INTERNAL_UB_BUF_START_ADDR">
+<span id="_CPPv332SHMEM_INTERNAL_UB_BUF_START_ADDR"></span><span id="_CPPv232SHMEM_INTERNAL_UB_BUF_START_ADDR"></span><span id="SHMEM_INTERNAL_UB_BUF_START_ADDR__uint64_t"></span><span class="target" id="shmem__device__low__level__rma_8h_1a0da26da7111981c1b9aac3b576fbc492"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SHMEM_INTERNAL_UB_BUF_START_ADDR</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">188</span></span><span class="w"> </span><span class="o"><span class="pre">*</span></span><span class="w"> </span><span class="m"><span class="pre">1024</span></span><a class="headerlink" href="#_CPPv432SHMEM_INTERNAL_UB_BUF_START_ADDR" title="Link to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv413UB_ALIGN_SIZE">
+<span id="_CPPv313UB_ALIGN_SIZE"></span><span id="_CPPv213UB_ALIGN_SIZE"></span><span id="UB_ALIGN_SIZE__uint32_t"></span><span class="target" id="shmem__device__low__level__rma_8h_1aaa4e2e1ddc7f43880d5ac7706aaf36e4"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UB_ALIGN_SIZE</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">32</span></span><a class="headerlink" href="#_CPPv413UB_ALIGN_SIZE" title="Link to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -966,11 +1166,6 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__sync_8h_1a91b3f3974a770efcc5564d51dd912961"></span><span class="sig-name descname"><span class="pre">SHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">shmemx_barrier_all_vec</span> <span class="pre">()</span></span></dt>
 <dd><p>shmemx_barrier_vec of all PEs. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>tid</strong> – [in] team to do barrier </p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="cpp function">

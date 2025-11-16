@@ -52,6 +52,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#id6">快速上手</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id7">功能自测用例</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#pythontest">python侧test用例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#unique-id">unique id 初始化方式</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a><ul>
@@ -208,14 +209,22 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Security hardening and public IP address</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="security.html">安全加固</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id2">通信矩阵</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id3">加固须知</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id4">运行用户建议</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id5">内存地址随机化机制安全加固</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">安全声明</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id2">安全加固</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="security.html#id3">加固须知</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#id4">通信矩阵</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="security.html#id6">公网地址</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id5">运行用户建议</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id6">文件权限控制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id7">构建安全声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id8">运行安全声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id9">内存地址随机化机制安全加固</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id10">公网地址声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id11">漏洞机制说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id12">附录</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -279,7 +288,7 @@
 </ul>
 </li>
 <li><p>平台：aarch64/x86</p></li>
-<li><p>配套软件：驱动固件 Ascend HDK 25.0.RC1.1、 CANN 8.2.RC1及之后版本。Ascend HDK版本为商发版本，CANN版本为社区版本，暂无支持商用版本。（参考《<a class="reference external" href="https://www.hiascend.com/document/detail/zh/canncommercial/82RC1/softwareinst/instg/instg_0000.html?Mode=PmIns&amp;amp;InstallType=local&amp;amp;OS=Ubuntu&amp;amp;Software=cannToolKit">CANN软件安装指南</a>》安装CANN开发套件包以及配套固件和驱动）<br />
+<li><p>配套软件：驱动固件 Ascend HDK 25.0.RC1.1、 CANN 8.2.RC1及之后版本。（参考《<a class="reference external" href="https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/83RC1/softwareinst/instg/instg_0000.html?Mode=PmIns&amp;amp;InstallType=local&amp;amp;OS=Ubuntu&amp;amp;Software=cannToolKit">CANN软件安装指南</a>》安装CANN开发套件包以及配套固件和驱动）<br />
 cmake &gt;= 3.19<br />
 GLIBC &gt;= 2.28</p></li>
 </ul>
@@ -392,6 +401,41 @@ bash<span class="w"> </span>scripts/run.sh<span class="w"> </span>-ranks<span cl
 </pre></div>
 </div>
 <p>看到日志中打印出“test.py running success!”即为demo运行成功</p>
+</section>
+<section id="unique-id">
+<h2>unique id 初始化方式<a class="headerlink" href="#unique-id" title="Link to this heading">¶</a></h2>
+<p>注：使用unique id的接口初始化，需要手动配置环境变量SHMEM_UID_SESSION_ID或者SHMEM_UID_SOCK_IFNAM，同时配置时只读SHMEM_UID_SESSION_ID
+SHMEM_UID_SESSION_ID配置示例：
+SHMEM_UID_SOCK_IFNAM=127.0.0.1:1234
+SHMEM_UID_SOCK_IFNAM=[6666:6666:6666:6666:6666:6666:6666:6666]:886
+SHMEM_UID_SOCK_IFNAM配置示例：
+SHMEM_UID_SOCK_IFNAM=enpxxxx:inet4  取ipv4
+SHMEM_UID_SOCK_IFNAM=enpxxxx:inet6  取ipv6
+不配置默认取eth:inet4</p>
+<ul class="simple">
+<li><p>python初始化例子</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">shmem</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ash</span>
+
+<span class="c1"># xxx</span>
+
+<span class="n">uid</span> <span class="o">=</span> <span class="n">ash</span><span class="o">.</span><span class="n">shmem_get_unique_id</span><span class="p">()</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">ash</span><span class="o">.</span><span class="n">shmem_init_using_unique_id</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span> <span class="n">world_size</span><span class="p">,</span> <span class="n">mem_size</span><span class="p">,</span> <span class="n">uid</span><span class="p">)</span>
+
+<span class="c1"># xxx</span>
+</pre></div>
+</div>
+<p>准备以上启动代码<code class="docutils literal notranslate"><span class="pre">init.py</span></code>后，使用<code class="docutils literal notranslate"><span class="pre">torchrun</span> <span class="pre">--nproc-per-node</span> <span class="pre">8</span> <span class="pre">init.py</span></code>，其中进程数 8 根据实际需要改动，更详细的例子，请参考<code class="docutils literal notranslate"><span class="pre">unique_id_test.py</span></code>文件。</p>
+<ul class="simple">
+<li><p>c++初始化例子</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">shmem_uniqueid_t</span><span class="w"> </span><span class="n">uid</span><span class="p">;</span>
+<span class="n">shmem_init_attr_t</span><span class="w"> </span><span class="o">*</span><span class="n">attr</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_get_uniqueid</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uid</span><span class="p">);</span>
+<span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_set_attr</span><span class="p">(</span><span class="n">my_rank</span><span class="p">,</span><span class="w"> </span><span class="n">n_ranks</span><span class="p">,</span><span class="w"> </span><span class="n">mem_size</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attr</span><span class="p">);</span><span class="w"> </span><span class="c1">// 第4个参数是ip_port，当前场景传入nullptr</span>
+<span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_set_attr_uniqueid_args</span><span class="p">(</span><span class="n">my_rank</span><span class="p">,</span><span class="w"> </span><span class="n">n_ranks</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">attr</span><span class="p">);</span>
+</pre></div>
+</div>
 </section>
 </section>
 

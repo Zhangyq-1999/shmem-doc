@@ -52,6 +52,7 @@
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id6">快速上手</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id7">功能自测用例</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#pythontest">python侧test用例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#unique-id">unique id 初始化方式</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a><ul>
@@ -208,14 +209,22 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Security hardening and public IP address</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="security.html">安全加固</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id2">通信矩阵</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id3">加固须知</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id4">运行用户建议</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id5">内存地址随机化机制安全加固</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">安全声明</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id2">安全加固</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="security.html#id3">加固须知</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#id4">通信矩阵</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="security.html#id6">公网地址</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id5">运行用户建议</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id6">文件权限控制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id7">构建安全声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id8">运行安全声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id9">内存地址随机化机制安全加固</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id10">公网地址声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id11">漏洞机制说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id12">附录</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -372,7 +381,7 @@
 </table>
 </li>
 <li><p>注册一个Python解密处理程序</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">register_decrypt_handler</span><span class="p">(</span><span class="n">py_decrypt_func</span><span class="p">:</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">set_conf_store_tls_key</span><span class="p">(</span><span class="n">tls_pk</span><span class="p">,</span> <span class="n">tls_pk_pw</span><span class="p">,</span> <span class="n">py_decrypt_func</span><span class="p">:</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -382,14 +391,14 @@
 </tr>
 </thead>
 <tbody>
+<tr class="row-even"><td><p>tls_pk</p></td>
+<td><p>私钥</p></td>
+</tr>
+<tr class="row-odd"><td><p>tls_pk_pw</p></td>
+<td><p>私钥口令</p></td>
+</tr>
 <tr class="row-even"><td><p>py_decrypt_func</p></td>
-<td><p>可调用对象，一个Python函数，接受 (str cipher_text)，并返回 (str plain_text)</p></td>
-</tr>
-<tr class="row-odd"><td><p>cipher_text</p></td>
-<td><p>加密文本</p></td>
-</tr>
-<tr class="row-even"><td><p>plain_text</p></td>
-<td><p>解密后的文本</p></td>
+<td><p>私钥口令解密函数，一个Python函数，接受 (str cipher_text)，并返回 (str plain_text)</p></td>
 </tr>
 <tr class="row-odd"><td><p>返回值</p></td>
 <td><p>成功时返回0,失败时返回错误代码</p></td>
@@ -398,7 +407,7 @@
 </table>
 </li>
 <li><p>分配内存</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_malloc</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_malloc</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -418,7 +427,7 @@
 </table>
 </li>
 <li><p>为多个元素分配内存</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_calloc</span><span class="p">(</span><span class="n">nmemb</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_calloc</span><span class="p">(</span><span class="n">nmemb</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -441,7 +450,7 @@
 </table>
 </li>
 <li><p>分配指定对齐方式内存</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_align</span><span class="p">(</span><span class="n">alignment</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_align</span><span class="p">(</span><span class="n">alignment</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -481,7 +490,7 @@
 </table>
 </li>
 <li><p>获取可用于在指定PE上直接引用目标地址的地址</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_ptr</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="n">peer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shmem_ptr</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="n">peer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -498,13 +507,13 @@
 <td><p>PE编号</p></td>
 </tr>
 <tr class="row-even"><td><p>返回值</p></td>
-<td><p>返回远程 PE 上对应对称地址的指针；若获取失败返回 None</p></td>
+<td><p>分配成功返回指向已分配的内存的指针；该内存未被成功分配或size为0，则返回NULL</p></td>
 </tr>
 </tbody>
 </table>
 </li>
 <li><p>获取PE值</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_my_pe</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">my_pe</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -541,7 +550,7 @@
 </table>
 </li>
 <li><p>程序中运行的PE数量</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_pe_count</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pe_count</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -666,7 +675,7 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>team</p></td>
+<tr class="row-even"><td><p>parent</p></td>
 <td><p>team id</p></td>
 </tr>
 <tr class="row-odd"><td><p>返回值</p></td>
@@ -949,7 +958,7 @@
 </table>
 </li>
 <li><p>获取团队中的PE编号，即PE的索引</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_team_my_pe</span><span class="p">(</span><span class="n">team</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">my_pe</span><span class="p">(</span><span class="n">team</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
@@ -969,7 +978,7 @@
 </table>
 </li>
 <li><p>获取团队中PE的数目</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_team_pe_count</span><span class="p">(</span><span class="n">team</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pe_count</span><span class="p">(</span><span class="n">team</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils align-default">

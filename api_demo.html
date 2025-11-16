@@ -52,6 +52,7 @@
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id6">快速上手</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id7">功能自测用例</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#pythontest">python侧test用例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#unique-id">unique id 初始化方式</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a><ul>
@@ -208,14 +209,22 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Security hardening and public IP address</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="security.html">安全加固</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id2">通信矩阵</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id3">加固须知</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id4">运行用户建议</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id5">内存地址随机化机制安全加固</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">安全声明</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id2">安全加固</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="security.html#id3">加固须知</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#id4">通信矩阵</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="security.html#id6">公网地址</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id5">运行用户建议</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id6">文件权限控制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id7">构建安全声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id8">运行安全声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id9">内存地址随机化机制安全加固</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id10">公网地址声明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id11">漏洞机制说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#id12">附录</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -267,7 +276,7 @@
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">version</span><span class="p">;</span><span class="w">                            </span><span class="c1">// 版本</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">my_rank</span><span class="p">;</span><span class="w">                             </span><span class="c1">// 当前rank</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n_ranks</span><span class="p">;</span><span class="w">                             </span><span class="c1">// 总rank数</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">ip_port</span><span class="p">;</span><span class="w">                     </span><span class="c1">// ip端口</span>
+<span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">ip_port</span><span class="p">;</span><span class="w">                     </span><span class="c1">// ip端口</span>
 <span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">local_mem_size</span><span class="p">;</span><span class="w">                  </span><span class="c1">// 本地申请内存大小</span>
 <span class="w">    </span><span class="n">shmem_init_optional_attr_t</span><span class="w"> </span><span class="n">option_attr</span><span class="p">;</span><span class="w">  </span><span class="c1">// 可选参数</span>
 <span class="p">}</span><span class="w"> </span><span class="n">shmem_init_attr_t</span><span class="p">;</span>
@@ -335,7 +344,7 @@
 </section>
 <section id="id4">
 <h3>注册私钥口令解密函数<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
-<p>shmem的多卡之间业务面TCP通信，通过memfabric_hybrid提供的能力实现，为了保证通信安全，该特性默认开启，使用时传入初始化TLS信息，TLS信息格式参考docs/security.md样例，其中私钥是密文，私钥口令以密文形式存储，需通过注册的解密回调函数进行解密，调用者实现具体的解密逻辑。</p>
+<p>shmem的多卡之间业务面TCP通信，通过memfabric_hybrid提供的能力实现，为了保证通信安全，该特性默认开启，使用时传入初始化TLS信息，TLS信息格式参考SECURITY.md样例，其中私钥是密文，私钥口令以密文形式存储，需通过注册的解密回调函数进行解密，调用者实现具体的解密逻辑。</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">my_key_password_decrypt_handler</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">cipherText</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">cipherTextLen</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">plainText</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="o">&amp;</span><span class="n">plainTextLen</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// cipherText: input encrypted key password</span>
@@ -352,7 +361,7 @@
 <span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_set_config_store_tls_key</span><span class="p">(</span><span class="n">pk</span><span class="p">,</span><span class="w"> </span><span class="n">pk_len</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">,</span><span class="w"> </span><span class="n">pw_len</span><span class="p">,</span><span class="w"> </span><span class="n">my_key_password_decrypt_handler</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>如需关闭加密特性，则调用如下接口。关闭后，则无需调用shmem_register_decrypt_handler注册接口。</p>
+<p>如需关闭加密特性，则调用如下接口。关闭后，则无需调用shmem_set_config_store_tls_key接口。</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_set_conf_store_tls</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="n">nullptr</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
 </pre></div>
 </div>
