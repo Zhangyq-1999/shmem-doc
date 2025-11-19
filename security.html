@@ -116,12 +116,12 @@
 <li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N21data_op_engine_type_t17SHMEM_DATA_OP_MTEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_DATA_OP_MTE</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv4Ut1_0"><code class="docutils literal notranslate"><span class="pre">&#64;0</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv4Ut1_0"><code class="docutils literal notranslate"><span class="pre">signal ops</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_016SHMEM_SIGNAL_SETE"><code class="docutils literal notranslate"><span class="pre">SHMEM_SIGNAL_SET</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_016SHMEM_SIGNAL_ADDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_SIGNAL_ADD</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv4Ut1_1"><code class="docutils literal notranslate"><span class="pre">&#64;1</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv4Ut1_1"><code class="docutils literal notranslate"><span class="pre">signal compare ops</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_EQE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_EQ</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_NEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_NE</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_GTE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_GT</span></code></a></li>
@@ -371,8 +371,8 @@
 <h2>文件权限控制<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>建议用户在主机（包括宿主机）及容器中设置运行系统umask值为0027及以上，保障新增文件夹默认最高权限为750，新增文件默认最高权限为640。</p></li>
-<li><p>建议用户对个人隐私数据、商业资产、源文件和算子开发过程中保存的各类文件等敏感内容做好权限控制等安全措施。例如涉及本项目安装目录权限管控、输入公共数据文件权限管控，设定的权限建议参考<a class="reference internal" href="#a-%E6%96%87%E4%BB%B6%E5%A4%B9%E5%90%84%E5%9C%BA%E6%99%AF%E6%9D%83%E9%99%90%E7%AE%A1%E6%8E%A7%E6%8E%A8%E8%8D%90%E6%9C%80%E5%A4%A7%E5%80%BC"><span class="xref myst">A-文件（夹）各场景权限管控推荐最大值</span></a>。</p></li>
-<li><p>用户安装和使用过程需要做好权限控制，建议参考<a class="reference internal" href="#a-%E6%96%87%E4%BB%B6%E5%A4%B9%E5%90%84%E5%9C%BA%E6%99%AF%E6%9D%83%E9%99%90%E7%AE%A1%E6%8E%A7%E6%8E%A8%E8%8D%90%E6%9C%80%E5%A4%A7%E5%80%BC"><span class="xref myst">A-文件（夹）各场景权限管控推荐最大值</span></a>文件权限参考进行设置。</p></li>
+<li><p>建议用户对个人隐私数据、商业资产、源文件和算子开发过程中保存的各类文件等敏感内容做好权限控制等安全措施。例如涉及本项目安装目录权限管控、输入公共数据文件权限管控，设定的权限建议参考<a class="reference internal" href="#a"><span class="xref myst">A-文件（夹）各场景权限管控推荐最大值</span></a>。</p></li>
+<li><p>用户安装和使用过程需要做好权限控制，建议参考<a class="reference internal" href="#a"><span class="xref myst">A-文件（夹）各场景权限管控推荐最大值</span></a>文件权限参考进行设置。</p></li>
 </ul>
 </section>
 <section id="id7">
@@ -455,7 +455,7 @@
 <tr class="row-even"><td><p>用户主目录</p></td>
 <td><p>750（rwxr-x—）</p></td>
 </tr>
-<tr class="row-odd"><td><p>程序文件(含脚本文件、库文件等)</p></td>
+<tr class="row-odd"><td><p>程序文件（含脚本文件、库文件等）</p></td>
 <td><p>550（r-xr-x—）</p></td>
 </tr>
 <tr class="row-even"><td><p>程序文件目录</p></td>
@@ -467,10 +467,10 @@
 <tr class="row-even"><td><p>配置文件目录</p></td>
 <td><p>750（rwxr-x—）</p></td>
 </tr>
-<tr class="row-odd"><td><p>日志文件(记录完毕或者已经归档)</p></td>
+<tr class="row-odd"><td><p>日志文件（记录完毕或者已经归档）</p></td>
 <td><p>440（r–r—–）</p></td>
 </tr>
-<tr class="row-even"><td><p>日志文件(正在记录)</p></td>
+<tr class="row-even"><td><p>日志文件（正在记录）</p></td>
 <td><p>640（rw-r—–）</p></td>
 </tr>
 <tr class="row-odd"><td><p>日志文件目录</p></td>
