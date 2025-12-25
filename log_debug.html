@@ -1,0 +1,174 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SHMEM日志 &mdash; SHMEM  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="SHMEM DEF" href="def.html" />
+    <link rel="prev" title="编译与构建" href="compilation_build_guide.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            SHMEM
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">快速开始</a></li>
+<li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Using ACLSHMEM</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="api_demo.html">SHMEM API 样例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compilation_build_guide.html">编译与构建</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SHMEM日志</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">环境变量介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">日志阅读</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="def.html">SHMEM DEF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="host_api.html">HOST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Example</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example.html">AllGather</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="principles.html">SHMEM原理概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_organization.html">代码组织结构</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting And FAQs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="SECURITY.html">安全声明</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SHMEM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SHMEM日志</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/log_debug.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="shmem">
+<h1>SHMEM日志<a class="headerlink" href="#shmem" title="Link to this heading"></a></h1>
+<section id="id1">
+<h2>环境变量介绍<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>SHMEM日志相关的几个环境变量：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_LOG_LEVEL</span></code>: 用于设置SHMEM日志等级，严重程度从高到低有TRACE、DEBUG、WARN、INFO、ERROR、FATAL。默认为ERROR，调试时建议设置为DEBUG或INFO。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_LOG_TO_STDOUT</span></code>: 用于设置SHMEM日志是否输出到控制台, 0: 关闭, 1: 开启输出到控制台。默认关闭，不输出到控制台，日志会存储到默认路径或指定路径。如果开启则会在控制台打印日志，日志将不再落盘到文件。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_LOG_PATH</span></code>: 用于设置SHMEM日志保存路径， 需要传递合法路径。如不设置默认存储路径为<code class="docutils literal notranslate"><span class="pre">${HOME}/aclshmem/log</span></code>。</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>日志阅读<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>每条SHMEM的日志一般会包含如下内容：时间、日志级别、进程号、日志模块、日志文件、日志所在行号、日志信息。
+<img alt="image" src="_images/0.png" />
+接下来通过一个初始化两个pe再去初始化的例子简单介绍如何看懂SHMEM日志。此样例日志都是info级别，主要关注日志信息。前面的，时间、日志级别、进程号等信息不做专门截取解释。
+初始化阶段会先报出当前使用的后端（mf或者图中的default）。然后会报出bootstrap使用的flag（如图中的ACLSHMEMX_INIT_WITH_DEFAULT）。然后会开始boostrap初始化，并检测环境变量的设置情况（如图中ACLSHMEM_UID_SESSION_ID未设置）。
+<img alt="image" src="_images/1.png" />
+SHMEM有一个root 0节点，在单机环境该节点可以使用回环地址，但在集群环境这样设置是错误的。因此初始化过程会报出当前的root 0（即remote address）是否是回环地址。如果是root 0是回环则默认单机环境，当前pe也可使用回环地址，当前pe的ip信息也会在netifaddr报出。
+<img alt="image" src="_images/2.png" />
+bootstrap过程中一般涉及多个socket的创建和使用，这些socket的信息也会在日志中体现，更详细的socket信息可以通过开启debug级别获取，但数量较大。
+<img alt="image" src="_images/3.png" />
+bootstrap成功后会有专门日志打印，同时日志里会标明pe号。
+<img alt="image" src="_images/4.png" />
+初始化成功后会有专门的日志打印，同时日志里会标明pe号。
+<img alt="image" src="_images/5.png" />
+去初始化成功后会有专门的日志打印，同时日志里会标明pe号。
+<img alt="image" src="_images/6.png" /></p>
+<p>SHMEM日志当前主要提供host侧的定位能力，device侧如算子发生报错时可能无法根据SHMEM定位，需配合CANN或者相关工具日志进行定位。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="compilation_build_guide.html" class="btn btn-neutral float-left" title="编译与构建" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="def.html" class="btn btn-neutral float-right" title="SHMEM DEF" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

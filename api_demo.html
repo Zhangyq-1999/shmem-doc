@@ -6,20 +6,21 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SHMEM API 样例 &mdash; Shmem Guidebook 1.0.0 documentation</title>
+  <title>SHMEM API 样例 &mdash; SHMEM  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=8d563738"></script>
-      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="SHMEM DEF" href="def.html" />
+    <link rel="next" title="编译与构建" href="compilation_build_guide.html" />
     <link rel="prev" title="相关脚本" href="related_scripts.html" /> 
 </head>
 
@@ -32,7 +33,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            Shmem Guidebook
+            SHMEM
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -44,31 +45,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">快速开始</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id2">介绍</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id3">软件架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id4">目录结构说明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id5">软件硬件配套说明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id6">快速上手</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#id7">功能自测用例</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#pythontest">python侧test用例</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#unique-id">unique id 初始化方式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">快速开始</a></li>
+<li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="related_scripts.html#build-sh">build.sh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="related_scripts.html#install-sh">install.sh</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="related_scripts.html#id2">安装目录</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="related_scripts.html#run-sh">run.sh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="related_scripts.html#set-env-sh">set_env.sh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="related_scripts.html#uninstall-sh">uninstall.sh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="related_scripts.html#release-sh">release.sh</a></li>
-</ul>
-</li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Using SHMEM</span></p>
+<p class="caption" role="heading"><span class="caption-text">Using ACLSHMEM</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">SHMEM API 样例</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#init-api">Init API</a><ul>
@@ -87,144 +67,33 @@
 <li class="toctree-l2"><a class="reference internal" href="#sync-api">Sync API</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="compilation_build_guide.html">编译与构建</a></li>
+<li class="toctree-l1"><a class="reference internal" href="log_debug.html">SHMEM日志</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="def.html">SHMEM DEF</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="def.html#enumerations">Enumerations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv418shmem_error_code_t"><code class="docutils literal notranslate"><span class="pre">shmem_error_code_t</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N18shmem_error_code_t13SHMEM_SUCCESSE"><code class="docutils literal notranslate"><span class="pre">SHMEM_SUCCESS</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N18shmem_error_code_t19SHMEM_INVALID_PARAME"><code class="docutils literal notranslate"><span class="pre">SHMEM_INVALID_PARAM</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N18shmem_error_code_t19SHMEM_INVALID_VALUEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_INVALID_VALUE</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N18shmem_error_code_t16SHMEM_SMEM_ERRORE"><code class="docutils literal notranslate"><span class="pre">SHMEM_SMEM_ERROR</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N18shmem_error_code_t17SHMEM_INNER_ERRORE"><code class="docutils literal notranslate"><span class="pre">SHMEM_INNER_ERROR</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N18shmem_error_code_t16SHMEM_NOT_INITEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_NOT_INITED</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv419shmem_init_status_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_status_t</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N19shmem_init_status_t28SHMEM_STATUS_NOT_INITIALIZEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_NOT_INITIALIZED</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N19shmem_init_status_t24SHMEM_STATUS_SHM_CREATEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_SHM_CREATED</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N19shmem_init_status_t27SHMEM_STATUS_IS_INITIALIZEDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_IS_INITIALIZED</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N19shmem_init_status_t20SHMEM_STATUS_INVALIDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_STATUS_INVALID</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv418shmem_team_index_t"><code class="docutils literal notranslate"><span class="pre">shmem_team_index_t</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N18shmem_team_index_t18SHMEM_TEAM_INVALIDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_TEAM_INVALID</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N18shmem_team_index_t16SHMEM_TEAM_WORLDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_TEAM_WORLD</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv421data_op_engine_type_t"><code class="docutils literal notranslate"><span class="pre">data_op_engine_type_t</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4N21data_op_engine_type_t17SHMEM_DATA_OP_MTEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_DATA_OP_MTE</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv4Ut1_0"><code class="docutils literal notranslate"><span class="pre">signal ops</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_016SHMEM_SIGNAL_SETE"><code class="docutils literal notranslate"><span class="pre">SHMEM_SIGNAL_SET</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_016SHMEM_SIGNAL_ADDE"><code class="docutils literal notranslate"><span class="pre">SHMEM_SIGNAL_ADD</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv4Ut1_1"><code class="docutils literal notranslate"><span class="pre">signal compare ops</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_EQE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_EQ</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_NEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_NE</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_GTE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_GT</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_GEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_GE</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_LTE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_LT</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="def.html#_CPPv4NUt1_112SHMEM_CMP_LEE"><code class="docutils literal notranslate"><span class="pre">SHMEM_CMP_LE</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="def.html#typedefs">Typedefs</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv412shmem_team_t"><code class="docutils literal notranslate"><span class="pre">shmem_team_t</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="def.html#macros">Macros</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="def.html#c.SHMEM_HOST_API"><code class="docutils literal notranslate"><span class="pre">SHMEM_HOST_API</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="def.html#structs">Structs</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv421shmem_decrypt_handler"><code class="docutils literal notranslate"><span class="pre">shmem_decrypt_handler</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv426shmem_init_optional_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_optional_attr_t</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv417shmem_init_attr_t"><code class="docutils literal notranslate"><span class="pre">shmem_init_attr_t</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="def.html#_CPPv425non_contiguous_copy_param"><code class="docutils literal notranslate"><span class="pre">non_contiguous_copy_param</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="host_api.html">HOST API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="host_api.html#shmem-host-heap-h">shmem_host_heap.h</a></li>
-<li class="toctree-l2"><a class="reference internal" href="host_api.html#shmem-host-init-h">shmem_host_init.h</a></li>
-<li class="toctree-l2"><a class="reference internal" href="host_api.html#shmem-host-rma-h">shmem_host_rma.h</a></li>
-<li class="toctree-l2"><a class="reference internal" href="host_api.html#shmem-host-sync-h">shmem_host_sync.h</a></li>
-<li class="toctree-l2"><a class="reference internal" href="host_api.html#shmem-host-team-h">shmem_host_team.h</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-rma-h">shmem_device_rma.h</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_TYPE_FUNC"><code class="docutils literal notranslate"><span class="pre">SHMEM_TYPE_FUNC</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_GET_TYPENAME_MEM_UB"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_GET_TYPENAME_MEM_UB_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB_TENSOR</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_GET_TYPENAME_MEM_UB_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB_DETAILED</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_GET_TYPENAME_MEM_UB_TENSOR_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_GET_TYPENAME_MEM_UB_TENSOR_DETAILED</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_TENSOR"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_TENSOR</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_DETAILED</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#c.SHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED"><code class="docutils literal notranslate"><span class="pre">SHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="device_api.html#_CPPv48ub_limit"><code class="docutils literal notranslate"><span class="pre">ub_limit</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-sync-h">shmem_device_sync.h</a></li>
-<li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-team-h">shmem_device_team.h</a></li>
-</ul>
-</li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Python API</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM对外接口</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html#id1">SHMEM类</a></li>
+<li class="toctree-l1"><a class="reference internal" href="def.html">SHMEM DEF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="host_api.html">HOST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="example.html">AllGather</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="example.html#id1">核函数实现</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">AllGather</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="code_organization.html">代码组织结构</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="code_organization.html#shmem">SHMEM组织结构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="code_organization.html#include">include</a></li>
-<li class="toctree-l2"><a class="reference internal" href="code_organization.html#src">src</a></li>
-<li class="toctree-l2"><a class="reference internal" href="code_organization.html#examples">examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="code_organization.html#tests">tests</a></li>
-<li class="toctree-l2"><a class="reference internal" href="code_organization.html#docs">docs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="code_organization.html#scripts">scripts</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="principles.html">SHMEM原理概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_organization.html">代码组织结构</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Troubleshooting And FAQs</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Security hardening and public IP address</span></p>
+<p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="security.html">安全声明</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id2">安全加固</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="security.html#id3">加固须知</a></li>
-<li class="toctree-l3"><a class="reference internal" href="security.html#id4">通信矩阵</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id5">运行用户建议</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id6">文件权限控制</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id7">构建安全声明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id8">运行安全声明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id9">内存地址随机化机制安全加固</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id10">公网地址声明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id11">漏洞机制说明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#id12">附录</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="SECURITY.html">安全声明</a></li>
 </ul>
 
         </div>
@@ -233,7 +102,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Shmem Guidebook</a>
+          <a href="index.html">SHMEM</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -253,7 +122,7 @@
              
   <section id="shmem-api">
 <h1>SHMEM API 样例<a class="headerlink" href="#shmem-api" title="Link to this heading"></a></h1>
-<p>SHMEM包含host和device两类接口。host接口用SHMEM_HOST_API宏标识，device接口用SHMEM_DEVICE宏标识。</p>
+<p>SHMEM包含host和device两类接口。host接口用ACLSHMEM_HOST_API宏标识，device接口用ACLSHMEM_DEVICE宏标识。</p>
 <p>此章介绍各类API的常见接口的使用样例。</p>
 <section id="init-api">
 <h2>Init API<a class="headerlink" href="#init-api" title="Link to this heading"></a></h2>
@@ -261,10 +130,10 @@
 <section id="id1">
 <h3>初始化状态<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">SHMEM_STATUS_NOT_INITIALIZED</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="c1">// 未初始化</span>
-<span class="w">    </span><span class="n">SHMEM_STATUS_SHM_CREATED</span><span class="p">,</span><span class="w">           </span><span class="c1">// 完成共享内存堆创建 </span>
-<span class="w">    </span><span class="n">SHMEM_STATUS_IS_INITIALIZED</span><span class="p">,</span><span class="w">         </span><span class="c1">// 初始化完成 </span>
-<span class="w">    </span><span class="n">SHMEM_STATUS_INVALID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INT_MAX</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ACLSHMEM_STATUS_NOT_INITIALIZED</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="c1">// 未初始化</span>
+<span class="w">    </span><span class="n">ACLSHMEM_STATUS_SHM_CREATED</span><span class="p">,</span><span class="w">           </span><span class="c1">// 完成共享内存堆创建</span>
+<span class="w">    </span><span class="n">ACLSHMEM_STATUS_IS_INITIALIZED</span><span class="p">,</span><span class="w">         </span><span class="c1">// 初始化完成</span>
+<span class="w">    </span><span class="n">ACLSHMEM_STATUS_INVALID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INT_MAX</span><span class="p">,</span>
 <span class="p">};</span>
 </pre></div>
 </div>
@@ -276,10 +145,10 @@
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">version</span><span class="p">;</span><span class="w">                            </span><span class="c1">// 版本</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">my_rank</span><span class="p">;</span><span class="w">                             </span><span class="c1">// 当前rank</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n_ranks</span><span class="p">;</span><span class="w">                             </span><span class="c1">// 总rank数</span>
-<span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">ip_port</span><span class="p">;</span><span class="w">                     </span><span class="c1">// ip端口</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">ip_port</span><span class="p">[</span><span class="n">ACLSHMEM_MAX_IP_PORT_LEN</span><span class="p">];</span><span class="w">      </span><span class="c1">// ip端口</span>
 <span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">local_mem_size</span><span class="p">;</span><span class="w">                  </span><span class="c1">// 本地申请内存大小</span>
-<span class="w">    </span><span class="n">shmem_init_optional_attr_t</span><span class="w"> </span><span class="n">option_attr</span><span class="p">;</span><span class="w">  </span><span class="c1">// 可选参数</span>
-<span class="p">}</span><span class="w"> </span><span class="n">shmem_init_attr_t</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aclshmem_init_optional_attr_t</span><span class="w"> </span><span class="n">option_attr</span><span class="p">;</span><span class="w">  </span><span class="c1">// 可选参数</span>
+<span class="p">}</span><span class="w"> </span><span class="n">aclshmemx_init_attr_t</span><span class="p">;</span>
 
 <span class="c1">// 可选属性</span>
 <span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
@@ -288,7 +157,9 @@
 <span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">shm_init_timeout</span><span class="p">;</span>
 <span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">shm_create_timeout</span><span class="p">;</span>
 <span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">control_operation_timeout</span><span class="p">;</span>
-<span class="p">}</span><span class="w"> </span><span class="n">shmem_init_optional_attr_t</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// apply avaliable port in advance</span>
+<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">sockFd</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">aclshmem_init_optional_attr_t</span><span class="p">;</span>
 </pre></div>
 </div>
 </section>
@@ -297,7 +168,7 @@
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;acl/acl.h&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;shmem_api.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;shmem.h&quot;</span>
 <span class="n">aclInit</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">device_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
@@ -307,20 +178,20 @@
 <span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">test_global_ipport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;tcp://127.0.0.1:8666&quot;</span><span class="p">;</span>
 <span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclrtSetDevice</span><span class="p">(</span><span class="n">device_id</span><span class="p">);</span>
 
-<span class="n">shmem_init_attr_t</span><span class="o">*</span><span class="w"> </span><span class="n">attributes</span><span class="p">;</span>
-<span class="n">shmem_set_attr</span><span class="p">(</span><span class="n">rank_id</span><span class="p">,</span><span class="w"> </span><span class="n">n_ranks</span><span class="p">,</span><span class="w"> </span><span class="n">local_mem_size</span><span class="p">,</span><span class="w"> </span><span class="n">test_global_ipport</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">);</span>
-<span class="c1">// shmem_init_attr_t* attributes = new shmem_init_attr_t{rank_id, n_ranks, test_global_ipport, local_mem_size, {0, SHMEM_DATA_OP_MTE, 120, 120, 120}}; // 自定义attr</span>
-<span class="n">shmem_init_attr</span><span class="p">(</span><span class="n">attributes</span><span class="p">);</span>
-<span class="c1">// delete attributes; // 销毁自定义attr</span>
+<span class="n">aclshmemx_init_attr_t</span><span class="w"> </span><span class="n">attributes</span><span class="p">;</span>
+<span class="n">aclshmemx_init_attr_t</span><span class="o">*</span><span class="w"> </span><span class="n">attributes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">aclshmemx_init_attr_t</span><span class="p">{</span><span class="n">rank_id</span><span class="p">,</span><span class="w"> </span><span class="n">n_ranks</span><span class="p">,</span><span class="w"> </span><span class="n">test_global_ipport</span><span class="p">,</span><span class="w"> </span><span class="n">local_mem_size</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">ACLSHMEM_DATA_OP_MTE</span><span class="p">,</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span><span class="w"> </span><span class="mi">120</span><span class="p">}};</span><span class="w"> </span><span class="c1">// 自定义attr</span>
+<span class="n">aclshmemx_init_attr</span><span class="p">(</span><span class="n">attributes</span><span class="p">);</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">attributes</span><span class="p">;</span>
+<span class="n">attributes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
 
-<span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_init_status</span><span class="p">();</span>
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SHMEM_STATUS_IS_INITIALIZED</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_init_status</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ACLSHMEM_STATUS_IS_INITIALIZED</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Init success!&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="c1">//################你的任务#################</span>
 
 <span class="c1">//#########################################</span>
-<span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_finalize</span><span class="p">();</span>
+<span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmem_finalize</span><span class="p">();</span>
 <span class="n">aclrtResetDevice</span><span class="p">(</span><span class="n">device_id</span><span class="p">);</span>
 <span class="n">aclFinalize</span><span class="p">();</span>
 </pre></div>
@@ -328,23 +199,23 @@
 </section>
 <section id="id3">
 <h3>自定义日志打印<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
-<p>自定义日志打印是可选操作，如果未注册自定义日志打印函数，日志则默认打印，接口示例如下。</p>
+<p>自定义日志打印是可选操作，如果未注册自定义日志打印函数，日志则默认打屏，接口示例如下。</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">cpp_logger_example</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// do print here</span>
 <span class="p">}</span>
 
 <span class="c1">// set self-defined log</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_set_extern_logger</span><span class="p">(</span><span class="n">cpp_logger_example</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_set_extern_logger</span><span class="p">(</span><span class="n">cpp_logger_example</span><span class="p">);</span>
 
 <span class="c1">// set log level. 0-debug, 1-info, 2-warn, 3-error</span>
-<span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_set_log_level</span><span class="p">(</span><span class="n">level</span><span class="p">);</span>
+<span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_set_log_level</span><span class="p">(</span><span class="n">level</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>
 <section id="id4">
 <h3>注册私钥口令解密函数<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
-<p>shmem的多卡之间业务面TCP通信，通过memfabric_hybrid提供的能力实现，为了保证通信安全，该特性默认开启，使用时传入初始化TLS信息，TLS信息格式参考SECURITY.md样例，其中私钥是密文，私钥口令以密文形式存储，需通过注册的解密回调函数进行解密，调用者实现具体的解密逻辑。</p>
+<p>shmem的多卡之间业务面TCP通信，提供的能力实现，为了保证通信安全，该特性默认开启，使用时传入初始化TLS信息，TLS信息格式参考SECURITY.md样例，其中私钥是密文，私钥口令以密文形式存储，需通过注册的解密回调函数进行解密，调用者实现具体的解密逻辑。</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">my_key_password_decrypt_handler</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">cipherText</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">cipherTextLen</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">plainText</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="o">&amp;</span><span class="n">plainTextLen</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// cipherText: input encrypted key password</span>
@@ -358,11 +229,11 @@
 
 <span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;xxxx&quot;</span><span class="p">;</span>
 <span class="kt">uint32_t</span><span class="w"> </span><span class="n">pw_len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="n">password</span><span class="p">);</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_set_config_store_tls_key</span><span class="p">(</span><span class="n">pk</span><span class="p">,</span><span class="w"> </span><span class="n">pk_len</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">,</span><span class="w"> </span><span class="n">pw_len</span><span class="p">,</span><span class="w"> </span><span class="n">my_key_password_decrypt_handler</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_set_config_store_tls_key</span><span class="p">(</span><span class="n">pk</span><span class="p">,</span><span class="w"> </span><span class="n">pk_len</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">,</span><span class="w"> </span><span class="n">pw_len</span><span class="p">,</span><span class="w"> </span><span class="n">my_key_password_decrypt_handler</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>如需关闭加密特性，则调用如下接口。关闭后，则无需调用shmem_set_config_store_tls_key接口。</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_set_conf_store_tls</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="n">nullptr</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<p>如需关闭加密特性，则调用如下接口。关闭后，则无需调用aclshmem_set_config_store_tls_key接口。</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_set_conf_store_tls</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="n">nullptr</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>
@@ -375,27 +246,27 @@
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// ################### 调用初始化相关接口 ###########################</span>
 <span class="c1">//...</span>
 <span class="c1">// ###################### 子通信域切分 #############################</span>
-<span class="n">shmem_team_t</span><span class="w"> </span><span class="n">team_odd</span><span class="p">;</span>
+<span class="n">aclshmem_team_t</span><span class="w"> </span><span class="n">team_odd</span><span class="p">;</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">team_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
-<span class="n">shmem_team_split_strided</span><span class="p">(</span><span class="n">SHMEM_TEAM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">stride</span><span class="p">,</span><span class="w"> </span><span class="n">team_size</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">team_odd</span><span class="p">);</span>
+<span class="n">aclshmem_team_split_strided</span><span class="p">(</span><span class="n">ACLSHMEM_TEAM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">stride</span><span class="p">,</span><span class="w"> </span><span class="n">team_size</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">team_odd</span><span class="p">);</span>
 
 <span class="c1">// ##################### host侧取值 ###############################</span>
 <span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank_id</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// shmem_team_n_pes(team_odd): Returns the number of PEs in the team.</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">team_n_pes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_team_n_pes</span><span class="p">(</span><span class="n">team_odd</span><span class="p">);</span><span class="w"> </span><span class="c1">// team_n_pes == team_size</span>
-<span class="w">    </span><span class="c1">// shmem_team_my_pe(team_odd): Returns the number of the calling PE in the specified team.</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">team_my_pe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_team_my_pe</span><span class="p">(</span><span class="n">team_odd</span><span class="p">);</span><span class="w"> </span><span class="c1">// team_my_pe == rank_id / stride</span>
-<span class="w">    </span><span class="c1">// shmem_n_pes(): Returns the number of PEs running in the program.</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n_pes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_n_pes</span><span class="p">();</span><span class="w"> </span><span class="c1">// n_pes == n_ranks</span>
-<span class="w">    </span><span class="c1">// shmem_my_pe(): Returns the PE number of the local PE</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">my_pe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_my_pe</span><span class="p">();</span><span class="w"> </span><span class="c1">// my_pe == rank_id</span>
+
+<span class="w">    </span><span class="c1">// aclshmem_team_n_pes(team_odd): Returns the number of PEs in the team.</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">team_n_pes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmem_team_n_pes</span><span class="p">(</span><span class="n">team_odd</span><span class="p">);</span><span class="w"> </span><span class="c1">// team_n_pes == team_size</span>
+<span class="w">    </span><span class="c1">// aclshmem_team_my_pe(team_odd): Returns the number of the calling PE in the specified team.</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">team_my_pe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmem_team_my_pe</span><span class="p">(</span><span class="n">team_odd</span><span class="p">);</span><span class="w"> </span><span class="c1">// team_my_pe == rank_id / stride</span>
+<span class="w">    </span><span class="c1">// aclshmem_n_pes(): Returns the number of PEs running in the program.</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n_pes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmem_n_pes</span><span class="p">();</span><span class="w"> </span><span class="c1">// n_pes == n_ranks</span>
+<span class="w">    </span><span class="c1">// aclshmem_my_pe(): Returns the PE number of the local PE</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">my_pe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmem_my_pe</span><span class="p">();</span><span class="w"> </span><span class="c1">// my_pe == rank_id</span>
 <span class="p">}</span>
 
 <span class="c1">// #################### 相关资源释放 ################################</span>
-<span class="n">shmem_team_destroy</span><span class="p">(</span><span class="n">team_odd</span><span class="p">);</span>
+<span class="n">aclshmem_team_destroy</span><span class="p">(</span><span class="n">team_odd</span><span class="p">);</span>
 <span class="c1">// ################## 调用去初始化相关接口 ###########################</span>
 <span class="c1">//...</span>
 </pre></div>
@@ -406,34 +277,34 @@
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">kernel_state_test</span><span class="w"> </span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
 <span class="w">    </span><span class="n">__aicore__</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">kernel_state_test</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
-<span class="w">    </span><span class="n">__aicore__</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Init</span><span class="p">(</span><span class="n">GM_ADDR</span><span class="w"> </span><span class="n">gva</span><span class="p">,</span><span class="w"> </span><span class="n">shmem_team_t</span><span class="w"> </span><span class="n">team_id</span><span class="p">)</span>
+<span class="w">    </span><span class="n">__aicore__</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Init</span><span class="p">(</span><span class="n">GM_ADDR</span><span class="w"> </span><span class="n">gva</span><span class="p">,</span><span class="w"> </span><span class="n">aclshmem_team_t</span><span class="w"> </span><span class="n">team_id</span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="n">gva_gm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">__gm__</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">gva</span><span class="p">;</span>
 <span class="w">        </span><span class="n">team_idx</span><span class="o">=</span><span class="w"> </span><span class="n">team_id</span><span class="p">;</span>
 
-<span class="w">        </span><span class="n">rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">smem_shm_get_global_rank</span><span class="p">();</span><span class="w">          </span><span class="c1">// 获取当前rank</span>
-<span class="w">        </span><span class="n">rank_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">smem_shm_get_global_rank_size</span><span class="p">();</span><span class="w"> </span><span class="c1">// 获取总rank数</span>
+<span class="w">        </span><span class="n">rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmem_my_pe</span><span class="p">();</span><span class="w">          </span><span class="c1">// 获取当前rank</span>
+<span class="w">        </span><span class="n">rank_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmem_n_pes</span><span class="p">();</span><span class="w"> </span><span class="c1">// 获取总rank数</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="n">__aicore__</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Process</span><span class="p">()</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="n">AscendC</span><span class="o">::</span><span class="n">PipeBarrier</span><span class="o">&lt;</span><span class="n">PIPE_ALL</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="w">        </span><span class="c1">// ##################### device侧取值 ###############################</span>
-<span class="w">        </span><span class="c1">// shmem_int32_p 是RMA功能提供的接口，此处可简易理解为在device存储第二个入参的函数的结果。</span>
-<span class="w">        </span>
-<span class="w">        </span><span class="c1">// shmem_n_pes(): Returns the number of PEs running in the program.</span>
-<span class="w">        </span><span class="n">shmem_int32_p</span><span class="p">(</span><span class="n">gva_gm</span><span class="p">,</span><span class="w"> </span><span class="n">shmem_n_pes</span><span class="p">(),</span><span class="w"> </span><span class="n">rank</span><span class="p">);</span><span class="w"> </span>
-<span class="w">        </span><span class="c1">// shmem_my_pe(): Returns the PE number of the local PE</span>
-<span class="w">        </span><span class="n">shmem_int32_p</span><span class="p">(</span><span class="n">gva_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">shmem_my_pe</span><span class="p">(),</span><span class="w"> </span><span class="n">rank</span><span class="p">);</span><span class="w"> </span>
-<span class="w">        </span><span class="c1">// shmem_team_my_pe(team_idx): Returns the number of the calling PE in the specified team.</span>
-<span class="w">        </span><span class="n">shmem_int32_p</span><span class="p">(</span><span class="n">gva_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">shmem_team_my_pe</span><span class="p">(</span><span class="n">team_idx</span><span class="p">),</span><span class="w"> </span><span class="n">rank</span><span class="p">);</span><span class="w"> </span>
-<span class="w">        </span><span class="c1">// shmem_team_n_pes(team_idx): Returns the number of PEs in the team.</span>
-<span class="w">        </span><span class="n">shmem_int32_p</span><span class="p">(</span><span class="n">gva_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">shmem_team_n_pes</span><span class="p">(</span><span class="n">team_idx</span><span class="p">),</span><span class="w"> </span><span class="n">rank</span><span class="p">);</span><span class="w"> </span>
-<span class="w">        </span><span class="c1">// shmem_team_translate_pe(team_idx, 1, SHMEM_TEAM_WORLD): Translate a given PE number in one team into the corresponding PE number in another team.</span>
-<span class="w">        </span><span class="n">shmem_int32_p</span><span class="p">(</span><span class="n">gva_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">shmem_team_translate_pe</span><span class="p">(</span><span class="n">team_idx</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">SHMEM_TEAM_WORLD</span><span class="p">),</span><span class="w"> </span><span class="n">rank</span><span class="p">);</span><span class="w"> </span>
+<span class="w">        </span><span class="c1">// aclshmem_int32_p 是RMA功能提供的接口，此处可简易理解为在device存储第二个入参的函数的结果。</span>
+
+<span class="w">        </span><span class="c1">// aclshmem_n_pes(): Returns the number of PEs running in the program.</span>
+<span class="w">        </span><span class="n">aclshmem_int32_p</span><span class="p">(</span><span class="n">gva_gm</span><span class="p">,</span><span class="w"> </span><span class="n">aclshmem_n_pes</span><span class="p">(),</span><span class="w"> </span><span class="n">rank</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// aclshmem_my_pe(): Returns the PE number of the local PE</span>
+<span class="w">        </span><span class="n">aclshmem_int32_p</span><span class="p">(</span><span class="n">gva_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">aclshmem_my_pe</span><span class="p">(),</span><span class="w"> </span><span class="n">rank</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// aclshmem_team_my_pe(team_idx): Returns the number of the calling PE in the specified team.</span>
+<span class="w">        </span><span class="n">aclshmem_int32_p</span><span class="p">(</span><span class="n">gva_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">aclshmem_team_my_pe</span><span class="p">(</span><span class="n">team_idx</span><span class="p">),</span><span class="w"> </span><span class="n">rank</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// aclshmem_team_n_pes(team_idx): Returns the number of PEs in the team.</span>
+<span class="w">        </span><span class="n">aclshmem_int32_p</span><span class="p">(</span><span class="n">gva_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">aclshmem_team_n_pes</span><span class="p">(</span><span class="n">team_idx</span><span class="p">),</span><span class="w"> </span><span class="n">rank</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// aclshmem_team_translate_pe(team_idx, 1, ACLSHMEM_TEAM_WORLD): Translate a given PE number in one team into the corresponding PE number in another team.</span>
+<span class="w">        </span><span class="n">aclshmem_int32_p</span><span class="p">(</span><span class="n">gva_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">aclshmem_team_translate_pe</span><span class="p">(</span><span class="n">team_idx</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">ACLSHMEM_TEAM_WORLD</span><span class="p">),</span><span class="w"> </span><span class="n">rank</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="k">private</span><span class="o">:</span>
 <span class="w">    </span><span class="n">__gm__</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">gva_gm</span><span class="p">;</span>
-<span class="w">    </span><span class="n">shmem_team_t</span><span class="w"> </span><span class="n">team_idx</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aclshmem_team_t</span><span class="w"> </span><span class="n">team_idx</span><span class="p">;</span>
 
 <span class="w">    </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">rank</span><span class="p">;</span>
 <span class="w">    </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">rank_size</span><span class="p">;</span>
@@ -442,11 +313,11 @@
 <span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="n">__global__</span><span class="w"> </span><span class="n">__aicore__</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">device_state_test</span><span class="p">(</span><span class="n">GM_ADDR</span><span class="w"> </span><span class="n">gva</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">team_id</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="n">kernel_state_test</span><span class="w"> </span><span class="n">op</span><span class="p">;</span>
-<span class="w">    </span><span class="n">op</span><span class="p">.</span><span class="n">Init</span><span class="p">(</span><span class="n">gva</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">shmem_team_t</span><span class="p">)</span><span class="n">team_id</span><span class="p">);</span>
+<span class="w">    </span><span class="n">op</span><span class="p">.</span><span class="n">Init</span><span class="p">(</span><span class="n">gva</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">aclshmem_team_t</span><span class="p">)</span><span class="n">team_id</span><span class="p">);</span>
 <span class="w">    </span><span class="n">op</span><span class="p">.</span><span class="n">Process</span><span class="p">();</span>
 <span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="n">get_device_state</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">block_dim</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">stream</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">gva</span><span class="p">,</span><span class="w"> </span><span class="n">shmem_team_t</span><span class="w"> </span><span class="n">team_id</span><span class="p">)</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">get_device_state</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">block_dim</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">stream</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">gva</span><span class="p">,</span><span class="w"> </span><span class="n">aclshmem_team_t</span><span class="w"> </span><span class="n">team_id</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="n">device_state_test</span><span class="o">&lt;&lt;&lt;</span><span class="n">block_dim</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="n">stream</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">gva</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">team_id</span><span class="p">);</span>
 <span class="p">}</span>
@@ -456,14 +327,14 @@
 </section>
 <section id="mem-api">
 <h2>Mem API<a class="headerlink" href="#mem-api" title="Link to this heading"></a></h2>
-<p>SHMEM的内存管理接口样例</p>
+<p>ACLSHMEM的内存管理接口样例</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// ################### 调用初始化相关接口 ###########################</span>
 <span class="c1">//...</span>
 <span class="c1">// ################## 内存管理接口调用 ###########################</span>
 <span class="c1">// 分配1024 bytes，返回所分配内存的指针ptr.</span>
-<span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_malloc</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmem_malloc</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>
 <span class="c1">// 释放ptr对应的被分配的内存空间.</span>
-<span class="n">shmem_free</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
+<span class="n">aclshmem_free</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
 <span class="c1">// ################## 调用去初始化相关接口 ###########################</span>
 <span class="c1">//...</span>
 </pre></div>
@@ -471,7 +342,7 @@
 </section>
 <section id="rma-api">
 <h2>RMA API<a class="headerlink" href="#rma-api" title="Link to this heading"></a></h2>
-<p>SHMEM的远端内存访问接口样例</p>
+<p>ACLSHMEM的远端内存访问接口样例</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">kernel_p</span><span class="w"> </span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
 <span class="w">    </span><span class="n">__aicore__</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">kernel_p</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
@@ -480,13 +351,13 @@
 <span class="w">        </span><span class="n">gva_gm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">__gm__</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">gva</span><span class="p">;</span>
 <span class="w">        </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
 
-<span class="w">        </span><span class="n">rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">smem_shm_get_global_rank</span><span class="p">();</span><span class="w">          </span><span class="c1">// 获取当前rank</span>
-<span class="w">        </span><span class="n">rank_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">smem_shm_get_global_rank_size</span><span class="p">();</span><span class="w"> </span><span class="c1">// 获取总rank数</span>
+<span class="w">        </span><span class="n">rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmem_my_pe</span><span class="p">();</span><span class="w">          </span><span class="c1">// 获取当前rank</span>
+<span class="w">        </span><span class="n">rank_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmem_n_pes</span><span class="p">();</span><span class="w"> </span><span class="c1">// 获取总rank数</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="n">__aicore__</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Process</span><span class="p">()</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// 把value的值put到共享内存gva_gm在(rank + 1) % rank_size中的对应位置。</span>
-<span class="w">        </span><span class="n">shmem_float_p</span><span class="p">(</span><span class="n">gva_gm</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">rank_size</span><span class="p">);</span>
+<span class="w">        </span><span class="n">aclshmem_float_p</span><span class="p">(</span><span class="n">gva_gm</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">rank_size</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="k">private</span><span class="o">:</span>
 <span class="w">    </span><span class="n">__gm__</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">gva_gm</span><span class="p">;</span>
@@ -512,11 +383,11 @@
 </section>
 <section id="sync-api">
 <h2>Sync API<a class="headerlink" href="#sync-api" title="Link to this heading"></a></h2>
-<p>SHMEM的同步管理接口样例</p>
+<p>ACLSHMEM的同步管理接口样例</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// 任务1</span>
 <span class="c1">// ...</span>
 <span class="c1">// 阻塞直到所有任务完成。</span>
-<span class="n">shmem_barrier_all</span><span class="p">();</span>
+<span class="n">aclshmem_barrier_all</span><span class="p">();</span>
 <span class="c1">// 任务2</span>
 <span class="c1">// ...</span>
 </pre></div>
@@ -529,15 +400,18 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="related_scripts.html" class="btn btn-neutral float-left" title="相关脚本" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="def.html" class="btn btn-neutral float-right" title="SHMEM DEF" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="compilation_build_guide.html" class="btn btn-neutral float-right" title="编译与构建" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025.</p>
+    <p>&#169; Copyright .</p>
   </div>
 
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
    
 
 </footer>

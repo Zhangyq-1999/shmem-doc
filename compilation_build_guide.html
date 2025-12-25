@@ -1,0 +1,219 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>编译与构建 &mdash; SHMEM  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="SHMEM日志" href="log_debug.html" />
+    <link rel="prev" title="SHMEM API 样例" href="api_demo.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            SHMEM
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">快速开始</a></li>
+<li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Using ACLSHMEM</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="api_demo.html">SHMEM API 样例</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">编译与构建</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#shmem">SHMEM编译</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">下载SHMEM源码</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">编译</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">SHMEM编译相关说明</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">SHMEM关键文件介绍</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">配置文件</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#build-sh">编译文件<code class="docutils literal notranslate"><span class="pre">build.sh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-env-sh">环境变量设置文件<code class="docutils literal notranslate"><span class="pre">set_env.sh</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="log_debug.html">SHMEM日志</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="def.html">SHMEM DEF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="host_api.html">HOST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Example</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example.html">AllGather</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="principles.html">SHMEM原理概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_organization.html">代码组织结构</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting And FAQs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="SECURITY.html">安全声明</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SHMEM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">编译与构建</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/compilation_build_guide.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>编译与构建<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<section id="shmem">
+<h2>SHMEM编译<a class="headerlink" href="#shmem" title="Link to this heading"></a></h2>
+<section id="id2">
+<h3>下载SHMEM源码<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://gitcode.com/cann/shmem.git
+</pre></div>
+</div>
+<p>您可自行选择需要的分支。</p>
+</section>
+<section id="id3">
+<h3>编译<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>进入shmem的根目录，编译</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>shmem
+bash<span class="w"> </span>scripts/build.sh
+</pre></div>
+</div>
+<p>更多命令介绍可查看shmem仓主目录下的<code class="docutils literal notranslate"><span class="pre">README.md</span></code>和<code class="docutils literal notranslate"><span class="pre">scripts/build.sh</span></code>文件。</p>
+</section>
+<section id="id4">
+<h3>SHMEM编译相关说明<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>SHMEM的基本编译命令是<code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">build.sh</span></code>，默认构建模式下生成版本信息，并创建安装包(默认情况下不会编译RDMA能力、用例、测试、python接口)。后可跟参数，实现不同功能：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-use_cxx11_abi1</span></code>：启用 <code class="docutils literal notranslate"><span class="pre">C++11</span> <span class="pre">ABI</span></code>，默认</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-use_cxx11_abi0</span></code>：禁用 <code class="docutils literal notranslate"><span class="pre">C++11</span> <span class="pre">ABI</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-mf</span></code>：启用MF后端</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-debug</span></code>：设置构建类型为 <code class="docutils literal notranslate"><span class="pre">Debug</span></code> 模式</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-uttests</span></code>：构建tests/unittest目录下所有ut用例</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-examples</span></code>：构建examples目录下所有用例</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-enable_rdma</span></code>：构建并启用RDMA相关能力</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-enable_ascendc_dump</span></code>：启用<code class="docutils literal notranslate"><span class="pre">AscendC_Dump</span></code>模式，用于对算子内核代码进行调测</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-package</span></code>：构建py扩展的whl包</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-gendoc</span></code>：生成文档</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-onlygendoc</span></code>: 生成文档，不构建源码</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>SHMEM关键文件介绍<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">scripts</span></code>目录：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">install.sh</span></code>: 安装脚本</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">uninstall.sh</span></code>: 卸载脚本</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">build.sh</span></code>: 编译脚本</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">release.sh</span></code>：全自动构建与打包脚本</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set_env.sh</span></code>：SHMEM的环境变量设置文件</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<section id="id6">
+<h2>配置文件<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<section id="build-sh">
+<h3>编译文件<code class="docutils literal notranslate"><span class="pre">build.sh</span></code><a class="headerlink" href="#build-sh" title="Link to this heading"></a></h3>
+<p>文件名：<code class="docutils literal notranslate"><span class="pre">scripts/build.sh</span></code><br />
+SHMEM编译文件，一般无需更改。</p>
+</section>
+<section id="set-env-sh">
+<h3>环境变量设置文件<code class="docutils literal notranslate"><span class="pre">set_env.sh</span></code><a class="headerlink" href="#set-env-sh" title="Link to this heading"></a></h3>
+<p>​<strong>文件名</strong>​：<code class="docutils literal notranslate"><span class="pre">scripts/set_env.sh</span></code><br />
+SHMEM安装完成后，提供进程级环境变量设置脚本<code class="docutils literal notranslate"><span class="pre">set_env.sh</span></code>，以自动完成环境变量设置，用户进程结束后自动失效。</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api_demo.html" class="btn btn-neutral float-left" title="SHMEM API 样例" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="log_debug.html" class="btn btn-neutral float-right" title="SHMEM日志" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
