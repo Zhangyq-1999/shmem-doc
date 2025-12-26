@@ -200,24 +200,6 @@
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__device__mo_8h_1ad98b486549bafa8c81ef60a47bcacf0f"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_quiet</span> <span class="pre">()</span></span></dt>
-<dd><p>The aclshmem_quiet routine ensures completion of all operations on symmetric data objects issued by the calling PE. On systems with only scale-up network (HCCS), updates are globally visible, whereas on systems with both scale-up network HCCS and scale-out network (RDMA), ACLSHMEM only guarantees that updates to the memory of a given PE are visible to that PE. Quiet operations issued on the CPU and the NPU only complete communication operations that were issued from the CPU and the NPU, respectively. To ensure completion of GPU-side operations from the CPU, using aclrtSynchronizeStream/aclrtDeviceSynchronize or stream-based API. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="target" id="shmem__device__mo_8h_1a7a6633dd1982756a62770523d9c3cdf6"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_fence</span> <span class="pre">()</span></span></dt>
-<dd><p>In OpenACLSHMEM specification, aclshmem_fence assures ordering of delivery of Put, AMOs, and memory store routines to symmetric data objects, but does not guarantee the completion of these operations. However, due to hardware capabilities, we implemented aclshmem_fence same as aclshmem_quiet, ensuring both ordering and completion. Fence operations issued on the CPU and the NPU only order communication operations that were issued from the CPU and the NPU, respectively. To ensure completion of GPU-side operations from the CPU, using aclrtSynchronizeStream/aclrtDeviceSynchronize or stream-based API. </p>
-</dd></dl>
-
-</div>
-</section>
-<section id="shmem-device-mo-h">
-<h2>shmem_device_mo.h<a class="headerlink" href="#shmem-device-mo-h" title="Link to this heading"></a></h2>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__cc_8h_1aef6b992c3031eafd82a40f7d842b0763"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">util_set_ffts_config</span> <span class="pre">(uint64_t</span> <span class="pre">config)</span></span></dt>
 <dd><p>Set runtime ffts address. Call this at MIX Kernel entry point (if the kernel contains barrier calls). </p>
 <dl class="field-list simple">
@@ -273,6 +255,24 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__cc_8h_1a71ba1fd4ca5069c42f57fb16681695c0"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_sync_all</span> <span class="pre">()</span></span></dt>
 <dd><p>aclshmem_sync_all of all PEs. </p>
+</dd></dl>
+
+</div>
+</section>
+<section id="shmem-device-mo-h">
+<h2>shmem_device_mo.h<a class="headerlink" href="#shmem-device-mo-h" title="Link to this heading"></a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__mo_8h_1ad98b486549bafa8c81ef60a47bcacf0f"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_quiet</span> <span class="pre">()</span></span></dt>
+<dd><p>The aclshmem_quiet routine ensures completion of all operations on symmetric data objects issued by the calling PE. On systems with only scale-up network (HCCS), updates are globally visible, whereas on systems with both scale-up network HCCS and scale-out network (RDMA), ACLSHMEM only guarantees that updates to the memory of a given PE are visible to that PE. Quiet operations issued on the CPU and the NPU only complete communication operations that were issued from the CPU and the NPU, respectively. To ensure completion of GPU-side operations from the CPU, using aclrtSynchronizeStream/aclrtDeviceSynchronize or stream-based API. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__mo_8h_1a7a6633dd1982756a62770523d9c3cdf6"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_fence</span> <span class="pre">()</span></span></dt>
+<dd><p>In OpenACLSHMEM specification, aclshmem_fence assures ordering of delivery of Put, AMOs, and memory store routines to symmetric data objects, but does not guarantee the completion of these operations. However, due to hardware capabilities, we implemented aclshmem_fence same as aclshmem_quiet, ensuring both ordering and completion. Fence operations issued on the CPU and the NPU only order communication operations that were issued from the CPU and the NPU, respectively. To ensure completion of GPU-side operations from the CPU, using aclrtSynchronizeStream/aclrtDeviceSynchronize or stream-based API. </p>
 </dd></dl>
 
 </div>
