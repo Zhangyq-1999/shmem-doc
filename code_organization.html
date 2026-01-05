@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>代码组织结构 &mdash; SHMEM  documentation</title>
+  <title>代码组织结构 &mdash; SHMEM Guidebook 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
@@ -14,8 +14,8 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -33,7 +33,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            SHMEM
+            SHMEM Guidebook
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -95,7 +95,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">SHMEM</a>
+          <a href="index.html">SHMEM Guidebook</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -131,41 +131,42 @@
 <h2>include<a class="headerlink" href="#include" title="Link to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>include目录下的头文件是按照如下文件层级进行组织的
 include/
-├── shmem.h                              // shmem所有对外API汇总
+├── shmem.h                                 // shmem所有对外API汇总
 ├── device/                                 // device侧头文件
-│   ├── shmem_def.h               // device侧定义的公共标展接口
-│   ├── ub2gm/                             // device侧aicore驱动ub2gm数据面低阶接口，扩展接口+x
-│   │   ├── shmem_device_rma.h           // aicore ub2gm 远端内存访问 RMA 接口
-│   │   └── engine/                // aicore 直驱gm2gm 低阶接口，扩展接口+x
-│   │       └── shmem_device_mte.h           // aicore 直驱 mte接口
-│   ├── gm2gm/                             // device侧aicore驱动gm2gm数据面高阶和低阶接口，扩展接口+x
-│   │   ├── shmem_device_rma.h           // aicore high-level RMA 接口
-│   │   ├── shmem_device_amo.h           // aicore high-level 原子内存操作接口
-│   │   ├── shmem_device_so.h           // aicore high-level 信号操作接口
-│   │   ├── shmem_device_cc.h           // aicore high-level 集合通信接口
-│   │   ├── shmem_device_p2p_sync.h     // aicore high-level p2p同步接口
-│   │   ├── shmem_device_mo.h            // aicore high-level 内存保序接口
-│   │   └── engine/                // aicore 直驱gm2gm 低阶接口，扩展接口+x
-│   │       ├── shmem_device_rdma.h           // aicore 直驱 rdma 接口
-│   │       └── shmem_device_mte.h           // aicore 直驱 udma接口
-│   └── team/                               // device侧通信域管理
-├── device_host/                            // device_host共用目录
-│       └── shmem_common_types.h                   // 公共数据结构等
+│   ├── shmem_def.h                         // device侧定义的公共标展接口
+│   ├── ub2gm/                              // device侧aicore驱动ub2gm数据面低阶接口，扩展接口+x
+│   │   ├── shmem_device_rma.h              // aicore ub2gm 远端内存访问 RMA 接口
+│   │   └── engine/                         // aicore 直驱ub2gm 低阶接口，扩展接口+x
+│   │       └── shmem_device_mte.h          // aicore 直驱 mte接口
+│   ├── gm2gm/                              // device侧aicore驱动gm2gm数据面高阶和低阶接口，扩展接口+x
+│   │   ├── shmem_device_rma.h              // aicore high-level RMA 接口
+│   │   ├── shmem_device_amo.h              // aicore high-level 原子内存操作接口
+│   │   ├── shmem_device_so.h               // aicore high-level 信号操作接口
+│   │   ├── shmem_device_cc.h               // aicore high-level 集合通信接口
+│   │   ├── shmem_device_p2p_sync.h         // aicore high-level p2p同步接口
+│   │   ├── shmem_device_mo.h               // aicore high-level 内存保序接口
+│   │   └── engine/                         // aicore 直驱gm2gm 低阶接口，扩展接口+x
+│   │       ├── shmem_device_rdma.h         // aicore 直驱 rdma 接口
+│   │       └── shmem_device_mte.h          // aicore 直驱 mte接口
+│   └── team/                               // device侧通信域管理接口
+│       └── shmem_device_team.h             // device侧通信域管理接口
+├── host_device/                            // device_host共用目录
+│       └── shmem_common_types.h            // 公共数据结构等
 └── host/                                   // host侧头文件
     ├── shmem_host_def.h                    // host侧定义的接口
     ├── init/                               // host侧初始化接口
+    │   └── shmem_host_init.h               // host初始化接口
     ├── team/                               // host侧通信域管理接口
+    │   └── shmem_host_team.h               // host通信域管理接口
     ├── mem/                                // host侧内存管理接口
+    │   └── shmem_host_heap.h               // host内存管理接口
     ├── data_plane/                         // host侧CPU驱动数据面接口
-    │   ├── shmem_host_rma.h           // host 接口
-    │   ├── shmem_host_amo.h           // host 接口
-    │   ├── shmem_host_so.h           // host 接口
-    │   ├── shmem_host_cc.h           // host 接口
-    │   ├── shmem_host_p2p_sync.h            // host high-level 接口
-    │   └── shmem_host_mo.h            // host high-level 接口
+    │   ├── shmem_host_rma.h                // host high-level RMA 接口
+    │   ├── shmem_device_so.h               // host high-level 信号操作接口
+    │   ├── shmem_host_cc.h                 // host high-level 集合通信接口
+    │   └── shmem_host_p2p_sync.h           // host high-level p2p同步接口
     └── utils/                              // host侧dfx接口
         └── shmem_log.h                     // host dfx-log接口
-
 </pre></div>
 </div>
 </section>
@@ -247,7 +248,7 @@ include/
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright .</p>
+    <p>&#169; Copyright  2025 Huawei Technologies Co., Ltd..</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

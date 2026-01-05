@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>快速开始 &mdash; SHMEM  documentation</title>
+  <title>快速开始 &mdash; SHMEM Guidebook 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
@@ -14,8 +14,8 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -33,7 +33,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            SHMEM
+            SHMEM Guidebook
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -96,7 +96,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">SHMEM</a>
+          <a href="index.html">SHMEM Guidebook</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -292,8 +292,7 @@ ACLSHMEM_UID_SOCK_IFNAM=enpxxxx:inet6  取ipv6
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">aclshmemx_uniqueid_t</span><span class="w"> </span><span class="n">uid</span><span class="p">;</span>
 <span class="n">aclshmemx_init_attr_t</span><span class="w"> </span><span class="o">*</span><span class="n">attr</span><span class="p">;</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_get_uniqueid</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uid</span><span class="p">);</span>
-<span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_set_attr</span><span class="p">(</span><span class="n">my_pe</span><span class="p">,</span><span class="w"> </span><span class="n">n_pes</span><span class="p">,</span><span class="w"> </span><span class="n">mem_size</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attr</span><span class="p">);</span><span class="w"> </span><span class="c1">// 第4个参数是ip_port，当前场景传入nullptr</span>
-<span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_set_attr_uniqueid_args</span><span class="p">(</span><span class="n">my_pe</span><span class="p">,</span><span class="w"> </span><span class="n">n_pes</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">attr</span><span class="p">);</span>
+<span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_set_attr_uniqueid_args</span><span class="p">(</span><span class="n">my_pe</span><span class="p">,</span><span class="w"> </span><span class="n">n_pes</span><span class="p">,</span><span class="w"> </span><span class="n">mem_size</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">attr</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>
@@ -332,7 +331,7 @@ ACLSHMEM_UID_SOCK_IFNAM=enpxxxx:inet6  取ipv6
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright .</p>
+    <p>&#169; Copyright  2025 Huawei Technologies Co., Ltd..</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

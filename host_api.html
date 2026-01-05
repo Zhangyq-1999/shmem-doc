@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HOST API &mdash; SHMEM  documentation</title>
+  <title>HOST API &mdash; SHMEM Guidebook 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
@@ -14,8 +14,8 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -33,7 +33,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            SHMEM
+            SHMEM Guidebook
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -62,11 +62,15 @@
 <li class="toctree-l2"><a class="reference internal" href="#shmem-log-h">shmem_log.h</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#shmem-host-heap-h">shmem_host_heap.h</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#shmem-host-rma-h">shmem_host_rma.h</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmem_block_mode_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_block_mode_t</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_block_mode_t6NO_NBIE"><code class="docutils literal notranslate"><span class="pre">NO_NBI</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_block_mode_t3NBIE"><code class="docutils literal notranslate"><span class="pre">NBI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPE_FUNC"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPE_FUNC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmem_block_mode_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_block_mode_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_block_mode_t6NO_NBIE"><code class="docutils literal notranslate"><span class="pre">NO_NBI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_block_mode_t3NBIE"><code class="docutils literal notranslate"><span class="pre">NBI</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#shmem-host-so-h">shmem_host_so.h</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv418ACLSHMEM_TYPE_FUNC32ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPE_FUNC()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv418ACLSHMEM_TYPE_FUNC36ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_NBI"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPE_FUNC()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#shmem-host-cc-h">shmem_host_cc.h</a></li>
@@ -75,6 +79,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul>
@@ -101,7 +106,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">SHMEM</a>
+          <a href="index.html">SHMEM Guidebook</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -173,7 +178,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__init_8h_1af1de117c692d8aae5da5ae008cfd9d0d"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmemx_init_attr</span> <span class="pre">(aclshmemx_bootstrap_t</span> <span class="pre">bootstrap_flags,</span> <span class="pre">aclshmemx_init_attr_t</span> <span class="pre">*attributes)</span></span></dt>
-<dd><p>Initialize the resources required for ACLSHMEM task based on attributes. Attributes can be created by users or obtained by calling <strong>aclshmemx_set_attr()</strong>. if the self-created attr structure is incorrect, the initialization will fail. It is recommended to build the attributes by <strong>aclshmemx_set_attr()</strong> or <strong><a class="reference internal" href="#shmem__host__init_8h_1a5ed1b6647db6d7e97d59463cbb01673a"><span class="std std-ref">aclshmemx_set_attr_uniqueid_args()</span></a></strong>. </p>
+<dd><p>Initialize the resources required for ACLSHMEM task based on attributes. Attributes can be created by users or obtained by calling <strong><a class="reference internal" href="#shmem__host__init_8h_1a5ed1b6647db6d7e97d59463cbb01673a"><span class="std std-ref">aclshmemx_set_attr_uniqueid_args()</span></a></strong>. if the self-created attr structure is incorrect, the initialization will fail. It is recommended to build the attributes by <strong><a class="reference internal" href="#shmem__host__init_8h_1a5ed1b6647db6d7e97d59463cbb01673a"><span class="std std-ref">aclshmemx_set_attr_uniqueid_args()</span></a></strong>. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -443,6 +448,58 @@
 <section id="shmem-host-rma-h">
 <h2>shmem_host_rma.h<a class="headerlink" href="#shmem-host-rma-h" title="Link to this heading"></a></h2>
 <div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_TYPE_FUNC">
+<span class="target" id="shmem__host__rma_8h_1abadf2954fce3634ed8300ca5107b5475"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TYPE_FUNC</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">FUNC</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Standard RMA Types and Names valid on Host. </p>
+<p><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>NAME   </p></th>
+<th class="head"><p>TYPE    </p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>float   </p></td>
+<td><p>float    </p></td>
+</tr>
+<tr class="row-odd"><td><p>double   </p></td>
+<td><p>double    </p></td>
+</tr>
+<tr class="row-even"><td><p>int8   </p></td>
+<td><p>int8    </p></td>
+</tr>
+<tr class="row-odd"><td><p>int16   </p></td>
+<td><p>int16    </p></td>
+</tr>
+<tr class="row-even"><td><p>int32   </p></td>
+<td><p>int32    </p></td>
+</tr>
+<tr class="row-odd"><td><p>int64   </p></td>
+<td><p>int64    </p></td>
+</tr>
+<tr class="row-even"><td><p>uint8   </p></td>
+<td><p>uint8    </p></td>
+</tr>
+<tr class="row-odd"><td><p>uint16   </p></td>
+<td><p>uint16    </p></td>
+</tr>
+<tr class="row-even"><td><p>uint32   </p></td>
+<td><p>uint32    </p></td>
+</tr>
+<tr class="row-odd"><td><p>uint64   </p></td>
+<td><p>uint64    </p></td>
+</tr>
+<tr class="row-even"><td><p>char   </p></td>
+<td><p>char   </p></td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
 <dl class="cpp enum">
 <dt class="sig sig-object cpp" id="_CPPv421aclshmem_block_mode_t">
@@ -485,15 +542,15 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__rma_8h_1ae1fdc04477f77a3b0d99f5b0ef36cb03"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem</span> <span class="pre">(float</span> <span class="pre">*dest,</span> <span class="pre">float</span> <span class="pre">*source,</span> <span class="pre">size_t</span> <span class="pre">nelems,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Synchronous interface. Copy a contiguous data on local PE to symmetric address on the specified PE. * *. </p>
-<p>*</p>
+<span class="target" id="shmem__host__rma_8h_1a45860a8081a23a35009607953fa15a11"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_put</span> <span class="pre">(TYPE</span> <span class="pre">*dest,</span> <span class="pre">TYPE</span> <span class="pre">*source,</span> <span class="pre">size_t</span> <span class="pre">nelems,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Copy a contiguous data on local PE to symmetric address on the specified PE.  </p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dest</strong> – [in] Pointer on Symmetric memory of the destination data. *</p></li>
-<li><p><strong>source</strong> – [in] Pointer on local device of the source data. *</p></li>
-<li><p><strong>nelems</strong> – [in] Number of elements in the destination and source arrays. *</p></li>
+<li><p><strong>dest</strong> – [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>source</strong> – [in] Pointer on local device of the source data.</p></li>
+<li><p><strong>nelems</strong> – [in] Number of elements in the destination and source arrays.</p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
 </dd>
@@ -502,15 +559,15 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__rma_8h_1acc6e8a8b57564e172ea517d285c90061"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem_nbi</span> <span class="pre">(float</span> <span class="pre">*dest,</span> <span class="pre">float</span> <span class="pre">*source,</span> <span class="pre">size_t</span> <span class="pre">nelems,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Asynchronous interface. Copy a contiguous data on local PE to symmetric address on the specified PE. * *. </p>
-<p>*</p>
+<span class="target" id="shmem__host__rma_8h_1aa32d02e60f8aad7a4e63177695685cd6"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_put_nbi</span> <span class="pre">(TYPE</span> <span class="pre">*dest,</span> <span class="pre">TYPE</span> <span class="pre">*source,</span> <span class="pre">size_t</span> <span class="pre">nelems,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Copy a contiguous data on local PE to symmetric address on the specified PE.  </p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dest</strong> – [in] Pointer on Symmetric memory of the destination data. *</p></li>
-<li><p><strong>source</strong> – [in] Pointer on local device of the source data. *</p></li>
-<li><p><strong>nelems</strong> – [in] Number of elements in the destination and source arrays. *</p></li>
+<li><p><strong>dest</strong> – [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>source</strong> – [in] Pointer on local device of the source data.</p></li>
+<li><p><strong>nelems</strong> – [in] Number of elements in the destination and source arrays.</p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
 </dd>
@@ -519,15 +576,15 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__rma_8h_1ab63f2f8c036365b12a13bceeafeb6d03"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_get_NAME_mem</span> <span class="pre">(float</span> <span class="pre">*dest,</span> <span class="pre">float</span> <span class="pre">*source,</span> <span class="pre">size_t</span> <span class="pre">nelems,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Synchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the * local PE. * *. </p>
-<p>*</p>
+<span class="target" id="shmem__host__rma_8h_1a556fb2e50a5cc54b8bccf9d00e21fb5d"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_get</span> <span class="pre">(TYPE</span> <span class="pre">*dest,</span> <span class="pre">TYPE</span> <span class="pre">*source,</span> <span class="pre">size_t</span> <span class="pre">nelems,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE.  </p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dest</strong> – [in] Pointer on local device of the destination data. *</p></li>
-<li><p><strong>source</strong> – [in] Pointer on Symmetric memory of the source data. *</p></li>
-<li><p><strong>nelems</strong> – [in] Number of elements in the destination and source arrays. *</p></li>
+<li><p><strong>dest</strong> – [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>source</strong> – [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>nelems</strong> – [in] Number of elements in the destination and source arrays.</p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
 </dd>
@@ -536,15 +593,15 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__rma_8h_1ac950b48f66c78cb2fe2cc276d483222b"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_get_NAME_mem_nbi</span> <span class="pre">(float</span> <span class="pre">*dest,</span> <span class="pre">float</span> <span class="pre">*source,</span> <span class="pre">size_t</span> <span class="pre">nelems,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the * local PE. * *. </p>
-<p>*</p>
+<span class="target" id="shmem__host__rma_8h_1aa68c4221facb3099ed684a7d0742dc21"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_get_nbi</span> <span class="pre">(TYPE</span> <span class="pre">*dest,</span> <span class="pre">TYPE</span> <span class="pre">*source,</span> <span class="pre">size_t</span> <span class="pre">nelems,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE.  </p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dest</strong> – [in] Pointer on local device of the destination data. *</p></li>
-<li><p><strong>source</strong> – [in] Pointer on Symmetric memory of the source data. *</p></li>
-<li><p><strong>nelems</strong> – [in] Number of elements in the destination and source arrays. *</p></li>
+<li><p><strong>dest</strong> – [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>source</strong> – [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>nelems</strong> – [in] Number of elements in the destination and source arrays.</p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
 </dd>
@@ -553,53 +610,13 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__rma_8h_1adfea648ce29009dc9d6c3b001424e992"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem_signal</span> <span class="pre">(float</span> <span class="pre">*dst,</span> <span class="pre">float</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">uint8_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Synchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE. * *. </p>
-<p>*</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. *</p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. *</p></li>
-<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. *</p></li>
-<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. *</p></li>
-<li><p><strong>signal</strong> – [in] The value used to update sig_addr. *</p></li>
-<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. * Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD *</p></li>
-<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
+<span class="target" id="shmem__host__rma_8h_1a8b96dbb83fe00bf2ff62cf48fee496ab"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_p</span> <span class="pre">(TYPE</span> <span class="pre">*dst,</span> <span class="pre">const</span> <span class="pre">TYPE</span> <span class="pre">value,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Provide a low latency put capability for single element of most basic types.  </p>
 
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__rma_8h_1ae0afbaab51b9f540f8dd97bbb5bf688d"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem_signal_nbi</span> <span class="pre">(float</span> <span class="pre">*dst,</span> <span class="pre">float</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">uint8_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Asynchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE. * *. </p>
-<p>*</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. *</p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. *</p></li>
-<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. *</p></li>
-<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. *</p></li>
-<li><p><strong>signal</strong> – [in] The value used to update sig_addr. *</p></li>
-<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. * Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD *</p></li>
-<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__rma_8h_1a8b96dbb83fe00bf2ff62cf48fee496ab"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_p</span> <span class="pre">(float</span> <span class="pre">*dst,</span> <span class="pre">const</span> <span class="pre">float</span> <span class="pre">value,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Provide a low latency put capability for single element of most basic types. * *. </p>
-<p>*</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Symmetric address of the destination data on local PE. *</p></li>
+<li><p><strong>dst</strong> – [in] Symmetric address of the destination data on local PE.</p></li>
 <li><p><strong>value</strong> – [in] The element to be put. *</p></li>
 <li><p><strong>pe</strong> – [in] The number of the remote PE. </p></li>
 </ul>
@@ -609,14 +626,14 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__rma_8h_1a172d2b1ec98ed44f43e0a006eee5e61a"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">float</span> <span class="pre">aclshmem_NAME_g</span> <span class="pre">(float</span> <span class="pre">*src,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Provide a low latency get single element of most basic types. * *. </p>
-<p>*</p>
+<span class="target" id="shmem__host__rma_8h_1a172d2b1ec98ed44f43e0a006eee5e61a"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">TYPE</span> <span class="pre">aclshmem_NAME_g</span> <span class="pre">(TYPE</span> <span class="pre">*src,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Provide a low latency get single element of most basic types.  </p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>src</strong> – [in] Symmetric address of the destination data on local PE. *</p></li>
-<li><p><strong>pe</strong> – [in] The number of the remote PE. * </p></li>
+<li><p><strong>src</strong> – [in] Symmetric address of the destination data on local PE.</p></li>
+<li><p><strong>pe</strong> – [in] The number of the remote PE. </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -691,46 +708,25 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__rma_8h_1a965822dcceaf3e04dc2ef44bd8c60d4e"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_putmem_signal_nbi</span> <span class="pre">(void</span> <span class="pre">*dst,</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">void</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Asynchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
-<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
-<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
-<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
-<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD </p></li>
-<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__rma_8h_1a8580b3377d987f713ca17c24501c89ee"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_putmem_signal</span> <span class="pre">(void</span> <span class="pre">*dst,</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">void</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Synchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
-<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
-<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
-<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
-<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD </p></li>
-<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__rma_8h_1ac4aa04f3da20b24c9c09d10951852cfc"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_getmem_on_stream</span> <span class="pre">(void</span> <span class="pre">*dst,</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe,</span> <span class="pre">aclrtStream</span> <span class="pre">stream)</span></span></dt>
 <dd><p>Copy contiguous data on symmetric memory from the specified PE to address on the local PE. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+<li><p><strong>stream</strong> – [in] copy used stream(use default stream if stream == NULL). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__rma_8h_1ad93313533caf6121293e63a7e5d7f95e"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_putmem_on_stream</span> <span class="pre">(void</span> <span class="pre">*dst,</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe,</span> <span class="pre">aclrtStream</span> <span class="pre">stream)</span></span></dt>
+<dd><p>Copy contiguous data on local PE to symmetric address on the specified PE. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -764,6 +760,68 @@
 
 </div>
 </section>
+<section id="shmem-host-so-h">
+<h2>shmem_host_so.h<a class="headerlink" href="#shmem-host-so-h" title="Link to this heading"></a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__so_8h_1a965822dcceaf3e04dc2ef44bd8c60d4e"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_putmem_signal_nbi</span> <span class="pre">(void</span> <span class="pre">*dst,</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">void</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
+<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
+<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
+<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__so_8h_1a8580b3377d987f713ca17c24501c89ee"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_putmem_signal</span> <span class="pre">(void</span> <span class="pre">*dst,</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">void</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
+<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
+<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
+<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__so_8h_1a0893efaf2fd8fc910d700a592c8cab80"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_signal_op_on_stream</span> <span class="pre">(int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">aclrtStream</span> <span class="pre">stream)</span></span></dt>
+<dd><p>This routine performs an atomic operation on a remote signal variable at the specified PE, with the operation executed on the given stream. It is used to modify a remote signal and is typically paired with wait routines like aclshmemx_signal_wait_until_on_stream. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sig_addr</strong> – [in] Local address of the source signal variable that is accessible at the target PE. </p></li>
+<li><p><strong>signal</strong> – [in] The value to be used in the atomic operation. </p></li>
+<li><p><strong>sig_op</strong> – [in] The operation to perform on the remote signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD. </p></li>
+<li><p><strong>pe</strong> – [in] The PE number on which the remote signal variable is to be updated. </p></li>
+<li><p><strong>stream</strong> – [in] Used stream(use default stream if stream == NULL). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</section>
 <section id="shmem-host-cc-h">
 <h2>shmem_host_cc.h<a class="headerlink" href="#shmem-host-cc-h" title="Link to this heading"></a></h2>
 <p>shmem host Collective Communication APIs </p>
@@ -782,7 +840,7 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__cc_8h_1a0803ae79dcbde882ac41537db1cbf662"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_barrier_all</span> <span class="pre">()</span></span></dt>
+<span class="target" id="shmem__host__cc_8h_1aead514d1024c322c0d7e60f6cfc75a22"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_barrier_all</span> <span class="pre">(void)</span></span></dt>
 <dd><p>aclshmem_barrier of all PEs. </p>
 </dd></dl>
 
@@ -824,7 +882,7 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__cc_8h_1ad79ed8ad5ba63ad168ee8d1400d60eb5"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_sync_all</span> <span class="pre">()</span></span></dt>
+<span class="target" id="shmem__host__cc_8h_1a51bedcee0319424b709e61ec3cb58cb3"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_sync_all</span> <span class="pre">(void)</span></span></dt>
 <dd><p>aclshmem_sync_all of all PEs. </p>
 </dd></dl>
 
@@ -836,7 +894,7 @@
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__p2p__sync_8h_1a0c2d1734df996f473b4445d2032282fa"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">uint64_t</span> <span class="pre">util_get_ffts_config</span> <span class="pre">()</span></span></dt>
+<span class="target" id="shmem__host__p2p__sync_8h_1a5ef21d69da0ca953dfb886b67b18d6ea"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">uint64_t</span> <span class="pre">util_get_ffts_config</span> <span class="pre">(void)</span></span></dt>
 <dd><p>Get runtime ffts config. This config should be passed to MIX Kernel and set by MIX Kernel using aclshmemx_set_ffts. Refer to aclshmemx_set_ffts for more details. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -854,6 +912,23 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>handle</strong> – [in] handle use to wait asynchronous RMA operations to finish </p></li>
 <li><p><strong>stream</strong> – [in] specifed stream to do wait </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__p2p__sync_8h_1ac16d79980259e67c8d010ac6b4a5f8fa"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_signal_wait_until_on_stream</span> <span class="pre">(int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int</span> <span class="pre">cmp,</span> <span class="pre">int32_t</span> <span class="pre">cmp_val,</span> <span class="pre">aclrtStream</span> <span class="pre">stream)</span></span></dt>
+<dd><p>This routine can be used to implement point-to-point synchronization between PEs or between threads within the same PE. A call to this routine blocks until the value of sig_addr at the calling PE satisfies the wait condition specified by the comparison operator, cmp, and comparison value, cmp_val. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sig_addr</strong> – [in] Local address of the source signal variable. </p></li>
+<li><p><strong>cmp</strong> – [in] The comparison operator that compares sig_addr with cmp_val. Supported operators: ACLSHMEM_CMP_EQ/ACLSHMEM_CMP_NE/ACLSHMEM_CMP_GT/
+ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
+<li><p><strong>cmp_val</strong> – [in] The value against which the object pointed to by sig_addr will be compared. </p></li>
+<li><p><strong>stream</strong> – [in] Used stream(use default stream if stream == NULL). </p></li>
 </ul>
 </dd>
 </dl>
@@ -1015,7 +1090,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright .</p>
+    <p>&#169; Copyright  2025 Huawei Technologies Co., Ltd..</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AllGather &mdash; SHMEM  documentation</title>
+  <title>AllGather &mdash; SHMEM Guidebook 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
@@ -14,8 +14,8 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -33,7 +33,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            SHMEM
+            SHMEM Guidebook
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -89,7 +89,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">SHMEM</a>
+          <a href="index.html">SHMEM Guidebook</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -110,7 +110,7 @@
   <section id="allgather">
 <h1>AllGather<a class="headerlink" href="#allgather" title="Link to this heading"></a></h1>
 <p>该样例工程位于<code class="docutils literal notranslate"><span class="pre">examples\allgather</span></code>文件夹下。</p>
-<p>在该样例中，实现了一个通信量较小(单PE通信量小于2MB)情况下，有着更低时延的AllGather纯通信算子。 各PE首先将存在本端input地址下的数据push到本PE的对称内存上；确认远端PE的任务完成后，从远端PE的对称内存拉取对应PE的数据，从而整体完成AllGather的操作。这个样例展示了多种shmem API的用法，包括aclshmemx_mte_put_mem_nbi、shmemx_signal_op以及aclshmemx_mte_get_mem_nbi等，用于p2p的通信以及同步任务。</p>
+<p>在该样例中，实现了一个通信量较小(单PE通信量小于2MB)情况下，有着更低时延的AllGather纯通信算子。 各PE首先将存在本端input地址下的数据push到本PE的对称内存上；确认远端PE的任务完成后，从远端PE的对称内存拉取对应PE的数据，从而整体完成AllGather的操作。这个样例展示了多种shmem API的用法，包括aclshmemx_mte_put_nbi、aclshmemx_signal_op以及aclshmemx_mte_get_nbi等，用于p2p的通信以及同步任务。</p>
 <section id="id1">
 <h2>核函数实现<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kernel_operator.h&quot;</span>
@@ -154,7 +154,7 @@
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">aivIndex</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">aivNum</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">num_per_core</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">elements</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">num_per_core</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">aivIndex</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="n">aclshmemx_mte_put_mem_nbi</span><span class="p">(</span><span class="n">gva_data_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">gva_offset</span><span class="p">,</span><span class="w"> </span><span class="n">input_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">input_offset</span><span class="p">,</span><span class="w"> </span><span class="n">tmp_buff</span><span class="p">,</span><span class="w"> </span><span class="n">ub_size</span><span class="p">,</span><span class="w"> </span><span class="n">num_per_core</span><span class="p">,</span><span class="w"> </span><span class="n">my_rank</span><span class="p">,</span><span class="w"> </span><span class="n">EVENT_ID0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">aclshmemx_mte_put_nbi</span><span class="p">(</span><span class="n">gva_data_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">gva_offset</span><span class="p">,</span><span class="w"> </span><span class="n">input_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">input_offset</span><span class="p">,</span><span class="w"> </span><span class="n">tmp_buff</span><span class="p">,</span><span class="w"> </span><span class="n">ub_size</span><span class="p">,</span><span class="w"> </span><span class="n">num_per_core</span><span class="p">,</span><span class="w"> </span><span class="n">my_rank</span><span class="p">,</span><span class="w"> </span><span class="n">EVENT_ID0</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">core_per_rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aivNum</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">pe_size</span><span class="p">;</span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">core_rank_idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aivIndex</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">core_per_rank</span><span class="p">;</span>
@@ -174,7 +174,7 @@
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">core_rank_idx</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">core_per_rank</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">num_per_core</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">elements</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">num_per_core</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">core_rank_idx</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="n">aclshmemx_mte_get_mem_nbi</span><span class="p">(</span><span class="n">output_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">output_offset</span><span class="p">,</span><span class="w"> </span><span class="n">gva_data_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">gva_offset</span><span class="p">,</span><span class="w"> </span><span class="n">tmp_buff</span><span class="p">,</span><span class="w"> </span><span class="n">ub_size</span><span class="p">,</span><span class="w"> </span><span class="n">num_per_core</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">EVENT_ID0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">aclshmemx_mte_get_nbi</span><span class="p">(</span><span class="n">output_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">output_offset</span><span class="p">,</span><span class="w"> </span><span class="n">gva_data_gm</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">gva_offset</span><span class="p">,</span><span class="w"> </span><span class="n">tmp_buff</span><span class="p">,</span><span class="w"> </span><span class="n">ub_size</span><span class="p">,</span><span class="w"> </span><span class="n">num_per_core</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">EVENT_ID0</span><span class="p">);</span>
 <span class="cp">#endif</span>
 <span class="p">}</span>
 </pre></div>
@@ -193,7 +193,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright .</p>
+    <p>&#169; Copyright  2025 Huawei Technologies Co., Ltd..</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

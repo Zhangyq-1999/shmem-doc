@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DEVICE API &mdash; SHMEM  documentation</title>
+  <title>DEVICE API &mdash; SHMEM Guidebook 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
@@ -14,8 +14,8 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -33,7 +33,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            SHMEM
+            SHMEM Guidebook
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -72,6 +72,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TEST_TYPE_FUNC"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TEST_TYPE_FUNC</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#shmem-device-so-h">shmem_device_so.h</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#shmem-device-team-h">shmem_device_team.h</a></li>
 </ul>
 </li>
@@ -102,7 +103,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">SHMEM</a>
+          <a href="index.html">SHMEM Guidebook</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -179,12 +180,12 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__amo_8h_1a423b374e00dc0158b2c06dad75d97c19"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_atomic_add</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">TYPE</span> <span class="pre">value,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Asynchronous interface. Perform contiguous data atomic add opeartion on symmetric memory from the specified PE to address on the local PE. We use scalar instructions to implement single element atomic add. Therefore, both vector and cube cores can execute atomic add operation.   </p>
-<p></p>
+<dd><p>Asynchronous interface. Perform contiguous data atomic add opeartion on symmetric memory from the specified PE to address on the local PE. We use scalar instructions to implement single element atomic add. Therefore, both vector and cube cores can execute atomic add operation.  </p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data.</p></li>
 <li><p><strong>value</strong> – [in] Value atomic add to destination. </p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
@@ -196,6 +197,7 @@
 </section>
 <section id="shmem-device-cc-h">
 <h2>shmem_device_cc.h<a class="headerlink" href="#shmem-device-cc-h" title="Link to this heading"></a></h2>
+<p>shmem device Collective Communication APIs </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
 <dl class="cpp function">
@@ -204,7 +206,7 @@
 <dd><p>Set runtime ffts address. Call this at MIX Kernel entry point (if the kernel contains barrier calls). </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>config</strong> – [config] ffts config, acquired by <a class="reference internal" href="host_api.html#shmem__host__p2p__sync_8h_1a0c2d1734df996f473b4445d2032282fa"><span class="std std-ref">util_get_ffts_config()</span></a></p>
+<dd class="field-odd"><p><strong>config</strong> – [config] ffts config, acquired by <a class="reference internal" href="host_api.html#shmem__host__p2p__sync_8h_1a5ef21d69da0ca953dfb886b67b18d6ea"><span class="std std-ref">util_get_ffts_config()</span></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -212,16 +214,12 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__device__cc_8h_1acc976a131b57626f4feb2aedcccc4240"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_barrier</span> <span class="pre">(aclshmem_team_t</span> <span class="pre">team)</span></span></dt>
-<dd><p>aclshmem_barrier is a collective synchronization routine over a team. Control returns from aclshmem_barrier after all PEs in the team have called aclshmem_barrier. aclshmem_barrier ensures that all previously issued stores and remote memory updates, including AMOs and RMA operations, done by any of the PEs in the active set are complete before returning. On systems with only scale-up network (HCCS), updates are globally visible, whereas on systems with both scale-up network HCCS and scale-out network (RDMA), ACLSHMEM only guarantees that updates to the memory of a given PE are visible to that PE. Barrier operations issued on the CPU and the NPU only complete communication operations that were issued from the CPU and the NPU, respectively. To ensure completion of GPU-side operations from the CPU, using aclrtSynchronizeStream/aclrtDeviceSynchronize or stream-based API.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>team</strong> – [in] team to do barrier </p>
-</dd></dl></dd></dl>
+<dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__device__cc_8h_1a0803ae79dcbde882ac41537db1cbf662"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_barrier_all</span> <span class="pre">()</span></span></dt>
-<dd><p>aclshmem_barrier of all PEs. </p></dd></dl>
+<span class="target" id="shmem__device__cc_8h_1aead514d1024c322c0d7e60f6cfc75a22"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_barrier_all</span> <span class="pre">(void)</span></span></dt>
+<dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
@@ -236,7 +234,7 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__device__cc_8h_1ab440ea9cb80dbd59bb13812d9c37aa07"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_barrier_all_vec</span> <span class="pre">()</span></span></dt>
+<span class="target" id="shmem__device__cc_8h_1a58a3f0b69a7ed7ffb5984cdef49b57ed"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_barrier_all_vec</span> <span class="pre">(void)</span></span></dt>
 <dd><p>aclshmemx_barrier_vec of all PEs. </p>
 </dd></dl>
 
@@ -253,7 +251,7 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__device__cc_8h_1a71ba1fd4ca5069c42f57fb16681695c0"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_sync_all</span> <span class="pre">()</span></span></dt>
+<span class="target" id="shmem__device__cc_8h_1ae2359cf78f29722a9523e099e6e1220d"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_sync_all</span> <span class="pre">(void)</span></span></dt>
 <dd><p>aclshmem_sync_all of all PEs. </p>
 </dd></dl>
 
@@ -265,13 +263,13 @@
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__device__mo_8h_1ad98b486549bafa8c81ef60a47bcacf0f"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_quiet</span> <span class="pre">()</span></span></dt>
+<span class="target" id="shmem__device__mo_8h_1ac9bd98e283fca88c486bbf8435982353"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_quiet</span> <span class="pre">(void)</span></span></dt>
 <dd><p>The aclshmem_quiet routine ensures completion of all operations on symmetric data objects issued by the calling PE. On systems with only scale-up network (HCCS), updates are globally visible, whereas on systems with both scale-up network HCCS and scale-out network (RDMA), ACLSHMEM only guarantees that updates to the memory of a given PE are visible to that PE. Quiet operations issued on the CPU and the NPU only complete communication operations that were issued from the CPU and the NPU, respectively. To ensure completion of GPU-side operations from the CPU, using aclrtSynchronizeStream/aclrtDeviceSynchronize or stream-based API. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__device__mo_8h_1a7a6633dd1982756a62770523d9c3cdf6"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_fence</span> <span class="pre">()</span></span></dt>
+<span class="target" id="shmem__device__mo_8h_1a493640d71e8d04347db4fc81f41bbce3"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_fence</span> <span class="pre">(void)</span></span></dt>
 <dd><p>In OpenACLSHMEM specification, aclshmem_fence assures ordering of delivery of Put, AMOs, and memory store routines to symmetric data objects, but does not guarantee the completion of these operations. However, due to hardware capabilities, we implemented aclshmem_fence same as aclshmem_quiet, ensuring both ordering and completion. Fence operations issued on the CPU and the NPU only order communication operations that were issued from the CPU and the NPU, respectively. To ensure completion of GPU-side operations from the CPU, using aclrtSynchronizeStream/aclrtDeviceSynchronize or stream-based API. </p>
 </dd></dl>
 
@@ -429,13 +427,13 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="gm2gm_2shmem__device__rma_8h_1a973408451c6fedb3ba869f7d7a81a11d"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_p</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">const</span> <span class="pre">TYPE</span> <span class="pre">value,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Provide a low latency put capability for single element of most basic types.   </p>
-<p></p>
+<dd><p>Provide a low latency put capability for single element of most basic types.  </p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Symmetric address of the destination data on local PE. </p></li>
-<li><p><strong>value</strong> – [in] The element to be put. </p></li>
+<li><p><strong>dst</strong> – [in] Symmetric address of the destination data on local PE.</p></li>
+<li><p><strong>value</strong> – [in] The element to be put.</p></li>
 <li><p><strong>pe</strong> – [in] The number of the remote PE. </p></li>
 </ul>
 </dd>
@@ -446,12 +444,12 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 <dt class="sig sig-object cpp">
 <span class="target" id="gm2gm_2shmem__device__rma_8h_1a3aa0321a5708ca75394aea9abe6ac88a"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">TYPE</span> <span class="pre">aclshmem_NAME_g</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Provide a low latency get capability for single element of most basic types.  </p>
-<p></p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>src</strong> – [in] Symmetric address of the destination data on local PE. </p></li>
-<li><p><strong>pe</strong> – [in] The number of the remote PE.  </p></li>
+<li><p><strong>src</strong> – [in] Symmetric address of the destination data on local PE.</p></li>
+<li><p><strong>pe</strong> – [in] The number of the remote PE. </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -478,15 +476,15 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2shmem__device__rma_8h_1a83424c94e9d6d03f1575fabc1698a87c"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_get_NAME_mem</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<span class="target" id="gm2gm_2shmem__device__rma_8h_1ac1bcf6e66a47e0caa95ba8ad511e2ef6"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_get</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Synchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE.  </p>
-<p></p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
-<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays.</p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
 </dd>
@@ -511,15 +509,15 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2shmem__device__rma_8h_1a483d3fa0b06c075a881c8d0abf621b18"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<span class="target" id="gm2gm_2shmem__device__rma_8h_1a40aee29c23c7922ffd23a6c0e0fdbdba"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_put</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Synchronous interface. Copy a contiguous data on local PE to symmetric address on the specified PE.  </p>
-<p></p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on Symmetric memory of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on local device of the source data. </p></li>
-<li><p><strong>elem_size</strong> – [in] Number of elements in the destination and source arrays. </p></li>
+<li><p><strong>dst</strong> – [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] Pointer on local device of the source data.</p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the destination and source arrays.</p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
 </dd>
@@ -544,15 +542,15 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2shmem__device__rma_8h_1afd7c6a3fe56fad7437275a2302616b74"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_get_NAME_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported.  </p>
-<p>*</p>
+<span class="target" id="gm2gm_2shmem__device__rma_8h_1a07cb716e12a23417fe637038d84a49dd"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_get_nbi</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the * same PE are not supported.  </p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
-<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays.</p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
 </dd>
@@ -561,48 +559,14 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2shmem__device__rma_8h_1a3cf87c90f8e5178f683638769e41a88c"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_get_NAME_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on symmetric memory from the specified PE to address on the local device. </p>
-<p></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
-<li><p><strong>copy_params</strong> – [in] Params to describe how non-contiguous data is managed in src and dst. </p></li>
-<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2shmem__device__rma_8h_1a9eb7f17c1b5d14ec5e8e076e1971d83a"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_get_NAME_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported.  </p>
-<p>*</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] GlobalTensor on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] GlobalTensor on Symmetric memory of the source data. </p></li>
-<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
-<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2shmem__device__rma_8h_1afc378e5fe25fcfcad4cfc4b204baf05d"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_get_NAME_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<span class="target" id="gm2gm_2shmem__device__rma_8h_1abefcf8e4ebfbe00d7ed5931b55cad994"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_get_nbi</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on symmetric memory from the specified PE to address on the local device.  </p>
-<p></p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] GlobalTensor on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] GlobalTensor on Symmetric memory of the source data. </p></li>
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data.</p></li>
 <li><p><strong>copy_params</strong> – [in] Params to describe how non-contiguous data is managed in src and dst. </p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
@@ -612,15 +576,15 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2shmem__device__rma_8h_1a4e7ee9d8ff8e6aa3bebd1b0310b7ee96"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Asynchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported.  </p>
-<p></p>
+<span class="target" id="gm2gm_2shmem__device__rma_8h_1a6a6ab46717ce582851ddc4bb80a1e25b"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_get_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the * same PE are not supported.  </p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on Symmetric memory of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on local device of the source data. </p></li>
-<li><p><strong>elem_size</strong> – [in] Number of elements in the destination and source arrays. </p></li>
+<li><p><strong>dst</strong> – [in] GlobalTensor on local device of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] GlobalTensor on Symmetric memory of the source data.</p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays.</p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
 </dd>
@@ -629,14 +593,14 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2shmem__device__rma_8h_1acfd9083a76d5e5bcf3b539681f3eea87"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on local PE to symmetric address on the specified PE.  </p>
-<p></p>
+<span class="target" id="gm2gm_2shmem__device__rma_8h_1ac0f5f53af352bee5b1ba1a1b077f3801"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_get_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on symmetric memory from the specified PE to address on the local device.  </p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on Symmetric memory of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on local device of the source data. </p></li>
+<li><p><strong>dst</strong> – [in] GlobalTensor on local device of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] GlobalTensor on Symmetric memory of the source data.</p></li>
 <li><p><strong>copy_params</strong> – [in] Params to describe how non-contiguous data is managed in src and dst. </p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
@@ -646,15 +610,15 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2shmem__device__rma_8h_1a29224d5dc0c690ddb113cea8f02f1d91"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Asynchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported.  </p>
-<p></p>
+<span class="target" id="gm2gm_2shmem__device__rma_8h_1ac503981171d06f6175683071aff33fe7"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_put_nbi</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the * same PE are not supported.  </p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] GlobalTensor on Symmetric memory of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] GlobalTensor on local device of the source data. </p></li>
-<li><p><strong>elem_size</strong> – [in] Number of elements in the destination and source arrays. </p></li>
+<li><p><strong>dst</strong> – [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] Pointer on local device of the source data.</p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the destination and source arrays.</p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
 </dd>
@@ -663,14 +627,48 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2shmem__device__rma_8h_1a208c343ee52d1f65e003314562d283a8"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<span class="target" id="gm2gm_2shmem__device__rma_8h_1a6e9512d4314035e07634d363e5c95002"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_put_nbi</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on local PE to symmetric address on the specified PE.  </p>
-<p></p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] GlobalTensor on Symmetric memory of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] GlobalTensor on local device of the source data. </p></li>
+<li><p><strong>dst</strong> – [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] Pointer on local device of the source data.</p></li>
+<li><p><strong>copy_params</strong> – [in] Params to describe how non-contiguous data is managed in src and dst. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="gm2gm_2shmem__device__rma_8h_1a2ea70f6a9ca659e05509d59e4d821349"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_put_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the * same PE are not supported.  </p>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] GlobalTensor on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] GlobalTensor on local device of the source data.</p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the destination and source arrays.</p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="gm2gm_2shmem__device__rma_8h_1abb28890070dfe2da6457d986b63ff21f"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_put_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on local PE to symmetric address on the specified PE.  </p>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] GlobalTensor on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] GlobalTensor on local device of the source data.</p></li>
 <li><p><strong>copy_params</strong> – [in] Params to describe how non-contiguous data is managed in src and dst. </p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
@@ -696,211 +694,13 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2shmem__device__rma_8h_1a522423cfe8373be36c2b83a3125ac3b7"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_putmem_signal</span> <span class="pre">(__gm__</span> <span class="pre">void</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Synchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE then update sig_addr. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
-<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
-<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
-<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
-<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD </p></li>
-<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2shmem__device__rma_8h_1a9148e5fe731bf0d953fe4b0d099ab25c"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem_signal</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Synchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE.  </p>
-<p></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
-<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
-<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
-<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
-<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD </p></li>
-<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2shmem__device__rma_8h_1a5a42780be3721bf3a14d30d6d068ab83"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem_signal</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Synchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE.  </p>
-<p></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
-<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
-<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
-<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
-<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD </p></li>
-<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2shmem__device__rma_8h_1a86a27f86cbd5658e5d4a07865bedec83"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem_signal</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Synchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE then update sig_addr  </p>
-<p></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
-<li><p><strong>copy_params</strong> – [in] Params to describe how non-contiguous data is organized in src and dst. </p></li>
-<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
-<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
-<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD</p></li>
-<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2shmem__device__rma_8h_1a53942922836e89993463fb4363eceae7"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem_signal</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Synchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE.  </p>
-<p></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
-<li><p><strong>copy_params</strong> – [in] Params to describe how non-contiguous data is organized in src and dst. </p></li>
-<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
-<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
-<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD </p></li>
-<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2shmem__device__rma_8h_1a36b717559c3d3807f3664c1f81a13f3a"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_putmem_signal_nbi</span> <span class="pre">(__gm__</span> <span class="pre">void</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Asynchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE then update sig_addr. </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
-<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
-<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
-<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
-<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD </p></li>
-<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2shmem__device__rma_8h_1adce0b9a2115179929826464d22faf1f6"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem_signal_nbi</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Asynchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE.  </p>
-<p></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
-<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
-<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
-<li><p><strong>signal</strong> – [in] The value used to update sig_addr.</p></li>
-<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD</p></li>
-<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2shmem__device__rma_8h_1a2cc4b718f5f9acefef976964f209d572"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem_signal_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Asynchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE.  </p>
-<p></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
-<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
-<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
-<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
-<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD </p></li>
-<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2shmem__device__rma_8h_1a7ba4a2ab7f90eabd27e4e2f65918ba25"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem_signal_nbi</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE then update sig_addr   </p>
-<p></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
-<li><p><strong>copy_params</strong> – [in] Params to describe how non-contiguous data is organized in src and dst. </p></li>
-<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
-<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
-<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD</p></li>
-<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2shmem__device__rma_8h_1a9f8bafd1159343f81f7099e41e667f4c"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem_signal_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE.  </p>
-<p></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
-<li><p><strong>copy_params</strong> – [in] Params to describe how non-contiguous data is organized in src and dst. </p></li>
-<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
-<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
-<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD </p></li>
-<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
 <span class="target" id="gm2gm_2shmem__device__rma_8h_1a51cd9a5224ebdf6a0c1516164e2bdceb"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">int</span> <span class="pre">aclshmem_NAME_test</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*ivar,</span> <span class="pre">int</span> <span class="pre">cmp,</span> <span class="pre">TYPE</span> <span class="pre">cmp_value)</span></span></dt>
 <dd><p>Synchronous interface. Provide a high-performance way to compare data on local UB to symmetric address on the specified PE.  </p>
-<p></p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ivar</strong> – [in] Pointer on local device of the destination data. </p></li>
+<li><p><strong>ivar</strong> – [in] Pointer on local device of the destination data.</p></li>
 <li><p><strong>cmp</strong> – [in] Compare type i.e. SHMEM_CMP_EQ, SHMEM_CMP_GT, etc. </p></li>
 <li><p><strong>cmp_value</strong> – [in] Expected data for comparation </p></li>
 </ul>
@@ -924,19 +724,19 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 </dd></dl>
 
 </div>
+
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="ub2gm_2shmem__device__rma_8h_1a63f5413e77d61603f1b8d6cb2304b6dc"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_get_NAME_mem_nbi</span> <span class="pre">(__ubuf__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local UB.   </p>
-<p></p>
+<span class="target" id="ub2gm_2shmem__device__rma_8h_1a52cd42c8589b421b0f3488b086d22537"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_get_nbi</span> <span class="pre">(__ubuf__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the * specified PE to address on the local UB.  </p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local UB of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
-<li><p><strong>elem_size</strong> – [in] Number of elements in the destination and source arrays. </p></li>
+<li><p><strong>dst</strong> – [in] Pointer on local UB of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the destination and source arrays.</p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
 </dd>
@@ -945,15 +745,15 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="ub2gm_2shmem__device__rma_8h_1a84a5c47bf33ecec9add0ee309e2e089d"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_get_NAME_mem_nbi</span> <span class="pre">(AscendC::LocalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to  address on the local UB.  </p>
-<p></p>
+<span class="target" id="ub2gm_2shmem__device__rma_8h_1a7f9f24b83ed22ec21fbe6b06fac88cb5"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_get_nbi</span> <span class="pre">(AscendC::LocalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local UB.  </p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] LocalTensor on local UB of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] GlobalTensor on Symmetric memory of the source data. </p></li>
-<li><p><strong>elem_size</strong> – [in] Number of elements in the destination and source arrays. </p></li>
+<li><p><strong>dst</strong> – [in] LocalTensor on local UB of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] GlobalTensor on Symmetric memory of the source data.</p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the destination and source arrays.</p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
 </dd>
@@ -962,14 +762,14 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="ub2gm_2shmem__device__rma_8h_1af64de10bcf8a10ede1c62667ef98e5b6"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_get_NAME_mem_nbi</span> <span class="pre">(__ubuf__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<span class="target" id="ub2gm_2shmem__device__rma_8h_1aefe18909e1ee92c747b7ae03a092c3f6"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_get_nbi</span> <span class="pre">(__ubuf__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on symmetric memory from the specified PE to address on the local UB.  </p>
-<p></p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local UB of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>dst</strong> – [in] Pointer on local UB of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data.</p></li>
 <li><p><strong>copy_params</strong> – [in] Params to describe how non-contiguous data is managed in src and dst. </p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
@@ -979,14 +779,14 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="ub2gm_2shmem__device__rma_8h_1a80a3ad12060d4b829da8d7d7645a01a6"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_get_NAME_mem_nbi</span> <span class="pre">(AscendC::LocalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<span class="target" id="ub2gm_2shmem__device__rma_8h_1aba76ec8ec34a8178499a93c251904b40"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_get_nbi</span> <span class="pre">(AscendC::LocalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on symmetric memory from the specified PE to address on the local UB.  </p>
-<p></p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] LocalTensor on local UB of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] GlobalTensor on Symmetric memory of the source data. </p></li>
+<li><p><strong>dst</strong> – [in] LocalTensor on local UB of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] GlobalTensor on Symmetric memory of the source data.</p></li>
 <li><p><strong>copy_params</strong> – [in] Params to describe how non-contiguous data is managed in src and dst. </p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
@@ -996,15 +796,15 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="ub2gm_2shmem__device__rma_8h_1afc46c13a0a430e6421bb785aa6216773"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__ubuf__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<span class="target" id="ub2gm_2shmem__device__rma_8h_1a5fc21398bf81e3c931c491baff7b0ebd"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_put_nbi</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__ubuf__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Copy contiguous data on local UB to symmetric address on the specified PE.  </p>
-<p></p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on Symmetric memory of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on local UB of the source data. </p></li>
-<li><p><strong>elem_size</strong> – [in] Number of elements in the destination and source arrays. </p></li>
+<li><p><strong>dst</strong> – [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] Pointer on local UB of the source data.</p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the destination and source arrays.</p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
 </dd>
@@ -1013,15 +813,15 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="ub2gm_2shmem__device__rma_8h_1ad2ca63f5895f8406c1ca86b4652cf0fe"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<span class="target" id="ub2gm_2shmem__device__rma_8h_1aca890a78bb812434fa3dd4653105a3a3"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_put_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Copy contiguous data on local UB to symmetric address on the specified PE.  </p>
-<p></p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] GlobalTensor on Symmetric memory of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] LocalTensor on local UB of the source data. </p></li>
-<li><p><strong>elem_size</strong> – [in] Number of elements in the destination and source arrays. </p></li>
+<li><p><strong>dst</strong> – [in] GlobalTensor on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] LocalTensor on local UB of the source data.</p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the destination and source arrays.</p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
 </dd>
@@ -1030,15 +830,15 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="ub2gm_2shmem__device__rma_8h_1a6e35c14084c3f1ff6f34d59f11dd3c0e"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__ubuf__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<span class="target" id="ub2gm_2shmem__device__rma_8h_1afedb777a78a98ba9dfa6941d4e8d850d"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_put_nbi</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__ubuf__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE.  </p>
-<p></p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on Symmetric memory of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on local UB of the source data. </p></li>
-<li><p><strong>copy_params</strong> – [in] Params to describe how non-contiguous data is organized in src and dst.</p></li>
+<li><p><strong>dst</strong> – [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] Pointer on local UB of the source data.</p></li>
+<li><p><strong>copy_params</strong> – [in] Params to describe how non-contiguous data is organized in src and dst. </p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
 </dd>
@@ -1047,14 +847,14 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="ub2gm_2shmem__device__rma_8h_1ae08c746d7656113344389b69688461d3"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_put_NAME_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<span class="target" id="ub2gm_2shmem__device__rma_8h_1a27c75315eb0ce8a983a1aaa5714470d8"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_put_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE.  </p>
-<p></p>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] GlobalTensor on Symmetric memory of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] LocalTensor on local UB of the source data. </p></li>
+<li><p><strong>dst</strong> – [in] GlobalTensor on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] LocalTensor on local UB of the source data.</p></li>
 <li><p><strong>copy_params</strong> – [in] Params to describe how non-contiguous data is organized in src and dst. </p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
@@ -1067,7 +867,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="ub2gm_2engine_2shmem__device__mte_8h_1a033c60aad89fc9f92ee529e61755e770"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_get_mem_nbi</span> <span class="pre">(__ubuf__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<span class="target" id="ub2gm_2engine_2shmem__device__mte_8h_1a0cd3eea6ce6b2636fdbd238a135bfd6c"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_get_nbi</span> <span class="pre">(__ubuf__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
 <dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local UB. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1084,7 +884,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="ub2gm_2engine_2shmem__device__mte_8h_1a77da01aec1bffdf5c9616dbadbb4c87c"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_get_mem_nbi</span> <span class="pre">(AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<span class="target" id="ub2gm_2engine_2shmem__device__mte_8h_1add625e96d20686d5cd83757882421ed6"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_get_nbi</span> <span class="pre">(AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
 <dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local UB. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1101,7 +901,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="ub2gm_2engine_2shmem__device__mte_8h_1a1973eef841d809a31a169fd7391363dc"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_get_mem_nbi</span> <span class="pre">(__ubuf__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<span class="target" id="ub2gm_2engine_2shmem__device__mte_8h_1ae4a871450a6e3a2ad77a94820e421275"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_get_nbi</span> <span class="pre">(__ubuf__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on symmetric memory from the specified PE to address on the local UB. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1118,7 +918,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="ub2gm_2engine_2shmem__device__mte_8h_1a66299271514d78a49500b78e2935b4a7"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_get_mem_nbi</span> <span class="pre">(AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<span class="target" id="ub2gm_2engine_2shmem__device__mte_8h_1a607fa58dd2467c349c656672a7d3f416"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_get_nbi</span> <span class="pre">(AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on symmetric memory from the specified PE to address on the local UB. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1135,7 +935,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="ub2gm_2engine_2shmem__device__mte_8h_1a3943c599a685c7f4e08b0107d575268a"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_put_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<span class="target" id="ub2gm_2engine_2shmem__device__mte_8h_1a2bf65a3a71a3c01fd645e569730fa3f0"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_put_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
 <dd><p>Asynchronous interface. Copy contiguous data on local UB to symmetric address on the specified PE. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1152,7 +952,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="ub2gm_2engine_2shmem__device__mte_8h_1a6adfd6706fc6999449ea69eefa4388a5"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_put_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<span class="target" id="ub2gm_2engine_2shmem__device__mte_8h_1a8151fea4108d78e82b282ea59f43b533"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_put_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
 <dd><p>Asynchronous interface. Copy contiguous data on local UB to symmetric address on the specified PE. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1169,7 +969,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="ub2gm_2engine_2shmem__device__mte_8h_1ab0d4d8baf620d5704fa3b8febc05aa7f"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_put_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<span class="target" id="ub2gm_2engine_2shmem__device__mte_8h_1a84de65f5dcf8383fd4ac78194f0957ce"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_put_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1186,7 +986,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="ub2gm_2engine_2shmem__device__mte_8h_1a88ef3ad561109b471e8781f5885b6fed"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_put_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<span class="target" id="ub2gm_2engine_2shmem__device__mte_8h_1ae7b3a97627aaaf88246452876ac11ecf"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_put_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1223,7 +1023,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2engine_2shmem__device__mte_8h_1a841eb30d5430f25871658be51d171fa6"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_get_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*buf,</span> <span class="pre">uint32_t</span> <span class="pre">ub_size,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<span class="target" id="gm2gm_2engine_2shmem__device__mte_8h_1abd5356c4a284db4aaa219f82ce913590"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_get_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*buf,</span> <span class="pre">uint32_t</span> <span class="pre">ub_size,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
 <dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local device. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1242,7 +1042,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2engine_2shmem__device__mte_8h_1a3b8036a89c2f348fc32a006e056c18fb"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_get_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*buf,</span> <span class="pre">uint32_t</span> <span class="pre">ub_size,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<span class="target" id="gm2gm_2engine_2shmem__device__mte_8h_1a151c116d3126258da8de1df34a99637f"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_get_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*buf,</span> <span class="pre">uint32_t</span> <span class="pre">ub_size,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on symmetric memory from the specified PE to address on the local device. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1261,7 +1061,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2engine_2shmem__device__mte_8h_1ac2074194b2b3a4a655ccc57fe368d47d"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_get_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">buf,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<span class="target" id="gm2gm_2engine_2shmem__device__mte_8h_1a44397bb40ee260db1fc2ebbbc90fbac0"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_get_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">buf,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
 <dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1279,7 +1079,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2engine_2shmem__device__mte_8h_1a5e4f238252ea261b74156559304112fa"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_get_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">buf,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<span class="target" id="gm2gm_2engine_2shmem__device__mte_8h_1a625fafbb411c97c37ce93bb53bbb7b86"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_get_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">buf,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on symmetric memory from the specified PE to address on the local device. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1297,7 +1097,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2engine_2shmem__device__mte_8h_1a341537115ec76589339373acd0dc0a3f"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_put_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*buf,</span> <span class="pre">uint32_t</span> <span class="pre">ub_size,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<span class="target" id="gm2gm_2engine_2shmem__device__mte_8h_1a80c43e9fb278a7aaa025d87d7cc4605c"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_put_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*buf,</span> <span class="pre">uint32_t</span> <span class="pre">ub_size,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
 <dd><p>Asynchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1316,7 +1116,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2engine_2shmem__device__mte_8h_1aa1f6477b9fbb4d74327d1592b6c687bb"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_put_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*buf,</span> <span class="pre">uint32_t</span> <span class="pre">ub_size,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<span class="target" id="gm2gm_2engine_2shmem__device__mte_8h_1a86399212a974de0c8e0e3ded9f36b33e"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_put_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*buf,</span> <span class="pre">uint32_t</span> <span class="pre">ub_size,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on local PE to symmetric address on the specified PE. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1335,7 +1135,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2engine_2shmem__device__mte_8h_1a770481a8482c23085cfcc50876e6d01e"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_put_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">buf,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<span class="target" id="gm2gm_2engine_2shmem__device__mte_8h_1afba290b9e4eaad9a6fff5f4d6ef97d4f"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_put_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">buf,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
 <dd><p>Asynchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1353,7 +1153,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="gm2gm_2engine_2shmem__device__mte_8h_1afd9c8972de15ae05e152376a6d284f88"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_put_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">buf,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<span class="target" id="gm2gm_2engine_2shmem__device__mte_8h_1ae7228644b14efbfc8fa4add2671fe1fd"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_mte_put_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">buf,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
 <dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on local PE to symmetric address on the specified PE. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1391,7 +1191,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__device__rdma_8h_1a0bc2eb15b02fab9e884f08da30ebe400"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_roce_get_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*buf,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<span class="target" id="shmem__device__rdma_8h_1a4fb332d61c8b4d71ad0f87f6725cbe41"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_roce_get_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*buf,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local device. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1408,7 +1208,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__device__rdma_8h_1a0e4fe1803f0ac6344a3fbfd9eafded39"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_roce_get_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">buf,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<span class="target" id="shmem__device__rdma_8h_1a28b394afbe38ea90150df26b264d794e"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_roce_get_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">buf,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1425,7 +1225,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__device__rdma_8h_1a30862ab8e8f90768cdca598a72555dc3"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_roce_put_mem_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*buf,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<span class="target" id="shmem__device__rdma_8h_1ae129138a43118f5ba8dcc35d0866e309"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_roce_put_nbi</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*buf,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
 <dd><p>Asynchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1442,7 +1242,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__device__rdma_8h_1a189ae627f3acddd8be0d6a061a4f55a8"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_roce_put_mem_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">buf,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
+<span class="target" id="shmem__device__rdma_8h_1a0d7cc237b21b692c88fadd5ef6ebe502"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_roce_put_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">AscendC::LocalTensor&lt;</span> <span class="pre">T</span> <span class="pre">&gt;</span> <span class="pre">buf,</span> <span class="pre">uint32_t</span> <span class="pre">elem_size,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">AscendC::TEventID</span> <span class="pre">EVENT_ID)</span></span></dt>
 <dd><p>Asynchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1453,6 +1253,210 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
 <li><p><strong>elem_size</strong> – [in] Number of elements in the destination and source arrays. </p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 <li><p><strong>EVENT_ID</strong> – [in] ID used to Sync MTE2\MTE3 Event. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</section>
+<section id="shmem-device-so-h">
+<h2>shmem_device_so.h<a class="headerlink" href="#shmem-device-so-h" title="Link to this heading"></a></h2>
+
+<div class="breathe-sectiondef docutils container">
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__so_8h_1a522423cfe8373be36c2b83a3125ac3b7"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_putmem_signal</span> <span class="pre">(__gm__</span> <span class="pre">void</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE then update sig_addr. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
+<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
+<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
+<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__so_8h_1a8a9b47f6100c1a9c2393510386cb013c"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_put_signal</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE.  </p>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays.</p></li>
+<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
+<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
+<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD</p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__so_8h_1a0689496ec9cca040ceba1d7a5c3e2e34"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_put_signal</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE.  </p>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays.</p></li>
+<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
+<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
+<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD</p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__so_8h_1a049df13214b3d62afce544999b5f71e9"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_put_signal</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE then update sig_addr  </p>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>copy_params</strong> – [in] Params to describe how non-contiguous data is organized in src and dst. </p></li>
+<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
+<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
+<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD</p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__so_8h_1a36c5abf6fd2eef825d8b32bc9c0febfe"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_put_signal</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE.  </p>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>copy_params</strong> – [in] Params to describe how non-contiguous data is organized in src and dst. </p></li>
+<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
+<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
+<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD</p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__so_8h_1a36b717559c3d3807f3664c1f81a13f3a"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_putmem_signal_nbi</span> <span class="pre">(__gm__</span> <span class="pre">void</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE then update sig_addr. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
+<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
+<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
+<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__so_8h_1aa674114ca7c9964d03feda78d6427590"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_put_signal_nbi</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE.  </p>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays.</p></li>
+<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
+<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
+<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD</p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__so_8h_1aa86e9e1acfdfe75c6f7f5e025361d79e"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_put_signal_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE.  </p>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays.</p></li>
+<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
+<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
+<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD</p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__so_8h_1a0d5685c36a1e3956c9c8952461a801a2"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_put_signal_nbi</span> <span class="pre">(__gm__</span> <span class="pre">TYPE</span> <span class="pre">*dst,</span> <span class="pre">__gm__</span> <span class="pre">TYPE</span> <span class="pre">*src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE then update sig_addr  </p>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>copy_params</strong> – [in] Params to describe how non-contiguous data is organized in src and dst. </p></li>
+<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
+<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
+<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD</p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__so_8h_1a53b403cab131930b5894c405eb3e3b0d"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_NAME_put_signal_nbi</span> <span class="pre">(AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">dst,</span> <span class="pre">AscendC::GlobalTensor&lt;</span> <span class="pre">TYPE</span> <span class="pre">&gt;</span> <span class="pre">src,</span> <span class="pre">const</span> <span class="pre">non_contiguous_copy_param</span> <span class="pre">&amp;copy_params,</span> <span class="pre">__gm__</span> <span class="pre">int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE.  </p>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>copy_params</strong> – [in] Params to describe how non-contiguous data is organized in src and dst. </p></li>
+<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
+<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
+<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD</p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
 </dd>
 </dl>
@@ -1564,7 +1568,7 @@ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright .</p>
+    <p>&#169; Copyright  2025 Huawei Technologies Co., Ltd..</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
