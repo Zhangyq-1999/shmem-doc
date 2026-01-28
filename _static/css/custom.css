@@ -1,0 +1,22 @@
+
+.rst-content .admonition.remark .admonition-title {
+    display: none !important;
+}
+
+.rst-content .admonition.remark {
+    font-weight: bold !important;
+}
+
+.rst-content .admonition.remark code,
+.rst-content .admonition.remark pre {
+    font-weight: normal !important;
+}
+
+.rst-content .admonition.remark {
+    background: #f0f9ff !important;
+    border-left: 5px solid #3b82f6 !important;
+    border-radius: 8px;
+    margin: 20px 0;
+    padding: 20px !important;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+}
