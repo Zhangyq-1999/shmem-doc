@@ -9,7 +9,7 @@
   <title>Welcome to Shmem’s Documentation! &mdash; SHMEM Guidebook 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
-      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=d6bf9227" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
@@ -62,7 +62,8 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="example.html">AllGather</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">初始化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html#allgather">AllGather</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
 <ul>
@@ -168,9 +169,9 @@
 <li class="toctree-l2"><a class="reference internal" href="host_api.html#shmem-log-h">shmem_log.h</a></li>
 <li class="toctree-l2"><a class="reference internal" href="host_api.html#shmem-host-heap-h">shmem_host_heap.h</a></li>
 <li class="toctree-l2"><a class="reference internal" href="host_api.html#shmem-host-rma-h">shmem_host_rma.h</a></li>
-<li class="toctree-l2"><a class="reference internal" href="host_api.html#shmem-host-so-h">shmem_host_so.h</a></li>
 <li class="toctree-l2"><a class="reference internal" href="host_api.html#shmem-host-cc-h">shmem_host_cc.h</a></li>
 <li class="toctree-l2"><a class="reference internal" href="host_api.html#shmem-host-p2p-sync-h">shmem_host_p2p_sync.h</a></li>
+<li class="toctree-l2"><a class="reference internal" href="host_api.html#shmem-host-so-h">shmem_host_so.h</a></li>
 <li class="toctree-l2"><a class="reference internal" href="host_api.html#shmem-host-team-h">shmem_host_team.h</a></li>
 </ul>
 </li>
@@ -194,8 +195,14 @@
 <div class="toctree-wrapper compound" id="example">
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="example.html">AllGather</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="example.html#id1">核函数实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">初始化</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example.html#aclshmemx-init-with-default">ACLSHMEMX_INIT_WITH_DEFAULT（支持双后端）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#aclshmemx-init-with-mpi">ACLSHMEMX_INIT_WITH_MPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#aclshmemx-init-with-uniqueid">ACLSHMEMX_INIT_WITH_UNIQUEID</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="example.html#allgather">AllGather</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example.html#id8">核函数实现</a></li>
 </ul>
 </li>
 </ul>

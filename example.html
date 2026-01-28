@@ -6,10 +6,10 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AllGather &mdash; SHMEM Guidebook 1.0.0 documentation</title>
+  <title>初始化 &mdash; SHMEM Guidebook 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
-      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=d6bf9227" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
@@ -63,8 +63,26 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">AllGather</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">核函数实现</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">初始化</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#aclshmemx-init-with-default">ACLSHMEMX_INIT_WITH_DEFAULT（支持双后端）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">样例运行</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">代码实现</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#aclshmemx-init-with-mpi">ACLSHMEMX_INIT_WITH_MPI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">样例运行</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">代码实现</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#aclshmemx-init-with-uniqueid">ACLSHMEMX_INIT_WITH_UNIQUEID</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">样例运行</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">代码实现</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#allgather">AllGather</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id8">核函数实现</a></li>
 </ul>
 </li>
 </ul>
@@ -97,7 +115,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">AllGather</li>
+      <li class="breadcrumb-item active">初始化</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/example.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -107,12 +125,224 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="allgather">
+  <section id="id1">
+<h1>初始化<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>该样例工程位于<code class="docutils literal notranslate"><span class="pre">examples/init</span></code>文件夹下。</p>
+<p>SHMEM当前提供了三种flag用于初始化：
+- ACLSHMEMX_INIT_WITH_DEFAULT 默认初始化流程，可以不依赖第三方库完成初始化，但需要保证设定的ipport空闲
+- ACLSHMEMX_INIT_WITH_MPI 依赖MPI的多进程管理能力的初始化流程
+- ACLSHMEMX_INIT_WITH_UNIQUEID 运行时依赖第三方库广播能力（MPI_Bcast/torch.distributed.broadcast等）的初始化流程</p>
+<p>在该样例中，分别实现了SHMEM提供的所有初始化流程调用方式。可以通过脚本参数编译运行不同flag对应的初始化流程。默认使用回环地址127.0.0.1，端口8666。该用例仅用以单机示范，请保证端口空闲可绑定。</p>
+<section id="aclshmemx-init-with-default">
+<h2>ACLSHMEMX_INIT_WITH_DEFAULT（支持双后端）<a class="headerlink" href="#aclshmemx-init-with-default" title="Link to this heading"></a></h2>
+<section id="id2">
+<h3>样例运行<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>在根目录调用<code class="docutils literal notranslate"><span class="pre">scripts/build.sh</span></code>控制后端。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/build.sh
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>examples/init
+<span class="c1"># 编译并运行两个pe的default初始化流程</span>
+bash<span class="w"> </span>run.sh<span class="w"> </span>-mode<span class="w"> </span>default<span class="w"> </span>-pesize<span class="w"> </span><span class="m">2</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3>代码实现<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>SHMEM初始化接口调用前需要完成attributes创建，此用例提供了一种attributes构建方式，也可根据实际需要参考<code class="docutils literal notranslate"><span class="pre">aclshmemx_init_attr_t</span></code>定义自行设置。</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// attributes设置函数</span>
+<span class="kt">int32_t</span><span class="w"> </span><span class="nf">test_set_attr</span><span class="p">(</span><span class="kt">int32_t</span><span class="w"> </span><span class="n">my_pe</span><span class="p">,</span><span class="w"> </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">n_pes</span><span class="p">,</span><span class="w"> </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">local_mem_size</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">ip_port</span><span class="p">,</span>
+<span class="w">                       </span><span class="n">aclshmemx_uniqueid_t</span><span class="w"> </span><span class="o">*</span><span class="n">default_flag_uid</span><span class="p">,</span><span class="w"> </span><span class="n">aclshmemx_init_attr_t</span><span class="w"> </span><span class="o">*</span><span class="n">attributes</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">ip_len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ip_port</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ip_len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="n">ip_port</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="p">)(</span><span class="n">ACLSHMEM_MAX_IP_PORT_LEN</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
+
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">copy_n</span><span class="p">(</span><span class="n">ip_port</span><span class="p">,</span><span class="w"> </span><span class="n">ip_len</span><span class="p">,</span><span class="w"> </span><span class="n">attributes</span><span class="o">-&gt;</span><span class="n">ip_port</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">attributes</span><span class="o">-&gt;</span><span class="n">ip_port</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;\0&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">ACLSHMEM_INVALID_VALUE</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">attr_version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">aclshmemx_init_attr_t</span><span class="p">);</span>
+<span class="w">    </span><span class="n">attributes</span><span class="o">-&gt;</span><span class="n">my_pe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_pe</span><span class="p">;</span>
+<span class="w">    </span><span class="n">attributes</span><span class="o">-&gt;</span><span class="n">n_pes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_pes</span><span class="p">;</span>
+<span class="w">    </span><span class="n">attributes</span><span class="o">-&gt;</span><span class="n">ip_port</span><span class="p">[</span><span class="n">ip_len</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">attributes</span><span class="o">-&gt;</span><span class="n">local_mem_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">local_mem_size</span><span class="p">;</span>
+<span class="w">    </span><span class="n">attributes</span><span class="o">-&gt;</span><span class="n">option_attr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">attr_version</span><span class="p">,</span><span class="w"> </span><span class="n">ACLSHMEM_DATA_OP_MTE</span><span class="p">,</span><span class="w"> </span><span class="n">DEFAULT_TIMEOUT</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                               </span><span class="n">DEFAULT_TIMEOUT</span><span class="p">,</span><span class="w"> </span><span class="n">DEFAULT_TIMEOUT</span><span class="p">};</span>
+<span class="w">    </span><span class="n">attributes</span><span class="o">-&gt;</span><span class="n">comm_args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="w"> </span><span class="o">*&gt;</span><span class="p">(</span><span class="n">default_flag_uid</span><span class="p">);</span>
+<span class="w">    </span><span class="n">aclshmemx_uniqueid_t</span><span class="w"> </span><span class="o">*</span><span class="n">uid_args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">aclshmemx_uniqueid_t</span><span class="w"> </span><span class="o">*</span><span class="p">)(</span><span class="n">attributes</span><span class="o">-&gt;</span><span class="n">comm_args</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ACLSHMEM_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//default初始化流程</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">run_main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">pe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">pe_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">ipport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="w">    </span><span class="n">aclshmemx_uniqueid_t</span><span class="w"> </span><span class="n">default_flag_uid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ACLSHMEM_UNIQUEID_INITIALIZER</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aclshmemx_init_attr_t</span><span class="w"> </span><span class="n">attributes</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ACLSHMEM_SUCCESS</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// acl初始化</span>
+<span class="w">    </span><span class="n">aclInit</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>
+<span class="w">    </span><span class="n">aclrtSetDevice</span><span class="p">(</span><span class="n">pe</span><span class="p">);</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">local_mem_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// 创建attributes</span>
+<span class="w">    </span><span class="n">test_set_attr</span><span class="p">(</span><span class="n">pe</span><span class="p">,</span><span class="w"> </span><span class="n">pe_size</span><span class="p">,</span><span class="w"> </span><span class="n">local_mem_size</span><span class="p">,</span><span class="w"> </span><span class="n">ipport</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">default_flag_uid</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// 初始化</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_init_attr</span><span class="p">(</span><span class="n">ACLSHMEMX_INIT_WITH_DEFAULT</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/*</span>
+<span class="cm">    你的任务</span>
+<span class="cm">    */</span>
+
+<span class="w">    </span><span class="c1">//去初始化</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="n">aclrtResetDevice</span><span class="p">(</span><span class="n">pe</span><span class="p">);</span>
+<span class="w">    </span><span class="n">aclFinalize</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="aclshmemx-init-with-mpi">
+<h2>ACLSHMEMX_INIT_WITH_MPI<a class="headerlink" href="#aclshmemx-init-with-mpi" title="Link to this heading"></a></h2>
+<section id="id4">
+<h3>样例运行<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>编译前需要安装并配置MPI环境变量，不配置无法编译MPI能力so。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># mpich安装在默认路径时可参考，需根据实际情况替换。</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/mpich/bin:<span class="nv">$PATH</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/usr/local/mpich/lib:<span class="nv">$LD_LIBRARY_PATH</span>
+</pre></div>
+</div>
+<p>在根目录调用<code class="docutils literal notranslate"><span class="pre">scripts/build.sh</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/build.sh
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>examples/init
+<span class="c1"># 编译并运行两个pe的mpi初始化流程</span>
+bash<span class="w"> </span>run.sh<span class="w"> </span>-mode<span class="w"> </span>mpi<span class="w"> </span>-pesize<span class="w"> </span><span class="m">2</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h3>代码实现<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//mpi初始化流程</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">run_main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// MPI初始化</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">pe</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">pe_size</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pe</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pe_size</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ACLSHMEM_SUCCESS</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// acl初始化</span>
+<span class="w">    </span><span class="n">aclInit</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>
+<span class="w">    </span><span class="n">aclrtSetDevice</span><span class="p">(</span><span class="n">pe</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">local_mem_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// 创建attributes，依赖MPI无需使用ipport可以不传。</span>
+<span class="w">    </span><span class="n">aclshmemx_init_attr_t</span><span class="w"> </span><span class="n">attributes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">pe</span><span class="p">,</span><span class="w"> </span><span class="n">pe_size</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">local_mem_size</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">ACLSHMEM_DATA_OP_MTE</span><span class="p">,</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span><span class="w"> </span><span class="mi">120</span><span class="p">}};</span>
+<span class="w">    </span><span class="c1">// 初始化</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_init_attr</span><span class="p">(</span><span class="n">ACLSHMEMX_INIT_WITH_MPI</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/*</span>
+<span class="cm">    你的任务</span>
+<span class="cm">    */</span>
+
+<span class="w">    </span><span class="c1">//去初始化</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="n">aclrtResetDevice</span><span class="p">(</span><span class="n">pe</span><span class="p">);</span>
+<span class="w">    </span><span class="n">aclFinalize</span><span class="p">();</span>
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="aclshmemx-init-with-uniqueid">
+<h2>ACLSHMEMX_INIT_WITH_UNIQUEID<a class="headerlink" href="#aclshmemx-init-with-uniqueid" title="Link to this heading"></a></h2>
+<section id="id6">
+<h3>样例运行<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>编译前需要安装并配置MPI环境变量，不配置无法编译MPI能力so。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># mpich安装在默认路径时可参考，需根据实际情况替换。</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/mpich/bin:<span class="nv">$PATH</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/usr/local/mpich/lib:<span class="nv">$LD_LIBRARY_PATH</span>
+</pre></div>
+</div>
+<p>在根目录调用<code class="docutils literal notranslate"><span class="pre">scripts/build.sh</span></code>控制后端。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/build.sh
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>examples/init
+<span class="c1"># 编译并运行两个pe的mpi初始化流程</span>
+bash<span class="w"> </span>run.sh<span class="w"> </span>-mode<span class="w"> </span>mpi<span class="w"> </span>-pesize<span class="w"> </span><span class="m">2</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h3>代码实现<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//uid初始化流程</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">run_main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// MPI初始化</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">pe</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">pe_size</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pe</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pe_size</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ACLSHMEM_SUCCESS</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// acl初始化</span>
+<span class="w">    </span><span class="n">aclInit</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>
+<span class="w">    </span><span class="n">aclrtSetDevice</span><span class="p">(</span><span class="n">pe</span><span class="p">);</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">aclshmemx_init_attr_t</span><span class="w"> </span><span class="n">attributes</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aclshmemx_uniqueid_t</span><span class="w"> </span><span class="n">uid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ACLSHMEM_UNIQUEID_INITIALIZER</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">local_mem_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// pe 0 获取uid</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pe</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_get_uniqueid</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uid</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// 广播pe 0 uid到其他pe</span>
+<span class="w">    </span><span class="n">MPI_Bcast</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">aclshmemx_uniqueid_t</span><span class="p">),</span><span class="w"> </span><span class="n">MPI_UINT8_T</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// 调用uid的set接口创建attributes。</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_set_attr_uniqueid_args</span><span class="p">(</span><span class="n">pe</span><span class="p">,</span><span class="w"> </span><span class="n">pe_size</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                                                </span><span class="n">local_mem_size</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                                                </span><span class="o">&amp;</span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// 初始化                                            </span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_init_attr</span><span class="p">(</span><span class="n">ACLSHMEMX_INIT_WITH_UNIQUEID</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/*</span>
+<span class="cm">    你的任务</span>
+<span class="cm">    */</span>
+
+<span class="w">    </span><span class="c1">//去初始化</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shmem_finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="n">aclrtResetDevice</span><span class="p">(</span><span class="n">pe</span><span class="p">);</span>
+<span class="w">    </span><span class="n">aclFinalize</span><span class="p">();</span>
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="allgather">
 <h1>AllGather<a class="headerlink" href="#allgather" title="Link to this heading"></a></h1>
-<p>该样例工程位于<code class="docutils literal notranslate"><span class="pre">examples\allgather</span></code>文件夹下。</p>
+<p>该样例工程位于<code class="docutils literal notranslate"><span class="pre">examples/allgather</span></code>文件夹下。</p>
 <p>在该样例中，实现了一个通信量较小(单PE通信量小于2MB)情况下，有着更低时延的AllGather纯通信算子。 各PE首先将存在本端input地址下的数据push到本PE的对称内存上；确认远端PE的任务完成后，从远端PE的对称内存拉取对应PE的数据，从而整体完成AllGather的操作。这个样例展示了多种shmem API的用法，包括aclshmemx_mte_put_nbi、aclshmemx_signal_op以及aclshmemx_mte_get_nbi等，用于p2p的通信以及同步任务。</p>
-<section id="id1">
-<h2>核函数实现<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<section id="id8">
+<h2>核函数实现<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;kernel_operator.h&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;acl/acl.h&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;shmem.h&quot;</span>
