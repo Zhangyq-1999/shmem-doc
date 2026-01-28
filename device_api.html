@@ -310,13 +310,20 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__device__cc_8h_1acc976a131b57626f4feb2aedcccc4240"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_barrier</span> <span class="pre">(aclshmem_team_t</span> <span class="pre">team)</span></span></dt>
-<dd></dd></dl>
+<span class="target" id="shmem__host__cc_8h_1acc976a131b57626f4feb2aedcccc4240"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_barrier</span> <span class="pre">(aclshmem_team_t</span> <span class="pre">team)</span></span></dt>
+<dd><p>aclshmem_barrier is a collective synchronization routine over a team. Control returns from aclshmem_barrier after all PEs in the team have called aclshmem_barrier. aclshmem_barrier ensures that all previously issued stores and remote memory updates, including AMOs and RMA operations, done by any of the PEs in the active set are complete before returning. On systems with only scale-up network (HCCS), updates are globally visible, whereas on systems with both scale-up network HCCS and scale-out network (RDMA), ACLSHMEM only guarantees that updates to the memory of a given PE are visible to that PE. Barrier operations issued on the CPU and the NPU only complete communication operations that were issued from the CPU and the NPU, respectively. To ensure completion of GPU-side operations from the CPU, using aclrtSynchronizeStream/aclrtDeviceSynchronize or stream-based API. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>team</strong> – [in] team to do barrier</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__device__cc_8h_1aead514d1024c322c0d7e60f6cfc75a22"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_barrier_all</span> <span class="pre">(void)</span></span></dt>
-<dd></dd></dl>
+<span class="target" id="shmem__host__cc_8h_1aead514d1024c322c0d7e60f6cfc75a22"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_barrier_all</span> <span class="pre">(void)</span></span></dt>
+<dd><p>aclshmem_barrier of all PEs. </p>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
