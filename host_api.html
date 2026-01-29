@@ -992,7 +992,7 @@
 <dd><p>Automatically generates aclshmem wait until functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_HOST_API void aclshmem_NAME_wait_until(<strong>__gm__</strong> TYPE *ivar, int cmp, TYPE cmp_value) </p>
+<p>ACLSHMEM_HOST_API void aclshmem_NAME_wait_until(TYPE *ivar, int cmp, TYPE cmp_value) </p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until the value at ivar satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
@@ -1014,7 +1014,7 @@
 <dd><p>Automatically generates aclshmem wait functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_HOST_API void aclshmem_NAME_wait(<strong>__gm__</strong> TYPE *ivar, TYPE cmp_value)</p>
+<p>ACLSHMEM_HOST_API void aclshmem_NAME_wait(TYPE *ivar, TYPE cmp_value)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until the value of ivar is not equal to comparison value, cmp_value.</p>
@@ -1035,7 +1035,7 @@
 <dd><p>Automatically generates aclshmem wait until all functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_HOST_API void aclshmem_NAME_wait_until_all(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> const int *status, int cmp, TYPE cmp_value)</p>
+<p>ACLSHMEM_HOST_API void aclshmem_NAME_wait_until_all(TYPE *ivars, size_t nelems, const int *status, int cmp, TYPE cmp_value)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until all entries in the wait set specified by ivars and status satisfy the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
@@ -1059,7 +1059,7 @@
 <dd><p>Automatically generates aclshmem wait until any functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_HOST_API void aclshmem_NAME_wait_until_any(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> const int *status, int cmp, TYPE cmp_value)</p>
+<p>ACLSHMEM_HOST_API void aclshmem_NAME_wait_until_any(TYPE *ivars, size_t nelems, const int *status, int cmp, TYPE cmp_value)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until any one entry in the wait set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
@@ -1083,7 +1083,7 @@
 <dd><p>Automatically generates aclshmem wait until some functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_wait_until_some(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> size_t *indices, <strong>__gm__</strong> const int *status, int cmp, TYPE cmp_value)</p>
+<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_wait_until_some(TYPE *ivars, size_t nelems, size_t *indices, const int *status, int cmp, TYPE cmp_value)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until at least one entry in the wait set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
@@ -1108,7 +1108,7 @@
 <dd><p>Automatically generates aclshmem wait until all vector functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_wait_until_all_vector(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> const int *status, int cmp, <strong>__gm__</strong> TYPE *cmp_values)</p>
+<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_wait_until_all_vector(TYPE *ivars, size_t nelems, const int *status, int cmp, TYPE *cmp_values)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until all entries in the wait set specified by ivars and status satisfy the condition defined by the comparison operator, cmp, and comparison value, cmp_values.</p>
@@ -1132,7 +1132,7 @@
 <dd><p>Automatically generates aclshmem wait until any vector functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_wait_until_any_vector(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> const int *status, int cmp, <strong>__gm__</strong> TYPE *cmp_values)</p>
+<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_wait_until_any_vector(TYPE *ivars, size_t nelems, const int *status, int cmp, TYPE *cmp_values)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until any one entry in the wait set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_values.</p>
@@ -1156,7 +1156,7 @@
 <dd><p>Automatically generates aclshmem wait until some vector functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_wait_until_some_vector(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> size_t *indices, <strong>__gm__</strong> const int *status, int cmp, <strong>__gm__</strong> TYPE *cmp_values)</p>
+<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_wait_until_some_vector(TYPE *ivars, size_t nelems, size_t *indices, const int *status, int cmp, TYPE *cmp_values)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until at least one entry in the wait set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_values.</p>
@@ -1181,7 +1181,7 @@
 <dd><p>Automatically generates aclshmem test functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_HOST_API int aclshmem_NAME_test(<strong>__gm__</strong> TYPE *ivars, int cmp, TYPE cmp_value)</p>
+<p>ACLSHMEM_HOST_API int aclshmem_NAME_test(TYPE *ivars, int cmp, TYPE cmp_value)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by testing whether the value of ivar satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
@@ -1203,7 +1203,7 @@
 <dd><p>Automatically generates aclshmem test any functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_test_any(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> const int *status, int cmp, TYPE cmp_value)</p>
+<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_test_any(TYPE *ivars, size_t nelems, const int *status, int cmp, TYPE cmp_value)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by testing whether any one entry in the test set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
@@ -1227,7 +1227,7 @@
 <dd><p>Automatically generates aclshmem test some functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_test_some(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> size_t *indices, <strong>__gm__</strong> const int *status, int cmp, TYPE cmp_value)</p>
+<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_test_some(TYPE *ivars, size_t nelems, size_t *indices, const int *status, int cmp, TYPE cmp_value)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by testing whether at least one entry in the test set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
@@ -1252,7 +1252,7 @@
 <dd><p>Automatically generates aclshmem test all vector functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_test_all_vector(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> const int *status, int cmp, <strong>__gm__</strong> TYPE *cmp_values)</p>
+<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_test_all_vector(TYPE *ivars, size_t nelems, const int *status, int cmp, TYPE *cmp_values)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by testing whether all entries in the test set specified by ivars and status satisfy the condition defined by the comparison operator, cmp, and comparison value, cmp_values.</p>
@@ -1276,7 +1276,7 @@
 <dd><p>Automatically generates aclshmem test any vector functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_test_any_vector(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> const int *status, int cmp, <strong>__gm__</strong> TYPE *cmp_values)</p>
+<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_test_any_vector(TYPE *ivars, size_t nelems, const int *status, int cmp, TYPE *cmp_values)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by testing whether any one entry in the test set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_values.</p>
@@ -1300,7 +1300,7 @@
 <dd><p>Automatically generates aclshmem test some vector functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_test_some_vector(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> size_t *indices, <strong>__gm__</strong> const int *status, int cmp, <strong>__gm__</strong> TYPE *cmp_values)</p>
+<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_test_some_vector(TYPE *ivars, size_t nelems, size_t *indices, const int *status, int cmp, TYPE *cmp_values)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by testing whether at least one entry in the test set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_values.</p>
