@@ -48,7 +48,7 @@
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">快速开始</a></li>
 <li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Using ACLSHMEM</span></p>
+<p class="caption" role="heading"><span class="caption-text">Using SHMEM</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api_demo.html">SHMEM API 样例</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compilation_build_guide.html">编译与构建</a></li>
@@ -893,7 +893,7 @@
 <dd><p>Automatically generates aclshmem g functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_g(<strong>__gm__</strong> TYPE *dst, const TYPE value, int pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_g(<strong>__gm__</strong> TYPE *dst, const TYPE value, int32_t pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Provide a low latency get capability for single element of most basic types.</p>
@@ -1077,7 +1077,7 @@
 <dd><p>Automatically generates aclshmem get nbi functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_get_nbi(AscendC::GlobalTensor&lt;TYPE&gt; dst, AscendC::GlobalTensor&lt;TYPE&gt; src, uint32_t elem_size, int32_t pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_get_nbi(AscendC::GlobalTensor&lt;TYPE&gt; dst, AscendC::GlobalTensor&lt;TYPE&gt; src, uint32_t elem_size, int pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported.</p>
@@ -1100,7 +1100,7 @@
 <dd><p>Automatically generates aclshmem get nbi functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_get_nbi(AscendC::GlobalTensor&lt;TYPE&gt; dst, AscendC::GlobalTensor&lt;TYPE&gt; src, uint32_t elem_size, int32_t pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_get_nbi(AscendC::GlobalTensor&lt;TYPE&gt; dst, AscendC::GlobalTensor&lt;TYPE&gt; src, uint32_t elem_size, int pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on symmetric memory from the specified PE to address on the local device.</p>
@@ -1192,7 +1192,7 @@
 <dd><p>Automatically generates aclshmem put nbi functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_nbi(AscendC::GlobalTensor&lt;TYPE&gt; dst, AscendC::GlobalTensor&lt;TYPE&gt; src, uint32_t elem_size, int32_t pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_nbi(AscendC::GlobalTensor&lt;TYPE&gt; dst, AscendC::GlobalTensor&lt;TYPE&gt; src, uint32_t elem_size, int pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported.</p>
@@ -1470,7 +1470,7 @@
 <dd><p>Automatically generates aclshmem put nbi functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_nbi(<strong>ubuf</strong> TYPE *dst, <strong>__gm__</strong> TYPE *src, uint32_t elem_size, int pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_nbi(<strong>ubuf</strong> TYPE *dst, <strong>__gm__</strong> TYPE *src, uint32_t elem_size, int32_t pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy contiguous data on local UB to symmetric address on the specified PE. </p>
@@ -1493,7 +1493,7 @@
 <dd><p>Automatically generates aclshmem put nbi functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_nbi(AscendC::LocalTensor&lt;TYPE&gt; dst, AscendC::GlobalTensor&lt;TYPE&gt; src, uint32_t elem_size, int pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_nbi(AscendC::LocalTensor&lt;TYPE&gt; dst, AscendC::GlobalTensor&lt;TYPE&gt; src, uint32_t elem_size, int32_t pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy contiguous data on local UB to symmetric address on the specified PE. </p>
@@ -1539,7 +1539,7 @@
 <dd><p>Automatically generates aclshmem put nbi functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_nbi(AscendC::LocalTensor&lt;TYPE&gt; dst, AscendC::GlobalTensor&lt;TYPE&gt; src, const non_contiguous_copy_param &amp;copy_params, int pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_nbi(AscendC::LocalTensor&lt;TYPE&gt; dst, AscendC::GlobalTensor&lt;TYPE&gt; src, const non_contiguous_copy_param &amp;copy_params, int32_t pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE.</p>
