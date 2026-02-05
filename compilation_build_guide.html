@@ -67,13 +67,15 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="log_debug.html">SHMEM日志</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools_debug.html">SHMEM搭配工具算子调测指导</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="def.html">SHMEM DEF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="host_api.html">HOST API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="env_vars_intro.html">SHMEM Env Vars</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul>
@@ -154,6 +156,7 @@ bash<span class="w"> </span>scripts/build.sh
 <li><p><code class="docutils literal notranslate"><span class="pre">-gendoc</span></code>：生成文档</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-onlygendoc</span></code>: 生成文档，不构建源码</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-debug</span></code>：设置构建类型为 <code class="docutils literal notranslate"><span class="pre">Debug</span></code> 模式</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-mssanitizer</span></code>：example启用mssanitizer内存检测工具，脚本执行需用mssanitizer拉起任务才能实际生效，当前暂不支持，allgather样例运行脚本提供了tool选项使用工具。工具使用方法参见<a class="reference external" href="https://www.hiascend.com/document/detail/zh/canncommercial/850/devaids/optool/atlasopdev_16_0039.html">异常检测工具（msSanitizer，MindStudio Sanitizer）</a></p></li>
 </ul>
 </section>
 <section id="id5">

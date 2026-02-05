@@ -53,7 +53,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#id6">快速上手</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#pythontest-pythonapi">python侧test用例     <span class="xref myst">python接口API列表</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#unique-id">unique id 初始化方式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#aclshmem">aclshmem方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shmem">SHMEM方式</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a></li>
@@ -63,13 +63,15 @@
 <li class="toctree-l1"><a class="reference internal" href="api_demo.html">SHMEM API 样例</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compilation_build_guide.html">编译与构建</a></li>
 <li class="toctree-l1"><a class="reference internal" href="log_debug.html">SHMEM日志</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools_debug.html">SHMEM搭配工具算子调测指导</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="def.html">SHMEM DEF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="host_api.html">HOST API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="env_vars_intro.html">SHMEM Env Vars</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul>
@@ -175,7 +177,7 @@ bash<span class="w"> </span>scripts/build.sh
 </div>
 </li>
 <li><p>run包使用<br>
-软件包名为：ACLSHMEM_{version}_linux-{arch}.run <br>
+软件包名为：SHMEM_{version}_linux-{arch}.run <br>
 其中，{version}表示软件版本号，{arch}表示CPU架构。<br>
 安装run包（需要依赖cann环境）<br></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+x<span class="w"> </span>软件包名.run<span class="w"> </span><span class="c1"># 增加对软件包的可执行权限</span>
@@ -265,13 +267,13 @@ bash<span class="w"> </span>scripts/run.sh<span class="w"> </span>-ranks<span cl
 </section>
 <section id="unique-id">
 <h2>unique id 初始化方式<a class="headerlink" href="#unique-id" title="Link to this heading"></a></h2>
-<p>注：使用unique id的接口初始化，需要手动配置环境变量ACLSHMEM_UID_SESSION_ID或者ACLSHMEM_UID_SOCK_IFNAM，同时配置时只读ACLSHMEM_UID_SESSION_ID
-ACLSHMEM_UID_SESSION_ID配置示例：
-ACLSHMEM_UID_SOCK_IFNAM=127.0.0.1:1234
-ACLSHMEM_UID_SOCK_IFNAM=[6666:6666:6666:6666:6666:6666:6666:6666]:886
-ACLSHMEM_UID_SOCK_IFNAM配置示例：
-ACLSHMEM_UID_SOCK_IFNAM=enpxxxx:inet4  取ipv4
-ACLSHMEM_UID_SOCK_IFNAM=enpxxxx:inet6  取ipv6
+<p>注：使用unique id的接口初始化，需要手动配置环境变量SHMEM_UID_SESSION_ID或者SHMEM_UID_SOCK_IFNAME，同时配置时只读SHMEM_UID_SESSION_ID
+SHMEM_UID_SESSION_ID配置示例：
+SHMEM_UID_SESSION_ID=127.0.0.1:1234
+SHMEM_UID_SESSION_ID=[6666:6666:6666:6666:6666:6666:6666:6666]:886
+SHMEM_UID_SOCK_IFNAME配置示例：
+SHMEM_UID_SOCK_IFNAME=enpxxxx:inet4  取ipv4
+SHMEM_UID_SOCK_IFNAME=enpxxxx:inet6  取ipv6
 不配置默认取eth:inet4</p>
 <ul class="simple">
 <li><p>python初始化例子</p></li>
@@ -297,16 +299,16 @@ ACLSHMEM_UID_SOCK_IFNAM=enpxxxx:inet6  取ipv6
 </pre></div>
 </div>
 </section>
-<section id="aclshmem">
-<h2>aclshmem方式<a class="headerlink" href="#aclshmem" title="Link to this heading"></a></h2>
-<p>注：使用unique id的接口初始化，可以手动配置环境变量ACLSHMEM_UID_SESSION_ID或者ACLSHMEM_UID_SOCK_IFNAM，同时配置时只读ACLSHMEM_UID_SESSION_ID，都不配置会自动搜索可用网口。
-ACLSHMEM_UID_SESSION_ID配置示例：
-ACLSHMEM_UID_SESSION_ID=127.0.0.1:1234
-ACLSHMEM_UID_SESSION_ID=[6666:6666:6666:6666:6666:6666:6666:6666]:886
-ACLSHMEM_UID_SESSION_ID=[6666:6666:6666:6666:6666:6666:6666:6666%eth]:886
-ACLSHMEM_UID_SOCK_IFNAM配置示例：
-ACLSHMEM_UID_SOCK_IFNAM=enpxxxx:inet4  取ipv4
-ACLSHMEM_UID_SOCK_IFNAM=enpxxxx:inet6  取ipv6
+<section id="shmem">
+<h2>SHMEM方式<a class="headerlink" href="#shmem" title="Link to this heading"></a></h2>
+<p>注：使用unique id的接口初始化，可以手动配置环境变量SHMEM_UID_SESSION_ID或者SHMEM_UID_SOCK_IFNAME，同时配置时只读SHMEM_UID_SESSION_ID，都不配置会自动搜索可用网口。
+SHMEM_UID_SESSION_ID配置示例：
+SHMEM_UID_SESSION_ID=127.0.0.1:1234
+SHMEM_UID_SESSION_ID=[6666:6666:6666:6666:6666:6666:6666:6666]:886
+SHMEM_UID_SESSION_ID=[6666:6666:6666:6666:6666:6666:6666:6666%eth]:886
+SHMEM_UID_SOCK_IFNAME配置示例：
+SHMEM_UID_SOCK_IFNAME=enpxxxx:inet4  取ipv4
+SHMEM_UID_SOCK_IFNAME=enpxxxx:inet6  取ipv6
 不配置默认取inet4自动搜索可用网口，搜索优先级：非docker、lo&gt;&gt;docker&gt;&gt;lo。</p>
 <ul class="simple">
 <li><p>c++初始化例子</p></li>

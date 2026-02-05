@@ -53,6 +53,7 @@
 <li class="toctree-l1"><a class="reference internal" href="api_demo.html">SHMEM API 样例</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compilation_build_guide.html">编译与构建</a></li>
 <li class="toctree-l1"><a class="reference internal" href="log_debug.html">SHMEM日志</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools_debug.html">SHMEM搭配工具算子调测指导</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul class="current">
@@ -65,12 +66,16 @@
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPE_FUNC"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPE_FUNC</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPE_PUT"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPE_PUT</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPE_PUT_NBI"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPE_PUT_NBI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPE_IPUT"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPE_IPUT</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PUT_SIZE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PUT_SIZE</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PUT_SIZE_NBI"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PUT_SIZE_NBI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_IPUT_SIZE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_IPUT_SIZE</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPE_GET"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPE_GET</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPE_GET_NBI"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPE_GET_NBI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPE_IGET"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPE_IGET</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_GET_SIZE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_GET_SIZE</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_GET_SIZE_NBI"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_GET_SIZE_NBI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_IGET_SIZE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_IGET_SIZE</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPENAME_P"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPENAME_P</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPENAME_G"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPENAME_G</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmem_block_mode_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_block_mode_t</span></code></a></li>
@@ -107,7 +112,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="env_vars_intro.html">SHMEM Env Vars</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul>
@@ -574,6 +580,31 @@
 </dd></dl>
 
 <dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_TYPE_IPUT">
+<span class="target" id="shmem__host__rma_8h_1a48aefc819e4aede4c9a72ed8727477ee"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TYPE_IPUT</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_TYPE_IPUT" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem put functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_NAME_iput(TYPE *dest, TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy strided data elements (specified by sst) of an array from a source array on the local PE to locations specified by stride dst on a dest array on specified remote PE.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dest</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>source</strong> - [in] Pointer on local device of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] The stride between consecutive elements of the dest array.</p></li>
+<li><p><strong>sst</strong> - [in] The stride between consecutive elements of the source array.</p></li>
+<li><p><strong>nelems</strong> - [in] Number of elements in the destination and source arrays.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.ACLSHMEM_PUT_SIZE">
 <span class="target" id="shmem__host__rma_8h_1a04b7171f5ba199a180f14056b12e33bf"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_PUT_SIZE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">BITS</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_PUT_SIZE" title="Link to this definition"></a><br /></dt>
 <dd><p>Automatically generates aclshmem put functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
@@ -611,6 +642,31 @@
 <li><p><strong>dst</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
 <li><p><strong>src</strong> - [in] Pointer on local device of the source data.</p></li>
 <li><p><strong>elem_size</strong> - [in] Number of elements in the destination and source arrays.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_IPUT_SIZE">
+<span class="target" id="shmem__host__rma_8h_1ab241be8a343cf5b5849123194b5ae904"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_IPUT_SIZE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">BITS</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_IPUT_SIZE" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem put functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_iputBITS(void *dest, void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy strided data elements (specified by sst) of an array from a source array on the local PE to locations specified by stride dst on a dest array on specified remote PE.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dest</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>source</strong> - [in] Pointer on local device of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] The stride between consecutive elements of the dest array.</p></li>
+<li><p><strong>sst</strong> - [in] The stride between consecutive elements of the source array.</p></li>
+<li><p><strong>nelems</strong> - [in] Number of elements in the destination and source arrays.</p></li>
 <li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
 </ul>
 </p>
@@ -666,6 +722,31 @@
 </dd></dl>
 
 <dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_TYPE_IGET">
+<span class="target" id="shmem__host__rma_8h_1a1072abb1b909c516a72b239620fe344c"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TYPE_IGET</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_TYPE_IGET" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem get functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_NAME_iget(TYPE *dest, TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy strided data elements from a symmetric array from a specified remote PE to strided locations on a local array.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dest</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>source</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] The stride between consecutive elements of the dest array.</p></li>
+<li><p><strong>sst</strong> - [in] The stride between consecutive elements of the source array.</p></li>
+<li><p><strong>nelems</strong> - [in] Number of elements in the destination and source arrays.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.ACLSHMEM_GET_SIZE">
 <span class="target" id="shmem__host__rma_8h_1a1d0631a757e62ba9b6b5c3748b5a1b09"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_GET_SIZE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">BITS</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_GET_SIZE" title="Link to this definition"></a><br /></dt>
 <dd><p>Automatically generates aclshmem get functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
@@ -703,6 +784,31 @@
 <li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
 <li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
 <li><p><strong>elem_size</strong> - [in] Number of elements in the dest and source arrays.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_IGET_SIZE">
+<span class="target" id="shmem__host__rma_8h_1a68efb2ca161475342e97c713bac38e24"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_IGET_SIZE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">BITS</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_IGET_SIZE" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem get functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_igetBITS(void *dest, void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy strided data elements from a symmetric array from a specified remote PE to strided locations on a local array.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dest</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>source</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] The stride between consecutive elements of the dest array.</p></li>
+<li><p><strong>sst</strong> - [in] The stride between consecutive elements of the source array.</p></li>
+<li><p><strong>nelems</strong> - [in] Number of elements in the destination and source arrays.</p></li>
 <li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
 </ul>
 </p>
@@ -923,18 +1029,18 @@
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__cc_8h_1acc976a131b57626f4feb2aedcccc4240"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_barrier</span> <span class="pre">(aclshmem_team_t</span> <span class="pre">team)</span></span></dt>
+<span class="target" id="shmem__host__cc_8h_1a84d2cb3df127dd0903ac7e6040fb22cd"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_barrier</span> <span class="pre">(aclshmem_team_t</span> <span class="pre">team)</span></span></dt>
 <dd><p>aclshmem_barrier is a collective synchronization routine over a team. Control returns from aclshmem_barrier after all PEs in the team have called aclshmem_barrier. aclshmem_barrier ensures that all previously issued stores and remote memory updates, including AMOs and RMA operations, done by any of the PEs in the active set are complete before returning. On systems with only scale-up network (HCCS), updates are globally visible, whereas on systems with both scale-up network HCCS and scale-out network (RDMA), ACLSHMEM only guarantees that updates to the memory of a given PE are visible to that PE. Barrier operations issued on the CPU and the NPU only complete communication operations that were issued from the CPU and the NPU, respectively. To ensure completion of GPU-side operations from the CPU, using aclrtSynchronizeStream/aclrtDeviceSynchronize or stream-based API. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>team</strong> – [in] team to do barrier</p>
+<dd class="field-odd"><p><strong>team</strong> – [in] team to do barrier </p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__cc_8h_1aead514d1024c322c0d7e60f6cfc75a22"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_barrier_all</span> <span class="pre">(void)</span></span></dt>
+<span class="target" id="shmem__host__cc_8h_1a77e4962016a975579418e3922d4104f1"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_barrier_all</span> <span class="pre">(void)</span></span></dt>
 <dd><p>aclshmem_barrier of all PEs. </p>
 </dd></dl>
 
@@ -1325,7 +1431,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__p2p__sync_8h_1a5ef21d69da0ca953dfb886b67b18d6ea"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">uint64_t</span> <span class="pre">util_get_ffts_config</span> <span class="pre">(void)</span></span></dt>
-<dd><p>Get runtime ffts config. This config should be passed to MIX Kernel and set by MIX Kernel Using SHMEMx_set_ffts. Refer to aclshmemx_set_ffts for more details. </p>
+<dd><p>Get runtime ffts config. This config should be passed to MIX Kernel and set by MIX Kernel using aclshmemx_set_ffts. Refer to aclshmemx_set_ffts for more details. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ffts config </p>

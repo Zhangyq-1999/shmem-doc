@@ -52,13 +52,15 @@
 <li class="toctree-l1"><a class="reference internal" href="api_demo.html">SHMEM API 样例</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compilation_build_guide.html">编译与构建</a></li>
 <li class="toctree-l1"><a class="reference internal" href="log_debug.html">SHMEM日志</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools_debug.html">SHMEM搭配工具算子调测指导</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="def.html">SHMEM DEF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="host_api.html">HOST API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="env_vars_intro.html">SHMEM Env Vars</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul>
@@ -117,7 +119,7 @@
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#id6">快速上手</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#pythontest-pythonapi">python侧test用例     <span class="xref myst">python接口API列表</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#unique-id">unique id 初始化方式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#aclshmem">aclshmem方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#shmem">SHMEM方式</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a><ul>
@@ -131,7 +133,7 @@
 </li>
 </ul>
 </div>
-<div class="toctree-wrapper compound" id="using-aclshmem">
+<div class="toctree-wrapper compound" id="using-shmem">
 <p class="caption" role="heading"><span class="caption-text">Using SHMEM</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api_demo.html">SHMEM API 样例</a><ul>
@@ -149,6 +151,11 @@
 <li class="toctree-l1"><a class="reference internal" href="log_debug.html">SHMEM日志</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="log_debug.html#id1">环境变量介绍</a></li>
 <li class="toctree-l2"><a class="reference internal" href="log_debug.html#id2">日志阅读</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools_debug.html">SHMEM搭配工具算子调测指导</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools_debug.html#msprof">msprof</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools_debug.html#mssanitizer">mssanitizer</a></li>
 </ul>
 </li>
 </ul>
@@ -185,9 +192,14 @@
 <li class="toctree-l2"><a class="reference internal" href="device_api.html#shmem-device-team-h">shmem_device_team.h</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pythonAPI.html#shmem">SHMEM对外接口</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pythonAPI.html#id1">SHMEM类</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pythonAPI.html#shmem-core-api">shmem.core API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pythonAPI.html#shmem-pyshmem-api">shmem._pyshmem API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="env_vars_intro.html">SHMEM Env Vars</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="env_vars_intro.html#id1">初始化相关</a></li>
+<li class="toctree-l2"><a class="reference internal" href="env_vars_intro.html#id2">日志相关</a></li>
 </ul>
 </li>
 </ul>
@@ -196,7 +208,7 @@
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="example.html">初始化</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="example.html#aclshmemx-init-with-default">ACLSHMEMX_INIT_WITH_DEFAULT（支持双后端）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example.html#aclshmemx-init-with-default">ACLSHMEMX_INIT_WITH_DEFAULT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example.html#aclshmemx-init-with-mpi">ACLSHMEMX_INIT_WITH_MPI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example.html#aclshmemx-init-with-uniqueid">ACLSHMEMX_INIT_WITH_UNIQUEID</a></li>
 </ul>
@@ -231,7 +243,11 @@
 <p class="caption" role="heading"><span class="caption-text">Troubleshooting And FAQs</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Troubleshooting_FAQs.html#id2">内存分配相关问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Troubleshooting_FAQs.html#ip-port">IP/PORT配置相关问题</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="toctree-wrapper compound" id="security-harding-and-public-ip-address">

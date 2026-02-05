@@ -53,13 +53,15 @@
 <li class="toctree-l1"><a class="reference internal" href="api_demo.html">SHMEM API 样例</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compilation_build_guide.html">编译与构建</a></li>
 <li class="toctree-l1"><a class="reference internal" href="log_debug.html">SHMEM日志</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools_debug.html">SHMEM搭配工具算子调测指导</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="def.html">SHMEM DEF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="host_api.html">HOST API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="env_vars_intro.html">SHMEM Env Vars</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul>
@@ -74,7 +76,35 @@
 <p class="caption" role="heading"><span class="caption-text">Troubleshooting And FAQs</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">SHMEM 使用限制</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#id1">SHMEM 常见问题</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#id1">SHMEM 常见问题</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">内存分配相关问题</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#aclshmem-malloc">aclshmem_malloc多卡分配非对称共享内存</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#q-error">Q: 算子精度问题，无error日志，发现共享内存访问到的数据异常;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a-debug">A: 可使用debug模式排查共享内存分配对称性问题</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#aclshmemx-set-attr-uniqueid-argspelocal-mem-size">aclshmemx_set_attr_uniqueid_args对每个pe设置了不同的local_mem_size</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#q-local-size-diffs">Q: 提示local size diffs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a-aclshmemx-init-attr-tpelocal-mem-size">A: 应保证aclshmemx_init_attr_t初始化过程中每pe分配的local_mem_size大小一致</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ip-port">IP/PORT配置相关问题</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">绑定端口被占用</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#q-ip-port">Q: 尝试使用的ip/port已被占用，错误日志如图:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a-ip">A: 逐步排查ip及端口可用情况</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ip-port-ethip">未通过环境变量配置ip/port，使用默认eth查询ip信息失败</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#q-shmem-uid-session-idshmem-uid-sock-ifnameth-inet4ip">Q: <code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID</span></code>和<code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SOCK_IFNAM</span></code>均未配置时使用<code class="docutils literal notranslate"><span class="pre">eth:inet4</span></code>查询本地ip地址，查询失败时错误日志如下:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a-shmem-uid-session-idshmem-uid-sock-ifnam">A: 应手动配置<code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID</span></code>或<code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SOCK_IFNAM</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
 <ul>
@@ -114,8 +144,126 @@
 </section>
 <section id="id1">
 <h1>SHMEM 常见问题<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
-<p>Q：<br />
-A：</p>
+<section id="id2">
+<h2>内存分配相关问题<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="aclshmem-malloc">
+<h3>aclshmem_malloc多卡分配非对称共享内存<a class="headerlink" href="#aclshmem-malloc" title="Link to this heading"></a></h3>
+<section id="q-error">
+<h4>Q: 算子精度问题，无error日志，发现共享内存访问到的数据异常;<a class="headerlink" href="#q-error" title="Link to this heading"></a></h4>
+<img src="./images/trouble-shooting/shmem_alloc-asymmetric-alloc-no-error.png" alt="算子精度报错" width="500"/>
+<p>错误示例代码:</p>
+<p>以<code class="docutils literal notranslate"><span class="pre">example</span></code>目录下的<code class="docutils literal notranslate"><span class="pre">allgather_matmul</span></code>为例，以下为非对称共享内存分配分配的简单示例场景：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Inappropriate calling of aclshmem_malloc</span>
+<span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">symmTest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<span class="n">symmTest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmem_malloc</span><span class="p">(((</span><span class="n">rank_id</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">__fp16</span><span class="p">));</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">symmPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmem_malloc</span><span class="p">((</span><span class="mi">204</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">__fp16</span><span class="p">));</span>
+<span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">gmSymmetric</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">symmPtr</span><span class="p">;</span>
+
+<span class="p">...</span><span class="w"> </span><span class="p">...</span>
+
+<span class="n">aclshmem_free</span><span class="p">(</span><span class="n">symmPtr</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">symmTest</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">aclshmem_free</span><span class="p">(</span><span class="n">symmTest</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="a-debug">
+<h4>A: 可使用debug模式排查共享内存分配对称性问题<a class="headerlink" href="#a-debug" title="Link to this heading"></a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">debug</span></code>模式开启方法：在代码仓根目录下执行：<code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">scripts/build.sh</span> <span class="pre">-examples</span> <span class="pre">-debug</span></code></p>
+<p>此时执行代码获得如下报错，确认错误为使用<code class="docutils literal notranslate"><span class="pre">aclshmem_malloc</span></code>接口分配了非对称的共享内存</p>
+<p><img alt="开启debug模式后错误日志" src="_images/shmem_alloc-asymmetric-alloc-log.png" /></p>
+<p>错误原因分析示意图:</p>
+<p>修正方式: 确保每个rank分配相同大小的共享内存</p>
+<img src="./images/trouble-shooting/shmem_alloc-asymmetric-alloc.png" alt="共享内存非对称分配" width="500"/>
+</section>
+</section>
+<section id="aclshmemx-set-attr-uniqueid-argspelocal-mem-size">
+<h3>aclshmemx_set_attr_uniqueid_args对每个pe设置了不同的local_mem_size<a class="headerlink" href="#aclshmemx-set-attr-uniqueid-argspelocal-mem-size" title="Link to this heading"></a></h3>
+<section id="q-local-size-diffs">
+<h4>Q: 提示local size diffs<a class="headerlink" href="#q-local-size-diffs" title="Link to this heading"></a></h4>
+<p>错误调用代码片段:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">aclshmemx_init_attr_t</span><span class="w"> </span><span class="n">attributes</span><span class="p">;</span>
+<span class="n">aclshmemx_uniqueid_t</span><span class="w"> </span><span class="n">uid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ACLSHMEM_UNIQUEID_INITIALIZER</span><span class="p">;</span>
+
+<span class="kt">int64_t</span><span class="w"> </span><span class="n">local_mem_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1024</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pe</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pe</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_get_uniqueid</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uid</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">MPI_Bcast</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">aclshmemx_uniqueid_t</span><span class="p">),</span><span class="w"> </span><span class="n">MPI_UINT8_T</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+<span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_set_attr_uniqueid_args</span><span class="p">(</span><span class="n">pe</span><span class="p">,</span><span class="w"> </span><span class="n">pe_size</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                                            </span><span class="n">local_mem_size</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                                            </span><span class="o">&amp;</span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">);</span>
+<span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_init_attr</span><span class="p">(</span><span class="n">ACLSHMEMX_INIT_WITH_UNIQUEID</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>错误日志:</p>
+<p><img alt="图片" src="_images/local_mem_size_asymmetirc_alloc.png" /></p>
+<p>注意:</p>
+<ol class="arabic simple">
+<li><p>日志中显示的实际分配大小和local_mem_size大小有<code class="docutils literal notranslate"><span class="pre">6MB</span></code>的差异为shmem框架内部使用空间</p></li>
+<li><p>此处<code class="docutils literal notranslate"><span class="pre">local_mem_size</span></code>大小为<code class="docutils literal notranslate"><span class="pre">2MB</span></code>对齐，若尝试分配其他大小如<code class="docutils literal notranslate"><span class="pre">1025</span> <span class="pre">*</span> <span class="pre">1024</span> <span class="pre">*</span> <span class="pre">1024</span></code>可能会出现不同的错误信息:</p></li>
+</ol>
+<p><img alt="图片" src="_images/local_mem_size_asymmetirc_alloc_not_2mb.png" /></p>
+</section>
+<section id="a-aclshmemx-init-attr-tpelocal-mem-size">
+<h4>A: 应保证aclshmemx_init_attr_t初始化过程中每pe分配的local_mem_size大小一致<a class="headerlink" href="#a-aclshmemx-init-attr-tpelocal-mem-size" title="Link to this heading"></a></h4>
+</section>
+</section>
+</section>
+<section id="ip-port">
+<h2>IP/PORT配置相关问题<a class="headerlink" href="#ip-port" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3>绑定端口被占用<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<section id="q-ip-port">
+<h4>Q: 尝试使用的ip/port已被占用，错误日志如图:<a class="headerlink" href="#q-ip-port" title="Link to this heading"></a></h4>
+<ol class="arabic simple">
+<li><p>端口被占用错误日志:</p></li>
+</ol>
+<p><img alt="端口被占用" src="_images/port-being-used.PNG" /></p>
+<ol class="arabic simple" start="2">
+<li><p>ip不可用错误日志1:</p></li>
+</ol>
+<p><img alt="ip不可用1" src="_images/ip-unaccessible.PNG" /></p>
+<ol class="arabic simple" start="3">
+<li><p>ip不可用错误日志2:</p></li>
+</ol>
+<p><img alt="ip不可用2" src="_images/ip-unaccessible2.PNG" /></p>
+</section>
+<section id="a-ip">
+<h4>A: 逐步排查ip及端口可用情况<a class="headerlink" href="#a-ip" title="Link to this heading"></a></h4>
+<ol class="arabic simple">
+<li><p>确认ip是否符合预期</p></li>
+<li><p>检查端口是否被占用，<code class="docutils literal notranslate"><span class="pre">netstat</span> <span class="pre">-tuln</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">&lt;端口号&gt;</span></code></p></li>
+<li><p>调整环境变量<code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID</span></code>及实际执行文件所使用的ip及端口号</p></li>
+</ol>
+</section>
+</section>
+<section id="ip-port-ethip">
+<h3>未通过环境变量配置ip/port，使用默认eth查询ip信息失败<a class="headerlink" href="#ip-port-ethip" title="Link to this heading"></a></h3>
+<section id="q-shmem-uid-session-idshmem-uid-sock-ifnameth-inet4ip">
+<h4>Q: <code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID</span></code>和<code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SOCK_IFNAM</span></code>均未配置时使用<code class="docutils literal notranslate"><span class="pre">eth:inet4</span></code>查询本地ip地址，查询失败时错误日志如下:<a class="headerlink" href="#q-shmem-uid-session-idshmem-uid-sock-ifnameth-inet4ip" title="Link to this heading"></a></h4>
+<p><img alt="session_id_sock_ifnam_not_set" src="_images/session_id_sock_ifnam_not_set.png" /></p>
+</section>
+<section id="a-shmem-uid-session-idshmem-uid-sock-ifnam">
+<h4>A: 应手动配置<code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID</span></code>或<code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SOCK_IFNAM</span></code><a class="headerlink" href="#a-shmem-uid-session-idshmem-uid-sock-ifnam" title="Link to this heading"></a></h4>
+<p>配置示例:</p>
+<ul>
+<li><p>SHMEM_UID_SESSION_ID:</p>
+<p><code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID=127.0.0.1:1234</span></code></p>
+</li>
+<li><p>SHMEM_UID_SOCK_IFNAM:</p>
+<p><code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SOCK_IFNAM=[6666:6666:6666:6666:6666:6666:6666:6666]:886</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SOCK_IFNAM=enpxxxx:inet4</span></code> 取ipv4</p>
+<p><code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SOCK_IFNAM=enpxxxx:inet6</span></code> 取ipv6</p>
+</li>
+</ul>
+<p>注意: 同时配置时只读取<code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID</span></code></p>
+</section>
+</section>
+</section>
 </section>
 
 

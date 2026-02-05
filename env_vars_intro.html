@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>在样例工程使用Ascend C算子调测API &mdash; SHMEM Guidebook 1.0.0 documentation</title>
+  <title>SHMEM Env Vars &mdash; SHMEM Guidebook 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=d6bf9227" />
@@ -19,7 +19,9 @@
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="初始化" href="example.html" />
+    <link rel="prev" title="SHMEM Python API Reference" href="pythonAPI.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -54,12 +56,16 @@
 <li class="toctree-l1"><a class="reference internal" href="tools_debug.html">SHMEM搭配工具算子调测指导</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="def.html">SHMEM DEF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="host_api.html">HOST API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="env_vars_intro.html">SHMEM Env Vars</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SHMEM Env Vars</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">初始化相关</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">日志相关</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul>
@@ -95,9 +101,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">在样例工程使用Ascend C算子调测API</li>
+      <li class="breadcrumb-item active">SHMEM Env Vars</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/debug.md.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/env_vars_intro.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -105,68 +111,41 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="ascend-capi">
-<h1>在样例工程使用Ascend C算子调测API<a class="headerlink" href="#ascend-capi" title="Link to this heading"></a></h1>
-<p>AscendC算子调测API是AscendC提供的调试能力，可进行kernel内部的打印、Tensor内容的查看(Dump)。</p>
-<p>关于kernel调测api的详细介绍，可参考<a class="reference external" href="https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/850/API/ascendcopapi/atlasascendc_api_07_0192.html">DumpTensor</a>和<a class="reference external" href="https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/850/API/ascendcopapi/atlasascendc_api_07_0193.html">printf</a>.</p>
+  <section id="shmem-env-vars">
+<h1>SHMEM Env Vars<a class="headerlink" href="#shmem-env-vars" title="Link to this heading"></a></h1>
 <section id="id1">
-<h2>插入调试代码<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
-<ol class="arabic">
-<li><p>修改使用该功能的核函数入口和相关调用代码，增加开启调测功能（<code class="docutils literal notranslate"><span class="pre">#if</span> <span class="pre">defined(ENABLE_ASCENDC_DUMP)</span></code>）的编译时代码，具体可参考<code class="docutils literal notranslate"><span class="pre">examples/allgather_matmul/main.cpp</span></code>。</p></li>
-<li><p>在想进行调试的层级，增加调测API调用，如下所示：</p>
-<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>// examples/allgather_matmul/main.cpp
-#if defined(ENABLE_ASCENDC_DUMP)
-__global__ __aicore__
-void ShmemAllGatherMatmul(
-<span class="w"> </span>  uint64_t fftsAddr,
-<span class="w"> </span>  GM_ADDR gmA, GM_ADDR gmB, GM_ADDR gmC, GM_ADDR gmSymmetric,
-<span class="w"> </span>  uint32_t m, uint32_t n, uint32_t k, GM_ADDR dump)
-{
-<span class="w"> </span>  AscendC::InitDump(false, dump, ALL_DUMPSIZE);
-#else
-__global__ __aicore__
-void ShmemAllGatherMatmul(
-<span class="w"> </span>  uint64_t fftsAddr,
-<span class="w"> </span>  GM_ADDR gmA, GM_ADDR gmB, GM_ADDR gmC, GM_ADDR gmSymmetric,
-<span class="w"> </span>  uint32_t m, uint32_t n, uint32_t k)
-{
-#endif
-<span class="w"> </span>  // Set FFTS address
-<span class="w"> </span>  AscendC::SetSyncBaseAddr(fftsAddr);
-
-<span class="gi">+  AscendC::printf(&quot;fftsAddr is %d\n&quot;, fftsAddr);</span>
-<span class="gi">+  AscendC::GlobalTensor&lt;ElementB&gt; gmT;</span>
-<span class="gi">+  gmT.SetGlobalBuffer((__gm__ ElementB*)gmB, k * n);</span>
-<span class="gi">+  AscendC::DumpTensor(gmT, n, 16);</span>
-<span class="w"> </span>  ...
-}
-</pre></div>
-</div>
-<p>注意：<code class="docutils literal notranslate"><span class="pre">ALL_DUMPSIZE</span></code>及<code class="docutils literal notranslate"><span class="pre">aclCheck</span></code>等宏和接口定义位于文件<code class="docutils literal notranslate"><span class="pre">examples\utils\debug.h</span></code>中，其中<code class="docutils literal notranslate"><span class="pre">ALL_DUMPSIZE</span></code>默认为75MB，用户可根据需要进行自定义修改。</p>
-</li>
-</ol>
+<h2>初始化相关<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>使用unique id的接口初始化时，需要手动配置环境变量SHMEM_UID_SESSION_ID或者SHMEM_UID_SOCK_IFNAME，同时配置时只读SHMEM_UID_SESSION_ID。指定SHMEM_UID_SESSION_ID时需保证ip可连通，port空闲。指定SHMEM_UID_SOCK_IFNAME时需保证网口指定的网络协议地址存在。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID</span></code>:直接指定PE 0的监听socket的ip和端口。
+SHMEM_UID_SESSION_ID配置示例：
+SHMEM_UID_SESSION_ID=127.0.0.1:1234
+SHMEM_UID_SESSION_ID=[6666:6666:6666:6666:6666:6666:6666:6666]:886</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SOCK_IFNAME</span></code>:指定PE 0的监听socket的网口名和网络层协议。
+SHMEM_UID_SOCK_IFNAME配置示例：
+SHMEM_UID_SOCK_IFNAME=enpxxxx:inet4  取ipv4
+SHMEM_UID_SOCK_IFNAME=enpxxxx:inet6  取ipv6</p></li>
+</ul>
 </section>
 <section id="id2">
-<h2>编译运行<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
-<ol class="arabic">
-<li><p>打开工具的编译开关<code class="docutils literal notranslate"><span class="pre">-enable_ascendc_dump</span></code>， 使能AscendC算子调测API编译算子样例。</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>-enable_ascendc_dump<span class="w"> </span>-examples
-</pre></div>
-</div>
-</li>
-<li><p>在examples/allgather_matmul目录执行demo:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/run.sh<span class="w"> </span><span class="m">6</span>,7
-</pre></div>
-</div>
-</li>
-</ol>
+<h2>日志相关<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>SHMEM提供日志功能协助调测，默认日志等级<code class="docutils literal notranslate"><span class="pre">error</span></code>，落盘到<code class="docutils literal notranslate"><span class="pre">${HOME}/shmem/log</span></code>。课根据下述环境变量控制日志等级，打屏/落盘，落盘路径。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SHMEM_LOG_LEVEL</span></code>: 用于设置SHMEM日志等级，严重程度从高到低有TRACE、DEBUG、WARN、INFO、ERROR、FATAL。默认为ERROR，调试时建议设置为DEBUG或INFO。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SHMEM_LOG_TO_STDOUT</span></code>: 用于设置SHMEM日志是否输出到控制台, 0: 关闭, 1: 开启输出到控制台。默认关闭，不输出到控制台，日志会存储到默认路径或指定路径。如果开启则会在控制台打印日志，日志将不再落盘到文件。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SHMEM_LOG_PATH</span></code>: 用于设置SHMEM日志保存路径， 需要传递合法路径。如不设置默认存储路径为<code class="docutils literal notranslate"><span class="pre">${HOME}/shmem/log</span></code>。</p></li>
+</ul>
+<p>日志详细介绍见<a class="reference internal" href="log_debug.html"><span class="std std-doc">log</span></a></p>
 </section>
 </section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pythonAPI.html" class="btn btn-neutral float-left" title="SHMEM Python API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="example.html" class="btn btn-neutral float-right" title="初始化" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

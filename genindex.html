@@ -50,13 +50,15 @@
 <li class="toctree-l1"><a class="reference internal" href="api_demo.html">SHMEM API 样例</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compilation_build_guide.html">编译与构建</a></li>
 <li class="toctree-l1"><a class="reference internal" href="log_debug.html">SHMEM日志</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools_debug.html">SHMEM搭配工具算子调测指导</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="def.html">SHMEM DEF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="host_api.html">HOST API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="env_vars_intro.html">SHMEM Env Vars</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul>
@@ -105,8 +107,7 @@
 <h1 id="index">Index</h1>
 
 <div class="genindex-jumpbox">
- <a href="#Symbols"><strong>Symbols</strong></a>
- | <a href="#A"><strong>A</strong></a>
+ <a href="#A"><strong>A</strong></a>
  | <a href="#D"><strong>D</strong></a>
  | <a href="#G"><strong>G</strong></a>
  | <a href="#L"><strong>L</strong></a>
@@ -116,32 +117,6 @@
  | <a href="#T"><strong>T</strong></a>
  
 </div>
-<h2 id="Symbols">Symbols</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="def.html#_CPPv4Ut1_0">[anonymous] (C++ enum)</a>, <a href="def.html#_CPPv4Ut1_1">[1]</a>
-</li>
-      <li><a href="def.html#_CPPv4NUt1_115ACLSHMEM_CMP_EQE">[anonymous]::ACLSHMEM_CMP_EQ (C++ enumerator)</a>
-</li>
-      <li><a href="def.html#_CPPv4NUt1_115ACLSHMEM_CMP_GEE">[anonymous]::ACLSHMEM_CMP_GE (C++ enumerator)</a>
-</li>
-      <li><a href="def.html#_CPPv4NUt1_115ACLSHMEM_CMP_GTE">[anonymous]::ACLSHMEM_CMP_GT (C++ enumerator)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="def.html#_CPPv4NUt1_115ACLSHMEM_CMP_LEE">[anonymous]::ACLSHMEM_CMP_LE (C++ enumerator)</a>
-</li>
-      <li><a href="def.html#_CPPv4NUt1_115ACLSHMEM_CMP_LTE">[anonymous]::ACLSHMEM_CMP_LT (C++ enumerator)</a>
-</li>
-      <li><a href="def.html#_CPPv4NUt1_115ACLSHMEM_CMP_NEE">[anonymous]::ACLSHMEM_CMP_NE (C++ enumerator)</a>
-</li>
-      <li><a href="def.html#_CPPv4NUt1_019ACLSHMEM_SIGNAL_ADDE">[anonymous]::ACLSHMEM_SIGNAL_ADD (C++ enumerator)</a>
-</li>
-      <li><a href="def.html#_CPPv4NUt1_019ACLSHMEM_SIGNAL_SETE">[anonymous]::ACLSHMEM_SIGNAL_SET (C++ enumerator)</a>
-</li>
-  </ul></td>
-</tr></table>
-
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -156,6 +131,20 @@
       <li><a href="def.html#_CPPv4N21aclshmem_block_mode_t3NBIE">aclshmem_block_mode_t::NBI (C++ enumerator)</a>, <a href="host_api.html#_CPPv4N21aclshmem_block_mode_t3NBIE">[1]</a>
 </li>
       <li><a href="def.html#_CPPv4N21aclshmem_block_mode_t6NO_NBIE">aclshmem_block_mode_t::NO_NBI (C++ enumerator)</a>, <a href="host_api.html#_CPPv4N21aclshmem_block_mode_t6NO_NBIE">[1]</a>
+</li>
+      <li><a href="def.html#_CPPv422aclshmem_cmp_op_type_t">aclshmem_cmp_op_type_t (C++ enum)</a>
+</li>
+      <li><a href="def.html#_CPPv4N22aclshmem_cmp_op_type_t15ACLSHMEM_CMP_EQE">aclshmem_cmp_op_type_t::ACLSHMEM_CMP_EQ (C++ enumerator)</a>
+</li>
+      <li><a href="def.html#_CPPv4N22aclshmem_cmp_op_type_t15ACLSHMEM_CMP_GEE">aclshmem_cmp_op_type_t::ACLSHMEM_CMP_GE (C++ enumerator)</a>
+</li>
+      <li><a href="def.html#_CPPv4N22aclshmem_cmp_op_type_t15ACLSHMEM_CMP_GTE">aclshmem_cmp_op_type_t::ACLSHMEM_CMP_GT (C++ enumerator)</a>
+</li>
+      <li><a href="def.html#_CPPv4N22aclshmem_cmp_op_type_t15ACLSHMEM_CMP_LEE">aclshmem_cmp_op_type_t::ACLSHMEM_CMP_LE (C++ enumerator)</a>
+</li>
+      <li><a href="def.html#_CPPv4N22aclshmem_cmp_op_type_t15ACLSHMEM_CMP_LTE">aclshmem_cmp_op_type_t::ACLSHMEM_CMP_LT (C++ enumerator)</a>
+</li>
+      <li><a href="def.html#_CPPv4N22aclshmem_cmp_op_type_t15ACLSHMEM_CMP_NEE">aclshmem_cmp_op_type_t::ACLSHMEM_CMP_NE (C++ enumerator)</a>
 </li>
       <li><a href="def.html#c.ACLSHMEM_CORE_SYNC_COUNTER_SIZE">ACLSHMEM_CORE_SYNC_COUNTER_SIZE (C macro)</a>
 </li>
@@ -229,7 +218,19 @@
 </li>
       <li><a href="def.html#_CPPv421aclshmem_host_state_t">aclshmem_host_state_t (C++ struct)</a>
 </li>
+      <li><a href="host_api.html#c.ACLSHMEM_IGET_SIZE">ACLSHMEM_IGET_SIZE (C macro)</a>
+</li>
+      <li><a href="device_api.html#c.ACLSHMEM_IGET_SIZE_MEM">ACLSHMEM_IGET_SIZE_MEM (C macro)</a>
+</li>
+      <li><a href="device_api.html#c.ACLSHMEM_IGET_TYPENAME_MEM">ACLSHMEM_IGET_TYPENAME_MEM (C macro)</a>
+</li>
       <li><a href="def.html#_CPPv429aclshmem_init_optional_attr_t">aclshmem_init_optional_attr_t (C++ struct)</a>
+</li>
+      <li><a href="host_api.html#c.ACLSHMEM_IPUT_SIZE">ACLSHMEM_IPUT_SIZE (C macro)</a>
+</li>
+      <li><a href="device_api.html#c.ACLSHMEM_IPUT_SIZE_MEM">ACLSHMEM_IPUT_SIZE_MEM (C macro)</a>
+</li>
+      <li><a href="device_api.html#c.ACLSHMEM_IPUT_TYPENAME_MEM">ACLSHMEM_IPUT_TYPENAME_MEM (C macro)</a>
 </li>
       <li><a href="def.html#c.ACLSHMEM_LOG_MAX_AIV_PER_NPU">ACLSHMEM_LOG_MAX_AIV_PER_NPU (C macro)</a>
 </li>
@@ -269,6 +270,10 @@
 </li>
       <li><a href="host_api.html#c.ACLSHMEM_PUT_SIZE_MEM_SIGNAL">ACLSHMEM_PUT_SIZE_MEM_SIGNAL (C macro)</a>
 </li>
+      <li><a href="device_api.html#c.ACLSHMEM_PUT_SIZE_MEM_SIGNAL_DETAIL">ACLSHMEM_PUT_SIZE_MEM_SIGNAL_DETAIL (C macro)</a>
+</li>
+      <li><a href="device_api.html#c.ACLSHMEM_PUT_SIZE_MEM_SIGNAL_DETAILED_NBI">ACLSHMEM_PUT_SIZE_MEM_SIGNAL_DETAILED_NBI (C macro)</a>
+</li>
       <li><a href="host_api.html#c.ACLSHMEM_PUT_SIZE_MEM_SIGNAL_NBI">ACLSHMEM_PUT_SIZE_MEM_SIGNAL_NBI (C macro)</a>
 </li>
       <li><a href="host_api.html#c.ACLSHMEM_PUT_SIZE_NBI">ACLSHMEM_PUT_SIZE_NBI (C macro)</a>
@@ -279,6 +284,8 @@
 </li>
       <li><a href="device_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM_NBI">ACLSHMEM_PUT_TYPENAME_MEM_NBI (C macro)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="device_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL (C macro)</a>, <a href="host_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL">[1]</a>
 </li>
       <li><a href="device_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_DETAILED">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_DETAILED (C macro)</a>
@@ -291,8 +298,6 @@
 </li>
       <li><a href="device_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_TENSOR_DETAILED">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_TENSOR_DETAILED (C macro)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="device_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_TENSOR_DETAILED_NBI">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_TENSOR_DETAILED_NBI (C macro)</a>
 </li>
       <li><a href="device_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_TENSOR_NBI">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_TENSOR_NBI (C macro)</a>
@@ -308,6 +313,12 @@
       <li><a href="device_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED_NBI">ACLSHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED_NBI (C macro)</a>
 </li>
       <li><a href="device_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM_UB_TENSOR_NBI">ACLSHMEM_PUT_TYPENAME_MEM_UB_TENSOR_NBI (C macro)</a>
+</li>
+      <li><a href="def.html#_CPPv425aclshmem_signal_op_type_t">aclshmem_signal_op_type_t (C++ enum)</a>
+</li>
+      <li><a href="def.html#_CPPv4N25aclshmem_signal_op_type_t19ACLSHMEM_SIGNAL_ADDE">aclshmem_signal_op_type_t::ACLSHMEM_SIGNAL_ADD (C++ enumerator)</a>
+</li>
+      <li><a href="def.html#_CPPv4N25aclshmem_signal_op_type_t19ACLSHMEM_SIGNAL_SETE">aclshmem_signal_op_type_t::ACLSHMEM_SIGNAL_SET (C++ enumerator)</a>
 </li>
       <li><a href="def.html#_CPPv422aclshmem_team_config_t">aclshmem_team_config_t (C++ struct)</a>
 </li>
@@ -342,20 +353,16 @@
       <li><a href="device_api.html#c.ACLSHMEM_TYPE_FUNC">ACLSHMEM_TYPE_FUNC (C macro)</a>, <a href="device_api.html#c.ACLSHMEM_TYPE_FUNC">[1]</a>, <a href="device_api.html#c.ACLSHMEM_TYPE_FUNC">[2]</a>, <a href="host_api.html#c.ACLSHMEM_TYPE_FUNC">[3]</a>
 </li>
       <li><a href="device_api.html#c.ACLSHMEM_TYPE_FUNC_ATOMIC_FLOAT">ACLSHMEM_TYPE_FUNC_ATOMIC_FLOAT (C macro)</a>
-
-      <ul>
-        <li><a href="device_api.html#_CPPv431ACLSHMEM_TYPE_FUNC_ATOMIC_FLOAT34ACLSHMEM_ATOMIC_ADD_TYPENAME_FLOAT">(C++ function)</a>
 </li>
-      </ul></li>
       <li><a href="device_api.html#c.ACLSHMEM_TYPE_FUNC_ATOMIC_INT">ACLSHMEM_TYPE_FUNC_ATOMIC_INT (C macro)</a>
-
-      <ul>
-        <li><a href="device_api.html#_CPPv429ACLSHMEM_TYPE_FUNC_ATOMIC_INT28ACLSHMEM_ATOMIC_ADD_TYPENAME">(C++ function)</a>
 </li>
-      </ul></li>
       <li><a href="host_api.html#c.ACLSHMEM_TYPE_GET">ACLSHMEM_TYPE_GET (C macro)</a>
 </li>
       <li><a href="host_api.html#c.ACLSHMEM_TYPE_GET_NBI">ACLSHMEM_TYPE_GET_NBI (C macro)</a>
+</li>
+      <li><a href="host_api.html#c.ACLSHMEM_TYPE_IGET">ACLSHMEM_TYPE_IGET (C macro)</a>
+</li>
+      <li><a href="host_api.html#c.ACLSHMEM_TYPE_IPUT">ACLSHMEM_TYPE_IPUT (C macro)</a>
 </li>
       <li><a href="host_api.html#c.ACLSHMEM_TYPE_PUT">ACLSHMEM_TYPE_PUT (C macro)</a>
 </li>

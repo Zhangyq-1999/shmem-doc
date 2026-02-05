@@ -20,7 +20,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="SHMEM Python API" href="pythonAPI.html" />
+    <link rel="next" title="SHMEM Python API Reference" href="pythonAPI.html" />
     <link rel="prev" title="HOST API" href="host_api.html" /> 
 </head>
 
@@ -53,6 +53,7 @@
 <li class="toctree-l1"><a class="reference internal" href="api_demo.html">SHMEM API 样例</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compilation_build_guide.html">编译与构建</a></li>
 <li class="toctree-l1"><a class="reference internal" href="log_debug.html">SHMEM日志</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools_debug.html">SHMEM搭配工具算子调测指导</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul class="current">
@@ -91,9 +92,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPENAME_P_AICORE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPENAME_P_AICORE</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPENAME_G_AICORE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPENAME_G_AICORE</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_GET_TYPENAME_MEM"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_GET_TYPENAME_MEM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_IGET_TYPENAME_MEM"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_IGET_TYPENAME_MEM</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_GET_SIZE_MEM"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_GET_SIZE_MEM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_IGET_SIZE_MEM"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_IGET_SIZE_MEM</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PUT_TYPENAME_MEM"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PUT_TYPENAME_MEM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_IPUT_TYPENAME_MEM"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_IPUT_TYPENAME_MEM</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PUT_SIZE_MEM"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PUT_SIZE_MEM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_IPUT_SIZE_MEM"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_IPUT_SIZE_MEM</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_GET_TYPENAME_MEM_NBI"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_GET_TYPENAME_MEM_NBI</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_GET_SIZE_MEM_NBI"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_GET_SIZE_MEM_NBI</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_GET_TYPENAME_MEM_DETAILED_NBI"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_GET_TYPENAME_MEM_DETAILED_NBI</span></code></a></li>
@@ -119,16 +124,19 @@
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_TENSOR"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_TENSOR</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_DETAILED"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_DETAILED</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_TENSOR_DETAILED"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_TENSOR_DETAILED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PUT_SIZE_MEM_SIGNAL_DETAIL"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PUT_SIZE_MEM_SIGNAL_DETAIL</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_NBI"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_NBI</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_TENSOR_NBI"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_TENSOR_NBI</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_DETAILED_NBI"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_DETAILED_NBI</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_TENSOR_DETAILED_NBI"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_TENSOR_DETAILED_NBI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PUT_SIZE_MEM_SIGNAL_DETAILED_NBI"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PUT_SIZE_MEM_SIGNAL_DETAILED_NBI</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#shmem-device-team-h">shmem_device_team.h</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="env_vars_intro.html">SHMEM Env Vars</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul>
@@ -231,13 +239,11 @@
 <dt class="sig sig-object cpp" id="c.ACLSHMEM_ATOMIC_ADD_TYPENAME">
 <span class="target" id="shmem__device__amo_8h_1ae51a6e89b8bd6650cd5b5e1dfedb15f5"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_ATOMIC_ADD_TYPENAME</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span>, <span class="n"><span class="pre">ATOMIC_TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_ATOMIC_ADD_TYPENAME" title="Link to this definition"></a><br /></dt>
 <dd><p>Automatically generates aclshmem atomic add functions for different data types (e.g., int8, int16, int32). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
-<p><dl>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_atomic_add(<strong>__gm__</strong> TYPE *dst, TYPE value, int32_t pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_atomic_add(__gm__ TYPE *dst, TYPE value, int32_t pe)</p>
 </div>
-</p>
-<p><dl class="simple">
+<dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Perform contiguous data atomic add operation on symmetric memory from the specified PE to address on the local PE.</p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
@@ -255,13 +261,11 @@
 <dt class="sig sig-object cpp" id="c.ACLSHMEM_ATOMIC_ADD_TYPENAME_FLOAT">
 <span class="target" id="shmem__device__amo_8h_1a760e21f56e159d927fc6075759a1cb71"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_ATOMIC_ADD_TYPENAME_FLOAT</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span>, <span class="n"><span class="pre">ATOMIC_TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_ATOMIC_ADD_TYPENAME_FLOAT" title="Link to this definition"></a><br /></dt>
 <dd><p>Automatically generates aclshmem atomic add functions for different data types (e.g., float, half). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
-<p><dl>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_atomic_add(<strong>__gm__</strong> TYPE *dst, TYPE value, int32_t pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_atomic_add(__gm__ TYPE *dst, TYPE value, int32_t pe)</p>
 </div>
-</p>
-<p><dl class="simple">
+<dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Perform contiguous data atomic add operation on symmetric memory from the specified PE to address on the local PE.</p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
@@ -295,18 +299,18 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__cc_8h_1acc976a131b57626f4feb2aedcccc4240"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_barrier</span> <span class="pre">(aclshmem_team_t</span> <span class="pre">team)</span></span></dt>
+<span class="target" id="shmem__device__cc_8h_1acc976a131b57626f4feb2aedcccc4240"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_barrier</span> <span class="pre">(aclshmem_team_t</span> <span class="pre">team)</span></span></dt>
 <dd><p>aclshmem_barrier is a collective synchronization routine over a team. Control returns from aclshmem_barrier after all PEs in the team have called aclshmem_barrier. aclshmem_barrier ensures that all previously issued stores and remote memory updates, including AMOs and RMA operations, done by any of the PEs in the active set are complete before returning. On systems with only scale-up network (HCCS), updates are globally visible, whereas on systems with both scale-up network HCCS and scale-out network (RDMA), ACLSHMEM only guarantees that updates to the memory of a given PE are visible to that PE. Barrier operations issued on the CPU and the NPU only complete communication operations that were issued from the CPU and the NPU, respectively. To ensure completion of GPU-side operations from the CPU, using aclrtSynchronizeStream/aclrtDeviceSynchronize or stream-based API. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>team</strong> – [in] team to do barrier</p>
+<dd class="field-odd"><p><strong>team</strong> – [in] team to do barrier </p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__cc_8h_1aead514d1024c322c0d7e60f6cfc75a22"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_barrier_all</span> <span class="pre">(void)</span></span></dt>
+<span class="target" id="shmem__device__cc_8h_1aead514d1024c322c0d7e60f6cfc75a22"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmem_barrier_all</span> <span class="pre">(void)</span></span></dt>
 <dd><p>aclshmem_barrier of all PEs. </p>
 </dd></dl>
 
@@ -374,7 +378,7 @@
 <dd><p>Automatically generates aclshmem wait until functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_wait_until(<strong>__gm__</strong> TYPE *ivar, int cmp, TYPE cmp_value)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_wait_until(__gm__ TYPE *ivar, int cmp, TYPE cmp_value)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until the value at ivar satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
@@ -396,7 +400,7 @@
 <dd><p>Automatically generates aclshmem wait functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_wait(<strong>__gm__</strong> TYPE *ivar, TYPE cmp_value)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_wait(__gm__ TYPE *ivar, TYPE cmp_value)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until the value of ivar is not equal to comparison value, cmp_value.</p>
@@ -417,7 +421,7 @@
 <dd><p>Automatically generates aclshmem wait until all functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_wait_until_all(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> const int *status, int cmp, TYPE cmp_value)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_wait_until_all(__gm__ TYPE *ivars, size_t nelems, __gm__ const int *status, int cmp, TYPE cmp_value)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until all entries in the wait set specified by ivars and status satisfy the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
@@ -441,7 +445,7 @@
 <dd><p>Automatically generates aclshmem wait until any functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_wait_until_any(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> const int *status, int cmp, TYPE cmp_value)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_wait_until_any(__gm__ TYPE *ivars, size_t nelems, __gm__ const int *status, int cmp, TYPE cmp_value)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until any one entry in the wait set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
@@ -467,7 +471,7 @@
 <dd><p>Automatically generates aclshmem wait until some functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE size_t aclshmem_NAME_wait_until_some(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> size_t *indices, <strong>__gm__</strong> const int *status, int cmp, TYPE cmp_value)</p>
+<p>ACLSHMEM_DEVICE size_t aclshmem_NAME_wait_until_some(__gm__ TYPE *ivars, size_t nelems, __gm__ size_t *indices, __gm__ const int *status, int cmp, TYPE cmp_value)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until at least one entry in the wait set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
@@ -494,7 +498,7 @@
 <dd><p>Automatically generates aclshmem wait until all vector functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE size_t aclshmem_NAME_wait_until_all_vector(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> const int *status, int cmp, <strong>__gm__</strong> TYPE *cmp_values)</p>
+<p>ACLSHMEM_DEVICE size_t aclshmem_NAME_wait_until_all_vector(__gm__ TYPE *ivars, size_t nelems, __gm__ const int *status, int cmp, __gm__ TYPE *cmp_values)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until all entries in the wait set specified by ivars and status satisfy the condition defined by the comparison operator, cmp, and comparison value, cmp_values.</p>
@@ -518,7 +522,7 @@
 <dd><p>Automatically generates aclshmem wait until any vector functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE size_t aclshmem_NAME_wait_until_any_vector(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> const int *status, int cmp, <strong>__gm__</strong> TYPE *cmp_values)</p>
+<p>ACLSHMEM_DEVICE size_t aclshmem_NAME_wait_until_any_vector(__gm__ TYPE *ivars, size_t nelems, __gm__ const int *status, int cmp, __gm__ TYPE *cmp_values)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until any one entry in the wait set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_values.</p>
@@ -544,7 +548,7 @@
 <dd><p>Automatically generates aclshmem wait until some vector functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE size_t aclshmem_NAME_wait_until_some_vector(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> size_t *indices, <strong>__gm__</strong> const int *status, int cmp, <strong>__gm__</strong> TYPE *cmp_values)</p>
+<p>ACLSHMEM_DEVICE size_t aclshmem_NAME_wait_until_some_vector(__gm__ TYPE *ivars, size_t nelems, __gm__ size_t *indices, __gm__ const int *status, int cmp, __gm__ TYPE *cmp_values)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until at least one entry in the wait set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_values.</p>
@@ -571,7 +575,7 @@
 <dd><p>Automatically generates aclshmem test functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE int aclshmem_NAME_test(<strong>__gm__</strong> TYPE *ivars, int cmp, TYPE cmp_value)</p>
+<p>ACLSHMEM_DEVICE int aclshmem_NAME_test(__gm__ TYPE *ivars, int cmp, TYPE cmp_value)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by testing whether the value of ivar satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
@@ -595,7 +599,7 @@
 <dd><p>Automatically generates aclshmem test any functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE size_t aclshmem_NAME_test_any(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> const int *status, int cmp, TYPE cmp_value)</p>
+<p>ACLSHMEM_DEVICE size_t aclshmem_NAME_test_any(__gm__ TYPE *ivars, size_t nelems, __gm__ const int *status, int cmp, TYPE cmp_value)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by testing whether any one entry in the test set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
@@ -621,7 +625,7 @@
 <dd><p>Automatically generates aclshmem test some functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE size_t aclshmem_NAME_test_some(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> size_t *indices, <strong>__gm__</strong> const int *status, int cmp, TYPE cmp_value)</p>
+<p>ACLSHMEM_DEVICE size_t aclshmem_NAME_test_some(__gm__ TYPE *ivars, size_t nelems, __gm__ size_t *indices, __gm__ const int *status, int cmp, TYPE cmp_value)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by testing whether at least one entry in the test set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
@@ -648,7 +652,7 @@
 <dd><p>Automatically generates aclshmem test all vector functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE size_t aclshmem_NAME_test_all_vector(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> const int *status, int cmp, <strong>__gm__</strong> TYPE *cmp_values)</p>
+<p>ACLSHMEM_DEVICE size_t aclshmem_NAME_test_all_vector(__gm__ TYPE *ivars, size_t nelems, __gm__ const int *status, int cmp, __gm__ TYPE *cmp_values)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by testing whether all entries in the test set specified by ivars and status satisfy the condition defined by the comparison operator, cmp, and comparison value, cmp_values.</p>
@@ -674,7 +678,7 @@
 <dd><p>Automatically generates aclshmem test any vector functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE size_t aclshmem_NAME_test_any_vector(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> const int *status, int cmp, <strong>__gm__</strong> TYPE *cmp_values)</p>
+<p>ACLSHMEM_DEVICE size_t aclshmem_NAME_test_any_vector(__gm__ TYPE *ivars, size_t nelems, __gm__ const int *status, int cmp, __gm__ TYPE *cmp_values)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by testing whether any one entry in the test set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_values.</p>
@@ -700,7 +704,7 @@
 <dd><p>Automatically generates aclshmem test some vector functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE size_t aclshmem_NAME_test_some_vector(<strong>__gm__</strong> TYPE *ivars, size_t nelems, <strong>__gm__</strong> size_t *indices, <strong>__gm__</strong> const int *status, int cmp, <strong>__gm__</strong> TYPE *cmp_values)</p>
+<p>ACLSHMEM_DEVICE size_t aclshmem_NAME_test_some_vector(__gm__ TYPE *ivars, size_t nelems, __gm__ size_t *indices, __gm__ const int *status, int cmp, __gm__ TYPE *cmp_values)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by testing whether at least one entry in the test set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_values.</p>
@@ -871,7 +875,7 @@
 <dd><p>Automatically generates aclshmem p functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_p(<strong>__gm__</strong> TYPE *dst, const TYPE value, int pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_p(__gm__ TYPE *dst, const TYPE value, int pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Provide a low latency put capability for single element of most basic types.</p>
@@ -893,7 +897,7 @@
 <dd><p>Automatically generates aclshmem g functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_g(<strong>__gm__</strong> TYPE *dst, const TYPE value, int32_t pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_g(__gm__ TYPE *dst, const TYPE value, int32_t pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Provide a low latency get capability for single element of most basic types.</p>
@@ -916,7 +920,7 @@
 <dd><p>Automatically generates aclshmem get functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_get(<strong>__gm__</strong> TYPE *dst, <strong>__gm__</strong> TYPE *src, uint32_t elem_size, int32_t pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_get(__gm__ TYPE *dst, __gm__ TYPE *src, uint32_t elem_size, int32_t pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE.</p>
@@ -925,6 +929,31 @@
 <li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
 <li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
 <li><p><strong>elem_size</strong> - [in] Number of elements in the dest and source arrays.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_IGET_TYPENAME_MEM">
+<span class="target" id="gm2gm_2shmem__device__rma_8h_1a0459fcbc9414e5b3279fc6b8b12333e9"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_IGET_TYPENAME_MEM</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_IGET_TYPENAME_MEM" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem get functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_iget(__gm__ TYPE *dest, __gm__ TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy strided data elements from a symmetric array from a specified remote PE to strided locations on a local array.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dest</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>source</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] The stride between consecutive elements of the dest array.</p></li>
+<li><p><strong>sst</strong> - [in] The stride between consecutive elements of the source array.</p></li>
+<li><p><strong>nelems</strong> - [in] Number of elements in the destination and source arrays.</p></li>
 <li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
 </ul>
 </p>
@@ -939,7 +968,7 @@
 <dd><p>Automatically generates aclshmem get functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_getBITS(<strong>__gm__</strong> void *dst, <strong>__gm__</strong> void *src, uint32_t elem_size, int32_t pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_getBITS(__gm__ void *dst, __gm__ void *src, uint32_t elem_size, int32_t pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE.</p>
@@ -957,12 +986,37 @@
 </dd></dl>
 
 <dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_IGET_SIZE_MEM">
+<span class="target" id="gm2gm_2shmem__device__rma_8h_1a3ac15b7b8404c694aace7d35c84be182"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_IGET_SIZE_MEM</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">BITS</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_IGET_SIZE_MEM" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem get functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_DEVICE void aclshmem_igetBITS(__gm__ void *dest, __gm__ void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy strided data elements from a symmetric array from a specified remote PE to strided locations on a local array.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dest</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>source</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] The stride between consecutive elements of the dest array.</p></li>
+<li><p><strong>sst</strong> - [in] The stride between consecutive elements of the source array.</p></li>
+<li><p><strong>nelems</strong> - [in] Number of elements in the destination and source arrays.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.ACLSHMEM_PUT_TYPENAME_MEM">
 <span class="target" id="gm2gm_2shmem__device__rma_8h_1ac2f08931f80ffbaecfa8117711abb244"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_PUT_TYPENAME_MEM</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_PUT_TYPENAME_MEM" title="Link to this definition"></a><br /></dt>
 <dd><p>Automatically generates aclshmem put functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_put(<strong>__gm__</strong> TYPE *dst, <strong>__gm__</strong> TYPE *src, uint32_t elem_size, int32_t pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_put(__gm__ TYPE *dst, __gm__ TYPE *src, uint32_t elem_size, int32_t pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy a contiguous data on local PE to symmetric address on the specified PE.</p>
@@ -971,6 +1025,31 @@
 <li><p><strong>dst</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
 <li><p><strong>src</strong> - [in] Pointer on local device of the source data.</p></li>
 <li><p><strong>elem_size</strong> - [in] Number of elements in the destination and source arrays.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_IPUT_TYPENAME_MEM">
+<span class="target" id="gm2gm_2shmem__device__rma_8h_1a070ff246713d083fee3d8d9ce3fc1597"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_IPUT_TYPENAME_MEM</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_IPUT_TYPENAME_MEM" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem put functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_iput(__gm__ TYPE *dest, __gm__ TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy strided data elements (specified by sst) of an array from a source array on the local PE to locations specified by stride dst on a dest array on specified remote PE.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dest</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>source</strong> - [in] Pointer on local device of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] The stride between consecutive elements of the dest array.</p></li>
+<li><p><strong>sst</strong> - [in] The stride between consecutive elements of the source array.</p></li>
+<li><p><strong>nelems</strong> - [in] Number of elements in the destination and source arrays.</p></li>
 <li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
 </ul>
 </p>
@@ -985,7 +1064,7 @@
 <dd><p>Automatically generates aclshmem put functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_putBITS(<strong>__gm__</strong> void *dst, <strong>__gm__</strong> void *src, uint32_t elem_size, int32_t pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_putBITS(__gm__ void *dst, __gm__ void *src, uint32_t elem_size, int32_t pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy a contiguous data on local PE to symmetric address on the specified PE.</p>
@@ -1003,12 +1082,37 @@
 </dd></dl>
 
 <dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_IPUT_SIZE_MEM">
+<span class="target" id="gm2gm_2shmem__device__rma_8h_1ae1b03804fbf3871c4dd756a0aaf46bba"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_IPUT_SIZE_MEM</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">BITS</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_IPUT_SIZE_MEM" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem put functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_iputBITS(__gm__ void *dest, __gm__ void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy strided data elements (specified by sst) of an array from a source array on the local PE to locations specified by stride dst on a dest array on specified remote PE.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dest</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>source</strong> - [in] Pointer on local device of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] The stride between consecutive elements of the dest array.</p></li>
+<li><p><strong>sst</strong> - [in] The stride between consecutive elements of the source array.</p></li>
+<li><p><strong>nelems</strong> - [in] Number of elements in the destination and source arrays.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.ACLSHMEM_GET_TYPENAME_MEM_NBI">
 <span class="target" id="gm2gm_2shmem__device__rma_8h_1ae03fc3e04ab9a054e7410792f7a43158"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_GET_TYPENAME_MEM_NBI</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_GET_TYPENAME_MEM_NBI" title="Link to this definition"></a><br /></dt>
 <dd><p>Automatically generates aclshmem get nbi functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_get_nbi(<strong>__gm__</strong> TYPE *dst, <strong>__gm__</strong> TYPE *src, uint32_t elem_size, int32_t pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_get_nbi(__gm__ TYPE *dst, __gm__ TYPE *src, uint32_t elem_size, int32_t pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported.</p>
@@ -1031,7 +1135,7 @@
 <dd><p>Automatically generates aclshmem get functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_getBITS_nbi(<strong>__gm__</strong> void *dst, <strong>__gm__</strong> void *src, uint32_t elem_size, int32_t pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_getBITS_nbi(__gm__ void *dst, __gm__ void *src, uint32_t elem_size, int32_t pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported.</p>
@@ -1054,7 +1158,7 @@
 <dd><p>Automatically generates aclshmem get nbi functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_get_nbi(<strong>__gm__</strong> TYPE *dst, <strong>__gm__</strong> TYPE *src, const <a class="reference internal" href="def.html#structnon__contiguous__copy__param"><span class="std std-ref">non_contiguous_copy_param</span></a> &amp;copy_params, int32_t pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_get_nbi(__gm__ TYPE *dst, __gm__ TYPE *src, const non_contiguous_copy_param &amp;copy_params, int32_t pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on symmetric memory from the specified PE to address on the local device.</p>
@@ -1123,7 +1227,7 @@
 <dd><p>Automatically generates aclshmem put nbi functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_nbi(<strong>__gm__</strong> TYPE *dst, <strong>__gm__</strong> TYPE *src, uint32_t elem_size, int32_t pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_nbi(__gm__ TYPE *dst, __gm__ TYPE *src, uint32_t elem_size, int32_t pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported.</p>
@@ -1146,7 +1250,7 @@
 <dd><p>Automatically generates aclshmem put functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_putBITS_nbi(<strong>__gm__</strong> void *dst, <strong>__gm__</strong> void *src, uint32_t elem_size, int32_t pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_putBITS_nbi(__gm__ void *dst, __gm__ void *src, uint32_t elem_size, int32_t pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported.</p>
@@ -1169,7 +1273,7 @@
 <dd><p>Automatically generates aclshmem put nbi functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_nbi(<strong>__gm__</strong> TYPE *dst, <strong>__gm__</strong> TYPE *src, const <a class="reference internal" href="def.html#structnon__contiguous__copy__param"><span class="std std-ref">non_contiguous_copy_param</span></a> &amp;copy_params, int32_t pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_nbi(__gm__ TYPE *dst, __gm__ TYPE *src, const non_contiguous_copy_param &amp;copy_params, int32_t pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on local PE to symmetric address on the specified PE.</p>
@@ -1378,7 +1482,7 @@
 <dd><p>Automatically generates aclshmem get nbi functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_get_nbi(<strong>__ubuf__</strong> TYPE *dst, <strong>__gm__</strong> TYPE *src, uint32_t elem_size, int pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_get_nbi(__ubuf__ TYPE *dst, __gm__ TYPE *src, uint32_t elem_size, int pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local UB. </p>
@@ -1424,7 +1528,7 @@
 <dd><p>Automatically generates aclshmem get nbi functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_get_nbi(<strong>__ubuf__</strong> TYPE *dst, <strong>__gm__</strong> TYPE *src, const <a class="reference internal" href="def.html#structnon__contiguous__copy__param"><span class="std std-ref">non_contiguous_copy_param</span></a> &amp;copy_params, int pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_get_nbi(__ubuf__ TYPE *dst, __gm__ TYPE *src, const non_contiguous_copy_param &amp;copy_params, int pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on symmetric memory from the specified PE to address on the local UB.</p>
@@ -1470,7 +1574,7 @@
 <dd><p>Automatically generates aclshmem put nbi functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_nbi(<strong>__gm__</strong> TYPE *dst, <strong>__ubuf__</strong> TYPE *src, uint32_t elem_size, int32_t pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_nbi(__gm__ TYPE *dst, __ubuf__ TYPE *src, uint32_t elem_size, int32_t pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy contiguous data on local UB to symmetric address on the specified PE. </p>
@@ -1516,7 +1620,7 @@
 <dd><p>Automatically generates aclshmem put nbi functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_nbi(<strong>__gm__</strong> TYPE *dst, <strong>__ubuf__</strong> TYPE *src, const <a class="reference internal" href="def.html#structnon__contiguous__copy__param"><span class="std std-ref">non_contiguous_copy_param</span></a> &amp;copy_params, int pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_nbi(__gm__ TYPE *dst, __ubuf__ TYPE *src, const non_contiguous_copy_param &amp;copy_params, int32_t pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE.</p>
@@ -2020,7 +2124,7 @@
 <dd><p>Automatically generates aclshmem put signal functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_signal(<strong>__gm__</strong> TYPE *dst, <strong>__gm__</strong> TYPE *src, size_t elem_size, <strong>__gm__</strong> int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_signal(__gm__ TYPE *dst, __gm__ TYPE *src, size_t elem_size,\ __gm__ int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE.</p>
@@ -2046,7 +2150,7 @@
 <dd><p>Automatically generates aclshmem put signal functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_signal(AscendC::GlobalTensor&lt;TYPE&gt; dst, AscendC::GlobalTensor&lt;TYPE&gt; src, size_t elem_size, <strong>__gm__</strong> int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_signal(AscendC::GlobalTensor&lt;TYPE&gt; dst, AscendC::GlobalTensor&lt;TYPE&gt;\ src, size_t elem_size, <strong>gm</strong> int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE.</p>
@@ -2072,7 +2176,7 @@
 <dd><p>Automatically generates aclshmem put signal functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_signal(<strong>__gm__</strong> TYPE *dst, <strong>__gm__</strong> TYPE *src, const <a class="reference internal" href="def.html#structnon__contiguous__copy__param"><span class="std std-ref">non_contiguous_copy_param</span></a> &amp;copy_params, <strong>__gm__</strong> int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_signal(__gm__ TYPE *dst, __gm__ TYPE *src, const\ <a class="reference internal" href="def.html#structnon__contiguous__copy__param"><span class="std std-ref">non_contiguous_copy_param</span></a> &amp;copy_params, __gm__ int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE then update sig_addr</p>
@@ -2098,7 +2202,7 @@
 <dd><p>Automatically generates aclshmem put signal functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_signal(AscendC::GlobalTensor&lt;TYPE&gt; dst, AscendC::GlobalTensor&lt;TYPE&gt; src，const <a class="reference internal" href="def.html#structnon__contiguous__copy__param"><span class="std std-ref">non_contiguous_copy_param</span></a> &amp;copy_params, <strong>__gm__</strong> int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_signal(AscendC::GlobalTensor&lt;TYPE&gt; dst, AscendC::GlobalTensor&lt;TYPE&gt;\ src，const <a class="reference internal" href="def.html#structnon__contiguous__copy__param"><span class="std std-ref">non_contiguous_copy_param</span></a> &amp;copy_params, __gm__ int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE.</p>
@@ -2119,12 +2223,38 @@
 </dd></dl>
 
 <dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_PUT_SIZE_MEM_SIGNAL_DETAIL">
+<span class="target" id="shmem__device__so_8h_1a6f715d4c9afe27cf771fe7d248636a12"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_PUT_SIZE_MEM_SIGNAL_DETAIL</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">BITS</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_PUT_SIZE_MEM_SIGNAL_DETAIL" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem put functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_DEVICE void aclshmem_putBITS_signal(void *dst, void *src, size_t nelems, int32_t *sig_addr,\ int32_t signal, int sig_op, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy a contiguous data from local to symmetric address on the specified PE and updating a remote signal flag on completion.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>nelems</strong> - [in] Number of elements in the dest and source arrays.</p></li>
+<li><p><strong>sig_addr</strong> - [in] Symmetric address of the signal word to be updated.</p></li>
+<li><p><strong>signal</strong> - [in] The value used to update sig_addr.</p></li>
+<li><p><strong>sig_op</strong> - [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_NBI">
 <span class="target" id="shmem__device__so_8h_1a8fda7bc245497043b10b4a7b0234cda9"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_NBI</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_NBI" title="Link to this definition"></a><br /></dt>
 <dd><p>Automatically generates aclshmem put signal nbi functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_signal_nbi(<strong>__gm__</strong> TYPE *dst, <strong>__gm__</strong> TYPE *src, size_t elem_size, <strong>__gm__</strong> int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_signal_nbi(__gm__ TYPE *dst, __gm__ TYPE *src, size_t\ elem_size, __gm__ int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE.</p>
@@ -2150,7 +2280,7 @@
 <dd><p>Automatically generates aclshmem put signal nbi functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_signal_nbi(AscendC::GlobalTensor&lt;TYPE&gt; dst, AscendC::GlobalTensor&lt;TYPE&gt; src, size_t elem_size, size_t elem_size, <strong>__gm__</strong> int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_signal_nbi(AscendC::GlobalTensor&lt;TYPE&gt; dst,\ AscendC::GlobalTensor&lt;TYPE&gt; src, size_t elem_size, size_t elem_size, __gm__ int32_t *sig_addr, int32_t signal,\ int sig_op, int pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE.</p>
@@ -2176,7 +2306,7 @@
 <dd><p>Automatically generates aclshmem put signal functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_signal(<strong>__gm__</strong> TYPE *dst, <strong>__gm__</strong> TYPE *src, const <a class="reference internal" href="def.html#structnon__contiguous__copy__param"><span class="std std-ref">non_contiguous_copy_param</span></a> &amp;copy_params, <strong>__gm__</strong> int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_signal(__gm__ TYPE *dst, __gm__ TYPE *src, const\ <a class="reference internal" href="def.html#structnon__contiguous__copy__param"><span class="std std-ref">non_contiguous_copy_param</span></a> &amp;copy_params, __gm__ int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE then update sig_addr</p>
@@ -2202,7 +2332,7 @@
 <dd><p>Automatically generates aclshmem put signal functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_signal(AscendC::GlobalTensor&lt;TYPE&gt; dst, AscendC::GlobalTensor&lt;TYPE&gt; src，const <a class="reference internal" href="def.html#structnon__contiguous__copy__param"><span class="std std-ref">non_contiguous_copy_param</span></a> &amp;copy_params, <strong>__gm__</strong> int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_signal(AscendC::GlobalTensor&lt;TYPE&gt; dst, AscendC::GlobalTensor&lt;TYPE&gt;\ src，const <a class="reference internal" href="def.html#structnon__contiguous__copy__param"><span class="std std-ref">non_contiguous_copy_param</span></a> &amp;copy_params, __gm__ int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE.</p>
@@ -2211,6 +2341,32 @@
 <li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
 <li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
 <li><p><strong>copy_params</strong> - [in] Params to describe how non-contiguous data is organized in src and dst.</p></li>
+<li><p><strong>sig_addr</strong> - [in] Symmetric address of the signal word to be updated.</p></li>
+<li><p><strong>signal</strong> - [in] The value used to update sig_addr.</p></li>
+<li><p><strong>sig_op</strong> - [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_PUT_SIZE_MEM_SIGNAL_DETAILED_NBI">
+<span class="target" id="shmem__device__so_8h_1ad118fca238f257e22d1c6bdacec855c1"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_PUT_SIZE_MEM_SIGNAL_DETAILED_NBI</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">BITS</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_PUT_SIZE_MEM_SIGNAL_DETAILED_NBI" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem put functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_DEVICE void aclshmem_putBITS_signal_nbi(void *dst, void *src, size_t nelems, int32_t \ *sig_addr, int32_t signal, int sig_op, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy a contiguous data from local to symmetric address on the specified PE and updating a remote signal flag on completion.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>nelems</strong> - [in] Number of elements in the dest and source arrays.</p></li>
 <li><p><strong>sig_addr</strong> - [in] Symmetric address of the signal word to be updated.</p></li>
 <li><p><strong>signal</strong> - [in] The value used to update sig_addr.</p></li>
 <li><p><strong>sig_op</strong> - [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD</p></li>
@@ -2363,7 +2519,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="host_api.html" class="btn btn-neutral float-left" title="HOST API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="pythonAPI.html" class="btn btn-neutral float-right" title="SHMEM Python API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="pythonAPI.html" class="btn btn-neutral float-right" title="SHMEM Python API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

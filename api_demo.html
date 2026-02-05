@@ -69,13 +69,15 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="compilation_build_guide.html">编译与构建</a></li>
 <li class="toctree-l1"><a class="reference internal" href="log_debug.html">SHMEM日志</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools_debug.html">SHMEM搭配工具算子调测指导</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="def.html">SHMEM DEF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="host_api.html">HOST API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="env_vars_intro.html">SHMEM Env Vars</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Example</span></p>
 <ul>
@@ -328,7 +330,7 @@
 </section>
 <section id="mem-api">
 <h2>Mem API<a class="headerlink" href="#mem-api" title="Link to this heading"></a></h2>
-<p>ACLSHMEM的内存管理接口样例</p>
+<p>SHMEM的内存管理接口样例</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// ################### 调用初始化相关接口 ###########################</span>
 <span class="c1">//...</span>
 <span class="c1">// ################## 内存管理接口调用 ###########################</span>
@@ -343,7 +345,7 @@
 </section>
 <section id="rma-api">
 <h2>RMA API<a class="headerlink" href="#rma-api" title="Link to this heading"></a></h2>
-<p>ACLSHMEM的远端内存访问接口样例</p>
+<p>SHMEM的远端内存访问接口样例</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">kernel_p</span><span class="w"> </span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
 <span class="w">    </span><span class="n">__aicore__</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">kernel_p</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
@@ -384,7 +386,7 @@
 </section>
 <section id="sync-api">
 <h2>Sync API<a class="headerlink" href="#sync-api" title="Link to this heading"></a></h2>
-<p>ACLSHMEM的同步管理接口样例</p>
+<p>SHMEM的同步管理接口样例</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// 任务1</span>
 <span class="c1">// ...</span>
 <span class="c1">// 阻塞直到所有任务完成。</span>
