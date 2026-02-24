@@ -1,6 +1,29 @@
 #!/bin/bash
 set -e
 
+if [ $# -ne 2 ]; then
+    echo "错误：参数数量不正确！"
+    echo "用法：$0 \"GitHub用户名\" \"GitHub Personal Access Token\""
+    echo "示例：$0 \"zhangsan\" \"ghp_xxxxxxxxx\""
+    exit 1
+fi
+
+# 解析传入的参数
+GITHUB_USER="$1"
+GITHUB_TOKEN="$2"
+
+# 检查参数合法性
+if [[ -z "$GITHUB_USER" ]]; then
+    echo "错误：GitHub用户名不能为空！"
+    exit 1
+fi
+if [[ -z "$GITHUB_TOKEN" || ${#GITHUB_TOKEN} -lt 20 ]]; then
+    echo "错误：GitHub Token格式不正确（不能为空且长度不小于20）！"
+    exit 1
+fi
+
+REMOTE_REPO="github.com/Zhangyq-1999/shmem-doc.git"
+
 REPO_URL="https://gitcode.com/cann/shmem.git"
 
 TEMP_REPO_DIR="shmem_temp"
@@ -45,6 +68,7 @@ echo -e "\n===== 开始提交并推送代码 ====="
 if [ -n "$(git status --porcelain)" ]; then
     git add .
     git commit -m "update"
+    git remote set-url origin https://${GITHUB_USER}:${GITHUB_TOKEN}@${REMOTE_REPO}
     git push
     echo "✅ 文档更新并推送成功！"
 else
