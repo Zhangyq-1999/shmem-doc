@@ -8,15 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HOST API &mdash; SHMEM Guidebook 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=d6bf9227" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=8d563738"></script>
-      <script src="_static/doctools.js?v=9a2dae69"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -78,9 +78,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_IGET_SIZE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_IGET_SIZE</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPENAME_P"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPENAME_P</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPENAME_G"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPENAME_G</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmem_block_mode_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_block_mode_t</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_block_mode_t6NO_NBIE"><code class="docutils literal notranslate"><span class="pre">NO_NBI</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_block_mode_t3NBIE"><code class="docutils literal notranslate"><span class="pre">NBI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmem_block_mode_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_block_mode_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_block_mode_t6NO_NBIE"><code class="docutils literal notranslate"><span class="pre">NO_NBI</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_block_mode_t3NBIE"><code class="docutils literal notranslate"><span class="pre">NBI</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#shmem-host-cc-h">shmem_host_cc.h</a></li>
@@ -197,11 +199,11 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>my_pe</strong> – [in] my_pe </p></li>
-<li><p><strong>n_pes</strong> – [in] n_pes </p></li>
-<li><p><strong>local_mem_size</strong> – [in] local_mem_size </p></li>
-<li><p><strong>uid</strong> – [in] uid </p></li>
-<li><p><strong>aclshmem_attr</strong> – [in/out] aclshmem_attr </p></li>
+<li><p><strong>my_pe</strong> – [in] Local PE ID, must be less than the maximum supported PEs (my_pe &lt; ACLSHMEM_MAX_PES) </p></li>
+<li><p><strong>n_pes</strong> – [in] Total number of PEs, must be less than or equal to the maximum supported PEs (n_pes &lt;= ACLSHMEM_MAX_PES) </p></li>
+<li><p><strong>local_mem_size</strong> – [in] Allocated local memory size , must be less than the maximum supported local memory size (local_mem_size &lt; ACLSHMEM_MAX_LOCAL_SIZE) </p></li>
+<li><p><strong>uid</strong> – [in] Unique ID obtained from <strong><a class="reference internal" href="#shmem__host__init_8h_1a1e1450a5eb402d76cdd62ebfe313f93e"><span class="std std-ref">aclshmemx_get_uniqueid()</span></a></strong></p></li>
+<li><p><strong>aclshmem_attr</strong> – [in/out] Attribute struct, output parameter of this interface and input parameter for subsequent initialization functions <strong><a class="reference internal" href="#shmem__host__init_8h_1af1de117c692d8aae5da5ae008cfd9d0d"><span class="std std-ref">aclshmemx_init_attr()</span></a></strong></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -344,6 +346,12 @@
 <dd class="field-even"><p>Returns 0 on success or an error code on failure </p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__log_8h_1aeac449d1523a92023c20687fd32bdadc"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_show_prof</span> <span class="pre">()</span></span></dt>
+<dd><p>Prinf profiling data. </p>
 </dd></dl>
 
 </div>
@@ -1004,14 +1012,50 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__rma_8h_1a3f07a349b22171cd96aff43c019f04d5"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmemx_set_mte_config</span> <span class="pre">(uint64_t</span> <span class="pre">offset,</span> <span class="pre">uint32_t</span> <span class="pre">ub_size,</span> <span class="pre">uint32_t</span> <span class="pre">event_id)</span></span></dt>
+<span class="target" id="shmem__host__rma_8h_1a3f55415fee13af3a7460b4488e67a368"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmemx_set_mte_config</span> <span class="pre">(uint64_t</span> <span class="pre">offset,</span> <span class="pre">uint32_t</span> <span class="pre">ub_size,</span> <span class="pre">uint32_t</span> <span class="pre">sync_id)</span></span></dt>
 <dd><p>Set necessary parameters for put or get. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>offset</strong> – [in] The start address on UB. </p></li>
 <li><p><strong>ub_size</strong> – [in] The Size of Temp UB Buffer. </p></li>
-<li><p><strong>event_id</strong> – [in] Sync ID for put or get. </p></li>
+<li><p><strong>sync_id</strong> – [in] Sync ID for put or get. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns 0 on success or an error code on failure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__rma_8h_1ad91d468343b9a8fc1d8cf1d271f7327b"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmemx_set_sdma_config</span> <span class="pre">(uint64_t</span> <span class="pre">offset,</span> <span class="pre">uint32_t</span> <span class="pre">ub_size,</span> <span class="pre">uint32_t</span> <span class="pre">sync_id)</span></span></dt>
+<dd><p>Set necessary parameters for SDMA operations. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offset</strong> – [in] The start address on UB. </p></li>
+<li><p><strong>ub_size</strong> – [in] The Size of Temp UB Buffer. </p></li>
+<li><p><strong>sync_id</strong> – [in] Sync ID for put or get. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns 0 on success or an error code on failure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__rma_8h_1a0348a06e097076032d27e2f7fe564f1b"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmemx_set_rdma_config</span> <span class="pre">(uint64_t</span> <span class="pre">offset,</span> <span class="pre">uint32_t</span> <span class="pre">ub_size,</span> <span class="pre">uint32_t</span> <span class="pre">sync_id)</span></span></dt>
+<dd><p>Set necessary parameters for RDMA operations. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offset</strong> – [in] The start address on UB. </p></li>
+<li><p><strong>ub_size</strong> – [in] The Size of Temp UB Buffer. </p></li>
+<li><p><strong>sync_id</strong> – [in] Sync ID for put or get. </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

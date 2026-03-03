@@ -8,15 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SHMEM DEF &mdash; SHMEM Guidebook 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=d6bf9227" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=8d563738"></script>
-      <script src="_static/doctools.js?v=9a2dae69"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -61,62 +61,85 @@
 <li class="toctree-l2"><a class="reference internal" href="#enumerations">Enumerations</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_P2P_SYNC_TYPE_FUNC"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_P2P_SYNC_TYPE_FUNC</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv46Result"><code class="docutils literal notranslate"><span class="pre">Result</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmem_block_mode_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_block_mode_t</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_block_mode_t6NO_NBIE"><code class="docutils literal notranslate"><span class="pre">NO_NBI</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_block_mode_t3NBIE"><code class="docutils literal notranslate"><span class="pre">NBI</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmem_error_code_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_error_code_t</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t16ACLSHMEM_SUCCESSE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SUCCESS</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t22ACLSHMEM_INVALID_PARAME"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_INVALID_PARAM</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t22ACLSHMEM_INVALID_VALUEE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_INVALID_VALUE</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t19ACLSHMEM_SMEM_ERRORE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SMEM_ERROR</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t20ACLSHMEM_INNER_ERRORE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_INNER_ERROR</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t19ACLSHMEM_NOT_INITEDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_NOT_INITED</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t24ACLSHMEM_BOOTSTRAP_ERRORE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_BOOTSTRAP_ERROR</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t22ACLSHMEM_TIMEOUT_ERRORE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TIMEOUT_ERROR</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t22ACLSHMEM_MALLOC_FAILEDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_MALLOC_FAILED</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t23ACLSHMEM_DL_FUNC_FAILEDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_DL_FUNC_FAILED</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t22ACLSHMEM_INNER_TIMEOUTE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_INNER_TIMEOUT</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t25ACLSHMEM_UNDER_API_UNLOADE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_UNDER_API_UNLOAD</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t22ACLSHMEM_NOT_SUPPORTEDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_NOT_SUPPORTED</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmemx_bootstrap_t"><code class="docutils literal notranslate"><span class="pre">aclshmemx_bootstrap_t</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmemx_bootstrap_t27ACLSHMEMX_INIT_WITH_DEFAULTE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMX_INIT_WITH_DEFAULT</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmemx_bootstrap_t23ACLSHMEMX_INIT_WITH_MPIE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMX_INIT_WITH_MPI</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmemx_bootstrap_t28ACLSHMEMX_INIT_WITH_UNIQUEIDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMX_INIT_WITH_UNIQUEID</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmemx_bootstrap_t18ACLSHMEMX_INIT_MAXE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMX_INIT_MAX</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv423aclshmemx_init_status_t"><code class="docutils literal notranslate"><span class="pre">aclshmemx_init_status_t</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N23aclshmemx_init_status_t31ACLSHMEM_STATUS_NOT_INITIALIZEDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_STATUS_NOT_INITIALIZED</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N23aclshmemx_init_status_t27ACLSHMEM_STATUS_SHM_CREATEDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_STATUS_SHM_CREATED</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N23aclshmemx_init_status_t30ACLSHMEM_STATUS_IS_INITIALIZEDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_STATUS_IS_INITIALIZED</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N23aclshmemx_init_status_t23ACLSHMEM_STATUS_INVALIDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_STATUS_INVALID</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv420aclshmem_transport_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_transport_t</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N20aclshmem_transport_t22ACLSHMEM_TRANSPORT_MTEE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TRANSPORT_MTE</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_ROCEE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TRANSPORT_ROCE</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv414aclshmemi_op_t"><code class="docutils literal notranslate"><span class="pre">aclshmemi_op_t</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N14aclshmemi_op_t16ACLSHMEMI_OP_PUTE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMI_OP_PUT</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N14aclshmemi_op_t14ACLSHMEMI_OP_PE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMI_OP_P</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N14aclshmemi_op_t23ACLSHMEMI_OP_PUT_SIGNALE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMI_OP_PUT_SIGNAL</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N14aclshmemi_op_t16ACLSHMEMI_OP_GETE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMI_OP_GET</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N14aclshmemi_op_t14ACLSHMEMI_OP_GE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMI_OP_G</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmem_team_index_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_team_index_t</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_team_index_t21ACLSHMEM_TEAM_INVALIDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TEAM_INVALID</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21aclshmem_team_index_t19ACLSHMEM_TEAM_WORLDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TEAM_WORLD</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv421data_op_engine_type_t"><code class="docutils literal notranslate"><span class="pre">data_op_engine_type_t</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21data_op_engine_type_t20ACLSHMEM_DATA_OP_MTEE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_DATA_OP_MTE</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21data_op_engine_type_t21ACLSHMEM_DATA_OP_SDMAE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_DATA_OP_SDMA</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N21data_op_engine_type_t21ACLSHMEM_DATA_OP_ROCEE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_DATA_OP_ROCE</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv419aclshmem_mem_type_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_mem_type_t</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N19aclshmem_mem_type_t9HOST_SIDEE"><code class="docutils literal notranslate"><span class="pre">HOST_SIDE</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N19aclshmem_mem_type_t11DEVICE_SIDEE"><code class="docutils literal notranslate"><span class="pre">DEVICE_SIDE</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv425aclshmem_signal_op_type_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_signal_op_type_t</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N25aclshmem_signal_op_type_t19ACLSHMEM_SIGNAL_SETE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_SET</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N25aclshmem_signal_op_type_t19ACLSHMEM_SIGNAL_ADDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_ADD</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv422aclshmem_cmp_op_type_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_cmp_op_type_t</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N22aclshmem_cmp_op_type_t15ACLSHMEM_CMP_EQE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CMP_EQ</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N22aclshmem_cmp_op_type_t15ACLSHMEM_CMP_NEE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CMP_NE</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N22aclshmem_cmp_op_type_t15ACLSHMEM_CMP_GTE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CMP_GT</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N22aclshmem_cmp_op_type_t15ACLSHMEM_CMP_GEE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CMP_GE</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N22aclshmem_cmp_op_type_t15ACLSHMEM_CMP_LTE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CMP_LT</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N22aclshmem_cmp_op_type_t15ACLSHMEM_CMP_LEE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CMP_LE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmem_block_mode_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_block_mode_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_block_mode_t6NO_NBIE"><code class="docutils literal notranslate"><span class="pre">NO_NBI</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_block_mode_t3NBIE"><code class="docutils literal notranslate"><span class="pre">NBI</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmem_error_code_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_error_code_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t16ACLSHMEM_SUCCESSE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SUCCESS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t22ACLSHMEM_INVALID_PARAME"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_INVALID_PARAM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t22ACLSHMEM_INVALID_VALUEE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_INVALID_VALUE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t19ACLSHMEM_SMEM_ERRORE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SMEM_ERROR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t20ACLSHMEM_INNER_ERRORE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_INNER_ERROR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t19ACLSHMEM_NOT_INITEDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_NOT_INITED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t24ACLSHMEM_BOOTSTRAP_ERRORE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_BOOTSTRAP_ERROR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t22ACLSHMEM_TIMEOUT_ERRORE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TIMEOUT_ERROR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t22ACLSHMEM_MALLOC_FAILEDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_MALLOC_FAILED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t23ACLSHMEM_DL_FUNC_FAILEDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_DL_FUNC_FAILED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t22ACLSHMEM_INNER_TIMEOUTE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_INNER_TIMEOUT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t25ACLSHMEM_UNDER_API_UNLOADE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_UNDER_API_UNLOAD</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_error_code_t22ACLSHMEM_NOT_SUPPORTEDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_NOT_SUPPORTED</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmemx_bootstrap_t"><code class="docutils literal notranslate"><span class="pre">aclshmemx_bootstrap_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmemx_bootstrap_t27ACLSHMEMX_INIT_WITH_DEFAULTE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMX_INIT_WITH_DEFAULT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmemx_bootstrap_t23ACLSHMEMX_INIT_WITH_MPIE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMX_INIT_WITH_MPI</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmemx_bootstrap_t28ACLSHMEMX_INIT_WITH_UNIQUEIDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMX_INIT_WITH_UNIQUEID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmemx_bootstrap_t18ACLSHMEMX_INIT_MAXE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMX_INIT_MAX</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv423aclshmemx_init_status_t"><code class="docutils literal notranslate"><span class="pre">aclshmemx_init_status_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N23aclshmemx_init_status_t31ACLSHMEM_STATUS_NOT_INITIALIZEDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_STATUS_NOT_INITIALIZED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N23aclshmemx_init_status_t27ACLSHMEM_STATUS_SHM_CREATEDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_STATUS_SHM_CREATED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N23aclshmemx_init_status_t30ACLSHMEM_STATUS_IS_INITIALIZEDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_STATUS_IS_INITIALIZED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N23aclshmemx_init_status_t23ACLSHMEM_STATUS_INVALIDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_STATUS_INVALID</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv420aclshmem_transport_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_transport_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N20aclshmem_transport_t22ACLSHMEM_TRANSPORT_MTEE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TRANSPORT_MTE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_ROCEE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TRANSPORT_ROCE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_SDMAE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TRANSPORT_SDMA</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv414aclshmemi_op_t"><code class="docutils literal notranslate"><span class="pre">aclshmemi_op_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N14aclshmemi_op_t16ACLSHMEMI_OP_PUTE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMI_OP_PUT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N14aclshmemi_op_t14ACLSHMEMI_OP_PE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMI_OP_P</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N14aclshmemi_op_t23ACLSHMEMI_OP_PUT_SIGNALE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMI_OP_PUT_SIGNAL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N14aclshmemi_op_t16ACLSHMEMI_OP_GETE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMI_OP_GET</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N14aclshmemi_op_t14ACLSHMEMI_OP_GE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMI_OP_G</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmem_team_index_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_team_index_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_team_index_t21ACLSHMEM_TEAM_INVALIDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TEAM_INVALID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_team_index_t19ACLSHMEM_TEAM_WORLDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TEAM_WORLD</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv421data_op_engine_type_t"><code class="docutils literal notranslate"><span class="pre">data_op_engine_type_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21data_op_engine_type_t20ACLSHMEM_DATA_OP_MTEE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_DATA_OP_MTE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21data_op_engine_type_t21ACLSHMEM_DATA_OP_SDMAE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_DATA_OP_SDMA</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21data_op_engine_type_t21ACLSHMEM_DATA_OP_ROCEE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_DATA_OP_ROCE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv419aclshmem_mem_type_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_mem_type_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N19aclshmem_mem_type_t9HOST_SIDEE"><code class="docutils literal notranslate"><span class="pre">HOST_SIDE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N19aclshmem_mem_type_t11DEVICE_SIDEE"><code class="docutils literal notranslate"><span class="pre">DEVICE_SIDE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv425aclshmem_signal_op_type_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_signal_op_type_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N25aclshmem_signal_op_type_t19ACLSHMEM_SIGNAL_SETE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_SET</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N25aclshmem_signal_op_type_t19ACLSHMEM_SIGNAL_ADDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_ADD</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv422aclshmem_cmp_op_type_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_cmp_op_type_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N22aclshmem_cmp_op_type_t15ACLSHMEM_CMP_EQE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CMP_EQ</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N22aclshmem_cmp_op_type_t15ACLSHMEM_CMP_NEE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CMP_NE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N22aclshmem_cmp_op_type_t15ACLSHMEM_CMP_GTE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CMP_GT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N22aclshmem_cmp_op_type_t15ACLSHMEM_CMP_GEE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CMP_GE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N22aclshmem_cmp_op_type_t15ACLSHMEM_CMP_LTE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CMP_LT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N22aclshmem_cmp_op_type_t15ACLSHMEM_CMP_LEE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CMP_LE</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#typedefs">Typedefs</a><ul>
@@ -143,6 +166,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#c.SCALAR_DATA_CACHELINE_SIZE"><code class="docutils literal notranslate"><span class="pre">SCALAR_DATA_CACHELINE_SIZE</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.L2_CACHELINE_SIZE"><code class="docutils literal notranslate"><span class="pre">L2_CACHELINE_SIZE</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PAGE_SIZE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PAGE_SIZE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_SDMA_MAX_CHAN"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SDMA_MAX_CHAN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_SDMA_FLAG_LENGTH"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SDMA_FLAG_LENGTH</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ALIGH_TO"><code class="docutils literal notranslate"><span class="pre">ALIGH_TO</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEMI_SYNCBIT_SIZE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMI_SYNCBIT_SIZE</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.SYNC_LOG_MAX_PES"><code class="docutils literal notranslate"><span class="pre">SYNC_LOG_MAX_PES</span></code></a></li>
@@ -160,14 +185,21 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#structs">Structs</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv429aclshmem_init_optional_attr_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_init_optional_attr_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_CYCLE_PROF_MAX_BLOCK"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CYCLE_PROF_MAX_BLOCK</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_CYCLE_PROF_FRAME_CNT"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CYCLE_PROF_FRAME_CNT</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmemx_init_attr_t"><code class="docutils literal notranslate"><span class="pre">aclshmemx_init_attr_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmem_mte_config_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_mte_config_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv422aclshmem_sdma_config_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_sdma_config_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv422aclshmem_rdma_config_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_rdma_config_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv429aclshmem_init_optional_attr_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_init_optional_attr_t</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv420aclshmemx_uniqueid_t"><code class="docutils literal notranslate"><span class="pre">aclshmemx_uniqueid_t</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv425non_contiguous_copy_param"><code class="docutils literal notranslate"><span class="pre">non_contiguous_copy_param</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv417aclshmem_handle_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_handle_t</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv422aclshmem_team_config_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_team_config_t</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv416aclshmemx_team_t"><code class="docutils literal notranslate"><span class="pre">aclshmemx_team_t</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmem_mte_config_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_mte_config_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv420aclshmem_ub_config_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_ub_config_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmem_prof_block_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_prof_block_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv418aclshmem_prof_pe_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_prof_pe_t</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv428aclshmem_device_host_state_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_device_host_state_t</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmem_host_state_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_host_state_t</span></code></a></li>
 </ul>
@@ -176,9 +208,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv428ACLSHMEM_UNIQUE_ID_INNER_LEN"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_UNIQUE_ID_INNER_LEN</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv415DEFAULT_TIMEOUT"><code class="docutils literal notranslate"><span class="pre">DEFAULT_TIMEOUT</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv425ACLSHMEM_UNIQUEID_VERSION"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_UNIQUEID_VERSION</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv414SVM_START_ADDR"><code class="docutils literal notranslate"><span class="pre">SVM_START_ADDR</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv412SVM_END_ADDR"><code class="docutils literal notranslate"><span class="pre">SVM_END_ADDR</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv417GLOBAL_STATE_SIZE"><code class="docutils literal notranslate"><span class="pre">GLOBAL_STATE_SIZE</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -477,6 +506,12 @@
 <dd><p>RDMA Transport (RoCE). </p>
 </dd></dl>
 
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_SDMAE">
+<span id="_CPPv3N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_SDMAE"></span><span id="_CPPv2N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_SDMAE"></span><span class="target" id="group__group__enums_1gga26fb4b675f0cd14b372e329f89dfa4bfa3b42c8e672a5ae83c29cc651e4ccc92e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TRANSPORT_SDMA</span></span></span><a class="headerlink" href="#_CPPv4N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_SDMAE" title="Link to this definition"></a><br /></dt>
+<dd><p>SDMA Transport. </p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="cpp enum">
@@ -724,13 +759,13 @@
 <dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.ACLSHMEM_MAX_PES">
 <span class="target" id="group__group__macros_1gaf989d521fd0818e1c761b86a727288be"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_MAX_PES</span></span></span><a class="headerlink" href="#c.ACLSHMEM_MAX_PES" title="Link to this definition"></a><br /></dt>
-<dd><p>Maximum number of Processing Elements (PE) supported by ACLSHMEM. </p>
+<dd><p>Maximum number of Processing Elements (PE) supported by ACLSHMEM (16384) </p>
 </dd></dl>
 
 <dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.ACLSHMEM_MAX_TEAMS">
 <span class="target" id="group__group__macros_1gab2845d45ff50abebbfb51dba83bf3c38"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_MAX_TEAMS</span></span></span><a class="headerlink" href="#c.ACLSHMEM_MAX_TEAMS" title="Link to this definition"></a><br /></dt>
-<dd><p>Maximum number of teams supported by ACLSHMEM. </p>
+<dd><p>Maximum number of teams supported by ACLSHMEM (2048) </p>
 </dd></dl>
 
 <dl class="cpp macro">
@@ -742,7 +777,7 @@
 <dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.TEAM_CONFIG_PADDING">
 <span class="target" id="group__group__macros_1gaea1a6c765cccbfe82ef1aa0f453f892c"></span><span class="sig-name descname"><span class="n"><span class="pre">TEAM_CONFIG_PADDING</span></span></span><a class="headerlink" href="#c.TEAM_CONFIG_PADDING" title="Link to this definition"></a><br /></dt>
-<dd><p>Padding bytes for the team configuration structure, used for memory alignment. </p>
+<dd><p>Padding bytes for the team configuration structure, used for memory alignment (48 bytes) </p>
 </dd></dl>
 
 <dl class="cpp macro">
@@ -761,6 +796,18 @@
 <dt class="sig sig-object cpp" id="c.ACLSHMEM_PAGE_SIZE">
 <span class="target" id="group__group__macros_1ga01147a11b9419558fbf6e4f4da2779ba"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_PAGE_SIZE</span></span></span><a class="headerlink" href="#c.ACLSHMEM_PAGE_SIZE" title="Link to this definition"></a><br /></dt>
 <dd><p>ACLSHMEM memory page size (2MB), complying with system memory paging specifications. </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_SDMA_MAX_CHAN">
+<span class="target" id="group__group__macros_1gaf9749718c30fe9663d9e142c6ee46e00"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_SDMA_MAX_CHAN</span></span></span><a class="headerlink" href="#c.ACLSHMEM_SDMA_MAX_CHAN" title="Link to this definition"></a><br /></dt>
+<dd><p>Max number of SDMA channels. </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_SDMA_FLAG_LENGTH">
+<span class="target" id="group__group__macros_1ga7981b39274b0dd5e9daa32e4f5aed730"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_SDMA_FLAG_LENGTH</span></span></span><a class="headerlink" href="#c.ACLSHMEM_SDMA_FLAG_LENGTH" title="Link to this definition"></a><br /></dt>
+<dd><p>SDMA flag data length. </p>
 </dd></dl>
 
 <dl class="cpp macro">
@@ -866,7 +913,66 @@ Aligns the size up to an integer multiple of the page to avoid memory fragmentat
 <dl>
 <dt class="sig sig-object cpp">
 <span class="target" id="group__group__structs"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">Structs</span></span></dt>
-<dd><dl class="cpp struct">
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_CYCLE_PROF_MAX_BLOCK">
+<span class="target" id="group__group__structs_1gaee218ea0a446321600cdfaabf2647a69"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_CYCLE_PROF_MAX_BLOCK</span></span></span><a class="headerlink" href="#c.ACLSHMEM_CYCLE_PROF_MAX_BLOCK" title="Link to this definition"></a><br /></dt>
+<dd><p>cycle profling max block nums </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_CYCLE_PROF_FRAME_CNT">
+<span class="target" id="group__group__structs_1ga8d098a5f5354e63a97e2e56daac5cd86"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_CYCLE_PROF_FRAME_CNT</span></span></span><a class="headerlink" href="#c.ACLSHMEM_CYCLE_PROF_FRAME_CNT" title="Link to this definition"></a><br /></dt>
+<dd><p>cycle profling frame count </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv421aclshmemx_init_attr_t">
+<span id="_CPPv321aclshmemx_init_attr_t"></span><span id="_CPPv221aclshmemx_init_attr_t"></span><span id="aclshmemx_init_attr_t"></span><span class="target" id="group__group__structs_1ga5fb0887390238e66d3e561a16277b9b2"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv421aclshmemx_init_attr_t" title="aclshmemx_init_attr_t"><span class="n"><span class="pre">aclshmemx_init_attr_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aclshmemx_init_attr_t</span></span></span><a class="headerlink" href="#_CPPv421aclshmemx_init_attr_t" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv421aclshmem_mte_config_t">
+<span id="_CPPv321aclshmem_mte_config_t"></span><span id="_CPPv221aclshmem_mte_config_t"></span><span id="aclshmem_mte_config_t"></span><span class="target" id="group__group__structs_1ga6678d4d18d2116395c8fa3c00ab2859a"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv420aclshmem_ub_config_t" title="aclshmem_ub_config_t"><span class="n"><span class="pre">aclshmem_ub_config_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aclshmem_mte_config_t</span></span></span><a class="headerlink" href="#_CPPv421aclshmem_mte_config_t" title="Link to this definition"></a><br /></dt>
+<dd><p><dl>
+<dt class="sig sig-object cpp">
+<em><span class="pre">Deprecated:</span></em></dt>
+<dd><p>Use <a class="reference internal" href="#structaclshmem__ub__config__t"><span class="std std-ref">aclshmem_ub_config_t</span></a> instead </p>
+</dd></dl>
+
+</p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv422aclshmem_sdma_config_t">
+<span id="_CPPv322aclshmem_sdma_config_t"></span><span id="_CPPv222aclshmem_sdma_config_t"></span><span id="aclshmem_sdma_config_t"></span><span class="target" id="group__group__structs_1ga30b2f6485ed5d1a385fbdca28aabb738"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv420aclshmem_ub_config_t" title="aclshmem_ub_config_t"><span class="n"><span class="pre">aclshmem_ub_config_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aclshmem_sdma_config_t</span></span></span><a class="headerlink" href="#_CPPv422aclshmem_sdma_config_t" title="Link to this definition"></a><br /></dt>
+<dd><p><dl>
+<dt class="sig sig-object cpp">
+<em><span class="pre">Deprecated:</span></em></dt>
+<dd><p>Use <a class="reference internal" href="#structaclshmem__ub__config__t"><span class="std std-ref">aclshmem_ub_config_t</span></a> instead </p>
+</dd></dl>
+
+</p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv422aclshmem_rdma_config_t">
+<span id="_CPPv322aclshmem_rdma_config_t"></span><span id="_CPPv222aclshmem_rdma_config_t"></span><span id="aclshmem_rdma_config_t"></span><span class="target" id="group__group__structs_1ga8a4a2bdf3ac598e71ae47df726e9be02"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv420aclshmem_ub_config_t" title="aclshmem_ub_config_t"><span class="n"><span class="pre">aclshmem_ub_config_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aclshmem_rdma_config_t</span></span></span><a class="headerlink" href="#_CPPv422aclshmem_rdma_config_t" title="Link to this definition"></a><br /></dt>
+<dd><p><dl>
+<dt class="sig sig-object cpp">
+<em><span class="pre">Deprecated:</span></em></dt>
+<dd><p>Use <a class="reference internal" href="#structaclshmem__ub__config__t"><span class="std std-ref">aclshmem_ub_config_t</span></a> instead </p>
+</dd></dl>
+
+</p>
+</dd></dl>
+
+</div>
+<dl class="cpp struct">
 <dt class="sig sig-object cpp" id="_CPPv429aclshmem_init_optional_attr_t">
 <span id="_CPPv329aclshmem_init_optional_attr_t"></span><span id="_CPPv229aclshmem_init_optional_attr_t"></span><span id="aclshmem_init_optional_attr_t"></span><span class="target" id="structaclshmem__init__optional__attr__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aclshmem_init_optional_attr_t</span></span></span><a class="headerlink" href="#_CPPv429aclshmem_init_optional_attr_t" title="Link to this definition"></a><br /></dt>
 <dd><div class="docutils container">
@@ -884,8 +990,8 @@ Aligns the size up to an integer multiple of the page to avoid memory fragmentat
 </dd></dl>
 
 <dl class="cpp struct">
-<dt class="sig sig-object cpp" id="_CPPv421aclshmemx_init_attr_t">
-<span id="_CPPv321aclshmemx_init_attr_t"></span><span id="_CPPv221aclshmemx_init_attr_t"></span><span id="aclshmemx_init_attr_t"></span><span class="target" id="structaclshmemx__init__attr__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aclshmemx_init_attr_t</span></span></span><a class="headerlink" href="#_CPPv421aclshmemx_init_attr_t" title="Link to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp">
+<span class="target" id="structaclshmemx__init__attr__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aclshmemx_init_attr_t</span></span></span><br /></dt>
 <dd><div class="docutils container">
 <em>#include &lt;shmem_host_def.h&gt;</em></div>
 <p>Mandatory parameter for attributes used for initialization. </p>
@@ -960,12 +1066,30 @@ Aligns the size up to an integer multiple of the page to avoid memory fragmentat
 </dd></dl>
 
 <dl class="cpp struct">
-<dt class="sig sig-object cpp" id="_CPPv421aclshmem_mte_config_t">
-<span id="_CPPv321aclshmem_mte_config_t"></span><span id="_CPPv221aclshmem_mte_config_t"></span><span id="aclshmem_mte_config_t"></span><span class="target" id="structaclshmem__mte__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aclshmem_mte_config_t</span></span></span><a class="headerlink" href="#_CPPv421aclshmem_mte_config_t" title="Link to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv420aclshmem_ub_config_t">
+<span id="_CPPv320aclshmem_ub_config_t"></span><span id="_CPPv220aclshmem_ub_config_t"></span><span id="aclshmem_ub_config_t"></span><span class="target" id="structaclshmem__ub__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aclshmem_ub_config_t</span></span></span><a class="headerlink" href="#_CPPv420aclshmem_ub_config_t" title="Link to this definition"></a><br /></dt>
 <dd><div class="docutils container">
 <em>#include &lt;shmem_common_types.h&gt;</em></div>
-<p>Memory Transfer Engine (MTE) configuration structure. </p>
-<p>Stores buffer address, size and synchronization event ID related to memory transfer </p>
+<p>Universal UB buffer configuration structure. </p>
+<p>Stores buffer address, size and optional synchronization event ID for memory transfer operations </p>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv421aclshmem_prof_block_t">
+<span id="_CPPv321aclshmem_prof_block_t"></span><span id="_CPPv221aclshmem_prof_block_t"></span><span id="aclshmem_prof_block_t"></span><span class="target" id="structaclshmem__prof__block__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aclshmem_prof_block_t</span></span></span><a class="headerlink" href="#_CPPv421aclshmem_prof_block_t" title="Link to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;shmem_common_types.h&gt;</em></div>
+<p>ccount and cycles structure </p>
+<p>cycle profling block data </p>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv418aclshmem_prof_pe_t">
+<span id="_CPPv318aclshmem_prof_pe_t"></span><span id="_CPPv218aclshmem_prof_pe_t"></span><span id="aclshmem_prof_pe_t"></span><span class="target" id="structaclshmem__prof__pe__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aclshmem_prof_pe_t</span></span></span><a class="headerlink" href="#_CPPv418aclshmem_prof_pe_t" title="Link to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;shmem_common_types.h&gt;</em></div>
+<p>block_prof data on pe structure </p>
+<p>cycle profiling data on the pe </p>
 </dd></dl>
 
 <dl class="cpp struct">
@@ -1012,24 +1136,6 @@ Aligns the size up to an integer multiple of the page to avoid memory fragmentat
 <dt class="sig sig-object cpp" id="_CPPv425ACLSHMEM_UNIQUEID_VERSION">
 <span id="_CPPv325ACLSHMEM_UNIQUEID_VERSION"></span><span id="_CPPv225ACLSHMEM_UNIQUEID_VERSION"></span><span id="ACLSHMEM_UNIQUEID_VERSION__int32_t"></span><span class="target" id="group__group__constants_1gafdbfe704034ac4ec73de5392033cbc74"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_UNIQUEID_VERSION</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="m"><span class="pre">1</span></span><span class="w"> </span><span class="o"><span class="pre">&lt;&lt;</span></span><span class="w"> </span><span class="m"><span class="pre">16</span></span><span class="p"><span class="pre">)</span></span><span class="w"> </span><span class="o"><span class="pre">+</span></span><span class="w"> </span><span class="k"><span class="pre">sizeof</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#_CPPv420aclshmemx_uniqueid_t" title="aclshmemx_uniqueid_t"><span class="n"><span class="pre">aclshmemx_uniqueid_t</span></span></a><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv425ACLSHMEM_UNIQUEID_VERSION" title="Link to this definition"></a><br /></dt>
 <dd><p>Version number of the ACLSHMEM unique ID structure. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv414SVM_START_ADDR">
-<span id="_CPPv314SVM_START_ADDR"></span><span id="_CPPv214SVM_START_ADDR"></span><span id="SVM_START_ADDR__uint64_t"></span><span class="target" id="group__group__constants_1ga9775711f7ef1ee267addd86d7ea4be50"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SVM_START_ADDR</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0x100000000000ULL</span></span><a class="headerlink" href="#_CPPv414SVM_START_ADDR" title="Link to this definition"></a><br /></dt>
-<dd><p>Start address of the Shared Virtual Memory (SVM) (0x100000000000) </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv412SVM_END_ADDR">
-<span id="_CPPv312SVM_END_ADDR"></span><span id="_CPPv212SVM_END_ADDR"></span><span id="SVM_END_ADDR__uint64_t"></span><span class="target" id="group__group__constants_1ga77860cb07fc1808dc1716a7c3760d735"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SVM_END_ADDR</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0x100000000000ULL</span></span><span class="w"> </span><span class="o"><span class="pre">+</span></span><span class="w"> </span><span class="m"><span class="pre">0x80000000000ULL</span></span><span class="w"> </span><span class="o"><span class="pre">-</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="m"><span class="pre">1UL</span></span><span class="w"> </span><span class="o"><span class="pre">&lt;&lt;</span></span><span class="w"> </span><span class="m"><span class="pre">30UL</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv412SVM_END_ADDR" title="Link to this definition"></a><br /></dt>
-<dd><p>End address of the Shared Virtual Memory (SVM), calculated as: start address + 0x80000000000 - 1GB. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv417GLOBAL_STATE_SIZE">
-<span id="_CPPv317GLOBAL_STATE_SIZE"></span><span id="_CPPv217GLOBAL_STATE_SIZE"></span><span id="GLOBAL_STATE_SIZE__uint64_t"></span><span class="target" id="group__group__constants_1ga505d50f67071e4d2cc9d7195a12f4517"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GLOBAL_STATE_SIZE</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">4UL</span></span><span class="w"> </span><span class="o"><span class="pre">*</span></span><span class="w"> </span><span class="m"><span class="pre">1024UL</span></span><span class="w"> </span><span class="o"><span class="pre">*</span></span><span class="w"> </span><span class="m"><span class="pre">1024UL</span></span><a class="headerlink" href="#_CPPv417GLOBAL_STATE_SIZE" title="Link to this definition"></a><br /></dt>
-<dd><p>Fixed memory size of the global state structure (4MB), used to store system global configuration information. </p>
 </dd></dl>
 
 </div>

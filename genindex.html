@@ -7,15 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Index &mdash; SHMEM Guidebook 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=d6bf9227" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=8d563738"></script>
-      <script src="_static/doctools.js?v=9a2dae69"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -109,7 +109,6 @@
 <div class="genindex-jumpbox">
  <a href="#A"><strong>A</strong></a>
  | <a href="#D"><strong>D</strong></a>
- | <a href="#G"><strong>G</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#N"><strong>N</strong></a>
  | <a href="#R"><strong>R</strong></a>
@@ -121,8 +120,6 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="device_api.html#c.ACLSHMEM_ATOMIC_ADD_TYPENAME">ACLSHMEM_ATOMIC_ADD_TYPENAME (C macro)</a>
-</li>
-      <li><a href="device_api.html#c.ACLSHMEM_ATOMIC_ADD_TYPENAME_FLOAT">ACLSHMEM_ATOMIC_ADD_TYPENAME_FLOAT (C macro)</a>
 </li>
       <li><a href="def.html#c.ACLSHMEM_BARRIER_TG_DISSEM_KVAL">ACLSHMEM_BARRIER_TG_DISSEM_KVAL (C macro)</a>
 </li>
@@ -149,6 +146,10 @@
       <li><a href="def.html#c.ACLSHMEM_CORE_SYNC_COUNTER_SIZE">ACLSHMEM_CORE_SYNC_COUNTER_SIZE (C macro)</a>
 </li>
       <li><a href="def.html#c.ACLSHMEM_CORE_SYNC_POOL_SIZE">ACLSHMEM_CORE_SYNC_POOL_SIZE (C macro)</a>
+</li>
+      <li><a href="def.html#c.ACLSHMEM_CYCLE_PROF_FRAME_CNT">ACLSHMEM_CYCLE_PROF_FRAME_CNT (C macro)</a>
+</li>
+      <li><a href="def.html#c.ACLSHMEM_CYCLE_PROF_MAX_BLOCK">ACLSHMEM_CYCLE_PROF_MAX_BLOCK (C macro)</a>
 </li>
       <li><a href="def.html#c.ACLSHMEM_DEVICE">ACLSHMEM_DEVICE (C macro)</a>
 </li>
@@ -256,11 +257,15 @@
 </li>
       <li><a href="def.html#c.ACLSHMEM_MINOR_VERSION">ACLSHMEM_MINOR_VERSION (C macro)</a>
 </li>
-      <li><a href="def.html#_CPPv421aclshmem_mte_config_t">aclshmem_mte_config_t (C++ struct)</a>
+      <li><a href="def.html#_CPPv421aclshmem_mte_config_t">aclshmem_mte_config_t (C++ type)</a>
 </li>
       <li><a href="def.html#c.ACLSHMEM_P2P_SYNC_TYPE_FUNC">ACLSHMEM_P2P_SYNC_TYPE_FUNC (C macro)</a>
 </li>
       <li><a href="def.html#c.ACLSHMEM_PAGE_SIZE">ACLSHMEM_PAGE_SIZE (C macro)</a>
+</li>
+      <li><a href="def.html#_CPPv421aclshmem_prof_block_t">aclshmem_prof_block_t (C++ struct)</a>
+</li>
+      <li><a href="def.html#_CPPv418aclshmem_prof_pe_t">aclshmem_prof_pe_t (C++ struct)</a>
 </li>
       <li><a href="host_api.html#c.ACLSHMEM_PUT_SIZE">ACLSHMEM_PUT_SIZE (C macro)</a>
 </li>
@@ -284,10 +289,10 @@
 </li>
       <li><a href="device_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM_NBI">ACLSHMEM_PUT_TYPENAME_MEM_NBI (C macro)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="device_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL (C macro)</a>, <a href="host_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL">[1]</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="device_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_DETAILED">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_DETAILED (C macro)</a>
 </li>
       <li><a href="device_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_DETAILED_NBI">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_DETAILED_NBI (C macro)</a>
@@ -313,6 +318,14 @@
       <li><a href="device_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED_NBI">ACLSHMEM_PUT_TYPENAME_MEM_UB_TENSOR_DETAILED_NBI (C macro)</a>
 </li>
       <li><a href="device_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM_UB_TENSOR_NBI">ACLSHMEM_PUT_TYPENAME_MEM_UB_TENSOR_NBI (C macro)</a>
+</li>
+      <li><a href="def.html#_CPPv422aclshmem_rdma_config_t">aclshmem_rdma_config_t (C++ type)</a>
+</li>
+      <li><a href="def.html#_CPPv422aclshmem_sdma_config_t">aclshmem_sdma_config_t (C++ type)</a>
+</li>
+      <li><a href="def.html#c.ACLSHMEM_SDMA_FLAG_LENGTH">ACLSHMEM_SDMA_FLAG_LENGTH (C macro)</a>
+</li>
+      <li><a href="def.html#c.ACLSHMEM_SDMA_MAX_CHAN">ACLSHMEM_SDMA_MAX_CHAN (C macro)</a>
 </li>
       <li><a href="def.html#_CPPv425aclshmem_signal_op_type_t">aclshmem_signal_op_type_t (C++ enum)</a>
 </li>
@@ -350,11 +363,11 @@
 </li>
       <li><a href="def.html#_CPPv4N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_ROCEE">aclshmem_transport_t::ACLSHMEM_TRANSPORT_ROCE (C++ enumerator)</a>
 </li>
+      <li><a href="def.html#_CPPv4N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_SDMAE">aclshmem_transport_t::ACLSHMEM_TRANSPORT_SDMA (C++ enumerator)</a>
+</li>
       <li><a href="device_api.html#c.ACLSHMEM_TYPE_FUNC">ACLSHMEM_TYPE_FUNC (C macro)</a>, <a href="device_api.html#c.ACLSHMEM_TYPE_FUNC">[1]</a>, <a href="device_api.html#c.ACLSHMEM_TYPE_FUNC">[2]</a>, <a href="host_api.html#c.ACLSHMEM_TYPE_FUNC">[3]</a>
 </li>
-      <li><a href="device_api.html#c.ACLSHMEM_TYPE_FUNC_ATOMIC_FLOAT">ACLSHMEM_TYPE_FUNC_ATOMIC_FLOAT (C macro)</a>
-</li>
-      <li><a href="device_api.html#c.ACLSHMEM_TYPE_FUNC_ATOMIC_INT">ACLSHMEM_TYPE_FUNC_ATOMIC_INT (C macro)</a>
+      <li><a href="device_api.html#c.ACLSHMEM_TYPE_FUNC_ATOMIC_ADD">ACLSHMEM_TYPE_FUNC_ATOMIC_ADD (C macro)</a>
 </li>
       <li><a href="host_api.html#c.ACLSHMEM_TYPE_GET">ACLSHMEM_TYPE_GET (C macro)</a>
 </li>
@@ -375,6 +388,8 @@
       <li><a href="host_api.html#c.ACLSHMEM_TYPENAME_P">ACLSHMEM_TYPENAME_P (C macro)</a>
 </li>
       <li><a href="device_api.html#c.ACLSHMEM_TYPENAME_P_AICORE">ACLSHMEM_TYPENAME_P_AICORE (C macro)</a>
+</li>
+      <li><a href="def.html#_CPPv420aclshmem_ub_config_t">aclshmem_ub_config_t (C++ struct)</a>
 </li>
       <li><a href="def.html#_CPPv428ACLSHMEM_UNIQUE_ID_INNER_LEN">ACLSHMEM_UNIQUE_ID_INNER_LEN (C++ member)</a>
 </li>
@@ -431,7 +446,11 @@
       <li><a href="def.html#_CPPv4N21aclshmemx_bootstrap_t28ACLSHMEMX_INIT_WITH_UNIQUEIDE">aclshmemx_bootstrap_t::ACLSHMEMX_INIT_WITH_UNIQUEID (C++ enumerator)</a>
 </li>
       <li><a href="def.html#_CPPv421aclshmemx_init_attr_t">aclshmemx_init_attr_t (C++ struct)</a>
+
+      <ul>
+        <li><a href="def.html#_CPPv421aclshmemx_init_attr_t">(C++ type)</a>
 </li>
+      </ul></li>
       <li><a href="def.html#_CPPv423aclshmemx_init_status_t">aclshmemx_init_status_t (C++ enum)</a>
 </li>
       <li><a href="def.html#_CPPv4N23aclshmemx_init_status_t23ACLSHMEM_STATUS_INVALIDE">aclshmemx_init_status_t::ACLSHMEM_STATUS_INVALID (C++ enumerator)</a>
@@ -471,14 +490,6 @@
   </ul></td>
 </tr></table>
 
-<h2 id="G">G</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="def.html#_CPPv417GLOBAL_STATE_SIZE">GLOBAL_STATE_SIZE (C++ member)</a>
-</li>
-  </ul></td>
-</tr></table>
-
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -508,16 +519,12 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="def.html#c.SCALAR_DATA_CACHELINE_SIZE">SCALAR_DATA_CACHELINE_SIZE (C macro)</a>
 </li>
-      <li><a href="def.html#_CPPv412SVM_END_ADDR">SVM_END_ADDR (C++ member)</a>
-</li>
-      <li><a href="def.html#_CPPv414SVM_START_ADDR">SVM_START_ADDR (C++ member)</a>
-</li>
       <li><a href="def.html#c.SYNC_ARRAY_SIZE">SYNC_ARRAY_SIZE (C macro)</a>
+</li>
+      <li><a href="def.html#c.SYNC_COUNTER_SIZE">SYNC_COUNTER_SIZE (C macro)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="def.html#c.SYNC_COUNTER_SIZE">SYNC_COUNTER_SIZE (C macro)</a>
-</li>
       <li><a href="def.html#c.SYNC_COUNTERS_SIZE">SYNC_COUNTERS_SIZE (C macro)</a>
 </li>
       <li><a href="def.html#c.SYNC_LOG_MAX_PES">SYNC_LOG_MAX_PES (C macro)</a>

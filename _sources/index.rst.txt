@@ -15,6 +15,9 @@ Welcome to Shmem's Documentation!
     :name: Using SHMEM
     
     api_demo.md
+    compilation_build_guide.md
+    log_debug.md
+    tools_debug.md
 
 .. toctree::
     :maxdepth: 2
@@ -24,13 +27,8 @@ Welcome to Shmem's Documentation!
     def.rst
     host_api.rst
     device_api.rst
-
-.. toctree::
-    :maxdepth: 2
-    :caption: Python API
-    :name: Python API
-
     pythonAPI.md
+    env_vars_intro.md
 
 .. toctree::
     :maxdepth: 2
@@ -44,6 +42,7 @@ Welcome to Shmem's Documentation!
     :caption: Architecture
     :name: Architecture
 
+    principles.md
     code_organization.md
 
 .. toctree::
@@ -58,7 +57,7 @@ Welcome to Shmem's Documentation!
     :caption: Security harding and public IP address
     :name: Security harding and public IP address
 
-    security.md
+    SECURITY.md
 
 Indices and tables
 ==================

@@ -8,15 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SHMEM Env Vars &mdash; SHMEM Guidebook 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=d6bf9227" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=8d563738"></script>
-      <script src="_static/doctools.js?v=9a2dae69"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -64,6 +64,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">SHMEM Env Vars</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#id1">初始化相关</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id2">日志相关</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#profiling">Profiling相关</a></li>
 </ul>
 </li>
 </ul>
@@ -136,6 +137,13 @@ SHMEM_UID_SOCK_IFNAME=enpxxxx:inet6  取ipv6</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">SHMEM_LOG_PATH</span></code>: 用于设置SHMEM日志保存路径， 需要传递合法路径。如不设置默认存储路径为<code class="docutils literal notranslate"><span class="pre">${HOME}/shmem/log</span></code>。</p></li>
 </ul>
 <p>日志详细介绍见<a class="reference internal" href="log_debug.html"><span class="std std-doc">log</span></a></p>
+</section>
+<section id="profiling">
+<h2>Profiling相关<a class="headerlink" href="#profiling" title="Link to this heading"></a></h2>
+<p>SHMEM提供Profiling打点工具，通过采集系统时钟周期数并转换为实际时间，精准量化不同Block（计算核）、不同Frame（埋点 ID）下的MTE搬运性能，详细介绍请参考<a class="reference internal" href="profiling.html"><span class="std std-doc">在示例中使用Profiling工具</span></a>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SHMEM_CYCLE_PROF_PE</span></code>: 用于设置需要进行Profiling采集的pe，pe_id设置范围【0，PEs-1】，需要取消采集请<code class="docutils literal notranslate"><span class="pre">unset</span> <span class="pre">SHMEM_CYCLE_PROF_PE</span></code>。</p></li>
+</ul>
 </section>
 </section>
 

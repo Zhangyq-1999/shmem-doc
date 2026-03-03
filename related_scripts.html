@@ -8,15 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>相关脚本 &mdash; SHMEM Guidebook 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=d6bf9227" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=8d563738"></script>
-      <script src="_static/doctools.js?v=9a2dae69"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -123,9 +123,36 @@
 <section id="build-sh">
 <h2><a class="reference external" href="http://build.sh">build.sh</a><a class="headerlink" href="#build-sh" title="Link to this heading"></a></h2>
 <p>使用方式</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>build.sh
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>build.sh<span class="w"> </span>-&lt;args&gt;
 </pre></div>
 </div>
+<ul class="simple">
+<li><p><strong>参数：</strong></p>
+<ul>
+<li><p>-package</p>
+<ul>
+<li><p>生成run包SHMEM_{version}_linux-{arch}.run，生成路径为{project_root}/package/{arch}/</p></li>
+<li><p>生成python whl包shmem-xxx.whl，生成路径为{project_root}/package/{arch}/</p></li>
+</ul>
+</li>
+<li><p>-python_extension</p>
+<ul>
+<li><p>生成python whl包shmem-xxx.whl，生成路径为{project_root}/dist/</p></li>
+</ul>
+</li>
+<li><p>-uttests</p>
+<ul>
+<li><p>UT用例编译</p></li>
+</ul>
+</li>
+<li><p>-examples</p>
+<ul>
+<li><p>样例用例编译</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <p>SHMEM自动编译脚本，会自动完成依赖库的下载，工程编译，UT用例编译，库打包</p>
 </section>
 <section id="install-sh">
@@ -148,7 +175,7 @@
 <section id="run-sh">
 <h2><a class="reference external" href="http://run.sh">run.sh</a><a class="headerlink" href="#run-sh" title="Link to this heading"></a></h2>
 <p>UT测试用例运行脚本。</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>run.sh
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/run.sh
 </pre></div>
 </div>
 <p>提供多种参数支持自定义用例执行</p>

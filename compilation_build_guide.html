@@ -8,15 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>编译与构建 &mdash; SHMEM Guidebook 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=d6bf9227" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=8d563738"></script>
-      <script src="_static/doctools.js?v=9a2dae69"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -157,6 +157,7 @@ bash<span class="w"> </span>scripts/build.sh
 <li><p><code class="docutils literal notranslate"><span class="pre">-onlygendoc</span></code>: 生成文档，不构建源码</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-debug</span></code>：设置构建类型为 <code class="docutils literal notranslate"><span class="pre">Debug</span></code> 模式</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-mssanitizer</span></code>：example启用mssanitizer内存检测工具，脚本执行需用mssanitizer拉起任务才能实际生效，当前暂不支持，allgather样例运行脚本提供了tool选项使用工具。工具使用方法参见<a class="reference external" href="https://www.hiascend.com/document/detail/zh/canncommercial/850/devaids/optool/atlasopdev_16_0039.html">异常检测工具（msSanitizer，MindStudio Sanitizer）</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-soc_type</span></code>：如果SOC是Ascend950类别，需要增加<code class="docutils literal notranslate"><span class="pre">-soc_type</span> <span class="pre">Ascend950</span></code>参数，可以通过<code class="docutils literal notranslate"><span class="pre">npu-smi</span> <span class="pre">info</span></code>命令查看，其他SOC可不加该参数。</p></li>
 </ul>
 </section>
 <section id="id5">
