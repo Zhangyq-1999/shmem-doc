@@ -1,0 +1,1901 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HOST API &mdash; SHMEM Guidebook 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=d6bf9227" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="DEVICE API" href="device_api.html" />
+    <link rel="prev" title="SHMEM DEF" href="def.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SHMEM Guidebook
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">快速开始</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../related_scripts.html">相关脚本</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Using SHMEM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../example/api_demo.html">SHMEM API 样例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compilation_build_guide.html">编译与构建</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug/log_debug.html">SHMEM日志</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug/tools_debug.html">SHMEM搭配工具算子调测指导</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug/dump_debug.html">在样例工程使用Ascend C算子调测API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="def.html">SHMEM DEF</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">HOST API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#shmem-host-init-h">shmem_host_init.h</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shmem-log-h">shmem_log.h</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shmem-host-heap-h">shmem_host_heap.h</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shmem-host-rma-h">shmem_host_rma.h</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPE_FUNC"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPE_FUNC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPE_PUT"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPE_PUT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPE_PUT_NBI"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPE_PUT_NBI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPE_IPUT"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPE_IPUT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PUT_SIZE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PUT_SIZE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PUT_SIZE_NBI"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PUT_SIZE_NBI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_IPUT_SIZE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_IPUT_SIZE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPE_GET"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPE_GET</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPE_GET_NBI"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPE_GET_NBI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPE_IGET"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPE_IGET</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_GET_SIZE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_GET_SIZE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_GET_SIZE_NBI"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_GET_SIZE_NBI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_IGET_SIZE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_IGET_SIZE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPENAME_P"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPENAME_P</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPENAME_G"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPENAME_G</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmem_block_mode_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_block_mode_t</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_block_mode_t6NO_NBIE"><code class="docutils literal notranslate"><span class="pre">NO_NBI</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_block_mode_t3NBIE"><code class="docutils literal notranslate"><span class="pre">NBI</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#shmem-host-cc-h">shmem_host_cc.h</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shmem-host-p2p-sync-h">shmem_host_p2p_sync.h</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_WAIT_UNTIL"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_WAIT_UNTIL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_WAIT"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_WAIT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_WAIT_UNTIL_ALL"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_WAIT_UNTIL_ALL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_WAIT_UNTIL_ANY"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_WAIT_UNTIL_ANY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_WAIT_UNTIL_SOME"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_WAIT_UNTIL_SOME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_WAIT_UNTIL_ALL_VECTOR"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_WAIT_UNTIL_ALL_VECTOR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_WAIT_UNTIL_ANY_VECTOR"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_WAIT_UNTIL_ANY_VECTOR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_WAIT_UNTIL_SOME_VECTOR"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_WAIT_UNTIL_SOME_VECTOR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TEST"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TEST</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TEST_ANY"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TEST_ANY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TEST_SOME"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TEST_SOME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TEST_ALL_VECTOR"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TEST_ALL_VECTOR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TEST_ANY_VECTOR"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TEST_ANY_VECTOR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TEST_SOME_VECTOR"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TEST_SOME_VECTOR</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#shmem-host-so-h">shmem_host_so.h</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_NBI"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_NBI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PUT_SIZE_MEM_SIGNAL"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PUT_SIZE_MEM_SIGNAL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PUT_SIZE_MEM_SIGNAL_NBI"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PUT_SIZE_MEM_SIGNAL_NBI</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#shmem-host-team-h">shmem_host_team.h</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="env_vars_intro.html">SHMEM Env Vars</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Example</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../example/example.html">初始化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example/example.html#allgather">AllGather</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../principles.html">SHMEM原理概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code_organization.html">代码组织结构</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting And FAQs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../debug/Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug/Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SECURITY.html">安全声明</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SHMEM Guidebook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">HOST API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/host_api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="host-api">
+<h1>HOST API<a class="headerlink" href="#host-api" title="Link to this heading"></a></h1>
+<section id="shmem-host-init-h">
+<h2>shmem_host_init.h<a class="headerlink" href="#shmem-host-init-h" title="Link to this heading"></a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__init_8h_1a4b30fa8a5b48ea7bc6e734fd7b286087"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmemx_init_status</span> <span class="pre">(void)</span></span></dt>
+<dd><p>Query the current initialization status. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns initialization status. Returning ACLSHMEM_STATUS_IS_INITIALIZED indicates that initialization is complete. All return types can be found in <strong><a class="reference internal" href="def.html#group__group__enums_1ga65af1fbb572a0358213c067129c74978"><span class="std std-ref">aclshmemx_init_status_t</span></a></strong>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__init_8h_1a1e1450a5eb402d76cdd62ebfe313f93e"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmemx_get_uniqueid</span> <span class="pre">(aclshmemx_uniqueid_t</span> <span class="pre">*uid)</span></span></dt>
+<dd><p>get the unique id and return it by intput argument uid. This function need run with PTA. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>uid</strong> – [out] a ptr to uid generate by shmem </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns 0 on success or an error code on failure </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__init_8h_1a5ed1b6647db6d7e97d59463cbb01673a"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmemx_set_attr_uniqueid_args</span> <span class="pre">(int</span> <span class="pre">my_pe,</span> <span class="pre">int</span> <span class="pre">n_pes,</span> <span class="pre">int64_t</span> <span class="pre">local_mem_size,</span> <span class="pre">aclshmemx_uniqueid_t</span> <span class="pre">*uid,</span> <span class="pre">aclshmemx_init_attr_t</span> <span class="pre">*aclshmem_attr)</span></span></dt>
+<dd><p>init process with unique id. This function need run with PTA. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>my_pe</strong> – [in] Local PE ID, must be less than the maximum supported PEs (my_pe &lt; ACLSHMEM_MAX_PES) </p></li>
+<li><p><strong>n_pes</strong> – [in] Total number of PEs, must be less than or equal to the maximum supported PEs (n_pes &lt;= ACLSHMEM_MAX_PES) </p></li>
+<li><p><strong>local_mem_size</strong> – [in] Allocated local memory size , must be less than the maximum supported local memory size (local_mem_size &lt; ACLSHMEM_MAX_LOCAL_SIZE) </p></li>
+<li><p><strong>uid</strong> – [in] Unique ID obtained from <strong><a class="reference internal" href="#shmem__host__init_8h_1a1e1450a5eb402d76cdd62ebfe313f93e"><span class="std std-ref">aclshmemx_get_uniqueid()</span></a></strong></p></li>
+<li><p><strong>aclshmem_attr</strong> – [in/out] Attribute struct, output parameter of this interface and input parameter for subsequent initialization functions <strong><a class="reference internal" href="#shmem__host__init_8h_1af1de117c692d8aae5da5ae008cfd9d0d"><span class="std std-ref">aclshmemx_init_attr()</span></a></strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns 0 on success or an error code on failure </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__init_8h_1af1de117c692d8aae5da5ae008cfd9d0d"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmemx_init_attr</span> <span class="pre">(aclshmemx_bootstrap_t</span> <span class="pre">bootstrap_flags,</span> <span class="pre">aclshmemx_init_attr_t</span> <span class="pre">*attributes)</span></span></dt>
+<dd><p>Initialize the resources required for ACLSHMEM task based on attributes. Attributes can be created by users or obtained by calling <strong><a class="reference internal" href="#shmem__host__init_8h_1a5ed1b6647db6d7e97d59463cbb01673a"><span class="std std-ref">aclshmemx_set_attr_uniqueid_args()</span></a></strong>. if the self-created attr structure is incorrect, the initialization will fail. It is recommended to build the attributes by <strong><a class="reference internal" href="#shmem__host__init_8h_1a5ed1b6647db6d7e97d59463cbb01673a"><span class="std std-ref">aclshmemx_set_attr_uniqueid_args()</span></a></strong>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bootstrap_flags</strong> – [in] bootstrap_flags for init. </p></li>
+<li><p><strong>attributes</strong> – [in] Pointer to the user-defined attributes. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns 0 on success or an error code on failure </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__init_8h_1a6c986c7883f3515ac3d86469bdde6b62"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmem_finalize</span> <span class="pre">(void)</span></span></dt>
+<dd><p>Release all resources used by the ACLSHMEM library. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns 0 on success or an error code on failure </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__init_8h_1ad41da5af228c49ebedff4c9a1c8b8699"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_info_get_version</span> <span class="pre">(int</span> <span class="pre">*major,</span> <span class="pre">int</span> <span class="pre">*minor)</span></span></dt>
+<dd><p>returns the major and minor version. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>major</strong> – [out] major version</p></li>
+<li><p><strong>minor</strong> – [out] minor version </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__init_8h_1a9fbdc5300f5a02879699495448ebbb08"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_info_get_name</span> <span class="pre">(char</span> <span class="pre">*name)</span></span></dt>
+<dd><p>returns the vendor defined name string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – [out] name </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__init_8h_1ac7efc89e062250be5ba3723eb6af9982"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int32_t</span> <span class="pre">aclshmemx_set_config_store_tls_key</span> <span class="pre">(const</span> <span class="pre">char</span> <span class="pre">*tls_pk,</span> <span class="pre">const</span> <span class="pre">uint32_t</span> <span class="pre">tls_pk_len,</span> <span class="pre">const</span> <span class="pre">char</span> <span class="pre">*tls_pk_pw,</span> <span class="pre">const</span> <span class="pre">uint32_t</span> <span class="pre">tls_pk_pw_len,</span> <span class="pre">const</span> <span class="pre">aclshmem_decrypt_handler</span> <span class="pre">decrypt_handler)</span></span></dt>
+<dd><p>Set the TLS private key and password, and register a decrypt key password handler. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tls_pk</strong> – the content of tls private key </p></li>
+<li><p><strong>tls_pk_len</strong> – length of tls private key </p></li>
+<li><p><strong>tls_pk_pw</strong> – the content of tls private key password </p></li>
+<li><p><strong>tls_pk_pw_len</strong> – length of tls private key password </p></li>
+<li><p><strong>decrypt_handler</strong> – decrypt function pointer </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns 0 on success or an error code on failure </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__init_8h_1ac847107616bfa6887cfd2ad2a92e2a95"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_global_exit</span> <span class="pre">(int</span> <span class="pre">status)</span></span></dt>
+<dd><p>exit all ranks. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>status</strong> – [in] name </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__init_8h_1a7461fb0b4c309cfad542897fd7f411a6"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int32_t</span> <span class="pre">aclshmemx_set_conf_store_tls</span> <span class="pre">(bool</span> <span class="pre">enable,</span> <span class="pre">const</span> <span class="pre">char</span> <span class="pre">*tls_info,</span> <span class="pre">const</span> <span class="pre">uint32_t</span> <span class="pre">tls_info_len)</span></span></dt>
+<dd><p>aclshmemx_set_conf_store_tls. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>enable</strong> – whether to enable tls </p></li>
+<li><p><strong>tls_info</strong> – the format describle in memfabric SECURITYNOTE.md, if disabled tls_info won’t be use </p></li>
+<li><p><strong>tls_info_len</strong> – length of tls_info, if disabled tls_info_len won’t be use </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns 0 on success or an error code on failure </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</section>
+<section id="shmem-log-h">
+<h2>shmem_log.h<a class="headerlink" href="#shmem-log-h" title="Link to this heading"></a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__log_8h_1a14b60085d934002dbb140175e077eb6d"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int32_t</span> <span class="pre">aclshmemx_set_extern_logger</span> <span class="pre">(void(*func)(int</span> <span class="pre">level,</span> <span class="pre">const</span> <span class="pre">char</span> <span class="pre">*msg))</span></span></dt>
+<dd><p>Set the log print function for the SHMEM library. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> – the logging function, takes level and msg as parameter </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns 0 on success or an error code on failure </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__log_8h_1a3d65e339bea631c1b8c3dcc12ccdfa73"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int32_t</span> <span class="pre">aclshmemx_set_log_level</span> <span class="pre">(int</span> <span class="pre">level)</span></span></dt>
+<dd><p>Set the logging level. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>level</strong> – the logging level. 0-debug, 1-info, 2-warn, 3-error </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns 0 on success or an error code on failure </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__log_8h_1a195c7106f955a9b8af07a05d3f8dd8ec"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_show_prof</span> <span class="pre">(aclshmem_prof_pe_t</span> <span class="pre">**out_profs,</span> <span class="pre">bool</span> <span class="pre">verbose)</span></span></dt>
+<dd><p>Show profiling data and optionally return profiling pointer. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out_profs</strong> – [out] Pointer to output profiling data. Can be nullptr if you don’t need the pointer. </p></li>
+<li><p><strong>verbose</strong> – [in] Whether to print profiling data to console. Default is true. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</section>
+<section id="shmem-host-heap-h">
+<h2>shmem_host_heap.h<a class="headerlink" href="#shmem-host-heap-h" title="Link to this heading"></a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__heap_8h_1ad200f93b46f0d38ae7f0a1b69f9af55a"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">*</span> <span class="pre">aclshmem_malloc</span> <span class="pre">(size_t</span> <span class="pre">size)</span></span></dt>
+<dd><p>allocate <em>size</em> bytes and returns a pointer to the allocated memory. The memory is not initialized. If <em>size</em> is 0, then <strong><a class="reference internal" href="#shmem__host__heap_8h_1ad200f93b46f0d38ae7f0a1b69f9af55a"><span class="std std-ref">aclshmem_malloc()</span></a></strong> returns NULL. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>size</strong> – [in] bytes to be allocated </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pointer to the allocated memory. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__heap_8h_1ad28719bc1b11d159a38aa204667335c0"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">*</span> <span class="pre">aclshmem_calloc</span> <span class="pre">(size_t</span> <span class="pre">nmemb,</span> <span class="pre">size_t</span> <span class="pre">size)</span></span></dt>
+<dd><p>allocate memory for an array of <em>nmemb</em> elements of <em>size</em> bytes each and returns a pointer to the allocated memory. The memory is set to zero. If <em>nmemb</em> or <em>size</em> is 0, then <strong><a class="reference internal" href="#shmem__host__heap_8h_1ad28719bc1b11d159a38aa204667335c0"><span class="std std-ref">aclshmem_calloc()</span></a></strong> returns either NULL. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nmemb</strong> – [in] elements count </p></li>
+<li><p><strong>size</strong> – [in] each element size in bytes </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pointer to the allocated memory. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__heap_8h_1ae09412cebb03a46e715a5ee2df2c175d"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">*</span> <span class="pre">aclshmem_align</span> <span class="pre">(size_t</span> <span class="pre">alignment,</span> <span class="pre">size_t</span> <span class="pre">size)</span></span></dt>
+<dd><p>allocate <em>size</em> bytes and returns a pointer to the allocated memory. The memory address will be a multiple of <em>alignment</em>, which must be a power of two. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alignment</strong> – [in] memory address alignment </p></li>
+<li><p><strong>size</strong> – [in] bytes allocated </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pointer to the allocated memory. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__heap_8h_1aaaefb76d38bcb883be4fd7ce7930cc38"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_free</span> <span class="pre">(void</span> <span class="pre">*ptr)</span></span></dt>
+<dd><p>Free the memory space pointed to by <em>ptr</em>, which must have been returned by a previous call to <strong><a class="reference internal" href="#shmem__host__heap_8h_1ad200f93b46f0d38ae7f0a1b69f9af55a"><span class="std std-ref">aclshmem_malloc()</span></a></strong>, <strong><a class="reference internal" href="#shmem__host__heap_8h_1ad28719bc1b11d159a38aa204667335c0"><span class="std std-ref">aclshmem_calloc()</span></a></strong> or <strong><a class="reference internal" href="#shmem__host__heap_8h_1ae09412cebb03a46e715a5ee2df2c175d"><span class="std std-ref">aclshmem_align()</span></a></strong>. If <em>ptr</em> is NULL, no operation is performed. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ptr</strong> – [in] point to memory block to be free. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__heap_8h_1a22ea9aa87c5e1c92a5012afacc6b0eb1"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">*</span> <span class="pre">aclshmemx_malloc</span> <span class="pre">(size_t</span> <span class="pre">size,</span> <span class="pre">aclshmem_mem_type_t</span> <span class="pre">mem_type=DEVICE_SIDE)</span></span></dt>
+<dd><p>Allocates a block of ACLSHMEM symmetric memory, the data in this memory is uninitialized. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> – [in] Memory allocation size (in bytes) </p></li>
+<li><p><strong>mem_type</strong> – [in] Allocation location of symmetric memory (Host/Device) </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pointer to the symmetric memory </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__heap_8h_1aa105fc76d4f234eaa68bf69573058ee7"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">*</span> <span class="pre">aclshmemx_calloc</span> <span class="pre">(size_t</span> <span class="pre">count,</span> <span class="pre">size_t</span> <span class="pre">size,</span> <span class="pre">aclshmem_mem_type_t</span> <span class="pre">mem_type=DEVICE_SIDE)</span></span></dt>
+<dd><p>Allocates a block of SHMEM symmetric memory and initializes all content to zero. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>count</strong> – [in] Number of elements </p></li>
+<li><p><strong>size</strong> – [in] Number of bytes occupied by each element </p></li>
+<li><p><strong>mem_type</strong> – [in] Allocation location of symmetric memory (Host/Device) </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pointer to the symmetric memory </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__heap_8h_1aca0a14495fb5c63fa720f82daf710ac8"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">*</span> <span class="pre">aclshmemx_align</span> <span class="pre">(size_t</span> <span class="pre">alignment,</span> <span class="pre">size_t</span> <span class="pre">size,</span> <span class="pre">aclshmem_mem_type_t</span> <span class="pre">mem_type=DEVICE_SIDE)</span></span></dt>
+<dd><p>Allocates a block of SHMEM symmetric memory with alignment to the specified length. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alignment</strong> – [in] Alignment length (in bytes) </p></li>
+<li><p><strong>size</strong> – [in] Memory allocation size (in bytes) </p></li>
+<li><p><strong>mem_type</strong> – [in] Allocation location of symmetric memory (Host/Device) </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pointer to the symmetric memory </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__heap_8h_1ab45c37856762df4dfdc1d6f9dd0c6862"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_free</span> <span class="pre">(void</span> <span class="pre">*ptr,</span> <span class="pre">aclshmem_mem_type_t</span> <span class="pre">mem_type=DEVICE_SIDE)</span></span></dt>
+<dd><p>Frees the allocated symmetric memory. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ptr</strong> – [in] Pointer to the memory to be freed </p></li>
+<li><p><strong>mem_type</strong> – [in] Allocation location of the symmetric memory (Host/Device) </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</section>
+<section id="shmem-host-rma-h">
+<h2>shmem_host_rma.h<a class="headerlink" href="#shmem-host-rma-h" title="Link to this heading"></a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_TYPE_FUNC">
+<span class="target" id="shmem__host__rma_8h_1abadf2954fce3634ed8300ca5107b5475"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TYPE_FUNC</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">FUNC</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Standard RMA Types and Names valid on Host. </p>
+<p><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>NAME   </p></th>
+<th class="head"><p>TYPE    </p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>float   </p></td>
+<td><p>float    </p></td>
+</tr>
+<tr class="row-odd"><td><p>double   </p></td>
+<td><p>double    </p></td>
+</tr>
+<tr class="row-even"><td><p>int8   </p></td>
+<td><p>int8    </p></td>
+</tr>
+<tr class="row-odd"><td><p>int16   </p></td>
+<td><p>int16    </p></td>
+</tr>
+<tr class="row-even"><td><p>int32   </p></td>
+<td><p>int32    </p></td>
+</tr>
+<tr class="row-odd"><td><p>int64   </p></td>
+<td><p>int64    </p></td>
+</tr>
+<tr class="row-even"><td><p>uint8   </p></td>
+<td><p>uint8    </p></td>
+</tr>
+<tr class="row-odd"><td><p>uint16   </p></td>
+<td><p>uint16    </p></td>
+</tr>
+<tr class="row-even"><td><p>uint32   </p></td>
+<td><p>uint32    </p></td>
+</tr>
+<tr class="row-odd"><td><p>uint64   </p></td>
+<td><p>uint64    </p></td>
+</tr>
+<tr class="row-even"><td><p>char   </p></td>
+<td><p>char   </p></td>
+</tr>
+</tbody>
+</table>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_TYPE_PUT">
+<span class="target" id="shmem__host__rma_8h_1ae69d0502cbf2436473b7d8f46536290b"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TYPE_PUT</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_TYPE_PUT" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem put functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_NAME_put(TYPE *dest, TYPE *source, size_t nelems, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy a contiguous data on local PE to symmetric address on the specified PE.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dest</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>source</strong> - [in] Pointer on local device of the source data.</p></li>
+<li><p><strong>nelems</strong> - [in] Number of elements in the destination and source arrays.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_TYPE_PUT_NBI">
+<span class="target" id="shmem__host__rma_8h_1a20c904da9aaf581c8ac16687416c1495"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TYPE_PUT_NBI</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_TYPE_PUT_NBI" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem put nbi functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_NAME_put_nbi(TYPE *dest, TYPE *source, size_t nelems, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy a contiguous data on local PE to symmetric address on the specified PE.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dest</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>source</strong> - [in] Pointer on local device of the source data.</p></li>
+<li><p><strong>nelems</strong> - [in] Number of elements in the destination and source arrays.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_TYPE_IPUT">
+<span class="target" id="shmem__host__rma_8h_1a48aefc819e4aede4c9a72ed8727477ee"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TYPE_IPUT</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_TYPE_IPUT" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem put functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_NAME_iput(TYPE *dest, TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy strided data elements (specified by sst) of an array from a source array on the local PE to locations specified by stride dst on a dest array on specified remote PE.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dest</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>source</strong> - [in] Pointer on local device of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] The stride between consecutive elements of the dest array.</p></li>
+<li><p><strong>sst</strong> - [in] The stride between consecutive elements of the source array.</p></li>
+<li><p><strong>nelems</strong> - [in] Number of elements in the destination and source arrays.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_PUT_SIZE">
+<span class="target" id="shmem__host__rma_8h_1a04b7171f5ba199a180f14056b12e33bf"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_PUT_SIZE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">BITS</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_PUT_SIZE" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem put functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_putBITS(void *dst, void *src, uint32_t elem_size, int32_t pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy a contiguous data on local PE to symmetric address on the specified PE.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> - [in] Pointer on local device of the source data.</p></li>
+<li><p><strong>elem_size</strong> - [in] Number of elements in the destination and source arrays.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_PUT_SIZE_NBI">
+<span class="target" id="shmem__host__rma_8h_1acc8cc5d0b4ab948f8ff81a4a2417d6d3"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_PUT_SIZE_NBI</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">BITS</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_PUT_SIZE_NBI" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem put functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_putBITS_nbi(void *dst, void *src, uint32_t elem_size, int32_t pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy a contiguous data on local PE to symmetric address on the specified PE.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> - [in] Pointer on local device of the source data.</p></li>
+<li><p><strong>elem_size</strong> - [in] Number of elements in the destination and source arrays.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_IPUT_SIZE">
+<span class="target" id="shmem__host__rma_8h_1ab241be8a343cf5b5849123194b5ae904"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_IPUT_SIZE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">BITS</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_IPUT_SIZE" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem put functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_iputBITS(void *dest, void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy strided data elements (specified by sst) of an array from a source array on the local PE to locations specified by stride dst on a dest array on specified remote PE.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dest</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>source</strong> - [in] Pointer on local device of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] The stride between consecutive elements of the dest array.</p></li>
+<li><p><strong>sst</strong> - [in] The stride between consecutive elements of the source array.</p></li>
+<li><p><strong>nelems</strong> - [in] Number of elements in the destination and source arrays.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_TYPE_GET">
+<span class="target" id="shmem__host__rma_8h_1ad8e82b1c372bc46569d957169ceb2beb"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TYPE_GET</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_TYPE_GET" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem get functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_NAME_get(TYPE *dest, TYPE *source, size_t nelems, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dest</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>source</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>nelems</strong> - [in] Number of elements in the dest and source arrays.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_TYPE_GET_NBI">
+<span class="target" id="shmem__host__rma_8h_1ac3824282310407796c8a992249133197"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TYPE_GET_NBI</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_TYPE_GET_NBI" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem get nbi functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_NAME_get_nbi(TYPE *dest, TYPE *source, size_t nelems, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dest</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>source</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>nelems</strong> - [in] Number of elements in the dest and source arrays.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_TYPE_IGET">
+<span class="target" id="shmem__host__rma_8h_1a1072abb1b909c516a72b239620fe344c"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TYPE_IGET</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_TYPE_IGET" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem get functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_NAME_iget(TYPE *dest, TYPE *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy strided data elements from a symmetric array from a specified remote PE to strided locations on a local array.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dest</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>source</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] The stride between consecutive elements of the dest array.</p></li>
+<li><p><strong>sst</strong> - [in] The stride between consecutive elements of the source array.</p></li>
+<li><p><strong>nelems</strong> - [in] Number of elements in the destination and source arrays.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_GET_SIZE">
+<span class="target" id="shmem__host__rma_8h_1a1d0631a757e62ba9b6b5c3748b5a1b09"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_GET_SIZE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">BITS</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_GET_SIZE" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem get functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_getBITS(void *dst, void *src, uint32_t elem_size, int32_t pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>elem_size</strong> - [in] Number of elements in the dest and source arrays.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_GET_SIZE_NBI">
+<span class="target" id="shmem__host__rma_8h_1a3dab5644f2d5d464af1a262e6c747d06"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_GET_SIZE_NBI</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">BITS</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_GET_SIZE_NBI" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem get functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_getBITS_nbi(void *dst, void *src, uint32_t elem_size, int32_t pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>elem_size</strong> - [in] Number of elements in the dest and source arrays.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_IGET_SIZE">
+<span class="target" id="shmem__host__rma_8h_1a68efb2ca161475342e97c713bac38e24"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_IGET_SIZE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">BITS</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_IGET_SIZE" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem get functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_igetBITS(void *dest, void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy strided data elements from a symmetric array from a specified remote PE to strided locations on a local array.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dest</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>source</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] The stride between consecutive elements of the dest array.</p></li>
+<li><p><strong>sst</strong> - [in] The stride between consecutive elements of the source array.</p></li>
+<li><p><strong>nelems</strong> - [in] Number of elements in the destination and source arrays.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_TYPENAME_P">
+<span class="target" id="shmem__host__rma_8h_1a74f1010965916b202e91e2c35fa90a43"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TYPENAME_P</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_TYPENAME_P" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem p functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_NAME_p(TYPE* dst, const TYPE value, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Provide a low latency put capability for single element of most basic types.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Symmetric address of the destination data on local PE.</p></li>
+<li><p><strong>value</strong> - [in] The element to be put.</p></li>
+<li><p><strong>pe</strong> - [in] The number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_TYPENAME_G">
+<span class="target" id="shmem__host__rma_8h_1af8530d0e6d4fe4cf4f92c4ebfa6ce2b2"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TYPENAME_G</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_TYPENAME_G" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem g functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_NAME_g(TYPE* src, int32_t pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Provide a low latency get capability for single element of most basic types.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>src</strong> - [in] Symmetric address of the destination data on local PE.</p></li>
+<li><p><strong>pe</strong> - [in] The number of the remote PE.</p></li>
+</ul>
+</p>
+</dd>
+<dt><strong>Returns</strong></dt><dd><p>A single element of type specified in the input pointer. </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv421aclshmem_block_mode_t">
+<span id="_CPPv321aclshmem_block_mode_t"></span><span id="_CPPv221aclshmem_block_mode_t"></span><span class="target" id="group__group__enums_1ga130f4c05cf3938ede775f63eea084e91"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aclshmem_block_mode_t</span></span></span><br /></dt>
+<dd><p>Enumeration indicating whether the method is blocking or non-blocking. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N21aclshmem_block_mode_t6NO_NBIE">
+<span id="_CPPv3N21aclshmem_block_mode_t6NO_NBIE"></span><span id="_CPPv2N21aclshmem_block_mode_t6NO_NBIE"></span><span class="target" id="group__group__enums_1gga130f4c05cf3938ede775f63eea084e91a92023ba139e72bd9b7a0da9efa906083"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NO_NBI</span></span></span><br /></dt>
+<dd><p>Non-blocking mode disabled (method is blocking) </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N21aclshmem_block_mode_t3NBIE">
+<span id="_CPPv3N21aclshmem_block_mode_t3NBIE"></span><span id="_CPPv2N21aclshmem_block_mode_t3NBIE"></span><span class="target" id="group__group__enums_1gga130f4c05cf3938ede775f63eea084e91afdc5130c2170b6cacf79a4bed2298502"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">NBI</span></span></span><br /></dt>
+<dd><p>Non-blocking mode enabled (method is non-blocking, NBI = Non-Blocking Interface) </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__rma_8h_1aebc7f9b8e89587c81f1b1a626169963d"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">*</span> <span class="pre">aclshmem_ptr</span> <span class="pre">(void</span> <span class="pre">*ptr,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Translate an local symmetric address to remote symmetric address on the specified PE. Firstly, check whether the input address is legal on local PE. Then translate it into remote address on specified PE. Otherwise, returns a null pointer. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ptr</strong> – [in] Symmetric address on local PE. </p></li>
+<li><p><strong>pe</strong> – [in] The number of the remote PE. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If the input address is legal, returns a remote symmetric address on the specified PE that can be accessed using memory loads and stores. Otherwise, a null pointer is returned. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__rma_8h_1ae4fa80134b603c5057dcd761def2c057"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_putmem</span> <span class="pre">(void</span> <span class="pre">*dst,</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Copy contiguous data on symmetric memory from local PE to address on the specified PE. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on Symmetric addr of local PE. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on local memory of the source data. </p></li>
+<li><p><strong>elem_size</strong> – [in] size of elements in the destination and source addr. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__rma_8h_1a5eccf092366deb25c701cf9ebadc60b0"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_getmem</span> <span class="pre">(void</span> <span class="pre">*dst,</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>elem_size</strong> – [in] size of elements in the destination and source addr. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__rma_8h_1aa65222af60cb19d0ec652f6aafdf200d"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_putmem_nbi</span> <span class="pre">(void</span> <span class="pre">*dst,</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from local PE to address on the specified PE. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on Symmetric addr of local PE. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on local memory of the source data. </p></li>
+<li><p><strong>elem_size</strong> – [in] size of elements in the destination and source addr. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__rma_8h_1a8e177ac1a2e0dc071ed83b58018d1b23"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_getmem_nbi</span> <span class="pre">(void</span> <span class="pre">*dst,</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from the specified PE to address on the local PE. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>elem_size</strong> – [in] size of elements in the destination and source addr. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__rma_8h_1ac4aa04f3da20b24c9c09d10951852cfc"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_getmem_on_stream</span> <span class="pre">(void</span> <span class="pre">*dst,</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe,</span> <span class="pre">aclrtStream</span> <span class="pre">stream)</span></span></dt>
+<dd><p>Copy contiguous data on symmetric memory from the specified PE to address on the local PE. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Cross-machine support: Supports cross-machine. Uses MTE when HCCS is connected, otherwise uses RDMA if available. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+<li><p><strong>stream</strong> – [in] copy used stream(use default stream if stream == NULL).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__rma_8h_1ad93313533caf6121293e63a7e5d7f95e"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_putmem_on_stream</span> <span class="pre">(void</span> <span class="pre">*dst,</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe,</span> <span class="pre">aclrtStream</span> <span class="pre">stream)</span></span></dt>
+<dd><p>Copy contiguous data on local PE to symmetric address on the specified PE. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Cross-machine support: Supports cross-machine. Uses MTE when HCCS is connected, otherwise uses RDMA if available. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+<li><p><strong>stream</strong> – [in] copy used stream(use default stream if stream == NULL).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__rma_8h_1a3f55415fee13af3a7460b4488e67a368"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmemx_set_mte_config</span> <span class="pre">(uint64_t</span> <span class="pre">offset,</span> <span class="pre">uint32_t</span> <span class="pre">ub_size,</span> <span class="pre">uint32_t</span> <span class="pre">sync_id)</span></span></dt>
+<dd><p>Set necessary parameters for put or get. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offset</strong> – [in] The start address on UB. </p></li>
+<li><p><strong>ub_size</strong> – [in] The Size of Temp UB Buffer. </p></li>
+<li><p><strong>sync_id</strong> – [in] Sync ID for put or get. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns 0 on success or an error code on failure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__rma_8h_1ad91d468343b9a8fc1d8cf1d271f7327b"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmemx_set_sdma_config</span> <span class="pre">(uint64_t</span> <span class="pre">offset,</span> <span class="pre">uint32_t</span> <span class="pre">ub_size,</span> <span class="pre">uint32_t</span> <span class="pre">sync_id)</span></span></dt>
+<dd><p>Set necessary parameters for SDMA operations. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offset</strong> – [in] The start address on UB. </p></li>
+<li><p><strong>ub_size</strong> – [in] The Size of Temp UB Buffer. </p></li>
+<li><p><strong>sync_id</strong> – [in] Sync ID for put or get. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns 0 on success or an error code on failure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__rma_8h_1a0348a06e097076032d27e2f7fe564f1b"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmemx_set_rdma_config</span> <span class="pre">(uint64_t</span> <span class="pre">offset,</span> <span class="pre">uint32_t</span> <span class="pre">ub_size,</span> <span class="pre">uint32_t</span> <span class="pre">sync_id)</span></span></dt>
+<dd><p>Set necessary parameters for RDMA operations. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offset</strong> – [in] The start address on UB. </p></li>
+<li><p><strong>ub_size</strong> – [in] The Size of Temp UB Buffer. </p></li>
+<li><p><strong>sync_id</strong> – [in] Sync ID for put or get. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns 0 on success or an error code on failure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</section>
+<section id="shmem-host-cc-h">
+<h2>shmem_host_cc.h<a class="headerlink" href="#shmem-host-cc-h" title="Link to this heading"></a></h2>
+<p>shmem host Collective Communication APIs </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__cc_8h_1a84d2cb3df127dd0903ac7e6040fb22cd"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_barrier</span> <span class="pre">(aclshmem_team_t</span> <span class="pre">team)</span></span></dt>
+<dd><p>aclshmem_barrier is a collective synchronization routine over a team. Control returns from aclshmem_barrier after all PEs in the team have called aclshmem_barrier. aclshmem_barrier ensures that all previously issued stores and remote memory updates, including AMOs and RMA operations, done by any of the PEs in the active set are complete before returning. On systems with only scale-up network (HCCS), updates are globally visible, whereas on systems with both scale-up network HCCS and scale-out network (RDMA), ACLSHMEM only guarantees that updates to the memory of a given PE are visible to that PE. Barrier operations issued on the CPU and the NPU only complete communication operations that were issued from the CPU and the NPU, respectively. To ensure completion of GPU-side operations from the CPU, using aclrtSynchronizeStream/aclrtDeviceSynchronize or stream-based API. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>team</strong> – [in] team to do barrier </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__cc_8h_1a77e4962016a975579418e3922d4104f1"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_barrier_all</span> <span class="pre">(void)</span></span></dt>
+<dd><p>aclshmem_barrier of all PEs. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__cc_8h_1a8ce0d98d376e9187aef05798280bac9d"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_barrier_on_stream</span> <span class="pre">(aclshmem_team_t</span> <span class="pre">team,</span> <span class="pre">aclrtStream</span> <span class="pre">stream)</span></span></dt>
+<dd><p>aclshmem_barrier on the specified stream </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>team</strong> – [in] team to do barrier </p></li>
+<li><p><strong>stream</strong> – [in] specifed stream to do barrier </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__cc_8h_1ab1d4265e9305fac8a16649fa0a5dfc61"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_barrier_all_on_stream</span> <span class="pre">(aclrtStream</span> <span class="pre">stream)</span></span></dt>
+<dd><p>aclshmemx_barrier_on_stream of all PEs. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stream</strong> – [in] specifed stream to do barrier </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__cc_8h_1a0344b70ccecacecd9ab37b5e565c8c3e"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_sync</span> <span class="pre">(aclshmem_team_t</span> <span class="pre">team)</span></span></dt>
+<dd><p>Similar to aclshmem_barrier. In constract with the aclshmem_barrier routine, aclshmem_sync only ensures completion and visibility of previously issued memory stores and does not ensure completion of remote memory updates issued via ACLSHMEM rountines. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>team</strong> – [in] team to do barrier </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__cc_8h_1a51bedcee0319424b709e61ec3cb58cb3"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_sync_all</span> <span class="pre">(void)</span></span></dt>
+<dd><p>aclshmem_sync_all of all PEs. </p>
+</dd></dl>
+
+</div>
+</section>
+<section id="shmem-host-p2p-sync-h">
+<h2>shmem_host_p2p_sync.h<a class="headerlink" href="#shmem-host-p2p-sync-h" title="Link to this heading"></a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_WAIT_UNTIL">
+<span class="target" id="shmem__host__p2p__sync_8h_1afe542e0f29ba78a3d100cd0e900e4f28"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_WAIT_UNTIL</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Automatically generates aclshmem wait until functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_NAME_wait_until(TYPE *ivar, int cmp, TYPE cmp_value) </p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until the value at ivar satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>ivar</strong> - [in] Symmetric address of a remotely accessible data object. The type of ivar should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC.</p></li>
+<li><p><strong>cmp</strong> - [in] The comparison operator that compares ivar with cmp_val. Supported operators: ACLSHMEM_CMP_EQ/ACLSHMEM_CMP_NE/ACLSHMEM_CMP_GT/ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE.</p></li>
+<li><p><strong>cmp_value</strong> - [in] The value to be compared with ivar. The type of cmp_value should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_WAIT">
+<span class="target" id="shmem__host__p2p__sync_8h_1a1291b9abc4b82b2f5345831d48b6be51"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_WAIT</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Automatically generates aclshmem wait functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_NAME_wait(TYPE *ivar, TYPE cmp_value)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until the value of ivar is not equal to comparison value, cmp_value.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>ivar</strong> - [in] Symmetric address of a remotely accessible data object. The type of ivar should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC.</p></li>
+<li><p><strong>cmp_value</strong> - [in] The value to be compared with ivar. The type of cmp_value should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_WAIT_UNTIL_ALL">
+<span class="target" id="shmem__host__p2p__sync_8h_1a85068e425fb90d2182902a4c51e02d9c"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_WAIT_UNTIL_ALL</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Automatically generates aclshmem wait until all functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_NAME_wait_until_all(TYPE *ivars, size_t nelems, const int *status, int cmp, TYPE cmp_value)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until all entries in the wait set specified by ivars and status satisfy the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>ivar</strong> - [in] Symmetric address of a remotely accessible data object. The type of ivar should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC.</p></li>
+<li><p><strong>nelems</strong> - [in] The number of elements in the ivars array.</p></li>
+<li><p><strong>status</strong> - [in] Local address of an optional mask array of length nelems. If status[i] == 0, then ivars[i] is included in the wait set; If status[i] != 0, then ivars[i] is excluded from the wait set; If status is NULL, all elements of ivars are included in the wait set.</p></li>
+<li><p><strong>cmp</strong> - [in] The comparison operator that compares ivar with cmp_val. Supported operators: ACLSHMEM_CMP_EQ/ACLSHMEM_CMP_NE/ACLSHMEM_CMP_GT/ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE.</p></li>
+<li><p><strong>cmp_value</strong> - [in] The value to be compared with ivar. The type of cmp_value should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_WAIT_UNTIL_ANY">
+<span class="target" id="shmem__host__p2p__sync_8h_1ad9494979e3e5a165725b753aad8d53d1"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_WAIT_UNTIL_ANY</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Automatically generates aclshmem wait until any functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_NAME_wait_until_any(TYPE *ivars, size_t nelems, const int *status, int cmp, TYPE cmp_value)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until any one entry in the wait set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>ivar</strong> - [in] Symmetric address of an array of remotely accessible data objects. The type of ivars should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC.</p></li>
+<li><p><strong>nelems</strong> - [in] The number of elements in the ivars array.</p></li>
+<li><p><strong>status</strong> - [in] Local address of an optional mask array of length nelems. If status[i] == 0, then ivars[i] is included in the wait set; If status[i] != 0, then ivars[i] is excluded from the wait set; If status is NULL, all elements of ivars are included in the wait set.</p></li>
+<li><p><strong>cmp</strong> - [in] The comparison operator that compares ivar with cmp_val. Supported operators: ACLSHMEM_CMP_EQ/ACLSHMEM_CMP_NE/ACLSHMEM_CMP_GT/ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE.</p></li>
+<li><p><strong>cmp_value</strong> - [in] The value to be compared with ivar. The type of cmp_value should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_WAIT_UNTIL_SOME">
+<span class="target" id="shmem__host__p2p__sync_8h_1acab7186d1f0cbeb8beee567fa64231de"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_WAIT_UNTIL_SOME</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Automatically generates aclshmem wait until some functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_wait_until_some(TYPE *ivars, size_t nelems, size_t *indices, const int *status, int cmp, TYPE cmp_value)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until at least one entry in the wait set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>ivar</strong> - [in] Symmetric address of an array of remotely accessible data objects. The type of ivars should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC.</p></li>
+<li><p><strong>nelems</strong> - [in] The number of elements in the ivars array.</p></li>
+<li><p><strong>indices</strong> - [out] Local address of an array of indices of length at least nelems into ivars that satisfied the wait condition.</p></li>
+<li><p><strong>status</strong> - [in] Local address of an optional mask array of length nelems. If status[i] == 0, then ivars[i] is included in the wait set; If status[i] != 0, then ivars[i] is excluded from the wait set; If status is NULL, all elements of ivars are included in the wait set.</p></li>
+<li><p><strong>cmp</strong> - [in] The comparison operator that compares ivars with cmp_value. Supported operators: ACLSHMEM_CMP_EQ/ACLSHMEM_CMP_NE/ACLSHMEM_CMP_GT/ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE.</p></li>
+<li><p><strong>cmp_value</strong> - [in] The value to be compared with ivar. The type of cmp_value should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_WAIT_UNTIL_ALL_VECTOR">
+<span class="target" id="shmem__host__p2p__sync_8h_1a08327c297da9ea8462e702333d4a5110"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_WAIT_UNTIL_ALL_VECTOR</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Automatically generates aclshmem wait until all vector functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_wait_until_all_vector(TYPE *ivars, size_t nelems, const int *status, int cmp, TYPE *cmp_values)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until all entries in the wait set specified by ivars and status satisfy the condition defined by the comparison operator, cmp, and comparison value, cmp_values.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>ivar</strong> - [in] Symmetric address of an array of remotely accessible data objects. The type of ivars should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC.</p></li>
+<li><p><strong>nelems</strong> - [in] The number of elements in the ivars array.</p></li>
+<li><p><strong>status</strong> - [in] Local address of an optional mask array of length nelems. If status[i] == 0, then ivars[i] is included in the wait set; If status[i] != 0, then ivars[i] is excluded from the wait set; If status is NULL, all elements of ivars are included in the wait set.</p></li>
+<li><p><strong>cmp</strong> - [in] The comparison operator that compares ivars with cmp_value. Supported operators: ACLSHMEM_CMP_EQ/ACLSHMEM_CMP_NE/ACLSHMEM_CMP_GT/ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE.</p></li>
+<li><p><strong>cmp_values</strong> - [in] Local address of an array of length nelems containing values to be compared with the respective value in ivars. The type of cmp_values should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_WAIT_UNTIL_ANY_VECTOR">
+<span class="target" id="shmem__host__p2p__sync_8h_1a7f653a68e1e49bc66690f1ef9f12b626"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_WAIT_UNTIL_ANY_VECTOR</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Automatically generates aclshmem wait until any vector functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_wait_until_any_vector(TYPE *ivars, size_t nelems, const int *status, int cmp, TYPE *cmp_values)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until any one entry in the wait set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_values.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>ivar</strong> - [in] Symmetric address of an array of remotely accessible data objects. The type of ivars should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC.</p></li>
+<li><p><strong>nelems</strong> - [in] The number of elements in the ivars array.</p></li>
+<li><p><strong>status</strong> - [in] Local address of an optional mask array of length nelems. If status[i] == 0, then ivars[i] is included in the wait set; If status[i] != 0, then ivars[i] is excluded from the wait set; If status is NULL, all elements of ivars are included in the wait set.</p></li>
+<li><p><strong>cmp</strong> - [in] The comparison operator that compares ivars with cmp_value. Supported operators: ACLSHMEM_CMP_EQ/ACLSHMEM_CMP_NE/ACLSHMEM_CMP_GT/ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE.</p></li>
+<li><p><strong>cmp_values</strong> - [in] Local address of an array of length nelems containing values to be compared with the respective value in ivars. The type of cmp_values should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_WAIT_UNTIL_SOME_VECTOR">
+<span class="target" id="shmem__host__p2p__sync_8h_1a4eaa388afd20e6a79c7bd8ab580c53cd"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_WAIT_UNTIL_SOME_VECTOR</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Automatically generates aclshmem wait until some vector functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_wait_until_some_vector(TYPE *ivars, size_t nelems, size_t *indices, const int *status, int cmp, TYPE *cmp_values)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by blocking until at least one entry in the wait set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_values.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>ivar</strong> - [in] Symmetric address of an array of remotely accessible data objects. The type of ivars should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC.</p></li>
+<li><p><strong>nelems</strong> - [in] The number of elements in the ivars array.</p></li>
+<li><p><strong>indices</strong> - [out] Local address of an array of indices of length at least nelems into ivars that satisfied the wait condition.</p></li>
+<li><p><strong>status</strong> - [in] Local address of an optional mask array of length nelems. If status[i] == 0, then ivars[i] is included in the wait set; If status[i] != 0, then ivars[i] is excluded from the wait set; If status is NULL, all elements of ivars are included in the wait set.</p></li>
+<li><p><strong>cmp</strong> - [in] The comparison operator that compares ivars with cmp_value. Supported operators: ACLSHMEM_CMP_EQ/ACLSHMEM_CMP_NE/ACLSHMEM_CMP_GT/ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE.</p></li>
+<li><p><strong>cmp_values</strong> - [in] Local address of an array of length nelems containing values to be compared with the respective value in ivars. The type of cmp_values should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_TEST">
+<span class="target" id="shmem__host__p2p__sync_8h_1a5bfe983183d66fcc54437af4e7a4ed8c"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TEST</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Automatically generates aclshmem test functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API int aclshmem_NAME_test(TYPE *ivars, int cmp, TYPE cmp_value)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by testing whether the value of ivar satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>ivar</strong> - [in] Symmetric address of an array of remotely accessible data objects. The type of ivars should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC.</p></li>
+<li><p><strong>cmp</strong> - [in] The comparison operator that compares ivars with cmp_value. Supported operators: ACLSHMEM_CMP_EQ/ACLSHMEM_CMP_NE/ACLSHMEM_CMP_GT/ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE.</p></li>
+<li><p><strong>cmp_value</strong> - [in] The value against which the object pointed to by ivar will be compared. The type of cmp_value should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_TEST_ANY">
+<span class="target" id="shmem__host__p2p__sync_8h_1aabdc8c8ed980e69da3332721ef996baf"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TEST_ANY</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Automatically generates aclshmem test any functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_test_any(TYPE *ivars, size_t nelems, const int *status, int cmp, TYPE cmp_value)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by testing whether any one entry in the test set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>ivar</strong> - [in] Symmetric address of an array of remotely accessible data objects. The type of ivars should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC.</p></li>
+<li><p><strong>nelems</strong> - [in] The number of elements in the ivars array.</p></li>
+<li><p><strong>status</strong> - [in] Local address of an optional mask array of length nelems. If status[i] == 0, then ivars[i] is included in the wait set; If status[i] != 0, then ivars[i] is excluded from the wait set; If status is NULL, all elements of ivars are included in the wait set.</p></li>
+<li><p><strong>cmp</strong> - [in] The comparison operator that compares ivars with cmp_value. Supported operators: ACLSHMEM_CMP_EQ/ACLSHMEM_CMP_NE/ACLSHMEM_CMP_GT/ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE.</p></li>
+<li><p><strong>cmp_value</strong> - [in] The value to be compared with ivars. The type of cmp_value should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_TEST_SOME">
+<span class="target" id="shmem__host__p2p__sync_8h_1a53310944eb171df556e789fc2ab30aeb"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TEST_SOME</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Automatically generates aclshmem test some functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_test_some(TYPE *ivars, size_t nelems, size_t *indices, const int *status, int cmp, TYPE cmp_value)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by testing whether at least one entry in the test set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_value.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>ivar</strong> - [in] Symmetric address of an array of remotely accessible data objects. The type of ivars should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC.</p></li>
+<li><p><strong>nelems</strong> - [in] The number of elements in the ivars array.</p></li>
+<li><p><strong>indices</strong> - [out] Local address of an array of indices of length at least nelems into ivars that satisfied the test condition.</p></li>
+<li><p><strong>status</strong> - [in] Local address of an optional mask array of length nelems. If status[i] == 0, then ivars[i] is included in the test set; If status[i] != 0, then ivars[i] is excluded from the test set; If status is NULL, all elements of ivars are included in the test set.</p></li>
+<li><p><strong>cmp</strong> - [in] The comparison operator that compares ivars with cmp_value. Supported operators: ACLSHMEM_CMP_EQ/ACLSHMEM_CMP_NE/ACLSHMEM_CMP_GT/ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE.</p></li>
+<li><p><strong>cmp_value</strong> - [in] The value to be compared with ivars. The type of cmp_value should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_TEST_ALL_VECTOR">
+<span class="target" id="shmem__host__p2p__sync_8h_1ab99d978d90fe2e19ab49794c23be1a28"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TEST_ALL_VECTOR</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Automatically generates aclshmem test all vector functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_test_all_vector(TYPE *ivars, size_t nelems, const int *status, int cmp, TYPE *cmp_values)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by testing whether all entries in the test set specified by ivars and status satisfy the condition defined by the comparison operator, cmp, and comparison value, cmp_values.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>ivar</strong> - [in] Symmetric address of an array of remotely accessible data objects. The type of ivars should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC.</p></li>
+<li><p><strong>nelems</strong> - [in] The number of elements in the ivars array.</p></li>
+<li><p><strong>status</strong> - [in] Local address of an optional mask array of length nelems. If status[i] == 0, then ivars[i] is included in the test set; If status[i] != 0, then ivars[i] is excluded from the test set; If status is NULL, all elements of ivars are included in the test set.</p></li>
+<li><p><strong>cmp</strong> - [in] The comparison operator that compares ivars with cmp_value. Supported operators: ACLSHMEM_CMP_EQ/ACLSHMEM_CMP_NE/ACLSHMEM_CMP_GT/ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE.</p></li>
+<li><p><strong>cmp_values</strong> - [in] Local address of an array of length nelems containing values to be compared with the respective value in ivars. The type of cmp_values should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_TEST_ANY_VECTOR">
+<span class="target" id="shmem__host__p2p__sync_8h_1a9113993bc338f84edafec540e48ac232"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TEST_ANY_VECTOR</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Automatically generates aclshmem test any vector functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_test_any_vector(TYPE *ivars, size_t nelems, const int *status, int cmp, TYPE *cmp_values)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by testing whether any one entry in the test set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_values.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>ivar</strong> - [in] Symmetric address of an array of remotely accessible data objects. The type of ivars should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC.</p></li>
+<li><p><strong>nelems</strong> - [in] The number of elements in the ivars array.</p></li>
+<li><p><strong>status</strong> - [in] Local address of an optional mask array of length nelems. If status[i] == 0, then ivars[i] is included in the test set; If status[i] != 0, then ivars[i] is excluded from the test set; If status is NULL, all elements of ivars are included in the test set.</p></li>
+<li><p><strong>cmp</strong> - [in] The comparison operator that compares ivars with cmp_value. Supported operators: ACLSHMEM_CMP_EQ/ACLSHMEM_CMP_NE/ACLSHMEM_CMP_GT/ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE.</p></li>
+<li><p><strong>cmp_values</strong> - [in] Local address of an array of length nelems containing values to be compared with the respective value in ivars. The type of cmp_values should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_TEST_SOME_VECTOR">
+<span class="target" id="shmem__host__p2p__sync_8h_1a691d5b968833281ec2c3c1b0e9902675"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TEST_SOME_VECTOR</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Automatically generates aclshmem test some vector functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API size_t aclshmem_NAME_test_some_vector(TYPE *ivars, size_t nelems, size_t *indices, const int *status, int cmp, TYPE *cmp_values)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Implements point-to-point synchronization by testing whether at least one entry in the test set specified by ivars and status satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_values.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>ivar</strong> - [in] Symmetric address of an array of remotely accessible data objects. The type of ivars should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC.</p></li>
+<li><p><strong>nelems</strong> - [in] The number of elements in the ivars array.</p></li>
+<li><p><strong>indices</strong> - [out] Local address of an array of indices of length at least nelems into ivars that satisfied the test condition.</p></li>
+<li><p><strong>status</strong> - [in] Local address of an optional mask array of length nelems. If status[i] == 0, then ivars[i] is included in the test set; If status[i] != 0, then ivars[i] is excluded from the test set; If status is NULL, all elements of ivars are included in the test set.</p></li>
+<li><p><strong>cmp</strong> - [in] The comparison operator that compares ivars with cmp_value. Supported operators: ACLSHMEM_CMP_EQ/ACLSHMEM_CMP_NE/ACLSHMEM_CMP_GT/ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE.</p></li>
+<li><p><strong>cmp_values</strong> - [in] Local address of an array of length nelems containing values to be compared with the respective value in ivars. The type of cmp_values should match that implied in the ACLSHMEM_P2P_SYNC_TYPE_FUNC. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__p2p__sync_8h_1a5ef21d69da0ca953dfb886b67b18d6ea"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">uint64_t</span> <span class="pre">util_get_ffts_config</span> <span class="pre">(void)</span></span></dt>
+<dd><p>Get runtime ffts config. This config should be passed to MIX Kernel and set by MIX Kernel using aclshmemx_set_ffts. Refer to aclshmemx_set_ffts for more details. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ffts config </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__p2p__sync_8h_1a6b4ad27d1cd45d95984459d25d01681e"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_handle_wait</span> <span class="pre">(aclshmem_handle_t</span> <span class="pre">handle,</span> <span class="pre">aclrtStream</span> <span class="pre">stream)</span></span></dt>
+<dd><p>Wait asynchronous RMA operations to finish. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handle</strong> – [in] handle use to wait asynchronous RMA operations to finish </p></li>
+<li><p><strong>stream</strong> – [in] specifed stream to do wait </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__p2p__sync_8h_1ac16d79980259e67c8d010ac6b4a5f8fa"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_signal_wait_until_on_stream</span> <span class="pre">(int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int</span> <span class="pre">cmp,</span> <span class="pre">int32_t</span> <span class="pre">cmp_val,</span> <span class="pre">aclrtStream</span> <span class="pre">stream)</span></span></dt>
+<dd><p>This routine can be used to implement point-to-point synchronization between PEs or between threads within the same PE. A call to this routine blocks until the value of sig_addr at the calling PE satisfies the wait condition specified by the comparison operator, cmp, and comparison value, cmp_val. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sig_addr</strong> – [in] Local address of the source signal variable. </p></li>
+<li><p><strong>cmp</strong> – [in] The comparison operator that compares sig_addr with cmp_val. Supported operators: ACLSHMEM_CMP_EQ/ACLSHMEM_CMP_NE/ACLSHMEM_CMP_GT/ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
+<li><p><strong>cmp_val</strong> – [in] The value against which the object pointed to by sig_addr will be compared. </p></li>
+<li><p><strong>stream</strong> – [in] Used stream(use default stream if stream == NULL). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__p2p__sync_8h_1a41949a969d3a876f1a23ed55b2e7f3f4"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_signal_wait_until</span> <span class="pre">(int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int</span> <span class="pre">cmp,</span> <span class="pre">int32_t</span> <span class="pre">cmp_val)</span></span></dt>
+<dd><p>Implements point-to-point synchronization by blocking until the value of sig_addr at the calling PE satisfies the condition defined by the comparison operator, cmp, and comparison value, cmp_value. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sig_addr</strong> – [in] Local address of the source signal variable. </p></li>
+<li><p><strong>cmp</strong> – [in] The comparison operator that compares sig_addr with cmp_val. Supported operators: ACLSHMEM_CMP_EQ/ACLSHMEM_CMP_NE/ACLSHMEM_CMP_GT/ ACLSHMEM_CMP_GE/ACLSHMEM_CMP_LT/ACLSHMEM_CMP_LE. </p></li>
+<li><p><strong>cmp_val</strong> – [in] The value against which the object pointed to by sig_addr will be compared. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</section>
+<section id="shmem-host-so-h">
+<h2>shmem_host_so.h<a class="headerlink" href="#shmem-host-so-h" title="Link to this heading"></a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL">
+<span class="target" id="shmem__host__so_8h_1af8c85c1798d55a0fbb0c99a3e3153f47"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Automatically generates aclshmem put signal functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p> * Copyright (c) 2025 Huawei Technologies Co., Ltd.  * This program is free software, you can redistribute it and/or modify it under the terms and conditions of  * CANN Open Software License Agreement Version 2.0 (the “License”).  * Please refer to the License for details. You may not use this file except in compliance with the License.  * THIS SOFTWARE IS PROVIDED ON AN “AS IS” BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED,  * INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE.  * See LICENSE in the root of the software repository for the full text of the License.   </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_NAME_put_signal(TYPE* dst, TYPE* src, size_t elem_size, uint8_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>elem_size</strong> - [in] Number of elements in the dest and source arrays.</p></li>
+<li><p><strong>sig_addr</strong> - [in] Symmetric address of the signal word to be updated.</p></li>
+<li><p><strong>signal</strong> - [in] The value used to update sig_addr.</p></li>
+<li><p><strong>sig_op</strong> - [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_NBI">
+<span class="target" id="shmem__host__so_8h_1a8fda7bc245497043b10b4a7b0234cda9"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_NBI</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Automatically generates aclshmem put signal nbi functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_NAME_put_signal_nbi(TYPE* dst, TYPE* src, size_t elem_size, uint8_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>elem_size</strong> - [in] Number of elements in the dest and source arrays.</p></li>
+<li><p><strong>sig_addr</strong> - [in] Symmetric address of the signal word to be updated.</p></li>
+<li><p><strong>signal</strong> - [in] The value used to update sig_addr.</p></li>
+<li><p><strong>sig_op</strong> - [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_PUT_SIZE_MEM_SIGNAL">
+<span class="target" id="shmem__host__so_8h_1a4d99e6070eafb8443282e97977b0c018"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_PUT_SIZE_MEM_SIGNAL</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">BITS</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_PUT_SIZE_MEM_SIGNAL" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem put functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_putBITS_signal(void *dst, void *src, size_t nelems, int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy a contiguous data from local to symmetric address on the specified PE and updating a remote signal flag on completion.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>elem_size</strong> - [in] Number of elements in the dest and source arrays.</p></li>
+<li><p><strong>sig_addr</strong> - [in] Symmetric address of the signal word to be updated.</p></li>
+<li><p><strong>signal</strong> - [in] The value used to update sig_addr.</p></li>
+<li><p><strong>sig_op</strong> - [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_PUT_SIZE_MEM_SIGNAL_NBI">
+<span class="target" id="shmem__host__so_8h_1a857c5b1aaee2bb2d9b2a78d1ddda2128"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_PUT_SIZE_MEM_SIGNAL_NBI</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">BITS</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_PUT_SIZE_MEM_SIGNAL_NBI" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem put functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_HOST_API void aclshmem_putBITS_signal_nbi(void *dst, void *src, size_t nelems, int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy a contiguous data from local to symmetric address on the specified PE and updating a remote signal flag on completion.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>elem_size</strong> - [in] Number of elements in the dest and source arrays.</p></li>
+<li><p><strong>sig_addr</strong> - [in] Symmetric address of the signal word to be updated.</p></li>
+<li><p><strong>signal</strong> - [in] The value used to update sig_addr.</p></li>
+<li><p><strong>sig_op</strong> - [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__so_8h_1a965822dcceaf3e04dc2ef44bd8c60d4e"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_putmem_signal_nbi</span> <span class="pre">(void</span> <span class="pre">*dst,</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">void</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Asynchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
+<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
+<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
+<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__so_8h_1a8580b3377d987f713ca17c24501c89ee"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_putmem_signal</span> <span class="pre">(void</span> <span class="pre">*dst,</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">void</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
+<li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
+<li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
+<li><p><strong>sig_op</strong> – [in] Operation used to update sig_addr with signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__so_8h_1a0893efaf2fd8fc910d700a592c8cab80"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_signal_op_on_stream</span> <span class="pre">(int32_t</span> <span class="pre">*sig_addr,</span> <span class="pre">int32_t</span> <span class="pre">signal,</span> <span class="pre">int</span> <span class="pre">sig_op,</span> <span class="pre">int</span> <span class="pre">pe,</span> <span class="pre">aclrtStream</span> <span class="pre">stream)</span></span></dt>
+<dd><p>This routine performs an atomic operation on a remote signal variable at the specified PE, with the operation executed on the given stream. It is used to modify a remote signal and is typically paired with wait routines like aclshmemx_signal_wait_until_on_stream. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Cross-machine support:<ul class="simple">
+<li><p>ACLSHMEM_SIGNAL_SET: Supports RDMA cross-machine.</p></li>
+<li><p>ACLSHMEM_SIGNAL_ADD: Does not support RDMA cross-machine. Supports MTE cross-machine when HCCS is available. </p></li>
+</ul>
+</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sig_addr</strong> – [in] Local address of the source signal variable that is accessible at the target PE. </p></li>
+<li><p><strong>signal</strong> – [in] The value to be used in the atomic operation. </p></li>
+<li><p><strong>sig_op</strong> – [in] The operation to perform on the remote signal. Supported operations: ACLSHMEM_SIGNAL_SET/ACLSHMEM_SIGNAL_ADD. </p></li>
+<li><p><strong>pe</strong> – [in] The PE number on which the remote signal variable is to be updated. </p></li>
+<li><p><strong>stream</strong> – [in] Used stream(use default stream if stream == NULL).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</section>
+<section id="shmem-host-team-h">
+<h2>shmem_host_team.h<a class="headerlink" href="#shmem-host-team-h" title="Link to this heading"></a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__team_8h_1a533d98d92eb69baacb579db205f999b2"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmem_team_split_strided</span> <span class="pre">(aclshmem_team_t</span> <span class="pre">parent_team,</span> <span class="pre">int</span> <span class="pre">pe_start,</span> <span class="pre">int</span> <span class="pre">pe_stride,</span> <span class="pre">int</span> <span class="pre">pe_size,</span> <span class="pre">aclshmem_team_t</span> <span class="pre">*new_team)</span></span></dt>
+<dd><p>Collective Interface. Creates a new ACLSHMEM team from an existing parent team. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parent_team</strong> – [in] A team handle. </p></li>
+<li><p><strong>pe_start</strong> – [in] The first PE number of the subset of PEs from the parent team. </p></li>
+<li><p><strong>pe_stride</strong> – [in] The stride between team PE numbers in the parent team. </p></li>
+<li><p><strong>pe_size</strong> – [in] The total number of PEs in new team. </p></li>
+<li><p><strong>new_team</strong> – [out] A team handle.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>0 on successful creation of new_team; otherwise nonzero. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__team_8h_1afa1f9ce1893a8b118885348928a39dfe"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmem_team_split_2d</span> <span class="pre">(aclshmem_team_t</span> <span class="pre">parent_team,</span> <span class="pre">int</span> <span class="pre">x_range,</span> <span class="pre">aclshmem_team_t</span> <span class="pre">*x_team,</span> <span class="pre">aclshmem_team_t</span> <span class="pre">*y_team)</span></span></dt>
+<dd><p>Collective Interface. Split team from an existing parent team based on a 2D Cartsian Space. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parent_team</strong> – [in] A team handle. </p></li>
+<li><p><strong>x_range</strong> – [in] represents the number of elements in the first dimensions </p></li>
+<li><p><strong>x_team</strong> – [in] A new x-axis team after team split. </p></li>
+<li><p><strong>y_team</strong> – [in] A new y-axis team after team split.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>0 on successful creation of new_team; otherwise nonzero. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__team_8h_1ad71782078c3f0b1a38859dbf3f72f1e7"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmem_team_translate_pe</span> <span class="pre">(aclshmem_team_t</span> <span class="pre">src_team,</span> <span class="pre">int</span> <span class="pre">src_pe,</span> <span class="pre">aclshmem_team_t</span> <span class="pre">dest_team)</span></span></dt>
+<dd><p>Translate a given PE number in one team into the corresponding PE number in another team. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src_team</strong> – [in] A ACLSHMEM team handle. </p></li>
+<li><p><strong>src_pe</strong> – [in] The PE number in src_team. </p></li>
+<li><p><strong>dest_team</strong> – [in] A ACLSHMEM team handle.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The number of PEs in the specified team. If the team handle is ACLSHMEM_TEAM_INVALID, returns -1. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__team_8h_1a04ca28345008fdcd465394f9ef192355"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_team_destroy</span> <span class="pre">(aclshmem_team_t</span> <span class="pre">team)</span></span></dt>
+<dd><p>Collective Interface. Destroys the team referenced by the team handle. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>team</strong> – [in] A team handle. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__team_8h_1a7dd607a14b777b4531191ab66373fb46"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmem_my_pe</span> <span class="pre">(void)</span></span></dt>
+<dd><p>Returns the PE number of the local PE. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Integer between 0 and npes - 1 </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__team_8h_1ada4d257855ba135c05041cd592bd5154"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmem_n_pes</span> <span class="pre">(void)</span></span></dt>
+<dd><p>Returns the number of PEs running in the program. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Number of PEs in the program. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__team_8h_1ac6e64ad71094d3cbe447d0872bfc149f"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmem_team_my_pe</span> <span class="pre">(aclshmem_team_t</span> <span class="pre">team)</span></span></dt>
+<dd><p>Returns the number of the calling PE in the specified team. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>team</strong> – [in] A team handle.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The number of the calling PE within the specified team. If the team handle is ACLSHMEM_TEAM_INVALID, returns -1. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__team_8h_1ada741ab0ce47461069deb288b9cac941"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmem_team_n_pes</span> <span class="pre">(aclshmem_team_t</span> <span class="pre">team)</span></span></dt>
+<dd><p>Returns the number of PEs in the specified team. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>team</strong> – [in] A team handle.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The number of PEs in the specified team. If the team handle is ACLSHMEM_TEAM_INVALID, returns -1. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__team_8h_1a52b9fedb7a924f350f92131ceaf5399e"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmem_team_get_config</span> <span class="pre">(aclshmem_team_t</span> <span class="pre">team,</span> <span class="pre">aclshmem_team_config_t</span> <span class="pre">*config)</span></span></dt>
+<dd><p>return team config which pass in as team created </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>team</strong> – [in] team handle </p></li>
+<li><p><strong>config</strong> – [out] the config associated with team, reserved for future use </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns 0 on success or an error code on failure </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="def.html" class="btn btn-neutral float-left" title="SHMEM DEF" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="device_api.html" class="btn btn-neutral float-right" title="DEVICE API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright  2025 Huawei Technologies Co., Ltd..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

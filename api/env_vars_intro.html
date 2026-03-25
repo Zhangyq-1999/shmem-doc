@@ -1,0 +1,176 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SHMEM Env Vars &mdash; SHMEM Guidebook 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=d6bf9227" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="初始化" href="../example/example.html" />
+    <link rel="prev" title="SHMEM Python API Reference" href="pythonAPI.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SHMEM Guidebook
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">快速开始</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../related_scripts.html">相关脚本</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Using SHMEM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../example/api_demo.html">SHMEM API 样例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compilation_build_guide.html">编译与构建</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug/log_debug.html">SHMEM日志</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug/tools_debug.html">SHMEM搭配工具算子调测指导</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug/dump_debug.html">在样例工程使用Ascend C算子调测API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="def.html">SHMEM DEF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="host_api.html">HOST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SHMEM Env Vars</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">初始化相关</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">日志相关</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#profiling">Profiling相关</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Example</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../example/example.html">初始化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example/example.html#allgather">AllGather</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../principles.html">SHMEM原理概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code_organization.html">代码组织结构</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting And FAQs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../debug/Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug/Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SECURITY.html">安全声明</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SHMEM Guidebook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SHMEM Env Vars</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/env_vars_intro.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="shmem-env-vars">
+<h1>SHMEM Env Vars<a class="headerlink" href="#shmem-env-vars" title="Link to this heading"></a></h1>
+<section id="id1">
+<h2>初始化相关<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>使用unique id的接口初始化时，需要手动配置环境变量SHMEM_UID_SESSION_ID或者SHMEM_UID_SOCK_IFNAME，同时配置时只读SHMEM_UID_SESSION_ID。指定SHMEM_UID_SESSION_ID时需保证ip可连通，port空闲。指定SHMEM_UID_SOCK_IFNAME时需保证网口指定的网络协议地址存在。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID</span></code>:直接指定PE 0的监听socket的ip和端口。
+SHMEM_UID_SESSION_ID配置示例：
+SHMEM_UID_SESSION_ID=127.0.0.1:1234
+SHMEM_UID_SESSION_ID=[6666:6666:6666:6666:6666:6666:6666:6666]:886</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SOCK_IFNAME</span></code>:指定PE 0的监听socket的网口名和网络层协议。
+SHMEM_UID_SOCK_IFNAME配置示例：
+SHMEM_UID_SOCK_IFNAME=enpxxxx:inet4  取ipv4
+SHMEM_UID_SOCK_IFNAME=enpxxxx:inet6  取ipv6</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>日志相关<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>日志相关环境变量及详细介绍见<a class="reference internal" href="../debug/log_debug.html"><span class="std std-doc">SHMEM日志</span></a>。</p>
+</section>
+<section id="profiling">
+<h2>Profiling相关<a class="headerlink" href="#profiling" title="Link to this heading"></a></h2>
+<p>SHMEM提供Profiling打点工具，通过采集系统时钟周期数并转换为实际时间，精准量化不同Block（计算核）、不同Frame（埋点 ID）下的MTE搬运性能，详细介绍请参考<a class="reference internal" href="../debug/profiling.html"><span class="std std-doc">在示例中使用Profiling工具</span></a>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SHMEM_CYCLE_PROF_PE</span></code>: 用于设置需要进行Profiling采集的pe，pe_id设置范围【0，PEs-1】，需要取消采集请<code class="docutils literal notranslate"><span class="pre">unset</span> <span class="pre">SHMEM_CYCLE_PROF_PE</span></code>。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pythonAPI.html" class="btn btn-neutral float-left" title="SHMEM Python API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../example/example.html" class="btn btn-neutral float-right" title="初始化" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright  2025 Huawei Technologies Co., Ltd..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

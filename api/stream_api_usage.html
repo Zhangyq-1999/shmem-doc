@@ -1,0 +1,569 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SHMEM C++ Stream API 使用说明 &mdash; SHMEM Guidebook 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=d6bf9227" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SHMEM Guidebook
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">快速开始</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../related_scripts.html">相关脚本</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Using SHMEM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../example/api_demo.html">SHMEM API 样例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compilation_build_guide.html">编译与构建</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug/log_debug.html">SHMEM日志</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug/tools_debug.html">SHMEM搭配工具算子调测指导</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug/dump_debug.html">在样例工程使用Ascend C算子调测API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="def.html">SHMEM DEF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="host_api.html">HOST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="env_vars_intro.html">SHMEM Env Vars</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Example</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../example/example.html">初始化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example/example.html#allgather">AllGather</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../principles.html">SHMEM原理概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code_organization.html">代码组织结构</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting And FAQs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../debug/Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug/Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SECURITY.html">安全声明</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SHMEM Guidebook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SHMEM C++ Stream API 使用说明</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/stream_api_usage.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="shmem-c-stream-api">
+<h1>SHMEM C++ Stream API 使用说明<a class="headerlink" href="#shmem-c-stream-api" title="Link to this heading"></a></h1>
+<section id="id1">
+<h2>一、概述<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>本文档介绍四个基于Stream的SHMEM C++接口的使用方法，这些接口允许在指定的ACL流上执行数据传输和信号操作。</p>
+<p><strong>跨机支持说明：</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>接口</p></th>
+<th class="head"><p>跨机支持</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>aclshmemx_putmem_on_stream</p></td>
+<td><p>支持</p></td>
+<td><p>HCCS连通时优先走MTE，否则RDMA链路可用时走RDMA</p></td>
+</tr>
+<tr class="row-odd"><td><p>aclshmemx_getmem_on_stream</p></td>
+<td><p>支持</p></td>
+<td><p>HCCS连通时优先走MTE，否则RDMA链路可用时走RDMA</p></td>
+</tr>
+<tr class="row-even"><td><p>aclshmemx_signal_op_on_stream</p></td>
+<td><p>部分支持</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_SET</span></code>：HCCS连通时优先走MTE，否则RDMA链路可用时走RDMA；<code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_ADD</span></code>不支持RDMA跨机，但HCCS可通时支持MTE跨机</p></td>
+</tr>
+<tr class="row-odd"><td><p>aclshmemx_signal_wait_until_on_stream</p></td>
+<td><p>不支持</p></td>
+<td><p>语义为等待本卡上地址到达某个值</p></td>
+</tr>
+</tbody>
+</table>
+<p>跨机器场景下的数据传输路径选择策略：</p>
+<ul class="simple">
+<li><p><strong>优先使用MTE接口</strong>：当HCCS链路连通时，优先走MTE路径</p></li>
+<li><p><strong>RDMA接口</strong>：当HCCS链路不通但RDMA配置可用时，自动切换到RDMA路径进行跨机通信</p></li>
+</ul>
+<p>若要实现上述自动选择MTE/RDMA路径的功能，需要通过以下方式初始化：</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">aclshmemx_init_attr_t</span><span class="w"> </span><span class="n">attributes</span><span class="p">;</span>
+<span class="c1">// 配置MTE和RDMA路径</span>
+<span class="n">attributes</span><span class="p">.</span><span class="n">option_attr</span><span class="p">.</span><span class="n">data_op_engine_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">data_op_engine_type_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">ACLSHMEM_DATA_OP_MTE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ACLSHMEM_DATA_OP_ROCE</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_init_attr</span><span class="p">(</span><span class="n">ACLSHMEMX_INIT_WITH_DEFAULT</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>完整初始化可参考<code class="docutils literal notranslate"><span class="pre">tests\unittest\host\main_test.cpp</span></code>的<code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">test_cross_init()</span></code>函数。</p>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h2>二、接口说明<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="aclshmemx-putmem-on-stream">
+<h3>1. aclshmemx_putmem_on_stream<a class="headerlink" href="#aclshmemx-putmem-on-stream" title="Link to this heading"></a></h3>
+<p><strong>功能描述：</strong></p>
+<p>同步接口，在指定流上将对称内存中本卡上的数据从源地址复制到指定PE的地址上。</p>
+<p><strong>跨机支持：</strong> 支持，HCCS连通时优先走MTE，否则RDMA链路可用时走RDMA。</p>
+<p><strong>函数原型：</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ACLSHMEM_HOST_API</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">aclshmemx_putmem_on_stream</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">dst</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">elem_size</span><span class="p">,</span><span class="w"> </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">pe</span><span class="p">,</span><span class="w"> </span><span class="n">aclrtStream</span><span class="w"> </span><span class="n">stream</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>参数说明：</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>参数</p></th>
+<th class="head"><p>类型</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>dst</p></td>
+<td><p>void*</p></td>
+<td><p>目标PE的目的地址在本卡的对称地址指针</p></td>
+</tr>
+<tr class="row-odd"><td><p>src</p></td>
+<td><p>void*</p></td>
+<td><p>本地源数据的指针</p></td>
+</tr>
+<tr class="row-even"><td><p>elem_size</p></td>
+<td><p>size_t</p></td>
+<td><p>要传输的数据大小（字节）</p></td>
+</tr>
+<tr class="row-odd"><td><p>pe</p></td>
+<td><p>int32_t</p></td>
+<td><p>目标PE的编号</p></td>
+</tr>
+<tr class="row-even"><td><p>stream</p></td>
+<td><p>aclrtStream</p></td>
+<td><p>使用的流（如果为NULL，则使用默认流）</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>使用示例：</strong>
+<code class="docutils literal notranslate"><span class="pre">tests\unittest\host\mem\shmem_host_put_stream_test.cpp</span></code>存在完整调用示例，展示了如何在指定流上使用<code class="docutils literal notranslate"><span class="pre">aclshmemx_putmem_on_stream</span></code>接口进行数据传输。下面仅展示核心流程。</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// 伪代码示例：aclshmemx_putmem_on_stream使用流程</span>
+
+<span class="c1">// 1. 初始化（跨机场景需配置MTE和RDMA）</span>
+<span class="n">aclshmemx_init_attr_t</span><span class="w"> </span><span class="n">attributes</span><span class="p">;</span>
+<span class="n">attributes</span><span class="p">.</span><span class="n">option_attr</span><span class="p">.</span><span class="n">data_op_engine_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ACLSHMEM_DATA_OP_MTE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ACLSHMEM_DATA_OP_ROCE</span><span class="p">;</span>
+<span class="n">aclshmemx_init_attr</span><span class="p">(</span><span class="n">ACLSHMEMX_INIT_WITH_DEFAULT</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">);</span>
+
+<span class="c1">// 2. 创建流</span>
+<span class="n">aclrtStream</span><span class="w"> </span><span class="n">stream</span><span class="p">;</span>
+<span class="n">aclrtCreateStream</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stream</span><span class="p">);</span>
+
+<span class="c1">// 3. 跨机调用RDMA接口时，必须使用aclshmem_malloc分配对称内存，不能使用aclrtMalloc</span>
+<span class="kt">size_t</span><span class="w"> </span><span class="n">data_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span><span class="w"> </span><span class="c1">// 1KB</span>
+<span class="kt">int32_t</span><span class="w"> </span><span class="n">target_pe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// 目标PE编号</span>
+<span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">src_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmem_malloc</span><span class="p">(</span><span class="n">data_size</span><span class="p">);</span>
+<span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">dst_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmem_malloc</span><span class="p">(</span><span class="n">data_size</span><span class="p">);</span>
+<span class="c1">// 4. src_ptr初始化赋值</span>
+<span class="c1">// 5. 执行put操作</span>
+<span class="n">aclshmemx_putmem_on_stream</span><span class="p">(</span><span class="n">dst_ptr</span><span class="p">,</span><span class="w"> </span><span class="n">src_ptr</span><span class="p">,</span><span class="w"> </span><span class="n">data_size</span><span class="p">,</span><span class="w"> </span><span class="n">target_pe</span><span class="p">,</span><span class="w"> </span><span class="n">stream</span><span class="p">);</span>
+
+<span class="c1">// 6. 跨机调用RDMA接口时，必须调用aclshmemx_handle_wait等待传输完成</span>
+<span class="n">aclshmem_handle_t</span><span class="w"> </span><span class="n">handle</span><span class="p">;</span>
+<span class="n">handle</span><span class="p">.</span><span class="n">team_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ACLSHMEM_TEAM_WORLD</span><span class="p">;</span>
+<span class="n">aclshmemx_handle_wait</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="n">stream</span><span class="p">);</span>
+<span class="n">aclrtSynchronizeStream</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span>
+
+<span class="c1">// 7. 释放资源</span>
+<span class="n">aclshmem_free</span><span class="p">(</span><span class="n">src_ptr</span><span class="p">);</span>
+<span class="n">aclshmem_free</span><span class="p">(</span><span class="n">dst_ptr</span><span class="p">);</span>
+<span class="n">aclshmem_finalize</span><span class="p">();</span>
+<span class="n">aclrtDestroyStream</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span>
+<span class="n">aclrtResetDevice</span><span class="p">(</span><span class="n">device_id</span><span class="p">);</span>
+<span class="n">aclFinalize</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="aclshmemx-getmem-on-stream">
+<h3>2. aclshmemx_getmem_on_stream<a class="headerlink" href="#aclshmemx-getmem-on-stream" title="Link to this heading"></a></h3>
+<p><strong>功能描述：</strong></p>
+<p>同步接口，在指定流上将对称内存中指定PE上的连续数据复制到本地PE的地址上。</p>
+<p><strong>跨机支持：</strong> 支持。HCCS连通时优先走MTE，否则RDMA链路可用时走RDMA。</p>
+<p><strong>函数原型：</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ACLSHMEM_HOST_API</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">aclshmemx_getmem_on_stream</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">dst</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">elem_size</span><span class="p">,</span><span class="w"> </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">pe</span><span class="p">,</span><span class="w"> </span><span class="n">aclrtStream</span><span class="w"> </span><span class="n">stream</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>参数说明：</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>参数</p></th>
+<th class="head"><p>类型</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>dst</p></td>
+<td><p>void*</p></td>
+<td><p>本地PE上的指针（目标地址）</p></td>
+</tr>
+<tr class="row-odd"><td><p>src</p></td>
+<td><p>void*</p></td>
+<td><p>远端PE上的源数据地址在本卡的对称地址</p></td>
+</tr>
+<tr class="row-even"><td><p>elem_size</p></td>
+<td><p>size_t</p></td>
+<td><p>要传输的数据大小（字节）</p></td>
+</tr>
+<tr class="row-odd"><td><p>pe</p></td>
+<td><p>int32_t</p></td>
+<td><p>远端PE的编号</p></td>
+</tr>
+<tr class="row-even"><td><p>stream</p></td>
+<td><p>aclrtStream</p></td>
+<td><p>使用的ACL流（如果为NULL，则使用默认流）</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>使用示例：</strong>
+<code class="docutils literal notranslate"><span class="pre">tests\unittest\host\mem\shmem_host_get_stream_test.cpp</span></code>存在完整调用示例，展示了如何在指定流上使用<code class="docutils literal notranslate"><span class="pre">aclshmemx_getmem_on_stream</span></code>接口进行数据传输。下面仅展示核心流程。</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// 伪代码示例：aclshmemx_getmem_on_stream使用流程</span>
+
+<span class="c1">// 1. 初始化（跨机场景需配置MTE和RDMA）</span>
+<span class="n">aclshmemx_init_attr_t</span><span class="w"> </span><span class="n">attributes</span><span class="p">;</span>
+<span class="n">attributes</span><span class="p">.</span><span class="n">option_attr</span><span class="p">.</span><span class="n">data_op_engine_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ACLSHMEM_DATA_OP_MTE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ACLSHMEM_DATA_OP_ROCE</span><span class="p">;</span>
+<span class="n">aclshmemx_init_attr</span><span class="p">(</span><span class="n">ACLSHMEMX_INIT_WITH_DEFAULT</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">);</span>
+
+<span class="c1">// 2. 创建流</span>
+<span class="n">aclrtStream</span><span class="w"> </span><span class="n">stream</span><span class="p">;</span>
+<span class="n">aclrtCreateStream</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stream</span><span class="p">);</span>
+
+<span class="c1">// 3. 跨机调用RDMA接口时，必须使用aclshmem_malloc分配对称内存，不能使用aclrtMalloc</span>
+<span class="kt">size_t</span><span class="w"> </span><span class="n">data_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span><span class="w"> </span><span class="c1">// 1KB</span>
+<span class="kt">int32_t</span><span class="w"> </span><span class="n">source_pe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="c1">// 源PE编号</span>
+<span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">src_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmem_malloc</span><span class="p">(</span><span class="n">data_size</span><span class="p">);</span>
+<span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">dst_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmem_malloc</span><span class="p">(</span><span class="n">data_size</span><span class="p">);</span>
+
+<span class="c1">// 4. 执行get操作</span>
+<span class="n">aclshmemx_getmem_on_stream</span><span class="p">(</span><span class="n">dst_ptr</span><span class="p">,</span><span class="w"> </span><span class="n">src_ptr</span><span class="p">,</span><span class="w"> </span><span class="n">data_size</span><span class="p">,</span><span class="w"> </span><span class="n">source_pe</span><span class="p">,</span><span class="w"> </span><span class="n">stream</span><span class="p">);</span>
+
+<span class="c1">// 5. 跨机调用RDMA接口时，必须调用aclshmemx_handle_wait等待传输完成</span>
+<span class="n">aclshmem_handle_t</span><span class="w"> </span><span class="n">handle</span><span class="p">;</span>
+<span class="n">handle</span><span class="p">.</span><span class="n">team_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ACLSHMEM_TEAM_WORLD</span><span class="p">;</span>
+<span class="n">aclshmemx_handle_wait</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="n">stream</span><span class="p">);</span>
+
+<span class="n">aclrtSynchronizeStream</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span>
+
+<span class="c1">// 6. 释放资源</span>
+<span class="n">aclshmem_free</span><span class="p">(</span><span class="n">src_ptr</span><span class="p">);</span>
+<span class="n">aclshmem_free</span><span class="p">(</span><span class="n">dst_ptr</span><span class="p">);</span>
+<span class="n">aclshmem_finalize</span><span class="p">();</span>
+<span class="n">aclrtDestroyStream</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span>
+<span class="n">aclrtResetDevice</span><span class="p">(</span><span class="n">device_id</span><span class="p">);</span>
+<span class="n">aclFinalize</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="aclshmemx-signal-op-on-stream">
+<h3>3. aclshmemx_signal_op_on_stream<a class="headerlink" href="#aclshmemx-signal-op-on-stream" title="Link to this heading"></a></h3>
+<p><strong>功能描述：</strong></p>
+<p>同步接口，在指定的PE上对信号变量执行操作，该操作在给定的流上执行。通常与<code class="docutils literal notranslate"><span class="pre">aclshmemx_signal_wait_until_on_stream</span></code>配合使用。</p>
+<p><strong>跨机支持：</strong> 部分支持。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_SET</span></code>：HCCS可通时支持MTE跨机，也支持RDMA跨机</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_ADD</span></code>：不支持RDMA跨机，HCCS可通时支持MTE跨机</p></li>
+</ul>
+<p><strong>函数原型：</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ACLSHMEM_HOST_API</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">aclshmemx_signal_op_on_stream</span><span class="p">(</span><span class="kt">int32_t</span><span class="w"> </span><span class="o">*</span><span class="n">sig_addr</span><span class="p">,</span><span class="w"> </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">signal</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">sig_op</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pe</span><span class="p">,</span><span class="w"> </span><span class="n">aclrtStream</span><span class="w"> </span><span class="n">stream</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>参数说明：</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>参数</p></th>
+<th class="head"><p>类型</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>sig_addr</p></td>
+<td><p>int32_t*</p></td>
+<td><p>信号变量在本卡上的对称地址</p></td>
+</tr>
+<tr class="row-odd"><td><p>signal</p></td>
+<td><p>int32_t</p></td>
+<td><p>用于原子操作的值</p></td>
+</tr>
+<tr class="row-even"><td><p>sig_op</p></td>
+<td><p>int</p></td>
+<td><p>在远程信号变量上执行的操作，支持：• <code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_SET</span></code>：设置信号值• <code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_ADD</span></code>：累加信号值</p></td>
+</tr>
+<tr class="row-odd"><td><p>pe</p></td>
+<td><p>int</p></td>
+<td><p>远端PE的编号</p></td>
+</tr>
+<tr class="row-even"><td><p>stream</p></td>
+<td><p>aclrtStream</p></td>
+<td><p>使用的ACL流（如果为NULL，则使用默认流）</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>使用示例：</strong>
+<code class="docutils literal notranslate"><span class="pre">tests\unittest\host\sync\signal\signal_host_test.cpp</span></code>存在完整调用示例，展示了如何在指定流上使用<code class="docutils literal notranslate"><span class="pre">aclshmemx_signal_op_on_stream</span></code>接口进行信号操作。下面仅展示核心流程。</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// 伪代码示例：aclshmemx_signal_op_on_stream使用流程</span>
+
+<span class="c1">// 1. 初始化（跨机场景需配置MTE和RDMA）</span>
+<span class="n">aclshmemx_init_attr_t</span><span class="w"> </span><span class="n">attributes</span><span class="p">;</span>
+<span class="n">attributes</span><span class="p">.</span><span class="n">option_attr</span><span class="p">.</span><span class="n">data_op_engine_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ACLSHMEM_DATA_OP_MTE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ACLSHMEM_DATA_OP_ROCE</span><span class="p">;</span>
+<span class="n">aclshmemx_init_attr</span><span class="p">(</span><span class="n">ACLSHMEMX_INIT_WITH_DEFAULT</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">);</span>
+
+<span class="c1">// 2. 创建流</span>
+<span class="n">aclrtStream</span><span class="w"> </span><span class="n">stream</span><span class="p">;</span>
+<span class="n">aclrtCreateStream</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stream</span><span class="p">);</span>
+
+<span class="c1">// 3. 跨机调用RDMA接口时，必须使用aclshmem_malloc分配对称内存，不能使用aclrtMalloc</span>
+<span class="kt">int32_t</span><span class="w"> </span><span class="n">target_pe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// 目标PE编号</span>
+<span class="kt">int32_t</span><span class="o">*</span><span class="w"> </span><span class="n">signal_var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int32_t</span><span class="o">*</span><span class="p">)</span><span class="n">aclshmem_malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">));</span>
+
+<span class="c1">// 4. 设置信号值（支持RDMA跨机）</span>
+<span class="n">aclshmemx_signal_op_on_stream</span><span class="p">(</span><span class="n">signal_var</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">ACLSHMEM_SIGNAL_SET</span><span class="p">,</span><span class="w"> </span><span class="n">target_pe</span><span class="p">,</span><span class="w"> </span><span class="n">stream</span><span class="p">);</span>
+
+<span class="c1">// 跨机调用RDMA接口时，必须调用aclshmemx_handle_wait等待传输完成</span>
+<span class="n">aclshmem_handle_t</span><span class="w"> </span><span class="n">handle</span><span class="p">;</span>
+<span class="n">handle</span><span class="p">.</span><span class="n">team_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ACLSHMEM_TEAM_WORLD</span><span class="p">;</span>
+<span class="n">aclshmemx_handle_wait</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="n">stream</span><span class="p">);</span>
+<span class="c1">// 5. 累加信号值（不支持RDMA跨机，仅HCCS可通时支持MTE跨机）</span>
+<span class="n">aclshmemx_signal_op_on_stream</span><span class="p">(</span><span class="n">signal_var</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">ACLSHMEM_SIGNAL_ADD</span><span class="p">,</span><span class="w"> </span><span class="n">target_pe</span><span class="p">,</span><span class="w"> </span><span class="n">stream</span><span class="p">);</span>
+
+<span class="c1">// 6. 等待操作完成</span>
+<span class="n">aclrtSynchronizeStream</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span>
+
+<span class="c1">// 7. 释放资源</span>
+<span class="n">aclshmem_free</span><span class="p">(</span><span class="n">signal_var</span><span class="p">);</span>
+<span class="n">aclshmem_finalize</span><span class="p">();</span>
+<span class="n">aclrtDestroyStream</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span>
+<span class="n">aclrtResetDevice</span><span class="p">(</span><span class="n">device_id</span><span class="p">);</span>
+<span class="n">aclFinalize</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="aclshmemx-signal-wait-until-on-stream">
+<h3>4. aclshmemx_signal_wait_until_on_stream<a class="headerlink" href="#aclshmemx-signal-wait-until-on-stream" title="Link to this heading"></a></h3>
+<p><strong>功能描述：</strong></p>
+<p>同步接口，调用该接口会阻塞，直到调用PE上的sig_addr值满足由比较操作符cmp和比较值cmp_val指定的等待条件。</p>
+<p><strong>跨机支持：</strong> 不支持。</p>
+<p><strong>函数原型：</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ACLSHMEM_HOST_API</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">aclshmemx_signal_wait_until_on_stream</span><span class="p">(</span><span class="kt">int32_t</span><span class="w"> </span><span class="o">*</span><span class="n">sig_addr</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">cmp</span><span class="p">,</span><span class="w"> </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">cmp_val</span><span class="p">,</span><span class="w"> </span><span class="n">aclrtStream</span><span class="w"> </span><span class="n">stream</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>参数说明：</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>参数</p></th>
+<th class="head"><p>类型</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>sig_addr</p></td>
+<td><p>int32_t*</p></td>
+<td><p>源信号变量的本地地址</p></td>
+</tr>
+<tr class="row-odd"><td><p>cmp</p></td>
+<td><p>int</p></td>
+<td><p>比较操作符，支持：• <code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CMP_EQ</span></code>：等于• <code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CMP_NE</span></code>：不等于• <code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CMP_GT</span></code>：大于• <code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CMP_GE</span></code>：大于等于• <code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CMP_LT</span></code>：小于• <code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CMP_LE</span></code>：小于等于</p></td>
+</tr>
+<tr class="row-even"><td><p>cmp_val</p></td>
+<td><p>int32_t</p></td>
+<td><p>用于比较的数值</p></td>
+</tr>
+<tr class="row-odd"><td><p>stream</p></td>
+<td><p>aclrtStream</p></td>
+<td><p>使用的ACL流（如果为NULL，则使用默认流）</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>使用示例：</strong>
+<code class="docutils literal notranslate"><span class="pre">tests\unittest\host\sync\signal\signal_host_test.cpp</span></code>存在完整调用示例，展示了如何在指定流上使用<code class="docutils literal notranslate"><span class="pre">aclshmemx_signal_wait_until_on_stream</span></code>接口等待信号条件。下面仅展示核心流程。</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// 伪代码示例：aclshmemx_signal_wait_until_on_stream使用流程</span>
+
+<span class="c1">// 1. 初始化</span>
+<span class="n">aclshmemx_init_attr_t</span><span class="w"> </span><span class="n">attributes</span><span class="p">;</span>
+<span class="n">aclshmemx_init_attr</span><span class="p">(</span><span class="n">ACLSHMEMX_INIT_WITH_DEFAULT</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">);</span>
+
+<span class="c1">// 2. 创建流</span>
+<span class="n">aclrtStream</span><span class="w"> </span><span class="n">stream</span><span class="p">;</span>
+<span class="n">aclrtCreateStream</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stream</span><span class="p">);</span>
+
+<span class="c1">// 3. 跨机调用RDMA接口时，必须使用aclshmem_malloc分配对称内存，不能使用aclrtMalloc</span>
+<span class="kt">int32_t</span><span class="o">*</span><span class="w"> </span><span class="n">signal_var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int32_t</span><span class="o">*</span><span class="p">)</span><span class="n">aclshmem_malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">));</span>
+
+<span class="c1">// 4. 设置信号值</span>
+<span class="n">aclshmemx_signal_op_on_stream</span><span class="p">(</span><span class="n">signal_var</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">ACLSHMEM_SIGNAL_SET</span><span class="p">,</span><span class="w"> </span><span class="n">target_pe</span><span class="p">,</span><span class="w"> </span><span class="n">stream</span><span class="p">);</span>
+
+<span class="c1">// 4. 等待本地信号等于指定值（阻塞直到条件满足），通常为多卡场景</span>
+<span class="n">aclshmemx_signal_wait_until_on_stream</span><span class="p">(</span><span class="n">signal_var</span><span class="p">,</span><span class="w"> </span><span class="n">ACLSHMEM_CMP_EQ</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">stream</span><span class="p">);</span>
+
+<span class="c1">// 6. 等待操作完成</span>
+<span class="n">aclrtSynchronizeStream</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span>
+
+<span class="c1">// 7. 释放资源</span>
+<span class="n">aclshmem_free</span><span class="p">(</span><span class="n">signal_var</span><span class="p">);</span>
+<span class="n">aclshmem_finalize</span><span class="p">();</span>
+<span class="n">aclrtDestroyStream</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span>
+<span class="n">aclrtResetDevice</span><span class="p">(</span><span class="n">device_id</span><span class="p">);</span>
+<span class="n">aclFinalize</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id3">
+<h3>典型使用场景：环形信号同步<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>以下示例展示多个PE之间的环形信号同步场景：每个PE等待上一个PE设置的信号，然后设置下一个PE的信号。完整示例见<code class="docutils literal notranslate"><span class="pre">tests\unittest\host\sync\signal\signal_host_test.cpp</span></code>的<code class="docutils literal notranslate"><span class="pre">test_signal_eq_all_pes</span></code>函数。</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// 伪代码示例：环形信号同步场景</span>
+<span class="c1">// 假设有N个PE，PE0 -&gt; PE1 -&gt; PE2 -&gt; ... -&gt; PE(N-1) -&gt; PE0 形成环形</span>
+
+<span class="c1">// 1. 初始化</span>
+<span class="n">aclshmemx_init_attr_t</span><span class="w"> </span><span class="n">attributes</span><span class="p">;</span>
+<span class="n">aclshmemx_init_attr</span><span class="p">(</span><span class="n">ACLSHMEMX_INIT_WITH_DEFAULT</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">);</span>
+
+<span class="c1">// 2. 创建流</span>
+<span class="n">aclrtStream</span><span class="w"> </span><span class="n">stream</span><span class="p">;</span>
+<span class="n">aclrtCreateStream</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stream</span><span class="p">);</span>
+
+<span class="c1">// 3. 分配信号变量（对称内存）</span>
+<span class="kt">int32_t</span><span class="o">*</span><span class="w"> </span><span class="n">sig_addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int32_t</span><span class="o">*</span><span class="p">)</span><span class="n">aclshmem_malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">));</span>
+<span class="n">aclrtMemset</span><span class="p">(</span><span class="n">sig_addr</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">));</span><span class="w"> </span><span class="c1">// 初始化为0</span>
+
+<span class="c1">// 4. 计算环形关系</span>
+<span class="kt">int32_t</span><span class="w"> </span><span class="n">expected_signal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pe_id</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">        </span><span class="c1">// 期望收到的信号值（来自上一个PE）</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">next_pe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">pe_id</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">n_pes</span><span class="p">;</span><span class="w">          </span><span class="c1">// 下一个PE编号</span>
+<span class="kt">int32_t</span><span class="w"> </span><span class="n">my_signal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next_pe</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">            </span><span class="c1">// 要发送给下一个PE的信号值</span>
+
+<span class="c1">// 5. 设置下一个PE的信号值</span>
+<span class="n">aclshmemx_signal_op_on_stream</span><span class="p">(</span><span class="n">sig_addr</span><span class="p">,</span><span class="w"> </span><span class="n">my_signal</span><span class="p">,</span><span class="w"> </span><span class="n">ACLSHMEM_SIGNAL_SET</span><span class="p">,</span><span class="w"> </span><span class="n">next_pe</span><span class="p">,</span><span class="w"> </span><span class="n">stream</span><span class="p">);</span>
+
+<span class="c1">// 调用aclshmemx_handle_wait等待信号设置完成</span>
+<span class="n">aclshmem_handle_t</span><span class="w"> </span><span class="n">handle</span><span class="p">;</span>
+<span class="n">handle</span><span class="p">.</span><span class="n">team_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ACLSHMEM_TEAM_WORLD</span><span class="p">;</span>
+<span class="n">aclshmemx_handle_wait</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="n">stream</span><span class="p">);</span>
+
+<span class="n">aclrtSynchronizeStream</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span>
+
+<span class="c1">// 6. 等待当前PE收到期望的信号值（阻塞直到条件满足）</span>
+<span class="n">aclshmemx_signal_wait_until_on_stream</span><span class="p">(</span><span class="n">sig_addr</span><span class="p">,</span><span class="w"> </span><span class="n">ACLSHMEM_CMP_EQ</span><span class="p">,</span><span class="w"> </span><span class="n">expected_signal</span><span class="p">,</span><span class="w"> </span><span class="n">stream</span><span class="p">);</span>
+<span class="n">aclrtSynchronizeStream</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span>
+
+<span class="c1">// 7. 验证信号值</span>
+<span class="kt">int32_t</span><span class="w"> </span><span class="n">host_value</span><span class="p">;</span>
+<span class="n">aclrtMemcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">host_value</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">),</span><span class="w"> </span><span class="n">sig_addr</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">),</span><span class="w"> </span><span class="n">ACL_MEMCPY_DEVICE_TO_HOST</span><span class="p">);</span>
+<span class="c1">// host_value 应该等于 expected_signal</span>
+
+<span class="c1">// 8. 释放资源</span>
+<span class="n">aclshmem_free</span><span class="p">(</span><span class="n">sig_addr</span><span class="p">);</span>
+<span class="n">aclshmem_finalize</span><span class="p">();</span>
+<span class="n">aclrtDestroyStream</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span>
+<span class="n">aclrtResetDevice</span><span class="p">(</span><span class="n">device_id</span><span class="p">);</span>
+<span class="n">aclFinalize</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h2>三、注意事项<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>内存申请</strong>：跨机调用RDMA接口时，必须使用<code class="docutils literal notranslate"><span class="pre">aclshmem_malloc</span></code>分配对称内存。</p></li>
+<li><p><strong>跨机通信</strong>：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">aclshmemx_putmem_on_stream</span></code>和<code class="docutils literal notranslate"><span class="pre">aclshmemx_getmem_on_stream</span></code>支持跨机，HCCS连通时优先走MTE，否则RDMA链路可用时走RDMA</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">aclshmemx_signal_op_on_stream</span></code>：<code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_SET</span></code>支持RDMA跨机；<code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_ADD</span></code>不支持RDMA跨机，HCCS可通时支持MTE跨机</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">aclshmemx_signal_wait_until_on_stream</span></code>不支持RDMA跨机，HCCS可通时支持MTE跨机</p></li>
+<li><p>跨机场景下需确保网络配置正确，相关环境变量已正确设置</p></li>
+<li><p><strong>RDMA路径同步</strong>：当使用RDMA接口时，需要调用<code class="docutils literal notranslate"><span class="pre">aclshmemx_handle_wait</span></code>来保证数据已经被接收完成。</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright  2025 Huawei Technologies Co., Ltd..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,203 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SHMEM搭配工具算子调测指导 &mdash; SHMEM Guidebook 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=d6bf9227" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="在样例工程使用Ascend C算子调测API" href="dump_debug.html" />
+    <link rel="prev" title="SHMEM日志" href="log_debug.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SHMEM Guidebook
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">快速开始</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../related_scripts.html">相关脚本</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Using SHMEM</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../example/api_demo.html">SHMEM API 样例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compilation_build_guide.html">编译与构建</a></li>
+<li class="toctree-l1"><a class="reference internal" href="log_debug.html">SHMEM日志</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SHMEM搭配工具算子调测指导</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#msprof">msprof</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mssanitizer">mssanitizer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mssanitizershmemexample">mssanitizer执行SHMEM自带的example样例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">内存越界日志</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#profiling">profiling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dump_debug.html">在样例工程使用Ascend C算子调测API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/def.html">SHMEM DEF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/host_api.html">HOST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/device_api.html">DEVICE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/pythonAPI.html">SHMEM Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/env_vars_intro.html">SHMEM Env Vars</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Example</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../example/example.html">初始化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example/example.html#allgather">AllGather</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../principles.html">SHMEM原理概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code_organization.html">代码组织结构</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting And FAQs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SECURITY.html">安全声明</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SHMEM Guidebook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SHMEM搭配工具算子调测指导</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/debug/tools_debug.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="shmem">
+<h1>SHMEM搭配工具算子调测指导<a class="headerlink" href="#shmem" title="Link to this heading"></a></h1>
+<section id="msprof">
+<h2>msprof<a class="headerlink" href="#msprof" title="Link to this heading"></a></h2>
+<p>shmem后续会适配<a class="reference external" href="https://www.hiascend.com/document/detail/zh/mindstudio/830/ODtools/Operatordevelopmenttools/atlasopdev_16_0082.html">msprof算子调优工具</a>
+当前版本暂不支持，预计Q1支持。</p>
+</section>
+<section id="mssanitizer">
+<h2>mssanitizer<a class="headerlink" href="#mssanitizer" title="Link to this heading"></a></h2>
+<p>shmem已适配<a class="reference external" href="https://www.hiascend.com/document/detail/zh/mindstudio/830/ODtools/Operatordevelopmenttools/atlasopdev_16_0039.html">mssanitizer内存检测工具</a>（暂不支持软同步竞争检测）</p>
+<p><strong>该功能依赖对应 CANN 版本能力，预计社区版 9.0.0-beta.2 支持</strong>
+<strong>提前尝鲜可自行编译<a class="reference external" href="https://gitcode.com/Ascend/mssanitizer?source_module=search_project">mssanitizer</a>工具，并将编译产物替换CANN包内部<code class="docutils literal notranslate"><span class="pre">tools/mssanitizer</span></code></strong></p>
+<p>使能mssanitizer工具能力，在shmem/目录编译:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>-mssanitizer
+</pre></div>
+</div>
+<p>为算子工程在编译时添加<code class="docutils literal notranslate"><span class="pre">-g</span> <span class="pre">--cce-enable-sanitizer</span></code>编译选项。</p>
+<p>工具默认开启内存检测能力，即–tool memcheck，一般情况按如下方式拉起可执行文件即可。</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mssanitizer<span class="w"> </span>--<span class="w"> </span>application<span class="w"> </span>parameter1<span class="w"> </span>parameter2<span class="w"> </span>...
+</pre></div>
+</div>
+<p>如果需要更详细的工具能力可参考<a class="reference external" href="https://www.hiascend.com/document/detail/zh/mindstudio/830/ODtools/Operatordevelopmenttools/atlasopdev_16_0039.html">mssanitizer内存检测工具</a>按如下格式控制参数</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mssanitizer<span class="w"> </span>&lt;options&gt;<span class="w"> </span>--<span class="w"> </span>&lt;user_program&gt;<span class="w"> </span>&lt;user_options&gt;<span class="w"> </span>
+</pre></div>
+</div>
+<section id="mssanitizershmemexample">
+<h3>mssanitizer执行SHMEM自带的example样例<a class="headerlink" href="#mssanitizershmemexample" title="Link to this heading"></a></h3>
+<p>shmem的<a class="reference external" href="https://gitcode.com/cann/shmem/tree/master/examples/allgather">AllGather</a>样例运行脚本提供了tool选项选择拉起工具。</p>
+<p>编译样例且使能工具能力</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>-examples<span class="w"> </span>-mssanitizer
+</pre></div>
+</div>
+<p>用mssanitizer工具拉起allgather样例进行内存检测</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>examples/allgather
+bash<span class="w"> </span>run.sh<span class="w"> </span>-ranks<span class="w"> </span><span class="m">2</span><span class="w"> </span>-tool<span class="w"> </span>mssanitizer
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h3>内存越界日志<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>当内存发生越界时工具会先打屏越界地址，越界内存大小、所属kernel，核号、卡号等信息。</p>
+<p>随后打屏越界代码的调用栈。可以协助开发快速定位越界问题以及排查代码漏洞。</p>
+<p><img alt="image" src="../_images/mssanitizer_example.png" /></p>
+<p><strong>注：<code class="docutils literal notranslate"><span class="pre">aclshmem_malloc</span></code>等shmem提供的内存分配接口是对已完成物理地址映射的一大块连续虚拟内存进行划分，不涉及实际的物理内存申请或虚拟内存对物理内存的映射操作。如使用的虚拟地址已完成和已分配物理地址的映射，即使超出<code class="docutils literal notranslate"><span class="pre">aclshmem_malloc</span></code>分配的范围也不会报错，因为该地址对应的内存可以合法使用。</strong></p>
+</section>
+</section>
+<section id="profiling">
+<h2>profiling<a class="headerlink" href="#profiling" title="Link to this heading"></a></h2>
+<p>shmem提供了Profiling打点工具，通过采集系统时钟周期数并转换为实际时间，精准量化不同Block（计算核）、不同Frame（埋点 ID）下的MTE搬运性能，详细介绍请参考<a class="reference internal" href="profiling.html"><span class="std std-doc">在示例中使用Profiling工具</span></a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="log_debug.html" class="btn btn-neutral float-left" title="SHMEM日志" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dump_debug.html" class="btn btn-neutral float-right" title="在样例工程使用Ascend C算子调测API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright  2025 Huawei Technologies Co., Ltd..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
