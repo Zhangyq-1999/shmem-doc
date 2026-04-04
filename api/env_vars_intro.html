@@ -64,7 +64,8 @@
 <li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API Reference</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">SHMEM Env Vars</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#id1">初始化相关</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">日志相关</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">多实例相关</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">日志相关</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#profiling">Profiling相关</a></li>
 </ul>
 </li>
@@ -73,6 +74,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../example/example.html">初始化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../example/example.html#allgather">AllGather</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Multi_Instance</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../multi_instance.html">多实例支持</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
 <ul>
@@ -130,7 +135,16 @@ SHMEM_UID_SOCK_IFNAME=enpxxxx:inet6  取ipv6</p></li>
 </ul>
 </section>
 <section id="id2">
-<h2>日志相关<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<h2>多实例相关<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>由于每个实例都有独立的bootstrap，每个bootstrap构建时需要提供一个可用端口</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SHMEM_INSTANCE_PORT_RANGE</span></code>:直接指定可用的端口范围。
+SHMEM_INSTANCE_PORT_RANGE配置示例：
+export SHMEM_INSTANCE_PORT_RANGE=1024:2047</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>日志相关<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
 <p>日志相关环境变量及详细介绍见<a class="reference internal" href="../debug/log_debug.html"><span class="std std-doc">SHMEM日志</span></a>。</p>
 </section>
 <section id="profiling">

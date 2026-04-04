@@ -1,0 +1,419 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>多实例支持 &mdash; SHMEM Guidebook 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=d6bf9227" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="SHMEM原理概述" href="principles.html" />
+    <link rel="prev" title="初始化" href="example/example.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            SHMEM Guidebook
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">快速开始</a></li>
+<li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Using SHMEM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example/api_demo.html">SHMEM API 样例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compilation_build_guide.html">编译与构建</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug/log_debug.html">SHMEM日志</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug/tools_debug.html">SHMEM搭配工具算子调测指导</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug/dump_debug.html">在样例工程使用Ascend C算子调测API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/def.html">SHMEM DEF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/host_api.html">HOST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/device_api.html">DEVICE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pythonAPI.html">SHMEM Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/env_vars_intro.html">SHMEM Env Vars</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Example</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example/example.html">初始化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example/example.html#allgather">AllGather</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Multi_Instance</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">多实例支持</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">概述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">核心概念</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#instance">实例（Instance）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#instance-id">实例标识（Instance ID）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#context">Context 切换</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">架构设计</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">关键设计决策</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#api">快速上手（当前仓库 API）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">1. 创建实例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">2. 切换到目标实例 Context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">3. 获取当前实例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">4. 释放实例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">规格与限制（按代码实现）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">环境变量与运行要求</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#kernel">Kernel侧使用要求</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#default">default 多实例模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unique-id">unique id 模式</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">注意事项</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id13">与单实例模式对比</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">相关代码与文档</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="principles.html">SHMEM原理概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_organization.html">代码组织结构</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting And FAQs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="debug/Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug/Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="SECURITY.html">安全声明</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SHMEM Guidebook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">多实例支持</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/multi_instance.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>多实例支持<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<section id="id2">
+<h2>概述<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>SHMEM 多实例能力允许<strong>在单个进程内创建多个独立 SHMEM 实例</strong>。每个实例拥有独立的通信域、内存空间和同步资源，适用于以下场景：</p>
+<ul class="simple">
+<li><p><strong>多通信域共存</strong>：单个进程中多个任务域需要独立 SHMEM 上下文</p></li>
+<li><p><strong>资源隔离</strong>：不同任务/模块之间隔离 SHMEM 资源，避免相互干扰</p></li>
+<li><p><strong>弹性扩缩</strong>：不同实例创建/释放互不影响</p></li>
+<li><p><strong>动态实例管理</strong>：运行时按 <code class="docutils literal notranslate"><span class="pre">instance_id</span></code> 创建/释放实例</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>核心概念<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<section id="instance">
+<h3>实例（Instance）<a class="headerlink" href="#instance" title="Link to this heading"></a></h3>
+<p>一个 SHMEM 实例包含一组完整初始化状态，典型包括：</p>
+<ul class="simple">
+<li><p>独立的通信域（<code class="docutils literal notranslate"><span class="pre">Team</span> <span class="pre">World</span></code>）</p></li>
+<li><p>独立的共享内存堆（<code class="docutils literal notranslate"><span class="pre">Heap</span></code>）</p></li>
+<li><p>独立的同步资源（<code class="docutils literal notranslate"><span class="pre">Sync</span> <span class="pre">Pool/Counter</span></code>）</p></li>
+<li><p>独立的 State/Bootstrap/MemoryManager 运行时快照</p></li>
+</ul>
+</section>
+<section id="instance-id">
+<h3>实例标识（Instance ID）<a class="headerlink" href="#instance-id" title="Link to this heading"></a></h3>
+<p>当前仓库使用 <code class="docutils literal notranslate"><span class="pre">instance_id</span></code>（<code class="docutils literal notranslate"><span class="pre">uint64_t</span></code>）标识实例。实例生命周期由初始化属性和 <code class="docutils literal notranslate"><span class="pre">finalize</span></code> 接口管理。</p>
+</section>
+<section id="context">
+<h3>Context 切换<a class="headerlink" href="#context" title="Link to this heading"></a></h3>
+<p>SHMEM 通过<strong>全局变量 swap 机制</strong>完成实例切换：切换时先回写当前实例的全局状态，再装载目标实例的全局状态。</p>
+</section>
+</section>
+<section id="id4">
+<h2>架构设计<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌─────────────────────────────────────────────────────────┐
+│                     单进程 (Process)                     │
+│  ┌───────────────────────────────────────────────────┐  │
+│  │              SHMEM Runtime (全局)                  │  │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌───────────┐  │  │
+│  │  │  Instance 0 │  │  Instance 1 │  │  Instance N│ │  │
+│  │  │  ┌───────┐  │  │  ┌───────┐  │  │  ┌──────┐ │  │  │
+│  │  │  │ Team  │  │  │  │ Team  │  │  │  │ Team │ │  │  │
+│  │  │  │ Heap  │  │  │  │ Heap  │  │  │  │ Heap │ │  │  │
+│  │  │  │ Sync  │  │  │  │ Sync  │  │  │  │ Sync │ │  │  │
+│  │  │  │ State │  │  │  │ State │  │  │  │ State│ │  │  │
+│  │  │  └───────┘  │  │  └───────┘  │  │  └──────┘ │  │  │
+│  │  └─────────────┘  └─────────────┘  └───────────┘  │  │
+│  └───────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────┘
+</pre></div>
+</div>
+<section id="id5">
+<h3>关键设计决策<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>设计点</p></th>
+<th class="head"><p>当前实现方案</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>实例隔离</p></td>
+<td><p>独立 <code class="docutils literal notranslate"><span class="pre">aclshmem_context</span></code> 快照</p></td>
+<td><p>每个实例保存独立的 <code class="docutils literal notranslate"><span class="pre">state</span></code>、<code class="docutils literal notranslate"><span class="pre">host_state</span></code>、<code class="docutils literal notranslate"><span class="pre">boot_handle</span></code>、<code class="docutils literal notranslate"><span class="pre">memory_manager</span></code> 等</p></td>
+</tr>
+<tr class="row-odd"><td><p>Context 管理</p></td>
+<td><p>全局变量 swap</p></td>
+<td><p>通过 <code class="docutils literal notranslate"><span class="pre">aclshmemx_instance_ctx_set</span></code> 切换</p></td>
+</tr>
+<tr class="row-even"><td><p>实例标识</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">instance_id</span></code> (<code class="docutils literal notranslate"><span class="pre">uint64_t</span></code>)</p></td>
+<td><p>位于 <code class="docutils literal notranslate"><span class="pre">aclshmemx_init_attr_t</span></code>，并用于 <code class="docutils literal notranslate"><span class="pre">aclshmem_finalize(instance_id)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Device 侧路由</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">instance_id</span> <span class="pre">&lt;&lt;</span> <span class="pre">1</span></code></p></td>
+<td><p>kernel 侧通过 硬编码地址 访问对应实例的 <code class="docutils literal notranslate"><span class="pre">state</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="api">
+<h2>快速上手（当前仓库 API）<a class="headerlink" href="#api" title="Link to this heading"></a></h2>
+<section id="id6">
+<h3>1. 创建实例<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;shmem.h&quot;</span>
+
+<span class="n">aclshmemx_init_attr_t</span><span class="w"> </span><span class="n">attr</span><span class="p">;</span>
+<span class="n">attr</span><span class="p">.</span><span class="n">my_pe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pe_id</span><span class="p">;</span>
+<span class="n">attr</span><span class="p">.</span><span class="n">n_pes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pe_size</span><span class="p">;</span>
+<span class="n">attr</span><span class="p">.</span><span class="n">local_mem_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024UL</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024UL</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024UL</span><span class="p">;</span>
+<span class="n">attr</span><span class="p">.</span><span class="n">ip_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;tcp://x.x.x.x:0&quot;</span><span class="w">        </span><span class="c1">// 预先置为0,后续会分配</span>
+<span class="n">attr</span><span class="p">.</span><span class="n">comm_args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span><span class="w">               </span><span class="c1">// default mode</span>
+<span class="n">attr</span><span class="p">.</span><span class="n">instance_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_init_attr</span><span class="p">(</span><span class="n">ACLSHMEMX_INIT_WITH_DEFAULT</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attr</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h3>2. 切换到目标实例 Context<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">aclshmemx_instance_ctx_set</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+
+<span class="c1">// 后续 SHMEM API 均作用于实例 2</span>
+<span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmem_malloc</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>
+<span class="n">aclshmem_free</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="id8">
+<h3>3. 获取当前实例<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">aclshmem_instance_ctx</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_instance_ctx_get</span><span class="p">();</span>
+<span class="c1">// 当前主要用于读取 id，其他能力见上一节</span>
+<span class="kt">uint64_t</span><span class="w"> </span><span class="n">cur_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ctx</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="id9">
+<h3>4. 释放实例<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">aclshmem_finalize</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>也可直接参照examples/multi_instance目录</p>
+</section>
+</section>
+<section id="id10">
+<h2>规格与限制（按代码实现）<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>项目</p></th>
+<th class="head"><p>规格</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">instance_id</span></code> 类型</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uint64_t</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>默认实例</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">instance_id</span> <span class="pre">=</span> <span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>PE 上限</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_MAX_PES</span> <span class="pre">=</span> <span class="pre">16384</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>本地内存上限</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_MAX_LOCAL_SIZE</span> <span class="pre">=</span> <span class="pre">40GB</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>非 0 实例 Team 行为</p></td>
+<td><p>初始化时仅保留 world team 槽位；team split/translate/get_config 等返回 <code class="docutils literal notranslate"><span class="pre">ACLSHMEM_NOT_SUPPORTED</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ip_port</span></code> 最大长度</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_MAX_IP_PORT_LEN</span> <span class="pre">=</span> <span class="pre">64</span></code>（含结尾 <code class="docutils literal notranslate"><span class="pre">\0</span></code>）</p></td>
+</tr>
+<tr class="row-even"><td><p>default 多实例端口范围</p></td>
+<td><p>依赖 <code class="docutils literal notranslate"><span class="pre">SHMEM_INSTANCE_PORT_RANGE=start:end</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>default 端口分配规则</p></td>
+<td><p>输入端口必须是 <code class="docutils literal notranslate"><span class="pre">0</span></code>；实际端口 = <code class="docutils literal notranslate"><span class="pre">start_port</span> <span class="pre">+</span> <span class="pre">instance_id</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>default 可用实例 ID 范围</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">instance_id</span> <span class="pre">&lt;=</span> <span class="pre">end_port</span> <span class="pre">-</span> <span class="pre">start_port</span></code>（含边界）</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id11">
+<h2>环境变量与运行要求<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<section id="kernel">
+<h3>Kernel侧使用要求<a class="headerlink" href="#kernel" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>编译时必须类似 <code class="docutils literal notranslate"><span class="pre">add_compile_definitions(MULTI_INSTANCE)</span></code> 添加 <code class="docutils literal notranslate"><span class="pre">MULTI_INSTANCE</span></code> 编译宏</p></li>
+<li><p>多实例使用时必须在算子开头使用 <code class="docutils literal notranslate"><span class="pre">aclshmemx_instance_ctx_set(id)</span></code> 来指定当前实例</p></li>
+<li><p>算子执行时可以做实例间切换</p></li>
+</ul>
+</section>
+<section id="default">
+<h3>default 多实例模式<a class="headerlink" href="#default" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>必须设置 <code class="docutils literal notranslate"><span class="pre">SHMEM_INSTANCE_PORT_RANGE</span></code>，格式 <code class="docutils literal notranslate"><span class="pre">start:end</span></code></p></li>
+<li><p>初始化属性中的 <code class="docutils literal notranslate"><span class="pre">ip_port</span></code> 端口必须为 <code class="docutils literal notranslate"><span class="pre">0</span></code>，例如 <code class="docutils literal notranslate"><span class="pre">(attr.ip_port</span> <span class="pre">=</span> <span class="pre">&quot;tcp://x.x.x.x:0&quot;)</span></code></p></li>
+</ul>
+</section>
+<section id="unique-id">
+<h3>unique id 模式<a class="headerlink" href="#unique-id" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>仍遵循现有 <code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID</span></code> / <code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SOCK_IFNAME</span></code> 规则</p></li>
+</ul>
+</section>
+</section>
+<section id="id12">
+<h2>注意事项<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>重复创建同一 <code class="docutils literal notranslate"><span class="pre">instance_id</span></code> 时：会有WARN日志提示并立即返回（不会重复创建）。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">aclshmem_finalize(instance_id)</span></code> 会先切换到目标实例，再执行释放，避免误释放。</p></li>
+<li><p>实例上下文相关接口路径由互斥锁保护。</p></li>
+</ul>
+</section>
+<section id="id13">
+<h2>与单实例模式对比<a class="headerlink" href="#id13" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>特性</p></th>
+<th class="head"><p>单实例模式</p></th>
+<th class="head"><p>多实例模式</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>初始化标识</p></td>
+<td><p>默认 <code class="docutils literal notranslate"><span class="pre">instance_id=0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">instance_id&gt;0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>资源隔离</p></td>
+<td><p>全局共享</p></td>
+<td><p>按实例隔离</p></td>
+</tr>
+<tr class="row-even"><td><p>上下文切换</p></td>
+<td><p>不需要</p></td>
+<td><p>需要 <code class="docutils literal notranslate"><span class="pre">aclshmemx_instance_ctx_set</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>生命周期管理</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aclshmem_finalize()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aclshmem_finalize(instance_id)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Team 高级操作</p></td>
+<td><p>支持</p></td>
+<td><p>仅 <code class="docutils literal notranslate"><span class="pre">instance_id=0</span></code> 支持</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id14">
+<h2>相关代码与文档<a class="headerlink" href="#id14" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Host 初始化与多实例实现：<code class="docutils literal notranslate"><span class="pre">src/host/init/shmem_init.cpp</span></code></p></li>
+<li><p>Device 多实例状态路由：<code class="docutils literal notranslate"><span class="pre">src/device/shmemi_device_common.hpp</span></code></p></li>
+<li><p>Team 多实例限制逻辑：<code class="docutils literal notranslate"><span class="pre">src/host/team/shmem_team.cpp</span></code></p></li>
+<li><p>对应示例：<code class="docutils literal notranslate"><span class="pre">examples/multi_instance</span></code></p></li>
+</ul>
+<hr class="docutils" />
+<p>最后更新：2026-03-25</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="example/example.html" class="btn btn-neutral float-left" title="初始化" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="principles.html" class="btn btn-neutral float-right" title="SHMEM原理概述" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright  2025 Huawei Technologies Co., Ltd..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

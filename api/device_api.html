@@ -142,6 +142,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../example/example.html">初始化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../example/example.html#allgather">AllGather</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Multi_Instance</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../multi_instance.html">多实例支持</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../principles.html">SHMEM原理概述</a></li>
@@ -845,7 +849,7 @@
 <dt><strong>Function Description</strong></dt><dd><p>Provide a low latency put capability for single element of most basic types.</p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
-<li><p><strong>dst</strong> - [in] Symmetric address of the destination data on local PE.</p></li>
+<li><p><strong>dst</strong> - [in] Symmetric address of the destination data.</p></li>
 <li><p><strong>value</strong> - [in] The element to be put.</p></li>
 <li><p><strong>pe</strong> - [in] The number of the remote PE. </p></li>
 </ul>
@@ -861,13 +865,13 @@
 <dd><p>Automatically generates aclshmem g functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_g(__gm__ TYPE *dst, const TYPE value, int32_t pe)</p>
+<p>ACLSHMEM_DEVICE TYPE aclshmem_NAME_g(__gm__ TYPE *src, int32_t pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Provide a low latency get capability for single element of most basic types.</p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
-<li><p><strong>src</strong> - [in] Symmetric address of the destination data on local PE.</p></li>
+<li><p><strong>src</strong> - [in] Symmetric address of the source data.</p></li>
 <li><p><strong>pe</strong> - [in] The number of the remote PE.</p></li>
 </ul>
 </p>
@@ -1051,7 +1055,7 @@
 <dd><p>Automatically generates aclshmem put functions for different bits (e.g., 8, 16). The macro parameters: BITS is the bits. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_HOST_API void aclshmem_iputBITS(__gm__ void *dest, __gm__ void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_iputBITS(__gm__ void *dest, __gm__ void *source, ptrdiff_t dst, ptrdiff_t sst, size_t nelems, int pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy strided data elements (specified by sst) of an array from a source array on the local PE to locations specified by stride dst on a dest array on specified remote PE.</p>
@@ -1326,8 +1330,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>dst</strong> – [in] Pointer on Symmetric memory of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on local device of the source data. </p></li>
 <li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
@@ -1358,8 +1362,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>dst</strong> – [in] Pointer on Symmetric memory of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on local device of the source data. </p></li>
 <li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 </ul>
@@ -2091,6 +2095,21 @@
 </dl>
 </dd></dl>
 
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rdma_8h_1ab5920dcde8dadda3cd153db024bd475a"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_roce_quiet</span> <span class="pre">(uint32_t</span> <span class="pre">pe,</span> <span class="pre">__ubuf__</span> <span class="pre">T</span> <span class="pre">*buf,</span> <span class="pre">uint32_t</span> <span class="pre">sync_id)</span></span></dt>
+<dd><p>RDMA Quiet function. This synchronous function ensures all previous RDMA WQEs are completed (data has arrived at the destination NIC). </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+<li><p><strong>buf</strong> – [in] Pointer on local UB, available space larger than 64 Bytes. </p></li>
+<li><p><strong>sync_id</strong> – [in] ID used to Sync S\MTE3 Event. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
@@ -2350,8 +2369,8 @@
 <dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE.</p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
-<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
-<li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> - [in] Pointer on local device of the source data.</p></li>
 <li><p><strong>elem_size</strong> - [in] Number of elements in the dest and source arrays.</p></li>
 <li><p><strong>sig_addr</strong> - [in] Symmetric address of the signal word to be updated.</p></li>
 <li><p><strong>signal</strong> - [in] The value used to update sig_addr.</p></li>
@@ -2376,8 +2395,8 @@
 <dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE.</p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
-<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
-<li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> - [in] Pointer on local device of the source data.</p></li>
 <li><p><strong>elem_size</strong> - [in] Number of elements in the dest and source arrays.</p></li>
 <li><p><strong>sig_addr</strong> - [in] Symmetric address of the signal word to be updated.</p></li>
 <li><p><strong>signal</strong> - [in] The value used to update sig_addr.</p></li>
@@ -2402,8 +2421,8 @@
 <dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE then update sig_addr</p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
-<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
-<li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> - [in] Pointer on local device of the source data.</p></li>
 <li><p><strong>copy_params</strong> - [in] Params to describe how non-contiguous data is organized in src and dst.</p></li>
 <li><p><strong>sig_addr</strong> - [in] Symmetric address of the signal word to be updated.</p></li>
 <li><p><strong>signal</strong> - [in] The value used to update sig_addr.</p></li>
@@ -2428,8 +2447,8 @@
 <dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE.</p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
-<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
-<li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> - [in] Pointer on local device of the source data.</p></li>
 <li><p><strong>copy_params</strong> - [in] Params to describe how non-contiguous data is organized in src and dst.</p></li>
 <li><p><strong>sig_addr</strong> - [in] Symmetric address of the signal word to be updated.</p></li>
 <li><p><strong>signal</strong> - [in] The value used to update sig_addr.</p></li>
@@ -2454,8 +2473,8 @@
 <dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Copy a contiguous data from local to symmetric address on the specified PE and updating a remote signal flag on completion.</p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
-<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
-<li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> - [in] Pointer on local device of the source data.</p></li>
 <li><p><strong>nelems</strong> - [in] Number of elements in the dest and source arrays.</p></li>
 <li><p><strong>sig_addr</strong> - [in] Symmetric address of the signal word to be updated.</p></li>
 <li><p><strong>signal</strong> - [in] The value used to update sig_addr.</p></li>
@@ -2480,8 +2499,8 @@
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE.</p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
-<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
-<li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> - [in] Pointer on local device of the source data.</p></li>
 <li><p><strong>elem_size</strong> - [in] Number of elements in the dest and source arrays.</p></li>
 <li><p><strong>sig_addr</strong> - [in] Symmetric address of the signal word to be updated.</p></li>
 <li><p><strong>signal</strong> - [in] The value used to update sig_addr.</p></li>
@@ -2506,8 +2525,8 @@
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy a contiguous data on local UB to symmetric address on the specified PE.</p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
-<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
-<li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> - [in] Pointer on local device of the source data.</p></li>
 <li><p><strong>elem_size</strong> - [in] Number of elements in the dest and source arrays.</p></li>
 <li><p><strong>sig_addr</strong> - [in] Symmetric address of the signal word to be updated.</p></li>
 <li><p><strong>signal</strong> - [in] The value used to update sig_addr.</p></li>
@@ -2526,14 +2545,14 @@
 <dd><p>Automatically generates aclshmem put signal functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_signal(__gm__ TYPE *dst, __gm__ TYPE *src, const\ <a class="reference internal" href="def.html#structnon__contiguous__copy__param"><span class="std std-ref">non_contiguous_copy_param</span></a> &amp;copy_params, __gm__ int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_signal_nbi(__gm__ TYPE *dst, __gm__ TYPE *src, const\ <a class="reference internal" href="def.html#structnon__contiguous__copy__param"><span class="std std-ref">non_contiguous_copy_param</span></a> &amp;copy_params, __gm__ int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE then update sig_addr</p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
-<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
-<li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> - [in] Pointer on local device of the source data.</p></li>
 <li><p><strong>copy_params</strong> - [in] Params to describe how non-contiguous data is organized in src and dst.</p></li>
 <li><p><strong>sig_addr</strong> - [in] Symmetric address of the signal word to be updated.</p></li>
 <li><p><strong>signal</strong> - [in] The value used to update sig_addr.</p></li>
@@ -2552,14 +2571,14 @@
 <dd><p>Automatically generates aclshmem put signal functions for different data types (e.g., float, int8_t). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
 <p><div class="remark admonition">
 <p class="admonition-title">Remark</p>
-<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_signal(AscendC::GlobalTensor&lt;TYPE&gt; dst, AscendC::GlobalTensor&lt;TYPE&gt;\ src，const <a class="reference internal" href="def.html#structnon__contiguous__copy__param"><span class="std std-ref">non_contiguous_copy_param</span></a> &amp;copy_params, __gm__ int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_put_signal_nbi(AscendC::GlobalTensor&lt;TYPE&gt; dst, AscendC::GlobalTensor&lt;TYPE&gt;\ src，const <a class="reference internal" href="def.html#structnon__contiguous__copy__param"><span class="std std-ref">non_contiguous_copy_param</span></a> &amp;copy_params, __gm__ int32_t *sig_addr, int32_t signal, int sig_op, int pe)</p>
 </div>
 <dl class="simple">
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Provide a high-performance way to copy non-contiguous data on local UB to symmetric address on the specified PE.</p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
-<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
-<li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> - [in] Pointer on local device of the source data.</p></li>
 <li><p><strong>copy_params</strong> - [in] Params to describe how non-contiguous data is organized in src and dst.</p></li>
 <li><p><strong>sig_addr</strong> - [in] Symmetric address of the signal word to be updated.</p></li>
 <li><p><strong>signal</strong> - [in] The value used to update sig_addr.</p></li>
@@ -2584,8 +2603,8 @@
 <dt><strong>Function Description</strong></dt><dd><p>Asynchronous interface. Copy a contiguous data from local to symmetric address on the specified PE and updating a remote signal flag on completion.</p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
-<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
-<li><p><strong>src</strong> - [in] Pointer on Symmetric memory of the source data.</p></li>
+<li><p><strong>dst</strong> - [in] Pointer on Symmetric memory of the destination data.</p></li>
+<li><p><strong>src</strong> - [in] Pointer on local device of the source data.</p></li>
 <li><p><strong>nelems</strong> - [in] Number of elements in the dest and source arrays.</p></li>
 <li><p><strong>sig_addr</strong> - [in] Symmetric address of the signal word to be updated.</p></li>
 <li><p><strong>signal</strong> - [in] The value used to update sig_addr.</p></li>
@@ -2608,8 +2627,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>dst</strong> – [in] Pointer on Symmetric memory of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on local device of the source data. </p></li>
 <li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
 <li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
 <li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>
@@ -2627,8 +2646,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>dst</strong> – [in] Pointer on Symmetric memory of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on local device of the source data. </p></li>
 <li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
 <li><p><strong>sig_addr</strong> – [in] Symmetric address of the signal word to be updated. </p></li>
 <li><p><strong>signal</strong> – [in] The value used to update sig_addr. </p></li>

@@ -123,6 +123,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../example/example.html">初始化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../example/example.html#allgather">AllGather</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Multi_Instance</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../multi_instance.html">多实例支持</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../principles.html">SHMEM原理概述</a></li>
@@ -232,7 +236,7 @@
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="shmem__host__init_8h_1a6c986c7883f3515ac3d86469bdde6b62"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmem_finalize</span> <span class="pre">(void)</span></span></dt>
+<span class="target" id="shmem__host__init_8h_1a8b8590ba29ec0b2aa64f14ab11fb59d8"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmem_finalize</span> <span class="pre">(uint64_t</span> <span class="pre">instance_id=0)</span></span></dt>
 <dd><p>Release all resources used by the ACLSHMEM library. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -308,6 +312,31 @@
 <li><p><strong>tls_info</strong> – the format describle in memfabric SECURITYNOTE.md, if disabled tls_info won’t be use </p></li>
 <li><p><strong>tls_info_len</strong> – length of tls_info, if disabled tls_info_len won’t be use </p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns 0 on success or an error code on failure </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__init_8h_1a7e634de7cd5999610a49d844a461baf0"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">aclshmem_instance_ctx</span> <span class="pre">*</span> <span class="pre">aclshmemx_instance_ctx_get</span> <span class="pre">()</span></span></dt>
+<dd><p>Get the current instance context. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns a pointer to the current instance context on success or NULL on failure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__init_8h_1a003366345e20313f2ecb4a6e2c15926c"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmemx_instance_ctx_set</span> <span class="pre">(uint64_t</span> <span class="pre">instance_id)</span></span></dt>
+<dd><p>Set the current instance context by instance_id. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>instance_id</strong> – the unique identifier of the instance to set as the current context. </p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Returns 0 on success or an error code on failure </p>
@@ -868,7 +897,7 @@
 <dt><strong>Function Description</strong></dt><dd><p>Provide a low latency get capability for single element of most basic types.</p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
-<li><p><strong>src</strong> - [in] Symmetric address of the destination data on local PE.</p></li>
+<li><p><strong>src</strong> - [in] Symmetric address of the source data on local PE.</p></li>
 <li><p><strong>pe</strong> - [in] The number of the remote PE.</p></li>
 </ul>
 </p>
@@ -924,11 +953,11 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__rma_8h_1ae4fa80134b603c5057dcd761def2c057"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_putmem</span> <span class="pre">(void</span> <span class="pre">*dst,</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Synchronous interface. Copy contiguous data on symmetric memory from local PE to address on the specified PE. </p>
+<dd><p>Synchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on Symmetric addr of local PE. </p></li>
+<li><p><strong>dst</strong> – [in] Pointer on Symmetric memory of the destination data. </p></li>
 <li><p><strong>src</strong> – [in] Pointer on local memory of the source data. </p></li>
 <li><p><strong>elem_size</strong> – [in] size of elements in the destination and source addr. </p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
@@ -956,11 +985,11 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__rma_8h_1aa65222af60cb19d0ec652f6aafdf200d"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_putmem_nbi</span> <span class="pre">(void</span> <span class="pre">*dst,</span> <span class="pre">void</span> <span class="pre">*src,</span> <span class="pre">size_t</span> <span class="pre">elem_size,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
-<dd><p>Asynchronous interface. Copy contiguous data on symmetric memory from local PE to address on the specified PE. </p>
+<dd><p>Asynchronous interface. Copy contiguous data on local PE to symmetric address on the specified PE. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on Symmetric addr of local PE. </p></li>
+<li><p><strong>dst</strong> – [in] Pointer on Symmetric memory of the destination data. </p></li>
 <li><p><strong>src</strong> – [in] Pointer on local memory of the source data. </p></li>
 <li><p><strong>elem_size</strong> – [in] size of elements in the destination and source addr. </p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
@@ -1017,8 +1046,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dst</strong> – [in] Pointer on local device of the destination data. </p></li>
-<li><p><strong>src</strong> – [in] Pointer on Symmetric memory of the source data. </p></li>
+<li><p><strong>dst</strong> – [in] Pointer on Symmetric memory of the destination data. </p></li>
+<li><p><strong>src</strong> – [in] Pointer on local device of the source data. </p></li>
 <li><p><strong>elem_size</strong> – [in] Number of elements in the dest and source arrays. </p></li>
 <li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
 <li><p><strong>stream</strong> – [in] copy used stream(use default stream if stream == NULL).</p></li>

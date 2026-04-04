@@ -69,6 +69,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../example/example.html">初始化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../example/example.html#allgather">AllGather</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Multi_Instance</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../multi_instance.html">多实例支持</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../principles.html">SHMEM原理概述</a></li>
@@ -100,6 +104,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#ip-port-ethip">未通过环境变量配置ip/port，使用默认eth查询ip信息失败</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#q-shmem-uid-session-idshmem-uid-sock-ifnameth-inet4ip">Q: <code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID</span></code>和<code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SOCK_IFNAM</span></code>均未配置时使用<code class="docutils literal notranslate"><span class="pre">eth:inet4</span></code>查询本地ip地址，查询失败时错误日志如下:</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#a-shmem-uid-session-idshmem-uid-sock-ifnam">A: 应手动配置<code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID</span></code>或<code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SOCK_IFNAM</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">调试相关</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">算子问题</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#q-o0-g-min-stack-size-is-xxx-larger-than-current-process-default-size-32768-please-modify-aclinit-json-and-reboot-process">Q:算子使用”-O0 -g”编译选项编译后，运行出错，”min stack size is xxx, larger than current process default size 32768. Please modify aclInit json, and reboot process.”</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a-aclinit-json">A:在aclInit()接口传入的json文件中，配置更大的栈空间。</a></li>
 </ul>
 </li>
 </ul>
@@ -143,6 +155,7 @@
 <li><p>barrier接口当前必须在Mix Kernel（包含mmad和GM2UB/UB2GM操作）中使用，可参考example样例。该限制待编译器更新后移除。</p></li>
 <li><p>使用RDMA的高阶接口前，需要先使用<code class="docutils literal notranslate"><span class="pre">aclshmemx_rdma_config</span></code>接口配置UB Buffer和sync_id等信息。若不配置，则使用默认的190KB处的UB Buffer和EVENT_ID0作为接口内部的同步EVENT_ID。RDMA相关接口内部使用<code class="docutils literal notranslate"><span class="pre">PipeBarrier&lt;PIPE_MTE3&gt;</span></code>阻塞MTE3流水以确保RDMA任务下发完成。</p></li>
 <li><p>使用SDMA的高阶接口前，需要先使用<code class="docutils literal notranslate"><span class="pre">aclshmemx_sdma_config</span></code>接口配置UB Buffer和sync_id等信息，且需要保证预留UB Buffer大小大于等于64字节。若不配置，则使用默认的191KB处的UB Buffer和EVENT_ID0作为接口内部的同步EVENT_ID。</p></li>
+<li><p>910B 16卡机型：NPU分为前八卡后八卡两个8P Fullmesh组，每个8P组内通过HCCS总线完成两两互联，两个8P Fullmesh组之间通过PCIe-SW完成互连，因此不支持直接使用MTE接口在跨组NPU间完成数据搬运。部分example用例使用MTE搬运接口，单机用例请勿跨组指定NPU，以防发生未知报错（如流同步失败等）。</p></li>
 </ol>
 </section>
 <section id="id1">
@@ -262,6 +275,19 @@
 </li>
 </ul>
 <p>注意: 同时配置时只读取<code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID</span></code></p>
+</section>
+</section>
+</section>
+<section id="id4">
+<h2>调试相关<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<section id="id5">
+<h3>算子问题<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<section id="q-o0-g-min-stack-size-is-xxx-larger-than-current-process-default-size-32768-please-modify-aclinit-json-and-reboot-process">
+<h4>Q:算子使用”-O0 -g”编译选项编译后，运行出错，”min stack size is xxx, larger than current process default size 32768. Please modify aclInit json, and reboot process.”<a class="headerlink" href="#q-o0-g-min-stack-size-is-xxx-larger-than-current-process-default-size-32768-please-modify-aclinit-json-and-reboot-process" title="Link to this heading"></a></h4>
+</section>
+<section id="a-aclinit-json">
+<h4>A:在aclInit()接口传入的json文件中，配置更大的栈空间。<a class="headerlink" href="#a-aclinit-json" title="Link to this heading"></a></h4>
+<p><a class="reference external" href="https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/850/devaids/optool/atlasopdev_16_0145.html">配置参考</a></p>
 </section>
 </section>
 </section>

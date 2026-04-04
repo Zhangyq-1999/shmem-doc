@@ -101,6 +101,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#_CPPv4N20aclshmem_transport_t22ACLSHMEM_TRANSPORT_MTEE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TRANSPORT_MTE</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#_CPPv4N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_ROCEE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TRANSPORT_ROCE</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#_CPPv4N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_SDMAE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TRANSPORT_SDMA</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_UDMAE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TRANSPORT_UDMA</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv414aclshmemi_op_t"><code class="docutils literal notranslate"><span class="pre">aclshmemi_op_t</span></code></a><ul>
@@ -120,6 +121,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21data_op_engine_type_t20ACLSHMEM_DATA_OP_MTEE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_DATA_OP_MTE</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21data_op_engine_type_t21ACLSHMEM_DATA_OP_SDMAE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_DATA_OP_SDMA</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21data_op_engine_type_t21ACLSHMEM_DATA_OP_ROCEE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_DATA_OP_ROCE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21data_op_engine_type_t21ACLSHMEM_DATA_OP_UDMAE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_DATA_OP_UDMA</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21data_op_engine_type_t20ACLSHMEM_DATA_OP_MAXE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_DATA_OP_MAX</span></code></a></li>
 </ul>
 </li>
@@ -205,6 +207,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv418aclshmem_prof_pe_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_prof_pe_t</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv428aclshmem_device_host_state_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_device_host_state_t</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmem_host_state_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_host_state_t</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmem_instance_ctx"><code class="docutils literal notranslate"><span class="pre">aclshmem_instance_ctx</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#constants">Constants</a><ul>
@@ -224,6 +227,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../example/example.html">初始化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../example/example.html#allgather">AllGather</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Multi_Instance</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../multi_instance.html">多实例支持</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
 <ul>
@@ -442,17 +449,20 @@
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N21aclshmemx_bootstrap_t27ACLSHMEMX_INIT_WITH_DEFAULTE">
 <span id="_CPPv3N21aclshmemx_bootstrap_t27ACLSHMEMX_INIT_WITH_DEFAULTE"></span><span id="_CPPv2N21aclshmemx_bootstrap_t27ACLSHMEMX_INIT_WITH_DEFAULTE"></span><span class="target" id="group__group__enums_1gga3a80b7190952f840b07730352f61ca17a7e137cce1b73e11ccba9c4b80a0b3ffa"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEMX_INIT_WITH_DEFAULT</span></span></span><a class="headerlink" href="#_CPPv4N21aclshmemx_bootstrap_t27ACLSHMEMX_INIT_WITH_DEFAULTE" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Default mode: Priority is ipport &gt; uid (comm_args), if neither provided returns error. </p>
+</dd></dl>
 
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N21aclshmemx_bootstrap_t23ACLSHMEMX_INIT_WITH_MPIE">
 <span id="_CPPv3N21aclshmemx_bootstrap_t23ACLSHMEMX_INIT_WITH_MPIE"></span><span id="_CPPv2N21aclshmemx_bootstrap_t23ACLSHMEMX_INIT_WITH_MPIE"></span><span class="target" id="group__group__enums_1gga3a80b7190952f840b07730352f61ca17ac954e49124f892ea204bd270e7a05c76"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEMX_INIT_WITH_MPI</span></span></span><a class="headerlink" href="#_CPPv4N21aclshmemx_bootstrap_t23ACLSHMEMX_INIT_WITH_MPIE" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
+<dd><p>MPI mode. </p>
+</dd></dl>
 
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N21aclshmemx_bootstrap_t28ACLSHMEMX_INIT_WITH_UNIQUEIDE">
 <span id="_CPPv3N21aclshmemx_bootstrap_t28ACLSHMEMX_INIT_WITH_UNIQUEIDE"></span><span id="_CPPv2N21aclshmemx_bootstrap_t28ACLSHMEMX_INIT_WITH_UNIQUEIDE"></span><span class="target" id="group__group__enums_1gga3a80b7190952f840b07730352f61ca17a3f54b10756298a862f19add2f7bc0b11"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEMX_INIT_WITH_UNIQUEID</span></span></span><a class="headerlink" href="#_CPPv4N21aclshmemx_bootstrap_t28ACLSHMEMX_INIT_WITH_UNIQUEIDE" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
+<dd><p>Unique ID mode. </p>
+</dd></dl>
 
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N21aclshmemx_bootstrap_t18ACLSHMEMX_INIT_MAXE">
@@ -513,6 +523,12 @@
 <dt class="sig sig-object cpp" id="_CPPv4N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_SDMAE">
 <span id="_CPPv3N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_SDMAE"></span><span id="_CPPv2N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_SDMAE"></span><span class="target" id="group__group__enums_1gga26fb4b675f0cd14b372e329f89dfa4bfa3b42c8e672a5ae83c29cc651e4ccc92e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TRANSPORT_SDMA</span></span></span><a class="headerlink" href="#_CPPv4N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_SDMAE" title="Link to this definition"></a><br /></dt>
 <dd><p>SDMA Transport. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_UDMAE">
+<span id="_CPPv3N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_UDMAE"></span><span id="_CPPv2N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_UDMAE"></span><span class="target" id="group__group__enums_1gga26fb4b675f0cd14b372e329f89dfa4bfa80ee4c9c634095907ad966809ce86d9f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TRANSPORT_UDMA</span></span></span><a class="headerlink" href="#_CPPv4N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_UDMAE" title="Link to this definition"></a><br /></dt>
+<dd><p>UDMA Transport. </p>
 </dd></dl>
 
 </dd></dl>
@@ -584,6 +600,11 @@
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N21data_op_engine_type_t21ACLSHMEM_DATA_OP_ROCEE">
 <span id="_CPPv3N21data_op_engine_type_t21ACLSHMEM_DATA_OP_ROCEE"></span><span id="_CPPv2N21data_op_engine_type_t21ACLSHMEM_DATA_OP_ROCEE"></span><span class="target" id="group__group__enums_1ggaf40b09d0739fd29381307a4433347897a8ef95ef9d13394738f8c04f541af7dde"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_DATA_OP_ROCE</span></span></span><a class="headerlink" href="#_CPPv4N21data_op_engine_type_t21ACLSHMEM_DATA_OP_ROCEE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N21data_op_engine_type_t21ACLSHMEM_DATA_OP_UDMAE">
+<span id="_CPPv3N21data_op_engine_type_t21ACLSHMEM_DATA_OP_UDMAE"></span><span id="_CPPv2N21data_op_engine_type_t21ACLSHMEM_DATA_OP_UDMAE"></span><span class="target" id="group__group__enums_1ggaf40b09d0739fd29381307a4433347897a8c07941cf54379c3426ca2c3249af511"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_DATA_OP_UDMA</span></span></span><a class="headerlink" href="#_CPPv4N21data_op_engine_type_t21ACLSHMEM_DATA_OP_UDMAE" title="Link to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp enumerator">
@@ -1122,6 +1143,15 @@ Aligns the size up to an integer multiple of the page to avoid memory fragmentat
 <em>#include &lt;shmem_common_types.h&gt;</em></div>
 <p>Host-side exclusive state structure. </p>
 <p>Stores configuration information such as streams, events, and block counts used only by the host side </p>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv421aclshmem_instance_ctx">
+<span id="_CPPv321aclshmem_instance_ctx"></span><span id="_CPPv221aclshmem_instance_ctx"></span><span id="aclshmem_instance_ctx"></span><span class="target" id="structaclshmem__instance__ctx"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aclshmem_instance_ctx</span></span></span><a class="headerlink" href="#_CPPv421aclshmem_instance_ctx" title="Link to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;shmem_common_types.h&gt;</em></div>
+<p>Instance context used to store gloabl_id. </p>
+<p>Stores the instance identifier and reserved fields for future extension </p>
 </dd></dl>
 
 </dd></dl>

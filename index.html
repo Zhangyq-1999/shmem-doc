@@ -68,6 +68,10 @@
 <li class="toctree-l1"><a class="reference internal" href="example/example.html">初始化</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example/example.html#allgather">AllGather</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Multi_Instance</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="multi_instance.html">多实例支持</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="principles.html">SHMEM原理概述</a></li>
@@ -206,7 +210,8 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/env_vars_intro.html">SHMEM Env Vars</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api/env_vars_intro.html#id1">初始化相关</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/env_vars_intro.html#id2">日志相关</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/env_vars_intro.html#id2">多实例相关</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/env_vars_intro.html#id3">日志相关</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/env_vars_intro.html#profiling">Profiling相关</a></li>
 </ul>
 </li>
@@ -223,6 +228,23 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="example/example.html#allgather">AllGather</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="example/example.html#id8">核函数实现</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound" id="multi-instance">
+<p class="caption" role="heading"><span class="caption-text">Multi_Instance</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="multi_instance.html">多实例支持</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multi_instance.html#id2">概述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi_instance.html#id3">核心概念</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi_instance.html#id4">架构设计</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi_instance.html#api">快速上手（当前仓库 API）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi_instance.html#id10">规格与限制（按代码实现）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi_instance.html#id11">环境变量与运行要求</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi_instance.html#id12">注意事项</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi_instance.html#id13">与单实例模式对比</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi_instance.html#id14">相关代码与文档</a></li>
 </ul>
 </li>
 </ul>
@@ -254,6 +276,7 @@
 <li class="toctree-l1"><a class="reference internal" href="debug/Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="debug/Troubleshooting_FAQs.html#id2">内存分配相关问题</a></li>
 <li class="toctree-l2"><a class="reference internal" href="debug/Troubleshooting_FAQs.html#ip-port">IP/PORT配置相关问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug/Troubleshooting_FAQs.html#id4">调试相关</a></li>
 </ul>
 </li>
 </ul>
