@@ -109,7 +109,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#id4">调试相关</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id5">算子问题</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">编译问题</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#q-o0-g-bisheng-error-xxxxx-will-be-ignored-werror-woption-ignored">Q:自行添加”-O0 -g”编译选项调试，编译出错，”bisheng: error: xxxxx will be ignored. [-Werror -Woption-ignored]”</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a-shmemcmakelists-txt-werror-werror">A:SHMEM根目录的CMakeLists.txt的-Werror选项导致编译器告警被作为错误处理，注释掉-Werror编译选项即可解决。</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">算子问题</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#q-o0-g-min-stack-size-is-xxx-larger-than-current-process-default-size-32768-please-modify-aclinit-json-and-reboot-process">Q:算子使用”-O0 -g”编译选项编译后，运行出错，”min stack size is xxx, larger than current process default size 32768. Please modify aclInit json, and reboot process.”</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#a-aclinit-json">A:在aclInit()接口传入的json文件中，配置更大的栈空间。</a></li>
 </ul>
@@ -156,6 +161,7 @@
 <li><p>使用RDMA的高阶接口前，需要先使用<code class="docutils literal notranslate"><span class="pre">aclshmemx_rdma_config</span></code>接口配置UB Buffer和sync_id等信息。若不配置，则使用默认的190KB处的UB Buffer和EVENT_ID0作为接口内部的同步EVENT_ID。RDMA相关接口内部使用<code class="docutils literal notranslate"><span class="pre">PipeBarrier&lt;PIPE_MTE3&gt;</span></code>阻塞MTE3流水以确保RDMA任务下发完成。</p></li>
 <li><p>使用SDMA的高阶接口前，需要先使用<code class="docutils literal notranslate"><span class="pre">aclshmemx_sdma_config</span></code>接口配置UB Buffer和sync_id等信息，且需要保证预留UB Buffer大小大于等于64字节。若不配置，则使用默认的191KB处的UB Buffer和EVENT_ID0作为接口内部的同步EVENT_ID。</p></li>
 <li><p>910B 16卡机型：NPU分为前八卡后八卡两个8P Fullmesh组，每个8P组内通过HCCS总线完成两两互联，两个8P Fullmesh组之间通过PCIe-SW完成互连，因此不支持直接使用MTE接口在跨组NPU间完成数据搬运。部分example用例使用MTE搬运接口，单机用例请勿跨组指定NPU，以防发生未知报错（如流同步失败等）。</p></li>
+<li><p>910C D2H/D2rH等功能，需要确保Host内存（DRAM）可用空间大于aclshmemx_init_attr_t初始化过程中pe分配的local_mem_size大小。因为HCCS总线上DRAM地址范围是固定的，部分环境上并不是所有DRAM都在HCCS固定的总线地址范围内，只有和HCCS总线固定的地址交集部分才是可用的DRAM空间。确认DRAM可用空间方法：通过lsmem查询本机物理地址范围，和如下4个地址区间取交集（0x29580000000-0x34000000000， 0xa9580000000-0xb4000000000， 0x129580000000-0x134000000000， 0x1a9580000000-0x1b4000000000），得到具体可用的DRAM容量。如果没有交集，表示当前没有可用DRAM空间或可用空间小于配置的local_mem_size，则不支持该功能。</p></li>
 </ol>
 </section>
 <section id="id1">
@@ -281,7 +287,16 @@
 <section id="id4">
 <h2>调试相关<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
 <section id="id5">
-<h3>算子问题<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<h3>编译问题<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<section id="q-o0-g-bisheng-error-xxxxx-will-be-ignored-werror-woption-ignored">
+<h4>Q:自行添加”-O0 -g”编译选项调试，编译出错，”bisheng: error: xxxxx will be ignored. [-Werror -Woption-ignored]”<a class="headerlink" href="#q-o0-g-bisheng-error-xxxxx-will-be-ignored-werror-woption-ignored" title="Link to this heading"></a></h4>
+</section>
+<section id="a-shmemcmakelists-txt-werror-werror">
+<h4>A:SHMEM根目录的CMakeLists.txt的-Werror选项导致编译器告警被作为错误处理，注释掉-Werror编译选项即可解决。<a class="headerlink" href="#a-shmemcmakelists-txt-werror-werror" title="Link to this heading"></a></h4>
+</section>
+</section>
+<section id="id6">
+<h3>算子问题<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <section id="q-o0-g-min-stack-size-is-xxx-larger-than-current-process-default-size-32768-please-modify-aclinit-json-and-reboot-process">
 <h4>Q:算子使用”-O0 -g”编译选项编译后，运行出错，”min stack size is xxx, larger than current process default size 32768. Please modify aclInit json, and reboot process.”<a class="headerlink" href="#q-o0-g-min-stack-size-is-xxx-larger-than-current-process-default-size-32768-please-modify-aclinit-json-and-reboot-process" title="Link to this heading"></a></h4>
 </section>
