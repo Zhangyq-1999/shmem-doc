@@ -186,7 +186,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__init_8h_1a1e1450a5eb402d76cdd62ebfe313f93e"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">int</span> <span class="pre">aclshmemx_get_uniqueid</span> <span class="pre">(aclshmemx_uniqueid_t</span> <span class="pre">*uid)</span></span></dt>
-<dd><p>get the unique id and return it by intput argument uid. This function need run with PTA. </p>
+<dd><p>get the unique id and return it by input argument uid. This function need run with PTA. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>uid</strong> – [out] a ptr to uid generate by shmem </p>
@@ -1142,7 +1142,7 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>team</strong> – [in] team to do barrier </p></li>
-<li><p><strong>stream</strong> – [in] specifed stream to do barrier </p></li>
+<li><p><strong>stream</strong> – [in] specified stream to do barrier </p></li>
 </ul>
 </dd>
 </dl>
@@ -1154,7 +1154,7 @@
 <dd><p>aclshmemx_barrier_on_stream of all PEs. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>stream</strong> – [in] specifed stream to do barrier </p>
+<dd class="field-odd"><p><strong>stream</strong> – [in] specified stream to do barrier </p>
 </dd>
 </dl>
 </dd></dl>
@@ -1162,7 +1162,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="shmem__host__cc_8h_1a0344b70ccecacecd9ab37b5e565c8c3e"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmem_sync</span> <span class="pre">(aclshmem_team_t</span> <span class="pre">team)</span></span></dt>
-<dd><p>Similar to aclshmem_barrier. In constract with the aclshmem_barrier routine, aclshmem_sync only ensures completion and visibility of previously issued memory stores and does not ensure completion of remote memory updates issued via ACLSHMEM rountines. </p>
+<dd><p>Similar to aclshmem_barrier. In contrast with the aclshmem_barrier routine, aclshmem_sync only ensures completion and visibility of previously issued memory stores and does not ensure completion of remote memory updates issued via ACLSHMEM routines. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>team</strong> – [in] team to do barrier </p>
@@ -1537,7 +1537,7 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>handle</strong> – [in] handle use to wait asynchronous RMA operations to finish </p></li>
-<li><p><strong>stream</strong> – [in] specifed stream to do wait </p></li>
+<li><p><strong>stream</strong> – [in] specified stream to do wait </p></li>
 </ul>
 </dd>
 </dl>
