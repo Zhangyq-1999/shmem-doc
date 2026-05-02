@@ -46,12 +46,11 @@
               <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../quickstart.html">快速开始</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../related_scripts.html">相关脚本</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compilation_build_guide.html">编译与构建</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Using SHMEM</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../example/api_demo.html">SHMEM API 样例</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../compilation_build_guide.html">编译与构建</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../debug/log_debug.html">SHMEM日志</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../debug/tools_debug.html">SHMEM搭配工具算子调测指导</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../debug/dump_debug.html">在样例工程使用Ascend C算子调测API</a></li>
@@ -173,6 +172,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_PAGE_SIZE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_PAGE_SIZE</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_STARS_NOTIFY_ADDR_OFFSET"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_STARS_NOTIFY_ADDR_OFFSET</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_SDMA_FLAG_LENGTH"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SDMA_FLAG_LENGTH</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ALIGN_TO"><code class="docutils literal notranslate"><span class="pre">ALIGN_TO</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ALIGH_TO"><code class="docutils literal notranslate"><span class="pre">ALIGH_TO</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEMI_SYNCBIT_SIZE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMI_SYNCBIT_SIZE</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.SYNC_LOG_MAX_PES"><code class="docutils literal notranslate"><span class="pre">SYNC_LOG_MAX_PES</span></code></a></li>
@@ -185,6 +185,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_LOG_MAX_AIV_PER_NPU"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_LOG_MAX_AIV_PER_NPU</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_CORE_SYNC_POOL_SIZE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CORE_SYNC_POOL_SIZE</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_CORE_SYNC_COUNTER_SIZE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CORE_SYNC_COUNTER_SIZE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_EXTRA_SIZE_UNALIGNED"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_EXTRA_SIZE_UNALIGNED</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_EXTRA_SIZE_UNALIGHED"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_EXTRA_SIZE_UNALIGHED</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_EXTRA_SIZE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_EXTRA_SIZE</span></code></a></li>
 </ul>
@@ -846,8 +847,8 @@
 </dd></dl>
 
 <dl class="cpp macro">
-<dt class="sig sig-object cpp" id="c.ALIGH_TO">
-<span class="target" id="group__group__macros_1gaf8a67cc8c1ff1697b1a84b441b36e8a6"></span><span class="sig-name descname"><span class="n"><span class="pre">ALIGH_TO</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size</span></span>, <span class="n"><span class="pre">page</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ALIGH_TO" title="Link to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="c.ALIGN_TO">
+<span class="target" id="group__group__macros_1ga76a8bfa7f47a46d5df0efddfda091c23"></span><span class="sig-name descname"><span class="n"><span class="pre">ALIGN_TO</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size</span></span>, <span class="n"><span class="pre">page</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ALIGN_TO" title="Link to this definition"></a><br /></dt>
 <dd><p>Memory address/size alignment macro. </p>
 <p>
 Aligns the size up to an integer multiple of the page to avoid memory fragmentation and out-of-bounds access </p>
@@ -859,6 +860,18 @@ Aligns the size up to an integer multiple of the page to avoid memory fragmentat
 </ul>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ALIGH_TO">
+<span class="target" id="group__group__macros_1gaaaec3e5266b20842bc50f37d16e5aaf1"></span><span class="sig-name descname"><span class="n"><span class="pre">ALIGH_TO</span></span></span><a class="headerlink" href="#c.ALIGH_TO" title="Link to this definition"></a><br /></dt>
+<dd><p><dl>
+<dt class="sig sig-object cpp">
+<em><span class="pre">Deprecated:</span></em></dt>
+<dd><p>Use ALIGN_TO instead </p>
+</dd></dl>
+
+</p>
 </dd></dl>
 
 <dl class="cpp macro">
@@ -928,9 +941,21 @@ Aligns the size up to an integer multiple of the page to avoid memory fragmentat
 </dd></dl>
 
 <dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_EXTRA_SIZE_UNALIGNED">
+<span class="target" id="group__group__macros_1gad034b4a457add303e007f3405925e834"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_EXTRA_SIZE_UNALIGNED</span></span></span><a class="headerlink" href="#c.ACLSHMEM_EXTRA_SIZE_UNALIGNED" title="Link to this definition"></a><br /></dt>
+<dd><p>Unaligned size of the ACLSHMEM extra memory (only includes NPU sync pool) </p>
+</dd></dl>
+
+<dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.ACLSHMEM_EXTRA_SIZE_UNALIGHED">
 <span class="target" id="group__group__macros_1ga92ea8446366697ea30359cb081d87798"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_EXTRA_SIZE_UNALIGHED</span></span></span><a class="headerlink" href="#c.ACLSHMEM_EXTRA_SIZE_UNALIGHED" title="Link to this definition"></a><br /></dt>
-<dd><p>Unaligned size of the ACLSHMEM extra memory (only includes NPU sync pool) </p>
+<dd><p><dl>
+<dt class="sig sig-object cpp">
+<em><span class="pre">Deprecated:</span></em></dt>
+<dd><p>Use ACLSHMEM_EXTRA_SIZE_UNALIGNED instead </p>
+</dd></dl>
+
+</p>
 </dd></dl>
 
 <dl class="cpp macro">
@@ -976,7 +1001,7 @@ Aligns the size up to an integer multiple of the page to avoid memory fragmentat
 <dd><p><dl>
 <dt class="sig sig-object cpp">
 <em><span class="pre">Deprecated:</span></em></dt>
-<dd><p>Use <a class="reference internal" href="#structaclshmem__ub__config__t"><span class="std std-ref">aclshmem_ub_config_t</span></a> instead </p>
+<dd><p>Use aclshmem_mte_config_t instead </p>
 </dd></dl>
 
 </p>
@@ -988,7 +1013,7 @@ Aligns the size up to an integer multiple of the page to avoid memory fragmentat
 <dd><p><dl>
 <dt class="sig sig-object cpp">
 <em><span class="pre">Deprecated:</span></em></dt>
-<dd><p>Use <a class="reference internal" href="#structaclshmem__ub__config__t"><span class="std std-ref">aclshmem_ub_config_t</span></a> instead </p>
+<dd><p>Use aclshmem_sdma_config_t instead </p>
 </dd></dl>
 
 </p>
@@ -1000,7 +1025,7 @@ Aligns the size up to an integer multiple of the page to avoid memory fragmentat
 <dd><p><dl>
 <dt class="sig sig-object cpp">
 <em><span class="pre">Deprecated:</span></em></dt>
-<dd><p>Use <a class="reference internal" href="#structaclshmem__ub__config__t"><span class="std std-ref">aclshmem_ub_config_t</span></a> instead </p>
+<dd><p>Use aclshmem_rdma_config_t instead </p>
 </dd></dl>
 
 </p>
@@ -1150,7 +1175,7 @@ Aligns the size up to an integer multiple of the page to avoid memory fragmentat
 <span id="_CPPv321aclshmem_instance_ctx"></span><span id="_CPPv221aclshmem_instance_ctx"></span><span id="aclshmem_instance_ctx"></span><span class="target" id="structaclshmem__instance__ctx"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aclshmem_instance_ctx</span></span></span><a class="headerlink" href="#_CPPv421aclshmem_instance_ctx" title="Link to this definition"></a><br /></dt>
 <dd><div class="docutils container">
 <em>#include &lt;shmem_common_types.h&gt;</em></div>
-<p>Instance context used to store gloabl_id. </p>
+<p>Instance context used to store global_id. </p>
 <p>Stores the instance identifier and reserved fields for future extension </p>
 </dd></dl>
 

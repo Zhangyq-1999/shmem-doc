@@ -43,12 +43,11 @@
               <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">快速开始</a></li>
-<li class="toctree-l1"><a class="reference internal" href="related_scripts.html">相关脚本</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compilation_build_guide.html">编译与构建</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Using SHMEM</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="example/api_demo.html">SHMEM API 样例</a></li>
-<li class="toctree-l1"><a class="reference internal" href="compilation_build_guide.html">编译与构建</a></li>
 <li class="toctree-l1"><a class="reference internal" href="debug/log_debug.html">SHMEM日志</a></li>
 <li class="toctree-l1"><a class="reference internal" href="debug/tools_debug.html">SHMEM搭配工具算子调测指导</a></li>
 <li class="toctree-l1"><a class="reference internal" href="debug/dump_debug.html">在样例工程使用Ascend C算子调测API</a></li>
@@ -126,9 +125,31 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/device_api.html#c.ACLSHMEM_ATOMIC_ADD_TYPENAME">ACLSHMEM_ATOMIC_ADD_TYPENAME (C macro)</a>
 </li>
+      <li><a href="api/device_api.html#c.ACLSHMEM_ATOMIC_AND_TYPENAME">ACLSHMEM_ATOMIC_AND_TYPENAME (C macro)</a>
+</li>
       <li><a href="api/device_api.html#c.ACLSHMEM_ATOMIC_COMPARE_SWAP_TYPENAME">ACLSHMEM_ATOMIC_COMPARE_SWAP_TYPENAME (C macro)</a>
 </li>
       <li><a href="api/device_api.html#c.ACLSHMEM_ATOMIC_FETCH_ADD_TYPENAME">ACLSHMEM_ATOMIC_FETCH_ADD_TYPENAME (C macro)</a>
+</li>
+      <li><a href="api/device_api.html#c.ACLSHMEM_ATOMIC_FETCH_AND_TYPENAME">ACLSHMEM_ATOMIC_FETCH_AND_TYPENAME (C macro)</a>
+</li>
+      <li><a href="api/device_api.html#c.ACLSHMEM_ATOMIC_FETCH_INC_TYPENAME">ACLSHMEM_ATOMIC_FETCH_INC_TYPENAME (C macro)</a>
+</li>
+      <li><a href="api/device_api.html#c.ACLSHMEM_ATOMIC_FETCH_OR_TYPENAME">ACLSHMEM_ATOMIC_FETCH_OR_TYPENAME (C macro)</a>
+</li>
+      <li><a href="api/device_api.html#c.ACLSHMEM_ATOMIC_FETCH_TYPENAME">ACLSHMEM_ATOMIC_FETCH_TYPENAME (C macro)</a>
+</li>
+      <li><a href="api/device_api.html#c.ACLSHMEM_ATOMIC_FETCH_XOR_TYPENAME">ACLSHMEM_ATOMIC_FETCH_XOR_TYPENAME (C macro)</a>
+</li>
+      <li><a href="api/device_api.html#c.ACLSHMEM_ATOMIC_INC_TYPENAME">ACLSHMEM_ATOMIC_INC_TYPENAME (C macro)</a>
+</li>
+      <li><a href="api/device_api.html#c.ACLSHMEM_ATOMIC_OR_TYPENAME">ACLSHMEM_ATOMIC_OR_TYPENAME (C macro)</a>
+</li>
+      <li><a href="api/device_api.html#c.ACLSHMEM_ATOMIC_SET_TYPENAME">ACLSHMEM_ATOMIC_SET_TYPENAME (C macro)</a>
+</li>
+      <li><a href="api/device_api.html#c.ACLSHMEM_ATOMIC_SWAP_TYPENAME">ACLSHMEM_ATOMIC_SWAP_TYPENAME (C macro)</a>
+</li>
+      <li><a href="api/device_api.html#c.ACLSHMEM_ATOMIC_XOR_TYPENAME">ACLSHMEM_ATOMIC_XOR_TYPENAME (C macro)</a>
 </li>
       <li><a href="api/def.html#c.ACLSHMEM_BARRIER_TG_DISSEM_KVAL">ACLSHMEM_BARRIER_TG_DISSEM_KVAL (C macro)</a>
 </li>
@@ -195,6 +216,8 @@
       <li><a href="api/def.html#c.ACLSHMEM_EXTRA_SIZE">ACLSHMEM_EXTRA_SIZE (C macro)</a>
 </li>
       <li><a href="api/def.html#c.ACLSHMEM_EXTRA_SIZE_UNALIGHED">ACLSHMEM_EXTRA_SIZE_UNALIGHED (C macro)</a>
+</li>
+      <li><a href="api/def.html#c.ACLSHMEM_EXTRA_SIZE_UNALIGNED">ACLSHMEM_EXTRA_SIZE_UNALIGNED (C macro)</a>
 </li>
       <li><a href="api/host_api.html#c.ACLSHMEM_GET_SIZE">ACLSHMEM_GET_SIZE (C macro)</a>
 </li>
@@ -292,6 +315,8 @@
 </li>
       <li><a href="api/host_api.html#c.ACLSHMEM_PUT_SIZE_MEM_SIGNAL_NBI">ACLSHMEM_PUT_SIZE_MEM_SIGNAL_NBI (C macro)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/host_api.html#c.ACLSHMEM_PUT_SIZE_NBI">ACLSHMEM_PUT_SIZE_NBI (C macro)</a>
 </li>
       <li><a href="api/device_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM">ACLSHMEM_PUT_TYPENAME_MEM (C macro)</a>
@@ -302,8 +327,6 @@
 </li>
       <li><a href="api/device_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL (C macro)</a>, <a href="api/host_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL">[1]</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/device_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_DETAILED">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_DETAILED (C macro)</a>
 </li>
       <li><a href="api/device_api.html#c.ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_DETAILED_NBI">ACLSHMEM_PUT_TYPENAME_MEM_SIGNAL_DETAILED_NBI (C macro)</a>
@@ -382,9 +405,9 @@
 </li>
       <li><a href="api/device_api.html#c.ACLSHMEM_TYPE_FUNC">ACLSHMEM_TYPE_FUNC (C macro)</a>, <a href="api/device_api.html#c.ACLSHMEM_TYPE_FUNC">[1]</a>, <a href="api/device_api.html#c.ACLSHMEM_TYPE_FUNC">[2]</a>, <a href="api/host_api.html#c.ACLSHMEM_TYPE_FUNC">[3]</a>
 </li>
-      <li><a href="api/device_api.html#c.ACLSHMEM_TYPE_FUNC_ATOMIC_ADD">ACLSHMEM_TYPE_FUNC_ATOMIC_ADD (C macro)</a>
+      <li><a href="api/device_api.html#c.ACLSHMEM_TYPE_FUNC_ATOMIC">ACLSHMEM_TYPE_FUNC_ATOMIC (C macro)</a>
 </li>
-      <li><a href="api/device_api.html#c.ACLSHMEM_TYPE_FUNC_ATOMIC_FETCH">ACLSHMEM_TYPE_FUNC_ATOMIC_FETCH (C macro)</a>
+      <li><a href="api/device_api.html#c.ACLSHMEM_TYPE_FUNC_ATOMIC_ADD">ACLSHMEM_TYPE_FUNC_ATOMIC_ADD (C macro)</a>
 </li>
       <li><a href="api/host_api.html#c.ACLSHMEM_TYPE_GET">ACLSHMEM_TYPE_GET (C macro)</a>
 </li>
@@ -485,6 +508,8 @@
       <li><a href="api/def.html#_CPPv420aclshmemx_uniqueid_t">aclshmemx_uniqueid_t (C++ struct)</a>
 </li>
       <li><a href="api/def.html#c.ALIGH_TO">ALIGH_TO (C macro)</a>
+</li>
+      <li><a href="api/def.html#c.ALIGN_TO">ALIGN_TO (C macro)</a>
 </li>
   </ul></td>
 </tr></table>

@@ -46,12 +46,11 @@
               <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../quickstart.html">快速开始</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../related_scripts.html">相关脚本</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compilation_build_guide.html">编译与构建</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Using SHMEM</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../example/api_demo.html">SHMEM API 样例</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../compilation_build_guide.html">编译与构建</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../debug/log_debug.html">SHMEM日志</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../debug/tools_debug.html">SHMEM搭配工具算子调测指导</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../debug/dump_debug.html">在样例工程使用Ascend C算子调测API</a></li>
@@ -64,9 +63,20 @@
 <li class="toctree-l2"><a class="reference internal" href="#shmem-device-amo-h">shmem_device_amo.h</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPE_FUNC_ATOMIC_ADD"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPE_FUNC_ATOMIC_ADD</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_ATOMIC_ADD_TYPENAME"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_ATOMIC_ADD_TYPENAME</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPE_FUNC_ATOMIC_FETCH"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPE_FUNC_ATOMIC_FETCH</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_TYPE_FUNC_ATOMIC"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TYPE_FUNC_ATOMIC</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_ATOMIC_FETCH_ADD_TYPENAME"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_ATOMIC_FETCH_ADD_TYPENAME</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_ATOMIC_COMPARE_SWAP_TYPENAME"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_ATOMIC_COMPARE_SWAP_TYPENAME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_ATOMIC_FETCH_TYPENAME"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_ATOMIC_FETCH_TYPENAME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_ATOMIC_SET_TYPENAME"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_ATOMIC_SET_TYPENAME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_ATOMIC_SWAP_TYPENAME"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_ATOMIC_SWAP_TYPENAME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_ATOMIC_FETCH_INC_TYPENAME"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_ATOMIC_FETCH_INC_TYPENAME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_ATOMIC_INC_TYPENAME"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_ATOMIC_INC_TYPENAME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_ATOMIC_FETCH_AND_TYPENAME"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_ATOMIC_FETCH_AND_TYPENAME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_ATOMIC_AND_TYPENAME"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_ATOMIC_AND_TYPENAME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_ATOMIC_FETCH_OR_TYPENAME"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_ATOMIC_FETCH_OR_TYPENAME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_ATOMIC_OR_TYPENAME"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_ATOMIC_OR_TYPENAME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_ATOMIC_FETCH_XOR_TYPENAME"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_ATOMIC_FETCH_XOR_TYPENAME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_ATOMIC_XOR_TYPENAME"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_ATOMIC_XOR_TYPENAME</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#shmem-device-cc-h">shmem_device_cc.h</a></li>
@@ -260,8 +270,8 @@
 </dd></dl>
 
 <dl class="cpp macro">
-<dt class="sig sig-object cpp" id="c.ACLSHMEM_TYPE_FUNC_ATOMIC_FETCH">
-<span class="target" id="shmem__device__amo_8h_1acafa005ee73f8000a9eb169553d7cd53"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TYPE_FUNC_ATOMIC_FETCH</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">FUNC</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_TYPE_FUNC_ATOMIC_FETCH" title="Link to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_TYPE_FUNC_ATOMIC">
+<span class="target" id="shmem__device__amo_8h_1aa7eaccc87401da5a50f10295a20d2551"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_TYPE_FUNC_ATOMIC</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">FUNC</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_TYPE_FUNC_ATOMIC" title="Link to this definition"></a><br /></dt>
 <dd><p>Standard Atomic Fetch Types and Names (supported types for fetch_add and compare swap) </p>
 <p><table class="docutils align-default">
 <thead>
@@ -331,6 +341,257 @@
 </p>
 </dd>
 <dt><strong>Returns</strong></dt><dd><p>Return the previous content of dst. </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_ATOMIC_FETCH_TYPENAME">
+<span class="target" id="shmem__device__amo_8h_1a6e02cb586e9532aac1ef5efd46631c75"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_ATOMIC_FETCH_TYPENAME</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_ATOMIC_FETCH_TYPENAME" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem atomic fetch functions for different data types (e.g., int32, uint32, int64, uint64). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_DEVICE TYPE aclshmem_NAME_atomic_fetch(__gm__ TYPE *dst, int32_t pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Fetch the contents of dst (remote symmetric address) on the specified PE pe and return the contents.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE.</p></li>
+</ul>
+</p>
+</dd>
+<dt><strong>Returns</strong></dt><dd><p>Return the contents of dst. </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_ATOMIC_SET_TYPENAME">
+<span class="target" id="shmem__device__amo_8h_1aa852083d79b51d6b7c419783db1283c9"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_ATOMIC_SET_TYPENAME</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_ATOMIC_SET_TYPENAME" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem atomic set functions for different data types (e.g., int32, uint32, int64, uint64). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_atomic_set(__gm__ TYPE *dst, TYPE value, int32_t pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Set value to dst (remote symmetric address) on the specified PE pe without returning a value.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>value</strong> - [in] Value to be atomically written to the remote PE.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_ATOMIC_SWAP_TYPENAME">
+<span class="target" id="shmem__device__amo_8h_1acf92e32df523e9d0792fb706f0ac361b"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_ATOMIC_SWAP_TYPENAME</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_ATOMIC_SWAP_TYPENAME" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem atomic swap functions for different data types (e.g., int32, uint32, int64, uint64). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_DEVICE TYPE aclshmem_NAME_atomic_swap(__gm__ TYPE *dst, TYPE value, int32_t pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Swap value to dst (remote symmetric address) on the specified PE pe and return the previous contents of dst.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>value</strong> - [in] Value to be atomically written to the remote PE.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE.</p></li>
+</ul>
+</p>
+</dd>
+<dt><strong>Returns</strong></dt><dd><p>Return the previous contents of dst. </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_ATOMIC_FETCH_INC_TYPENAME">
+<span class="target" id="shmem__device__amo_8h_1ad3f2da412cd68d1efe77f47a75412f81"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_ATOMIC_FETCH_INC_TYPENAME</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_ATOMIC_FETCH_INC_TYPENAME" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem atomic fetch inc functions for different data types (e.g., int32, uint32, int64, uint64). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_DEVICE TYPE aclshmem_NAME_atomic_fetch_inc(__gm__ TYPE *dst, int32_t pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Increment dst (remote symmetric address) on the specified PE pe by one and return the previous contents of dst.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE.</p></li>
+</ul>
+</p>
+</dd>
+<dt><strong>Returns</strong></dt><dd><p>Return the previous contents of dst. </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_ATOMIC_INC_TYPENAME">
+<span class="target" id="shmem__device__amo_8h_1a58668ceaf12a62e954a7a583ce9d2a6e"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_ATOMIC_INC_TYPENAME</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_ATOMIC_INC_TYPENAME" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem atomic inc functions for different data types (e.g., int32, uint32, int64, uint64, float). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_atomic_inc(__gm__ TYPE *dst, int32_t pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Increment dst (remote symmetric address) on the specified PE pe by one without returning a value.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_ATOMIC_FETCH_AND_TYPENAME">
+<span class="target" id="shmem__device__amo_8h_1a735b34bad88ff55f28f6d3ec9f45d314"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_ATOMIC_FETCH_AND_TYPENAME</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_ATOMIC_FETCH_AND_TYPENAME" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem atomic fetch and functions for different data types (e.g., int32, uint32, int64, uint64). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_DEVICE TYPE aclshmem_NAME_atomic_fetch_and(__gm__ TYPE *dst, TYPE value, int32_t pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Perform a bitwise AND operation on dst (remote symmetric address) on the specified PE pe with the operand value, and return the previous contents of dst.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>value</strong> - [in] Operand of bitwise AND operation.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE.</p></li>
+</ul>
+</p>
+</dd>
+<dt><strong>Returns</strong></dt><dd><p>Return the previous contents of dst. </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_ATOMIC_AND_TYPENAME">
+<span class="target" id="shmem__device__amo_8h_1a69ec0d3da77e709fd85877ed1ddadaf3"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_ATOMIC_AND_TYPENAME</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_ATOMIC_AND_TYPENAME" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem atomic and functions for different data types (e.g., int32, uint32, int64, uint64). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_atomic_and(__gm__ TYPE *dst, TYPE value, int32_t pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Perform a bitwise AND operation on dst (remote symmetric address) on the specified PE pe with the operand value, without returning a value.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>value</strong> - [in] Operand of bitwise AND operation.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_ATOMIC_FETCH_OR_TYPENAME">
+<span class="target" id="shmem__device__amo_8h_1a749454eedf1713e82a3bbeefb4a9e927"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_ATOMIC_FETCH_OR_TYPENAME</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_ATOMIC_FETCH_OR_TYPENAME" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem atomic fetch or functions for different data types (e.g., int32, uint32, int64, uint64). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_DEVICE TYPE aclshmem_NAME_atomic_fetch_or(__gm__ TYPE *dst, TYPE value, int32_t pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Perform a bitwise OR operation on dst (remote symmetric address) on the specified PE pe with the operand value, and return the previous contents of dst.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>value</strong> - [in] Operand of bitwise OR operation.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE.</p></li>
+</ul>
+</p>
+</dd>
+<dt><strong>Returns</strong></dt><dd><p>Return the previous contents of dst. </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_ATOMIC_OR_TYPENAME">
+<span class="target" id="shmem__device__amo_8h_1ab57b5193a809d94473cb6785dcc30fb7"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_ATOMIC_OR_TYPENAME</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_ATOMIC_OR_TYPENAME" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem atomic or functions for different data types (e.g., int32, uint32, int64, uint64). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_atomic_or(__gm__ TYPE *dst, TYPE value, int32_t pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Perform a bitwise OR operation on dst (remote symmetric address) on the specified PE pe with the operand value, without returning a value.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>value</strong> - [in] Operand of bitwise OR operation.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_ATOMIC_FETCH_XOR_TYPENAME">
+<span class="target" id="shmem__device__amo_8h_1a64ac2b9b83f5d7547ed3db1b5924ab46"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_ATOMIC_FETCH_XOR_TYPENAME</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_ATOMIC_FETCH_XOR_TYPENAME" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem atomic fetch xor functions for different data types (e.g., int32, uint32, int64, uint64). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_DEVICE TYPE aclshmem_NAME_atomic_fetch_xor(__gm__ TYPE *dst, TYPE value, int32_t pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Perform a bitwise XOR operation on dst (remote symmetric address) on the specified PE pe with the operand value, and return the previous contents of dst.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>value</strong> - [in] Operand of bitwise XOR operation.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE.</p></li>
+</ul>
+</p>
+</dd>
+<dt><strong>Returns</strong></dt><dd><p>Return the previous contents of dst. </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_ATOMIC_XOR_TYPENAME">
+<span class="target" id="shmem__device__amo_8h_1a8e27969d92b995d493662dfec9a09252"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_ATOMIC_XOR_TYPENAME</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NAME</span></span>, <span class="n"><span class="pre">TYPE</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ACLSHMEM_ATOMIC_XOR_TYPENAME" title="Link to this definition"></a><br /></dt>
+<dd><p>Automatically generates aclshmem atomic xor functions for different data types (e.g., int32, uint32, int64, uint64). The macro parameters: NAME is the function name suffix, TYPE is the operation data type. </p>
+<p><div class="remark admonition">
+<p class="admonition-title">Remark</p>
+<p>ACLSHMEM_DEVICE void aclshmem_NAME_atomic_xor(__gm__ TYPE *dst, TYPE value, int32_t pe)</p>
+</div>
+<dl class="simple">
+<dt><strong>Function Description</strong></dt><dd><p>Synchronous interface. Perform a bitwise XOR operation on dst (remote symmetric address) on the specified PE pe with the operand value, without returning a value.</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><strong>dst</strong> - [in] Pointer on local device of the destination data.</p></li>
+<li><p><strong>value</strong> - [in] Operand of bitwise XOR operation.</p></li>
+<li><p><strong>pe</strong> - [in] PE number of the remote PE. </p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </p>
