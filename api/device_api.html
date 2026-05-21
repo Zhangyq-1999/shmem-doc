@@ -15,8 +15,8 @@
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=8d563738"></script>
-      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -2518,6 +2518,294 @@
 <li><p><strong>buf</strong> – [in] Pointer on local UB, available space larger than 64 Bytes. </p></li>
 <li><p><strong>sync_id</strong> – [in] ID used to Sync S\MTE3 Event. </p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rdma_8h_1adc0269b3f2eb4d94422953951d09056c"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">T</span> <span class="pre">aclshmemx_roce_atomic_fetch</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*src,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Atomic fetch operation. Returns the value at the source address on the specified PE. Supported hardware platform: Ascend950. WARNING: Use sync_id in device_state.rdma_config for pipeline synchronization. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>T only supports 32-bit and 64-bit data types.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src</strong> – [in] Symmetric address of the source data. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The value at the source address. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rdma_8h_1a35b7199702997ebbfbd384d0dfcf449a"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_roce_atomic_set</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">T</span> <span class="pre">value,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Atomic set operation. Sets the value at the destination address on the specified PE. Supported hardware platform: Ascend950. WARNING: Use sync_id in device_state.rdma_config for pipeline synchronization. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>T only supports 32-bit and 64-bit data types.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Symmetric address of the destination data. </p></li>
+<li><p><strong>value</strong> – [in] Value to be set. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rdma_8h_1a56b53b8acdbb68aa72a3b7e6449956dc"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">T</span> <span class="pre">aclshmemx_roce_atomic_compare_swap</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">T</span> <span class="pre">cond,</span> <span class="pre">T</span> <span class="pre">value,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Atomic compare and swap operation. Conditionally updates the value at the destination address. Supported hardware platform: Ascend950. WARNING: Use sync_id in device_state.rdma_config for pipeline synchronization. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>T only supports 32-bit and 64-bit integers.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Symmetric address of the destination data. </p></li>
+<li><p><strong>cond</strong> – [in] Value to compare against. </p></li>
+<li><p><strong>value</strong> – [in] Value to be written if comparison succeeds. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The original value at the destination address. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rdma_8h_1afc62cf145ec6a815687389216e851327"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">T</span> <span class="pre">aclshmemx_roce_atomic_swap</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">T</span> <span class="pre">value,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Atomic swap operation. Swaps the value at the destination address. Supported hardware platform: Ascend950. WARNING: Use sync_id in device_state.rdma_config for pipeline synchronization. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>T only supports 32-bit and 64-bit integers.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Symmetric address of the destination data. </p></li>
+<li><p><strong>value</strong> – [in] Value to be swapped. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The original value at the destination address. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rdma_8h_1a564a580708b9bb4af8bbefe0ccb5e5fd"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_roce_atomic_inc</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Atomic increment operation. Increments the value at the destination address by 1. Supported hardware platform: Ascend950. WARNING: Use sync_id in device_state.rdma_config for pipeline synchronization. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>T only supports 32-bit and 64-bit integers.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Symmetric address of the destination data. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rdma_8h_1aadf0c7ec2c7fa1ad5698d8334d903d5a"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_roce_atomic_add</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">T</span> <span class="pre">value,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Atomic add operation. Adds the value to the destination address. Supported hardware platform: Ascend950. WARNING: Use sync_id in device_state.rdma_config for pipeline synchronization. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>T only supports 32-bit and 64-bit integers.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Symmetric address of the destination data. </p></li>
+<li><p><strong>value</strong> – [in] Value to be added. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rdma_8h_1aa121d67ae812be7d0157e5f93191d7a4"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_roce_atomic_and</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">T</span> <span class="pre">value,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Perform a bitwise AND operation on dst (remote symmetric address) on the specified PE pe with the operand value, without returning a value. Supported types: int32, uint32, int64, uint64. Supported hardware platform: Ascend950. The function returns after the remote atomic operation has completed and is visible on the remote PE. An internal quiet operation is performed before returning. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported. Use sync_id in device_state.rdma_config for pipeline synchronization. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>T only supports 32-bit and 64-bit integers. Using unsupported types or platforms results in undefined behavior.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Symmetric address of the destination data. Must be a valid symmetric address. </p></li>
+<li><p><strong>value</strong> – [in] Operand of bitwise AND operation. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. Must be a valid PE number within the active set. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rdma_8h_1a2ba12141260253885d250f246af3ad4e"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_roce_atomic_or</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">T</span> <span class="pre">value,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Perform a bitwise OR operation on dst (remote symmetric address) on the specified PE pe with the operand value, without returning a value. Supported types: int32, uint32, int64, uint64. Supported hardware platform: Ascend950. The function returns after the remote atomic operation has completed and is visible on the remote PE. An internal quiet operation is performed before returning. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported. Use sync_id in device_state.rdma_config for pipeline synchronization. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>T only supports 32-bit and 64-bit integers. Using unsupported types or platforms will result in a compile-time error.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Symmetric address of the destination data. Must be a valid symmetric address. </p></li>
+<li><p><strong>value</strong> – [in] Operand of bitwise OR operation. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. Must be a valid PE number within the active set. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rdma_8h_1aa483e3b724b432b1c42c1ac312599f83"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">void</span> <span class="pre">aclshmemx_roce_atomic_xor</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">T</span> <span class="pre">value,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Perform a bitwise XOR operation on dst (remote symmetric address) on the specified PE pe with the operand value, without returning a value. Supported types: int32, uint32, int64, uint64. Supported hardware platform: Ascend950. The function returns after the remote atomic operation has completed and is visible on the remote PE. An internal quiet operation is performed before returning. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported. Use sync_id in device_state.rdma_config for pipeline synchronization. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>T only supports 32-bit and 64-bit integers. Using unsupported types or platforms results in undefined behavior.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Symmetric address of the destination data. Must be a valid symmetric address. </p></li>
+<li><p><strong>value</strong> – [in] Operand of bitwise XOR operation. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. Must be a valid PE number within the active set. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rdma_8h_1a5c55b87c6881cff7da06456c2fd14747"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">T</span> <span class="pre">aclshmemx_roce_atomic_fetch_inc</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Atomic fetch increment operation. Increments the value at the destination address by 1 and returns the old value. Supported hardware platform: Ascend950. WARNING: Use sync_id in device_state.rdma_config for pipeline synchronization. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>T only supports 32-bit and 64-bit integers.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Symmetric address of the destination data. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The original value at the destination address before increment. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rdma_8h_1a5de5ccc9e16347f0e943ed125478e476"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">T</span> <span class="pre">aclshmemx_roce_atomic_fetch_add</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">T</span> <span class="pre">value,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Atomic fetch add operation. Adds the value to the destination address and returns the old value. Supported hardware platform: Ascend950. WARNING: Use sync_id in device_state.rdma_config for pipeline synchronization. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>T only supports 32-bit and 64-bit integers.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Symmetric address of the destination data. </p></li>
+<li><p><strong>value</strong> – [in] Value to be added. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The original value at the destination address before addition. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rdma_8h_1a3d14feba6f24b17460c2437d61a01e2e"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">T</span> <span class="pre">aclshmemx_roce_atomic_fetch_and</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">T</span> <span class="pre">value,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Perform a bitwise AND operation on dst (remote symmetric address) on the specified PE pe with the operand value, and return the previous contents of dst. Supported types: int32, uint32, int64, uint64. Supported hardware platform: Ascend950. The function returns after the remote atomic operation has completed and is visible on the remote PE. An internal quiet operation is performed before returning. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported. Use sync_id in device_state.rdma_config for pipeline synchronization. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>T only supports 32-bit and 64-bit integers. Using unsupported types or platforms will result in a compile-time error.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Symmetric address of the destination data. Must be a valid symmetric address. </p></li>
+<li><p><strong>value</strong> – [in] Operand of bitwise AND operation. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. Must be a valid PE number within the active set. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Return the previous contents of dst. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rdma_8h_1a846b5336580e11e148a2cae7c92dbd62"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">T</span> <span class="pre">aclshmemx_roce_atomic_fetch_or</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">T</span> <span class="pre">value,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Perform a bitwise OR operation on dst (remote symmetric address) on the specified PE pe with the operand value, and return the previous contents of dst. Supported types: int32, uint32, int64, uint64. Supported hardware platform: Ascend950. The function returns after the remote atomic operation has completed and is visible on the remote PE. An internal quiet operation is performed before returning. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported. Use sync_id in device_state.rdma_config for pipeline synchronization. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>T only supports 32-bit and 64-bit integers. Using unsupported types or platforms results in undefined behavior.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Symmetric address of the destination data. Must be a valid symmetric address. </p></li>
+<li><p><strong>value</strong> – [in] Operand of bitwise OR operation. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. Must be a valid PE number within the active set. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Return the previous contents of dst. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__device__rdma_8h_1a0243ef2f0972da45bbf783a9aa591cd0"></span><span class="sig-name descname"><span class="pre">template&lt;typename</span> <span class="pre">T&gt;</span> <span class="pre">ACLSHMEM_DEVICE</span> <span class="pre">T</span> <span class="pre">aclshmemx_roce_atomic_fetch_xor</span> <span class="pre">(__gm__</span> <span class="pre">T</span> <span class="pre">*dst,</span> <span class="pre">T</span> <span class="pre">value,</span> <span class="pre">int32_t</span> <span class="pre">pe)</span></span></dt>
+<dd><p>Synchronous interface. Perform a bitwise XOR operation on dst (remote symmetric address) on the specified PE pe with the operand value, and return the previous contents of dst. Supported types: int32, uint32, int64, uint64. Supported hardware platform: Ascend950. The function returns after the remote atomic operation has completed and is visible on the remote PE. An internal quiet operation is performed before returning. WARNING: When using RDMA as the underlying transport, concurrent RMA/AMO operations to the same PE are not supported. Use sync_id in device_state.rdma_config for pipeline synchronization. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>T only supports 32-bit and 64-bit integers. Using unsupported types or platforms will result in a compile-time error.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dst</strong> – [in] Symmetric address of the destination data. Must be a valid symmetric address. </p></li>
+<li><p><strong>value</strong> – [in] Operand of bitwise XOR operation. </p></li>
+<li><p><strong>pe</strong> – [in] PE number of the remote PE. Must be a valid PE number within the active set. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Return the previous contents of dst. </p>
 </dd>
 </dl>
 </dd></dl>

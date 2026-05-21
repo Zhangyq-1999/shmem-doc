@@ -15,8 +15,8 @@
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=8d563738"></script>
-      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -519,6 +519,32 @@
 <li><p><strong>ptr</strong> – [in] Pointer to the memory to be freed </p></li>
 <li><p><strong>mem_type</strong> – [in] Allocation location of the symmetric memory (Host/Device) </p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__heap_8h_1abcbca990628c486fe6e77fac325036b3"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">*</span> <span class="pre">aclshmemx_get_heap_base</span> <span class="pre">(aclshmem_mem_type_t</span> <span class="pre">mem_type=DEVICE_SIDE)</span></span></dt>
+<dd><p>Returns the start address (heap_base) of the local symmetric memory heap. If <em>mem_type</em> is DEVICE_SIDE, returns the device heap base address. If <em>mem_type</em> is HOST_SIDE, returns the host heap base address. Must be called after ACLSHMEM initialization, otherwise returns NULL. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Thread safety: This function is thread-safe for reading heap_base after initialization. The heap_base value is set during initialization and does not change afterwards. </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remote visibility: The returned address is local-only, not directly accessible by remote PEs. </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Failure conditions: Returns NULL if ACLSHMEM is not initialized or the heap has not been allocated. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mem_type</strong> – [in] Allocation location of symmetric memory (Host/Device) </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pointer to the start address of the symmetric memory heap, or NULL if not initialized. </p>
 </dd>
 </dl>
 </dd></dl>

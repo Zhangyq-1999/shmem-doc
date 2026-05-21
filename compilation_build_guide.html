@@ -15,8 +15,8 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=8d563738"></script>
-      <script src="_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -51,6 +51,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#id2">下载SHMEM源码</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id3">编译</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id4">SHMEM编译相关说明</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rdma">RDMA参数使用说明</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#id5">SHMEM关键文件介绍</a><ul>
@@ -159,7 +160,8 @@ bash<span class="w"> </span>scripts/build.sh
 <li><p><code class="docutils literal notranslate"><span class="pre">-uttests</span></code>：构建<code class="docutils literal notranslate"><span class="pre">tests/unittest</span></code>目录下所有ut用例</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-examples</span></code>：构建examples目录下所有用例</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-python_example</span></code>：对部分examples目录下用例提供torch接入能力</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-enable_rdma</span></code>：构建并启用RDMA相关能力</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-enable_rdma</span></code>：构建并启用RDMA相关能力。 Ascend910B/C 默认配置 RDMA 后端类型，Ascend950 需要配合 <code class="docutils literal notranslate"><span class="pre">-rdma_backend</span></code> 来指定后端类型。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-rdma_backend</span></code>：指定RDMA后端类型（Ascend910B/C 不支持该选项），可选值为 <code class="docutils literal notranslate"><span class="pre">XSCALE</span></code>（使用云脉网卡）。<strong>必须配合 <code class="docutils literal notranslate"><span class="pre">-enable_rdma</span></code> 使用</strong>，否则会报错。参数顺序不限。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-enable_ascendc_dump</span></code>：启用<code class="docutils literal notranslate"><span class="pre">AscendC_Dump</span></code>模式，用于对算子内核代码进行调测</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-package</span></code>：构建py扩展的whl包</p>
 <ul>
@@ -176,6 +178,81 @@ bash<span class="w"> </span>scripts/build.sh
 <li><p><code class="docutils literal notranslate"><span class="pre">-enable_simt</span></code>：使能simt编程模式接口。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-full</span></code>：编译 package + python_extension + uttests + examples。SHMEM自动编译脚本，会自动完成依赖库的下载，工程编译，UT用例编译，库打包。</p></li>
 </ul>
+</section>
+<section id="rdma">
+<h3>RDMA参数使用说明<a class="headerlink" href="#rdma" title="Link to this heading"></a></h3>
+<p>若需要使用 RDMA 功能，需要在编译时开启 <code class="docutils literal notranslate"><span class="pre">-enable_rdma</span></code> 参数。之后用户需要根据服务器类型与使用的网卡种类进行参数配置来配置后端</p>
+<ul class="simple">
+<li><p>Ascend910B/C 平台</p>
+<ul>
+<li><p>仅需要使用 <code class="docutils literal notranslate"><span class="pre">-enable_rdma</span></code> 参数，不需要额外参数，后端使用默认配置</p></li>
+</ul>
+</li>
+<li><p>Ascend950 平台</p>
+<ul>
+<li><p>使用 <code class="docutils literal notranslate"><span class="pre">-enable_rdma</span></code> 参数</p></li>
+<li><p>显式指定 <code class="docutils literal notranslate"><span class="pre">-soc_type</span> <span class="pre">Ascend950</span></code></p></li>
+<li><p>指定 <code class="docutils literal notranslate"><span class="pre">-rdma_backend</span></code> 参数，否则构建脚本将会报错</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>参数依赖规则：</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-rdma_backend</span></code> 参数在使用时<strong>必须</strong>同时指定 <code class="docutils literal notranslate"><span class="pre">-enable_rdma</span></code> 参数</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-rdma_backend</span></code> 参数仅在 <code class="docutils literal notranslate"><span class="pre">-soc_type</span> <span class="pre">Ascend950</span></code> 时有效，否则构建脚本将会报错</p></li>
+<li><p>如果指定了 <code class="docutils literal notranslate"><span class="pre">-rdma_backend</span></code> 但未指定 <code class="docutils literal notranslate"><span class="pre">-enable_rdma</span></code>，构建将失败并提示错误信息</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-rdma_backend</span></code>, <code class="docutils literal notranslate"><span class="pre">-enable_rdma</span></code>, <code class="docutils literal notranslate"><span class="pre">-soc_type</span> <span class="pre">xxx</span></code> 三个参数顺序不限，但所有依赖参数必须最终都被指定</p></li>
+</ul>
+<p><strong>有效命令示例：</strong></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ascend950 平台启用RDMA并指定后端为 XSCALE（参数顺序示例1）</span>
+bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>-soc_type<span class="w"> </span>Ascend950<span class="w"> </span>-enable_rdma<span class="w"> </span>-rdma_backend<span class="w"> </span>XSCALE
+
+<span class="c1"># Ascend950 平台启用RDMA并指定后端为 XSCALE（参数顺序示例2）</span>
+bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>-enable_rdma<span class="w"> </span>-soc_type<span class="w"> </span>Ascend950<span class="w"> </span>-rdma_backend<span class="w"> </span>XSCALE
+
+<span class="c1"># Ascend950 平台启用RDMA并指定后端为 XSCALE（参数顺序示例3）</span>
+bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>-rdma_backend<span class="w"> </span>XSCALE<span class="w"> </span>-enable_rdma<span class="w"> </span>-soc_type<span class="w"> </span>Ascend950
+
+<span class="c1"># Ascend910B/C 启用RDMA（不需要指定backend）</span>
+bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>-enable_rdma
+</pre></div>
+</div>
+<p><strong>无效命令示例：</strong></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># 错误：指定了-rdma_backend但未启用-enable_rdma</span>
+bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>-soc_type<span class="w"> </span>Ascend950<span class="w"> </span>-rdma_backend<span class="w"> </span>XSCALE
+<span class="c1"># 将报错：Error: -rdma_backend requires -enable_rdma to be specified.</span>
+
+<span class="c1"># 错误：在非Ascend950平台使用-rdma_backend</span>
+bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>-enable_rdma<span class="w"> </span>-rdma_backend<span class="w"> </span>XSCALE
+<span class="c1"># 将报错：Error: -rdma_backend can only be specified when SOC_TYPE is Ascend950.</span>
+</pre></div>
+</div>
+<p><strong>RDMA 后端类型说明：</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">-rdma_backend</span></code> 参数支持以下后端类型：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">XSCALE</span></code>：云脉网卡后端（仅 Ascend950 支持）</p></li>
+</ul>
+<p><strong>⚠️ 重要提示：</strong></p>
+<ol class="arabic simple">
+<li><p><strong>自动生成的编译定义</strong>：</p>
+<ul class="simple">
+<li><p>CMake 会根据 <code class="docutils literal notranslate"><span class="pre">-rdma_backend</span></code> 的值自动生成以下编译定义，用户不应手动设置：</p>
+<ul>
+<li><p>当 <code class="docutils literal notranslate"><span class="pre">-rdma_backend</span> <span class="pre">XSCALE</span></code> 时，自动添加 <code class="docutils literal notranslate"><span class="pre">-DACLSHMEMI_RDMA_K_BACKEND_XSCALE=1</span></code></p></li>
+<li><p>未指定后端时，自动添加 <code class="docutils literal notranslate"><span class="pre">-DACLSHMEMI_RDMA_K_BACKEND_IN_DIE=1</span></code></p></li>
+</ul>
+</li>
+<li><p>手动定义这些宏可能导致编译冲突或功能异常</p></li>
+</ul>
+</li>
+<li><p><strong>禁止手动定义的内部宏</strong>：</p>
+<ul class="simple">
+<li><p>用户不应手动添加名为 <code class="docutils literal notranslate"><span class="pre">ACLSHMEMI_K_RDMA_BACKEND</span></code> 的编译定义</p></li>
+<li><p>这是一个设备端代码使用的内部宏，由系统在 <code class="docutils literal notranslate"><span class="pre">src/device/gm2gm/engine/shmem_device_rdma.hpp</span></code> 中根据上述自动生成的定义进行设置</p></li>
+<li><p>手动定义此宏会导致编译错误或运行时功能异常</p></li>
+</ul>
+</li>
+</ol>
 </section>
 </section>
 <section id="id5">
@@ -234,12 +311,12 @@ bash<span class="w"> </span>run.sh<span class="w"> </span>-ranks<span class="w">
 </section>
 <section id="build-sh">
 <h3>编译文件<code class="docutils literal notranslate"><span class="pre">build.sh</span></code><a class="headerlink" href="#build-sh" title="Link to this heading"></a></h3>
-<p>文件名：<code class="docutils literal notranslate"><span class="pre">scripts/build.sh</span></code><br />
+<p>文件名：<code class="docutils literal notranslate"><span class="pre">scripts/build.sh</span></code>
 SHMEM编译文件，一般无需更改。</p>
 </section>
 <section id="set-env-sh">
 <h3>环境变量设置文件<code class="docutils literal notranslate"><span class="pre">set_env.sh</span></code><a class="headerlink" href="#set-env-sh" title="Link to this heading"></a></h3>
-<p>​<strong>文件名</strong>​：<code class="docutils literal notranslate"><span class="pre">scripts/set_env.sh</span></code><br />
+<p>​<strong>文件名</strong>​：<code class="docutils literal notranslate"><span class="pre">scripts/set_env.sh</span></code>
 SHMEM安装完成后，提供进程级环境变量设置脚本<code class="docutils literal notranslate"><span class="pre">set_env.sh</span></code>，以自动完成环境变量设置，用户进程结束后自动失效。</p>
 </section>
 </section>

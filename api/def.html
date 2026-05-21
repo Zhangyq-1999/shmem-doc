@@ -15,8 +15,8 @@
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=8d563738"></script>
-      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -103,14 +103,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#_CPPv4N20aclshmem_transport_t23ACLSHMEM_TRANSPORT_UDMAE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TRANSPORT_UDMA</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv414aclshmemi_op_t"><code class="docutils literal notranslate"><span class="pre">aclshmemi_op_t</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N14aclshmemi_op_t16ACLSHMEMI_OP_PUTE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMI_OP_PUT</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N14aclshmemi_op_t14ACLSHMEMI_OP_PE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMI_OP_P</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N14aclshmemi_op_t23ACLSHMEMI_OP_PUT_SIGNALE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMI_OP_PUT_SIGNAL</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N14aclshmemi_op_t16ACLSHMEMI_OP_GETE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMI_OP_GET</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N14aclshmemi_op_t14ACLSHMEMI_OP_GE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMI_OP_G</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv421aclshmem_team_index_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_team_index_t</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_team_index_t21ACLSHMEM_TEAM_INVALIDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TEAM_INVALID</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#_CPPv4N21aclshmem_team_index_t19ACLSHMEM_TEAM_WORLDE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TEAM_WORLD</span></code></a></li>
@@ -146,9 +138,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#typedefs">Typedefs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#c.aclshmemi_sync_bit"><code class="docutils literal notranslate"><span class="pre">aclshmemi_sync_bit</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv415aclshmem_team_t"><code class="docutils literal notranslate"><span class="pre">aclshmem_team_t</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv425aclshmemx_team_uniqueid_t"><code class="docutils literal notranslate"><span class="pre">aclshmemx_team_uniqueid_t</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv418aclshmemi_sync_bit"><code class="docutils literal notranslate"><span class="pre">aclshmemi_sync_bit</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv418aclshmemx_sync_bit"><code class="docutils literal notranslate"><span class="pre">aclshmemx_sync_bit</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#macros">Macros</a><ul>
@@ -174,6 +167,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_SDMA_FLAG_LENGTH"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SDMA_FLAG_LENGTH</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ALIGN_TO"><code class="docutils literal notranslate"><span class="pre">ALIGN_TO</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ALIGH_TO"><code class="docutils literal notranslate"><span class="pre">ALIGH_TO</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_SYNCBIT_SIZE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SYNCBIT_SIZE</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEMI_SYNCBIT_SIZE"><code class="docutils literal notranslate"><span class="pre">ACLSHMEMI_SYNCBIT_SIZE</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.SYNC_LOG_MAX_PES"><code class="docutils literal notranslate"><span class="pre">SYNC_LOG_MAX_PES</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.ACLSHMEM_BARRIER_TG_DISSEM_KVAL"><code class="docutils literal notranslate"><span class="pre">ACLSHMEM_BARRIER_TG_DISSEM_KVAL</span></code></a></li>
@@ -535,38 +529,6 @@
 </dd></dl>
 
 <dl class="cpp enum">
-<dt class="sig sig-object cpp" id="_CPPv414aclshmemi_op_t">
-<span id="_CPPv314aclshmemi_op_t"></span><span id="_CPPv214aclshmemi_op_t"></span><span class="target" id="group__group__enums_1ga55511c7361d0efb6f46ab608d0378ae4"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aclshmemi_op_t</span></span></span><a class="headerlink" href="#_CPPv414aclshmemi_op_t" title="Link to this definition"></a><br /></dt>
-<dd><p>The state of the ACLSHMEM host OP type. </p>
-<p><em>Values:</em></p>
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N14aclshmemi_op_t16ACLSHMEMI_OP_PUTE">
-<span id="_CPPv3N14aclshmemi_op_t16ACLSHMEMI_OP_PUTE"></span><span id="_CPPv2N14aclshmemi_op_t16ACLSHMEMI_OP_PUTE"></span><span class="target" id="group__group__enums_1gga55511c7361d0efb6f46ab608d0378ae4ab9b740f3119eaf202ba2b5813e50d961"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEMI_OP_PUT</span></span></span><a class="headerlink" href="#_CPPv4N14aclshmemi_op_t16ACLSHMEMI_OP_PUTE" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N14aclshmemi_op_t14ACLSHMEMI_OP_PE">
-<span id="_CPPv3N14aclshmemi_op_t14ACLSHMEMI_OP_PE"></span><span id="_CPPv2N14aclshmemi_op_t14ACLSHMEMI_OP_PE"></span><span class="target" id="group__group__enums_1gga55511c7361d0efb6f46ab608d0378ae4a456fc07b19c52683319a9bf84a12eb9c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEMI_OP_P</span></span></span><a class="headerlink" href="#_CPPv4N14aclshmemi_op_t14ACLSHMEMI_OP_PE" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N14aclshmemi_op_t23ACLSHMEMI_OP_PUT_SIGNALE">
-<span id="_CPPv3N14aclshmemi_op_t23ACLSHMEMI_OP_PUT_SIGNALE"></span><span id="_CPPv2N14aclshmemi_op_t23ACLSHMEMI_OP_PUT_SIGNALE"></span><span class="target" id="group__group__enums_1gga55511c7361d0efb6f46ab608d0378ae4ad524083d00d377b83460fc8c205d9bfe"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEMI_OP_PUT_SIGNAL</span></span></span><a class="headerlink" href="#_CPPv4N14aclshmemi_op_t23ACLSHMEMI_OP_PUT_SIGNALE" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N14aclshmemi_op_t16ACLSHMEMI_OP_GETE">
-<span id="_CPPv3N14aclshmemi_op_t16ACLSHMEMI_OP_GETE"></span><span id="_CPPv2N14aclshmemi_op_t16ACLSHMEMI_OP_GETE"></span><span class="target" id="group__group__enums_1gga55511c7361d0efb6f46ab608d0378ae4a2ef4cdf17fb7ca8f65bdcdd89d04c81e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEMI_OP_GET</span></span></span><a class="headerlink" href="#_CPPv4N14aclshmemi_op_t16ACLSHMEMI_OP_GETE" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N14aclshmemi_op_t14ACLSHMEMI_OP_GE">
-<span id="_CPPv3N14aclshmemi_op_t14ACLSHMEMI_OP_GE"></span><span id="_CPPv2N14aclshmemi_op_t14ACLSHMEMI_OP_GE"></span><span class="target" id="group__group__enums_1gga55511c7361d0efb6f46ab608d0378ae4a37d45197901d76be0e1969e8d30a8ebe"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEMI_OP_G</span></span></span><a class="headerlink" href="#_CPPv4N14aclshmemi_op_t14ACLSHMEMI_OP_GE" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="cpp enum">
 <dt class="sig sig-object cpp" id="_CPPv421aclshmem_team_index_t">
 <span id="_CPPv321aclshmem_team_index_t"></span><span id="_CPPv221aclshmem_team_index_t"></span><span class="target" id="group__group__enums_1ga2bb63ab156d340b871203d9cd859a2ea"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aclshmem_team_index_t</span></span></span><a class="headerlink" href="#_CPPv421aclshmem_team_index_t" title="Link to this definition"></a><br /></dt>
 <dd><p>Team’s index. </p>
@@ -696,6 +658,21 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="group__group__typedef"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">Typedef</span></span></dt>
 <dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.aclshmemi_sync_bit">
+<span class="target" id="group__group__typedef_1gafbeddfee04ddf467d4c048b221ed725f"></span><span class="sig-name descname"><span class="n"><span class="pre">aclshmemi_sync_bit</span></span></span><a class="headerlink" href="#c.aclshmemi_sync_bit" title="Link to this definition"></a><br /></dt>
+<dd><p><dl>
+<dt class="sig sig-object cpp">
+<em><span class="pre">Deprecated:</span></em></dt>
+<dd><p>Use aclshmemx_sync_bit instead </p>
+</dd></dl>
+
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
 <dl class="cpp type">
 <dt class="sig sig-object cpp" id="_CPPv415aclshmem_team_t">
@@ -710,8 +687,8 @@
 </dd></dl>
 
 <dl class="cpp type">
-<dt class="sig sig-object cpp" id="_CPPv418aclshmemi_sync_bit">
-<span id="_CPPv318aclshmemi_sync_bit"></span><span id="_CPPv218aclshmemi_sync_bit"></span><span id="aclshmemi_sync_bit"></span><span class="target" id="group__group__typedef_1ga15b80e4b1b86edc0556a8faf068827f7"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aclshmemi_sync_bit</span></span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">ACLSHMEMI_SYNCBIT_SIZE</span></span><span class="w"> </span><span class="o"><span class="pre">/</span></span><span class="w"> </span><span class="k"><span class="pre">sizeof</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">int32_t</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv418aclshmemi_sync_bit" title="Link to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv418aclshmemx_sync_bit">
+<span id="_CPPv318aclshmemx_sync_bit"></span><span id="_CPPv218aclshmemx_sync_bit"></span><span id="aclshmemx_sync_bit"></span><span class="target" id="group__group__typedef_1ga57f3cd42ce54338e9ed8278fd09cc54e"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">aclshmemx_sync_bit</span></span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">ACLSHMEM_SYNCBIT_SIZE</span></span><span class="w"> </span><span class="o"><span class="pre">/</span></span><span class="w"> </span><span class="k"><span class="pre">sizeof</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">int32_t</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv418aclshmemx_sync_bit" title="Link to this definition"></a><br /></dt>
 <dd><p>ACLSHMEM synchronization bit array type, cache line-aligned storage structure for synchronization flags. </p>
 </dd></dl>
 
@@ -875,9 +852,21 @@ Aligns the size up to an integer multiple of the page to avoid memory fragmentat
 </dd></dl>
 
 <dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ACLSHMEM_SYNCBIT_SIZE">
+<span class="target" id="group__group__macros_1ga40dcb01de3cf4d3b1765674dad530c72"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEM_SYNCBIT_SIZE</span></span></span><a class="headerlink" href="#c.ACLSHMEM_SYNCBIT_SIZE" title="Link to this definition"></a><br /></dt>
+<dd><p>Memory size of the ACLSHMEM synchronization bit, consistent with the scalar data cache line size. </p>
+</dd></dl>
+
+<dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c.ACLSHMEMI_SYNCBIT_SIZE">
 <span class="target" id="group__group__macros_1gadefbabc601fdb4a01667dff38ccdb369"></span><span class="sig-name descname"><span class="n"><span class="pre">ACLSHMEMI_SYNCBIT_SIZE</span></span></span><a class="headerlink" href="#c.ACLSHMEMI_SYNCBIT_SIZE" title="Link to this definition"></a><br /></dt>
-<dd><p>Memory size of the ACLSHMEM synchronization bit, consistent with the scalar data cache line size. </p>
+<dd><p><dl>
+<dt class="sig sig-object cpp">
+<em><span class="pre">Deprecated:</span></em></dt>
+<dd><p>Use ACLSHMEM_SYNCBIT_SIZE instead </p>
+</dd></dl>
+
+</p>
 </dd></dl>
 
 <dl class="cpp macro">

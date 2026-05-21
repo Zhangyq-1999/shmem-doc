@@ -1,0 +1,527 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Root Info Generate 工具 - 用户指南 &mdash; SHMEM Guidebook 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=d6bf9227" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SHMEM Guidebook
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">快速开始</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compilation_build_guide.html">编译与构建</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Using SHMEM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../example/api_demo.html">SHMEM API 样例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug/log_debug.html">SHMEM日志</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug/tools_debug.html">SHMEM搭配工具算子调测指导</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug/dump_debug.html">在样例工程使用Ascend C算子调测API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/def.html">SHMEM DEF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/host_api.html">HOST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/device_api.html">DEVICE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/pythonAPI.html">SHMEM Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/env_vars_intro.html">SHMEM Env Vars</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Example</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../example/example.html">初始化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example/example.html#allgather">AllGather</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Multi_Instance</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../multi_instance.html">多实例支持</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../principles.html">SHMEM原理概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code_organization.html">代码组织结构</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting And FAQs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../debug/Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug/Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SECURITY.html">安全声明</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SHMEM Guidebook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Root Info Generate 工具 - 用户指南</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tools/root_info_generate_user_guide.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="root-info-generate">
+<h1>Root Info Generate 工具 - 用户指南<a class="headerlink" href="#root-info-generate" title="Link to this heading"></a></h1>
+<section id="id1">
+<h2>概述<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p><strong>root_info_generate</strong> 是一个辅助工具，用于查看Ascend950 NPU设备拓扑地址信息，帮助用户了解组网结构和设备配置。</p>
+<p><strong>重要说明</strong>：</p>
+<ul class="simple">
+<li><p><strong>支持范围</strong>：当前仅支持Ascend950平台</p></li>
+<li><p><strong>自动生成</strong>：root info信息会在SHMEM初始化时自动调用相关接口生成，无需用户手动执行工具</p></li>
+<li><p><strong>辅助用途</strong>：本工具主要用于辅助用户查看和了解组网拓扑、EID地址等信息，便于开发和调试</p></li>
+<li><p><strong>非必需操作</strong>：正常使用SHMEM时，用户不需要手动运行此工具</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>背景知识<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3>简介<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>昇腾芯片在950代际中，超平面使用Unified Bus（UB）总线组网，在不同产品形态中使用多种不同的拓扑组网方式。本模块用于发现不同拓扑下每条边的端点地址。</p>
+<section id="id4">
+<h4>组网介绍<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<p>组网主要采用了MESH和CLOS两种类型组网。相关介绍可参考论文：<a class="reference external" href="https://arxiv.org/abs/2503.20377">https://arxiv.org/abs/2503.20377</a></p>
+<section id="mesh">
+<h5>MESH组网<a class="headerlink" href="#mesh" title="Link to this heading"></a></h5>
+<p>每个NPU之间均有一条直连的物理链路，因此有一对独立的通信地址。</p>
+<p><strong>示例</strong>：在同一个NPU板上有8个NPU，因此存在 <code class="docutils literal notranslate"><span class="pre">8*7/2</span> <span class="pre">=</span> <span class="pre">28</span></code> 条物理路径，即28对通信地址。</p>
+<p><strong>特点</strong>：</p>
+<ul class="simple">
+<li><p>直连链路，无交换芯片</p></li>
+<li><p>通信质量最高，时延最低</p></li>
+<li><p>地址数量：N*(N-1)/2 对地址（N为NPU数量）</p></li>
+</ul>
+</section>
+<section id="clos">
+<h5>CLOS组网<a class="headerlink" href="#clos" title="Link to this heading"></a></h5>
+<p>任意两个NPU之间通过交换芯片转发，因此一个NPU只需一个地址。</p>
+<p><strong>多平面设计</strong>：在常见组网中，由于可靠性等原因，CLOS组网通常分为多个平面，每个平面对应一个地址。</p>
+<p><strong>示例</strong>：在液冷POD中，NPU使用两个独立的逻辑口连接两个分开的网络平面。</p>
+<p><strong>特点</strong>：</p>
+<ul class="simple">
+<li><p>通过交换芯片转发</p></li>
+<li><p>地址数量与平面数量相同</p></li>
+<li><p>可实现流量分担和冗余</p></li>
+</ul>
+</section>
+<section id="id5">
+<h5>组网规划<a class="headerlink" href="#id5" title="Link to this heading"></a></h5>
+</section>
+</section>
+<section id="id6">
+<h4>网络层级说明<a class="headerlink" href="#id6" title="Link to this heading"></a></h4>
+<p>在950芯片代际中，按通信质量和范围，将网络划分为多层：</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>网络层级</p></th>
+<th class="head text-left"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>层级0</strong></p></td>
+<td class="text-left"><p>通信质量最高，时延最低。多为MESH组网，主要是同一个NPU单板内的fullmesh网络和POD形态的框级网络</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>层级1</strong></p></td>
+<td class="text-left"><p>通信质量次高，时延中等。为CLOS组网，通信范围较大，为超节点范围，仍然在scale up范围内</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>层级2</strong></p></td>
+<td class="text-left"><p>通信质量最低，CLOS组网，通信范围为整个集群，主要是ROCE或者UBOE这类scale out网络</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>层级特点对比</strong>：</p>
+<ul class="simple">
+<li><p><strong>层级0</strong>：板内/框内通信，最优质量</p></li>
+<li><p><strong>层级1</strong>：超节点内通信，中等质量</p></li>
+<li><p><strong>层级2</strong>：集群间通信，最低质量但范围最大</p></li>
+</ul>
+</section>
+<section id="id7">
+<h4>网络地址说明<a class="headerlink" href="#id7" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>网络层级</p></th>
+<th class="head text-left"><p>地址规划说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>层级0</strong></p></td>
+<td class="text-left"><p>由于是MESH组网为主，因此有多对通信地址。在拓扑信息中表示为每个NPU上每个端口的地址。<strong>地址类型：EID</strong></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>层级1</strong></p></td>
+<td class="text-left"><p>根据组网平面填写地址，多平面组网时，地址数量与平面数量相同。集合通信在不同平面之间做流量分担。<strong>地址类型：EID</strong></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>层级2</strong></p></td>
+<td class="text-left"><p>地址规划与层级1相同。<strong>地址类型：IP地址</strong></p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>地址类型说明</strong>：</p>
+<ul class="simple">
+<li><p><strong>EID (Extended ID)</strong>：扩展标识符，用于层级0和层级1的UB网络通信</p></li>
+<li><p><strong>IP地址</strong>：用于层级2的scale out网络通信（如RoCE、UBOE）</p></li>
+</ul>
+</section>
+<section id="eid">
+<h4>EID地址格式<a class="headerlink" href="#eid" title="Link to this heading"></a></h4>
+<p>EID地址为16字节（128位），在JSON输出中表示为32位十六进制字符串：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">格式示例</span><span class="p">:</span> <span class="s2">&quot;000000000000006000100000dfdf008b&quot;</span>
+<span class="n">长度</span><span class="p">:</span> <span class="mi">32</span><span class="n">个十六进制字符</span> <span class="o">=</span> <span class="mi">16</span><span class="n">字节</span>
+</pre></div>
+</div>
+<p><strong>EID结构</strong>（参考）：</p>
+<ul class="simple">
+<li><p>包含subnet_prefix（子网前缀）</p></li>
+<li><p>包含interface_id（接口标识）</p></li>
+<li><p>用于UB网络的端点寻址</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="id8">
+<h2>功能特性<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>拓扑查询</strong>: 获取指定NPU的完整拓扑地址信息</p></li>
+<li><p><strong>缓冲区检测</strong>: 自动获取拓扑数据所需缓冲区大小</p></li>
+<li><p><strong>文件路径查询</strong>: 获取拓扑配置文件路径</p></li>
+<li><p><strong>JSON格式输出</strong>: 以结构化JSON格式显示拓扑信息</p></li>
+</ul>
+</section>
+<section id="id9">
+<h2>前置条件<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<section id="id10">
+<h3>系统要求<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>SOC类型</strong>: Ascend950</p></li>
+<li><p><strong>平台</strong>: Linux</p></li>
+<li><p><strong>依赖库</strong>: libdcmi.so驱动库、c_sec安全库</p></li>
+</ul>
+</section>
+<section id="id11">
+<h3>编译要求<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>CMake 3.16+</p></li>
+<li><p>C++17编译器</p></li>
+<li><p>Ascend驱动已安装</p></li>
+</ul>
+</section>
+</section>
+<section id="id12">
+<h2>安装说明<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
+<section id="id13">
+<h3>从源码编译<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 克隆代码仓库</span>
+git<span class="w"> </span>clone<span class="w"> </span>&lt;仓库地址&gt;
+<span class="nb">cd</span><span class="w"> </span>shmem
+
+<span class="c1"># 使用Ascend950 SOC类型编译</span>
+bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>-soc_type<span class="w"> </span>Ascend950
+
+<span class="c1"># 工具生成位置：</span>
+<span class="c1"># - 编译后（立即可用）: build/bin/root_info_generate</span>
+<span class="c1"># - 安装后（完整安装）: install/shmem/bin/root_info_generate</span>
+</pre></div>
+</div>
+</section>
+<section id="id14">
+<h3>验证安装<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<p>编译完成后可立即使用：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 检查编译生成的工具</span>
+ls<span class="w"> </span>-l<span class="w"> </span>build/bin/root_info_generate
+
+<span class="c1"># 直接运行（编译后）</span>
+./build/bin/root_info_generate<span class="w"> </span>&lt;物理ID&gt;
+
+<span class="c1"># 或使用安装后的工具（完整编译安装后）</span>
+./install/shmem/bin/root_info_generate<span class="w"> </span>&lt;物理ID&gt;
+</pre></div>
+</div>
+</section>
+<section id="id15">
+<h3>打包安装<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<p>完整编译安装后生成安装包：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">install</span><span class="o">/</span><span class="n">aarch64</span><span class="o">/</span><span class="n">SHMEM_1</span><span class="mf">.0.0</span><span class="n">_linux</span><span class="o">-</span><span class="n">aarch64</span><span class="o">.</span><span class="n">run</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id16">
+<h2>使用方法<a class="headerlink" href="#id16" title="Link to this heading"></a></h2>
+<section id="id17">
+<h3>基本语法<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./root_info_generate<span class="w"> </span>&lt;物理ID&gt;
+</pre></div>
+</div>
+<p><strong>参数说明</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">物理ID</span></code>: NPU物理ID（整数，范围：0-63）</p></li>
+</ul>
+</section>
+<section id="id18">
+<h3>使用示例<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<section id="id3npu">
+<h4>示例1：查询ID为3的NPU<a class="headerlink" href="#id3npu" title="Link to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./root_info_generate<span class="w"> </span><span class="m">3</span>
+</pre></div>
+</div>
+<p><strong>预期输出</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Generating</span> <span class="n">root</span> <span class="n">info</span> <span class="k">for</span> <span class="n">NPU</span> <span class="k">with</span> <span class="n">physical</span> <span class="n">ID</span><span class="p">:</span> <span class="mi">3</span>
+<span class="n">Required</span> <span class="n">buffer</span> <span class="n">size</span><span class="p">:</span> <span class="mi">2048</span> <span class="nb">bytes</span>
+<span class="n">topo_addr_info_get</span> <span class="n">succeeded</span><span class="p">,</span> <span class="n">actual</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1329</span> <span class="nb">bytes</span>
+<span class="n">Rank</span> <span class="n">info</span><span class="p">:</span>
+<span class="p">{</span><span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0&quot;</span><span class="p">,</span><span class="s2">&quot;topo_file_path&quot;</span><span class="p">:</span> <span class="s2">&quot;/usr/local/Ascend/driver/topo/950/atlas_850_1.json&quot;</span><span class="p">,</span><span class="s2">&quot;rank_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span><span class="s2">&quot;rank_list&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;device_id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span><span class="s2">&quot;local_id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span><span class="s2">&quot;level_list&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;net_layer&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span><span class="s2">&quot;net_instance_id&quot;</span><span class="p">:</span> <span class="s2">&quot;sp-1_srv65535&quot;</span><span class="p">,</span><span class="s2">&quot;net_type&quot;</span><span class="p">:</span> <span class="s2">&quot;MESH&quot;</span><span class="p">,</span><span class="s2">&quot;net_attr&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span><span class="s2">&quot;rank_addr_list&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;addr_type&quot;</span><span class="p">:</span> <span class="s2">&quot;EID&quot;</span><span class="p">,</span><span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="s2">&quot;000000000000006000100000dfdf008b&quot;</span><span class="p">,</span><span class="s2">&quot;plane_id&quot;</span><span class="p">:</span> <span class="s2">&quot;plane_1&quot;</span><span class="p">,</span><span class="s2">&quot;ports&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1/0&quot;</span><span class="p">]},{</span><span class="s2">&quot;addr_type&quot;</span><span class="p">:</span> <span class="s2">&quot;EID&quot;</span><span class="p">,</span><span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="s2">&quot;000000000000006000100000dfdf00cb&quot;</span><span class="p">,</span><span class="s2">&quot;plane_id&quot;</span><span class="p">:</span> <span class="s2">&quot;plane_1&quot;</span><span class="p">,</span><span class="s2">&quot;ports&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1/8&quot;</span><span class="p">]},{</span><span class="s2">&quot;addr_type&quot;</span><span class="p">:</span> <span class="s2">&quot;EID&quot;</span><span class="p">,</span><span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="s2">&quot;000000000000006000100000dfdf00c3&quot;</span><span class="p">,</span><span class="s2">&quot;plane_id&quot;</span><span class="p">:</span> <span class="s2">&quot;plane_1&quot;</span><span class="p">,</span><span class="s2">&quot;ports&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1/7&quot;</span><span class="p">]},{</span><span class="s2">&quot;addr_type&quot;</span><span class="p">:</span> <span class="s2">&quot;EID&quot;</span><span class="p">,</span><span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="s2">&quot;000000000000006000100000dfdf00ab&quot;</span><span class="p">,</span><span class="s2">&quot;plane_id&quot;</span><span class="p">:</span> <span class="s2">&quot;plane_1&quot;</span><span class="p">,</span><span class="s2">&quot;ports&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1/4&quot;</span><span class="p">]},{</span><span class="s2">&quot;addr_type&quot;</span><span class="p">:</span> <span class="s2">&quot;EID&quot;</span><span class="p">,</span><span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="s2">&quot;000000000000006000100000dfdf00a3&quot;</span><span class="p">,</span><span class="s2">&quot;plane_id&quot;</span><span class="p">:</span> <span class="s2">&quot;plane_1&quot;</span><span class="p">,</span><span class="s2">&quot;ports&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1/3&quot;</span><span class="p">]},{</span><span class="s2">&quot;addr_type&quot;</span><span class="p">:</span> <span class="s2">&quot;EID&quot;</span><span class="p">,</span><span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="s2">&quot;000000000000006000100000dfdf009b&quot;</span><span class="p">,</span><span class="s2">&quot;plane_id&quot;</span><span class="p">:</span> <span class="s2">&quot;plane_1&quot;</span><span class="p">,</span><span class="s2">&quot;ports&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1/2&quot;</span><span class="p">]},{</span><span class="s2">&quot;addr_type&quot;</span><span class="p">:</span> <span class="s2">&quot;EID&quot;</span><span class="p">,</span><span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="s2">&quot;000000000000006000100000dfdf0093&quot;</span><span class="p">,</span><span class="s2">&quot;plane_id&quot;</span><span class="p">:</span> <span class="s2">&quot;plane_1&quot;</span><span class="p">,</span><span class="s2">&quot;ports&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1/1&quot;</span><span class="p">]}]},</span> <span class="p">{</span><span class="s2">&quot;net_layer&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span><span class="s2">&quot;net_instance_id&quot;</span><span class="p">:</span> <span class="s2">&quot;superpod_-1&quot;</span><span class="p">,</span><span class="s2">&quot;net_type&quot;</span><span class="p">:</span> <span class="s2">&quot;CLOS&quot;</span><span class="p">,</span><span class="s2">&quot;net_attr&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span><span class="s2">&quot;rank_addr_list&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;addr_type&quot;</span><span class="p">:</span> <span class="s2">&quot;EID&quot;</span><span class="p">,</span><span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="s2">&quot;000000000000004000100000dfdf00df&quot;</span><span class="p">,</span><span class="s2">&quot;plane_id&quot;</span><span class="p">:</span> <span class="s2">&quot;plane_1&quot;</span><span class="p">,</span><span class="s2">&quot;ports&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1/5&quot;</span><span class="p">,</span><span class="s2">&quot;1/6&quot;</span><span class="p">]},{</span><span class="s2">&quot;addr_type&quot;</span><span class="p">:</span> <span class="s2">&quot;EID&quot;</span><span class="p">,</span><span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="s2">&quot;000000000000006000100000dfdf005f&quot;</span><span class="p">,</span><span class="s2">&quot;plane_id&quot;</span><span class="p">:</span> <span class="s2">&quot;plane_0&quot;</span><span class="p">,</span><span class="s2">&quot;ports&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;0/4&quot;</span><span class="p">,</span><span class="s2">&quot;0/5&quot;</span><span class="p">,</span><span class="s2">&quot;0/6&quot;</span><span class="p">,</span><span class="s2">&quot;0/7&quot;</span><span class="p">]}]}]}]}</span>
+<span class="n">Topology</span> <span class="n">file</span> <span class="n">path</span><span class="p">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">Ascend</span><span class="o">/</span><span class="n">driver</span><span class="o">/</span><span class="n">topo</span><span class="o">/</span><span class="mi">950</span><span class="o">/</span><span class="n">atlas_850_1</span><span class="o">.</span><span class="n">json</span>
+<span class="n">Root</span> <span class="n">info</span> <span class="n">generation</span> <span class="n">completed</span> <span class="n">successfully</span>
+</pre></div>
+</div>
+</section>
+<section id="npu">
+<h4>示例2：查询其他NPU<a class="headerlink" href="#npu" title="Link to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./root_info_generate<span class="w"> </span><span class="m">0</span>
+./root_info_generate<span class="w"> </span><span class="m">5</span>
+</pre></div>
+</div>
+</section>
+<section id="id">
+<h4>示例3：无效物理ID<a class="headerlink" href="#id" title="Link to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./root_info_generate<span class="w"> </span><span class="m">100</span>
+</pre></div>
+</div>
+<p><strong>错误输出</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Generating</span> <span class="n">root</span> <span class="n">info</span> <span class="k">for</span> <span class="n">NPU</span> <span class="k">with</span> <span class="n">physical</span> <span class="n">ID</span><span class="p">:</span> <span class="mi">100</span>
+<span class="n">Error</span><span class="p">:</span> <span class="n">topo_addr_info_get_size</span> <span class="n">failed</span> <span class="k">with</span> <span class="n">ret</span><span class="o">=-</span><span class="mi">1</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="id19">
+<h2>输出解读<a class="headerlink" href="#id19" title="Link to this heading"></a></h2>
+<section id="id20">
+<h3>成功输出结构<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
+<p>工具执行成功后会输出以下信息：</p>
+<ol class="arabic">
+<li><p><strong>缓冲区大小</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Required</span> <span class="n">buffer</span> <span class="n">size</span><span class="p">:</span> <span class="n">XXX</span> <span class="nb">bytes</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>实际数据大小</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">topo_addr_info_get</span> <span class="n">succeeded</span><span class="p">,</span> <span class="n">actual</span> <span class="n">size</span><span class="p">:</span> <span class="n">XXX</span> <span class="nb">bytes</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>JSON拓扑数据</strong>（紧凑格式，建议使用jq格式化查看）</p>
+<ul class="simple">
+<li><p>输出为JSON字符串，包含拓扑地址信息</p></li>
+<li><p>可使用 <code class="docutils literal notranslate"><span class="pre">jq</span> <span class="pre">'.'</span></code> 格式化输出便于阅读</p></li>
+</ul>
+</li>
+<li><p><strong>拓扑文件路径</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Topology</span> <span class="n">file</span> <span class="n">path</span><span class="p">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">Ascend</span><span class="o">/</span><span class="n">driver</span><span class="o">/</span><span class="n">topo</span><span class="o">/</span><span class="mi">950</span><span class="o">/</span><span class="n">atlas_850_1</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="id21">
+<h3>错误处理<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<p>当工具执行失败时会输出错误信息：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span><span class="p">:</span> <span class="n">topo_addr_info_get_size</span> <span class="n">failed</span> <span class="k">with</span> <span class="n">ret</span><span class="o">=-</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>常见错误原因：</p>
+<ul class="simple">
+<li><p>物理ID超出范围（有效范围0-63）</p></li>
+<li><p>驱动未初始化或设备不可访问</p></li>
+<li><p>设备权限不足</p></li>
+</ul>
+</section>
+</section>
+<section id="id22">
+<h2>常见问题与解决方案<a class="headerlink" href="#id22" title="Link to this heading"></a></h2>
+<section id="id23">
+<h3>问题1：工具找不到<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<p><strong>症状</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./root_info_generate:<span class="w"> </span><span class="nb">command</span><span class="w"> </span>not<span class="w"> </span>found
+</pre></div>
+</div>
+<p><strong>解决方案</strong>:</p>
+<ol class="arabic simple">
+<li><p>使用SOC_TYPE=Ascend950编译</p></li>
+<li><p>验证安装位置: <code class="docutils literal notranslate"><span class="pre">build/bin/</span></code> 或 <code class="docutils literal notranslate"><span class="pre">install/shmem/bin/</span></code></p></li>
+<li><p>检查编译日志确认工具已生成</p></li>
+</ol>
+</section>
+<section id="id24">
+<h3>问题2：库依赖缺失<a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
+<p><strong>症状</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>error<span class="w"> </span><span class="k">while</span><span class="w"> </span>loading<span class="w"> </span>shared<span class="w"> </span>libraries:<span class="w"> </span>libshmem_rootinfo.so:<span class="w"> </span>cannot<span class="w"> </span>open<span class="w"> </span>shared<span class="w"> </span>object<span class="w"> </span>file
+</pre></div>
+</div>
+<p><strong>解决方案</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 设置库路径</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>install/shmem/lib:<span class="nv">$LD_LIBRARY_PATH</span>
+
+<span class="c1"># 或复制库到标准位置</span>
+cp<span class="w"> </span>install/shmem/lib/*.so<span class="w"> </span>/usr/local/lib/
+ldconfig
+</pre></div>
+</div>
+</section>
+<section id="id25">
+<h3>问题3：驱动未初始化<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
+<p><strong>症状</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Error:<span class="w"> </span>topo_addr_info_get_size<span class="w"> </span>failed<span class="w"> </span>with<span class="w"> </span><span class="nv">ret</span><span class="o">=</span>-1
+</pre></div>
+</div>
+<p><strong>解决方案</strong>:</p>
+<ol class="arabic simple">
+<li><p>检查Ascend驱动安装: <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">/usr/local/Ascend/</span></code></p></li>
+<li><p>初始化驱动: 运行驱动初始化脚本</p></li>
+<li><p>验证NPU设备: <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">/dev/davinci*</span></code></p></li>
+</ol>
+</section>
+<section id="id26">
+<h3>问题4：权限拒绝<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
+<p><strong>症状</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Error:<span class="w"> </span>cannot<span class="w"> </span>access<span class="w"> </span>/dev/davinci0
+</pre></div>
+</div>
+<p><strong>解决方案</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 检查设备权限</span>
+ls<span class="w"> </span>-l<span class="w"> </span>/dev/davinci*
+
+<span class="c1"># 将用户添加到相应组</span>
+sudo<span class="w"> </span>usermod<span class="w"> </span>-a<span class="w"> </span>-G<span class="w"> </span>ascend<span class="w"> </span>&lt;用户名&gt;
+
+<span class="c1"># 或使用适当权限运行</span>
+sudo<span class="w"> </span>./root_info_generate<span class="w"> </span><span class="m">0</span>
+</pre></div>
+</div>
+</section>
+<section id="id27">
+<h3>问题5：无效物理ID<a class="headerlink" href="#id27" title="Link to this heading"></a></h3>
+<p><strong>症状</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Error:<span class="w"> </span>get_mainboard_id<span class="w"> </span>returned<span class="w"> </span>null<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">phy_id</span><span class="o">=</span><span class="m">100</span>
+</pre></div>
+</div>
+<p><strong>解决方案</strong>:</p>
+<ul class="simple">
+<li><p>使用有效的物理ID范围: 0到ACLSHMEMI_MAX_NPU_COUNT-1</p></li>
+<li><p>检查可用NPU: <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">/dev/davinci*</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="id28">
+<h2>支持与故障排查<a class="headerlink" href="#id28" title="Link to this heading"></a></h2>
+<section id="id29">
+<h3>获取帮助<a class="headerlink" href="#id29" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>检查日志</strong>: 仔细审查错误消息</p></li>
+<li><p><strong>验证安装</strong>: 确保所有依赖已安装</p></li>
+<li><p><strong>测试驱动</strong>: 验证Ascend驱动功能</p></li>
+<li><p><strong>联系支持</strong>: 提交包含详细日志的问题</p></li>
+</ol>
+</section>
+<section id="id30">
+<h3>调试模式<a class="headerlink" href="#id30" title="Link to this heading"></a></h3>
+<p>启用详细日志用于调试：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 设置调试环境（如果可用）</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">SHMEM_LOG_LEVEL</span><span class="o">=</span>DEBUG
+./root_info_generate<span class="w"> </span><span class="m">0</span>
+</pre></div>
+</div>
+</section>
+<section id="id31">
+<h3>日志分析<a class="headerlink" href="#id31" title="Link to this heading"></a></h3>
+<p>检查系统日志获取额外信息：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 检查驱动日志</span>
+dmesg<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>ascend
+
+<span class="c1"># 检查应用日志</span>
+journalctl<span class="w"> </span>-u<span class="w"> </span>ascend-driver
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright  2025 Huawei Technologies Co., Ltd..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
