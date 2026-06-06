@@ -269,7 +269,7 @@ bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>-enable_rdma
 </section>
 <section id="run-sh">
 <h3>run.sh脚本使用<a class="headerlink" href="#run-sh" title="Link to this heading"></a></h3>
-<p>UT测试用例运行脚本。</p>
+<p>UT（单元测试）测试用例运行脚本。</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/run.sh
 </pre></div>
 </div>
@@ -282,13 +282,13 @@ bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>-enable_rdma
 -test_filter<span class="w">    </span><span class="c1"># gtest_filter</span>
 
 <span class="c1"># 例如</span>
-bash<span class="w"> </span>run.sh<span class="w"> </span>-ranks<span class="w"> </span><span class="m">4</span><span class="w"> </span>-fnpu<span class="w"> </span><span class="m">2</span><span class="w"> </span>-gnpus<span class="w"> </span><span class="m">4</span><span class="w"> </span>-test_filter<span class="w"> </span>ScalarP<span class="w"> </span><span class="c1"># 会在2-6卡</span>
+bash<span class="w"> </span>scripts/run.sh<span class="w"> </span>-ranks<span class="w"> </span><span class="m">4</span><span class="w"> </span>-fnpu<span class="w"> </span><span class="m">2</span><span class="w"> </span>-gnpus<span class="w"> </span><span class="m">4</span><span class="w"> </span>-test_filter<span class="w"> </span>ScalarP<span class="w"> </span><span class="c1"># 会在2-6卡</span>
 </pre></div>
 </div>
 </section>
 <section id="install-sh">
 <h3><a class="reference external" href="http://install.sh">install.sh</a><a class="headerlink" href="#install-sh" title="Link to this heading"></a></h3>
-<p>打包生成的run包安装卸载依赖的脚本，提供安装卸载功能。
+<p>打包生成的run包的安装/卸载脚本，提供安装和卸载的功能。
 安装目录</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>${INSTALL_PATH}
     |--shmem
@@ -300,6 +300,7 @@ bash<span class="w"> </span>run.sh<span class="w"> </span>-ranks<span class="w">
             |--scripts      (卸载脚本)
 </pre></div>
 </div>
+<p>注：<code class="docutils literal notranslate"><span class="pre">INSTALL_PATH</span></code>表示用户设置的安装目录。</p>
 </section>
 <section id="uninstall-sh">
 <h3><a class="reference external" href="http://uninstall.sh">uninstall.sh</a><a class="headerlink" href="#uninstall-sh" title="Link to this heading"></a></h3>

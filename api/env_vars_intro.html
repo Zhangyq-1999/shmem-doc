@@ -132,6 +132,7 @@ SHMEM_UID_SOCK_IFNAME配置示例：
 SHMEM_UID_SOCK_IFNAME=enpxxxx:inet4  取ipv4
 SHMEM_UID_SOCK_IFNAME=enpxxxx:inet6  取ipv6</p></li>
 </ul>
+<p>以上两个环境变量均未配置时自动搜索可用网口（IPv4/IPv6均可，跳过lo/docker/veth/br-/virbr/tun/tap等虚拟网口）。</p>
 </section>
 <section id="id2">
 <h2>多实例相关<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
@@ -150,7 +151,7 @@ export SHMEM_INSTANCE_PORT_RANGE=1024:2047</p></li>
 <h2>Profiling相关<a class="headerlink" href="#profiling" title="Link to this heading"></a></h2>
 <p>SHMEM提供Profiling打点工具，通过采集系统时钟周期数并转换为实际时间，精准量化不同Block（计算核）、不同Frame（埋点 ID）下的MTE搬运性能，详细介绍请参考<a class="reference internal" href="../debug/profiling.html"><span class="std std-doc">在示例中使用Profiling工具</span></a>.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">SHMEM_CYCLE_PROF_PE</span></code>: 用于设置需要进行Profiling采集的pe，pe_id设置范围【0，PEs-1】，需要取消采集请<code class="docutils literal notranslate"><span class="pre">unset</span> <span class="pre">SHMEM_CYCLE_PROF_PE</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SHMEM_CYCLE_PROF_PE</span></code>: 用于设置需要进行Profiling采集的pe，pe_id设置范围[0，PEs-1]，需要取消采集请<code class="docutils literal notranslate"><span class="pre">unset</span> <span class="pre">SHMEM_CYCLE_PROF_PE</span></code>。</p></li>
 </ul>
 </section>
 </section>

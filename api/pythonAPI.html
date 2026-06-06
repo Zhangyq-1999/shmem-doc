@@ -130,375 +130,508 @@
 <section id="id1">
 <h3>对外接口<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
 <ol class="arabic">
-<li><p>获取当前库版本函数</p>
+<li><p>获取当前库版本。返回 ACLSHMEM 库的版本信息。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_version</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>返回值</p></td>
-<td><p>version信息组成的字符串</p></td>
+<td><p>[out]</p></td>
+<td><p>版本信息组成的字符串，格式为 <code class="docutils literal notranslate"><span class="pre">&quot;libaclshmem_version=X.Y&quot;</span></code></p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>初始化共享内存模块</p>
+<li><p>生成用于 UID 初始化的唯一 ID。应由单个进程（如 rank 0）调用，并通过广播分发给其他进程。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_unique_id</span><span class="p">(</span><span class="n">empty</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UniqueID</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>empty</p></td>
+<td><p>[in]</p></td>
 <td><p>预留参数，无实际意义</p></td>
 </tr>
 <tr class="row-odd"><td><p>返回值</p></td>
-<td><p>代表一个唯一 ID 的句柄</p></td>
+<td><p>[out]</p></td>
+<td><p>代表一个唯一 ID 的句柄。若生成失败则引发 <code class="docutils literal notranslate"><span class="pre">AclshmemError</span></code></p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>初始化共享内存模块</p>
+<li><p>使用唯一 ID 初始化 ACLSHMEM 运行时。这是一个集合（collective）操作，所有 PE 必须调用。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="n">device</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="n">UniqueID</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rank</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nranks</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mpi_comm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initializer_method</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">mem_size</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>device</p></td>
+<td><p>[in]</p></td>
 <td><p>预留参数，无实际意义</p></td>
 </tr>
 <tr class="row-odd"><td><p>uid</p></td>
-<td><p>用于初始化的唯一标识符</p></td>
+<td><p>[in]</p></td>
+<td><p>用于初始化的唯一标识符，必填</p></td>
 </tr>
 <tr class="row-even"><td><p>rank</p></td>
-<td><p>当前进程在 ACLSHMEM 作业中的排名</p></td>
+<td><p>[in]</p></td>
+<td><p>当前进程在 ACLSHMEM 作业中的排名（0-based），必填</p></td>
 </tr>
 <tr class="row-odd"><td><p>nranks</p></td>
-<td><p>参与 ACLSHMEM 作业的总进程数</p></td>
+<td><p>[in]</p></td>
+<td><p>参与 ACLSHMEM 作业的总进程数，必填</p></td>
 </tr>
 <tr class="row-even"><td><p>mpi_comm</p></td>
+<td><p>[in]</p></td>
 <td><p>预留参数，无实际意义</p></td>
 </tr>
 <tr class="row-odd"><td><p>initializer_method</p></td>
-<td><p>指定初始化方法，必须为 “uid”</p></td>
+<td><p>[in]</p></td>
+<td><p>指定初始化方法，必须为 <code class="docutils literal notranslate"><span class="pre">&quot;uid&quot;</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p>mem_size</p></td>
-<td><p>每个处理单元（PE）分配的对称内存大小</p></td>
+<td><p>[in]</p></td>
+<td><p>每个 PE 分配的对称内存大小（字节），必填</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值。参数缺失引发 <code class="docutils literal notranslate"><span class="pre">AclshmemInvalid</span></code>，初始化失败引发 <code class="docutils literal notranslate"><span class="pre">AclshmemError</span></code></p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>销毁共享内存模块</p>
+<li><p>销毁 ACLSHMEM 运行时，释放所有资源。每个进程在完成所有 ACLSHMEM 操作后应调用一次。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">finalize</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
+<th class="head"><p>含义</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值。若销毁失败则引发 <code class="docutils literal notranslate"><span class="pre">AclshmemError</span></code></p></td>
+</tr>
+</tbody>
+</table>
 </li>
-<li><p>分配一个由 ACLSHMEM 支持的 NPU 缓冲区</p>
+<li><p>分配一个由 ACLSHMEM 支持的 NPU 缓冲区。这是一个集合（collective）操作，所有 PE 必须同步调用。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">buffer</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">release</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">except_on_del</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Buffer</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>size</p></td>
-<td><p>要分配的缓冲区大小</p></td>
+<td><p>[in]</p></td>
+<td><p>要分配的缓冲区大小（字节）</p></td>
 </tr>
 <tr class="row-odd"><td><p>release</p></td>
+<td><p>[in]</p></td>
 <td><p>预留参数，无实际意义</p></td>
 </tr>
 <tr class="row-even"><td><p>except_on_del</p></td>
+<td><p>[in]</p></td>
 <td><p>预留参数，无实际意义</p></td>
 </tr>
 <tr class="row-odd"><td><p>返回值</p></td>
-<td><p>一个原始内存缓冲区，通过其地址和字节长度表示</p></td>
+<td><p>[out]</p></td>
+<td><p>通过地址和字节长度表示的原始内存缓冲区。若分配失败则引发 <code class="docutils literal notranslate"><span class="pre">AclshmemError</span></code></p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>释放缓冲区</p>
+<li><p>释放由 <code class="docutils literal notranslate"><span class="pre">buffer()</span></code> 分配的缓冲区。这是一个集合（collective）操作。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">free</span><span class="p">(</span><span class="n">buf</span><span class="p">:</span> <span class="n">Buffer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>buf</p></td>
+<td><p>[in]</p></td>
 <td><p>需要释放的缓冲区</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>获取可用于在指定PE上直接引用目标地址的地址</p>
+<li><p>获取指定 PE 上目标缓冲区的对称地址，可用于直接引用该 PE 上的数据。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_peer_buffer</span><span class="p">(</span><span class="n">buf</span><span class="p">:</span> <span class="n">Buffer</span><span class="p">,</span> <span class="n">pe</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Buffer</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>buf</p></td>
+<td><p>[in]</p></td>
 <td><p>远程可访问数据的对称地址</p></td>
 </tr>
 <tr class="row-odd"><td><p>pe</p></td>
-<td><p>PE编号</p></td>
+<td><p>[in]</p></td>
+<td><p>PE 编号</p></td>
 </tr>
 <tr class="row-even"><td><p>返回值</p></td>
-<td><p>一个原始内存缓冲区，通过其地址和字节长度表示</p></td>
+<td><p>[out]</p></td>
+<td><p>指定 PE 上的远程对称地址缓冲区。若获取失败则引发 <code class="docutils literal notranslate"><span class="pre">AclshmemError</span></code></p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步接口，从本地PE复制内存中的连续数据到指定的PE地址</p>
+<li><p>从本地 PE 复制连续数据到指定 PE 的对称内存地址，并在完成后更新远程信号变量。当前仅支持 MTE（Memory Transfer Engine）。同步（blocking）接口。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">put_signal</span><span class="p">(</span><span class="n">dst</span><span class="p">:</span> <span class="n">Buffer</span><span class="p">,</span> <span class="n">src</span><span class="p">:</span> <span class="n">Buffer</span><span class="p">,</span> <span class="n">signal_var</span><span class="p">:</span> <span class="n">Buffer</span><span class="p">,</span> <span class="n">signal_val</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">signal_operation</span><span class="p">:</span> <span class="n">SignalOp</span><span class="p">,</span> <span class="n">remote_pe</span><span class="p">:</span> <span class="nb">int</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>dst</p></td>
-<td><p>远程 PE 上的对称内存缓冲区（目标地址）</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 上目标数据的对称地址</p></td>
 </tr>
 <tr class="row-odd"><td><p>src</p></td>
-<td><p>包含源数据的内存缓冲区。</p></td>
+<td><p>[in]</p></td>
+<td><p>本地内存中的源数据地址</p></td>
 </tr>
 <tr class="row-even"><td><p>signal_var</p></td>
-<td><p>用作信号变量的对称内存缓冲区</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 上待更新信号字的对称地址</p></td>
 </tr>
-<tr class="row-odd"><td><p>signal_operation</p></td>
-<td><p>用于更新信号变量的原子操作</p></td>
+<tr class="row-odd"><td><p>signal_val</p></td>
+<td><p>[in]</p></td>
+<td><p>用于更新信号变量的值</p></td>
 </tr>
-<tr class="row-even"><td><p>remote_pe</p></td>
-<td><p>远程处理单元（PE）的编号</p></td>
+<tr class="row-even"><td><p>signal_operation</p></td>
+<td><p>[in]</p></td>
+<td><p>信号变量更新操作。支持：<code class="docutils literal notranslate"><span class="pre">SignalOp.SIGNAL_SET</span></code> / <code class="docutils literal notranslate"><span class="pre">SignalOp.SIGNAL_ADD</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>stream</p></td>
-<td><p>预留参数，无实际意义</p></td>
+<tr class="row-odd"><td><p>remote_pe</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号，默认 -1</p></td>
+</tr>
+<tr class="row-even"><td><p>stream</p></td>
+<td><p>[in]</p></td>
+<td><p>预留参数，忽略。底层使用默认流</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步接口，在指定流上将对称内存中连续的数据从本地处理单元（PE）复制到指定PE的地址上</p>
+<li><p>在指定流上将本地 PE 的连续数据复制到远程 PE 的对称内存地址。调用者需同步流以确保传输完成。当前仅支持 MTE（Memory Transfer Engine）。非阻塞（non-blocking）接口。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">put</span><span class="p">(</span><span class="n">dst</span><span class="p">:</span> <span class="n">Buffer</span><span class="p">,</span> <span class="n">src</span><span class="p">:</span> <span class="n">Buffer</span><span class="p">,</span> <span class="n">remote_pe</span><span class="p">:</span> <span class="nb">int</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>dst</p></td>
-<td><p>远程 PE 上的对称目标缓冲区</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 上目标数据的对称地址</p></td>
 </tr>
 <tr class="row-odd"><td><p>src</p></td>
-<td><p>包含待发送数据的本地源缓冲区</p></td>
+<td><p>[in]</p></td>
+<td><p>本地内存中的源数据地址</p></td>
 </tr>
 <tr class="row-even"><td><p>remote_pe</p></td>
-<td><p>目标处理单元（PE）的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号，默认 -1</p></td>
 </tr>
 <tr class="row-odd"><td><p>stream</p></td>
-<td><p>ACL 流对象</p></td>
+<td><p>[in]</p></td>
+<td><p>ACL 流对象，用于执行排序。传入 <code class="docutils literal notranslate"><span class="pre">0</span></code> 或 <code class="docutils literal notranslate"><span class="pre">None</span></code> 使用默认流</p></td>
+</tr>
+<tr class="row-even"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步接口，在指定流上将对称内存中指定处理单元（PE）上的连续数据复制到本地PE的地址上</p>
+<li><p>在指定流上将远程 PE 对称内存中的连续数据复制到本地缓冲区。调用者需同步流以确保传输完成。当前仅支持 MTE（Memory Transfer Engine）。非阻塞（non-blocking）接口。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="n">dst</span><span class="p">:</span> <span class="n">Buffer</span><span class="p">,</span> <span class="n">src</span><span class="p">:</span> <span class="n">Buffer</span><span class="p">,</span> <span class="n">remote_pe</span><span class="p">:</span> <span class="nb">int</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>dst</p></td>
-<td><p>用于写入数据的本地目标缓冲区</p></td>
+<td><p>[in]</p></td>
+<td><p>本地内存中的目标数据地址</p></td>
 </tr>
 <tr class="row-odd"><td><p>src</p></td>
-<td><p>远程 PE 上的对称源缓冲区</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 上源数据的对称地址</p></td>
 </tr>
 <tr class="row-even"><td><p>remote_pe</p></td>
-<td><p>目标处理单元（PE）的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号，默认 -1</p></td>
 </tr>
 <tr class="row-odd"><td><p>stream</p></td>
-<td><p>ACL 流对象</p></td>
+<td><p>[in]</p></td>
+<td><p>ACL 流对象，用于执行排序。传入 <code class="docutils literal notranslate"><span class="pre">0</span></code> 或 <code class="docutils literal notranslate"><span class="pre">None</span></code> 使用默认流</p></td>
+</tr>
+<tr class="row-even"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步接口，在指定的 PE 上对远程信号变量执行原子操作，该操作在给定的流上执行</p>
+<li><p>在指定的 PE 上对远程信号变量执行原子操作，操作在给定流上执行。调用者需同步流以观察结果。当前仅支持 MTE（Memory Transfer Engine）。非阻塞（non-blocking）接口。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">signal_op</span><span class="p">(</span><span class="n">signal_var</span><span class="p">:</span> <span class="n">Buffer</span><span class="p">,</span> <span class="n">signal_val</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">signal_operation</span><span class="p">:</span> <span class="n">SignalOp</span><span class="p">,</span> <span class="n">remote_pe</span><span class="p">:</span> <span class="nb">int</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>signal_var</p></td>
-<td><p>包含信号变量的对称内存缓冲区</p></td>
+<td><p>[in]</p></td>
+<td><p>目标 PE 可访问的信号变量的本地地址</p></td>
 </tr>
 <tr class="row-odd"><td><p>signal_val</p></td>
-<td><p>用于远程原子信号操作的值</p></td>
+<td><p>[in]</p></td>
+<td><p>用于原子操作的值</p></td>
 </tr>
 <tr class="row-even"><td><p>signal_operation</p></td>
-<td><p>要应用于远程信号变量的原子操作</p></td>
+<td><p>[in]</p></td>
+<td><p>对远程信号执行的操作。支持：<code class="docutils literal notranslate"><span class="pre">SignalOp.SIGNAL_SET</span></code> / <code class="docutils literal notranslate"><span class="pre">SignalOp.SIGNAL_ADD</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>remote_pe</p></td>
-<td><p>远程处理单元（PE）的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>待更新远程信号变量所在的 PE 编号，默认 -1</p></td>
 </tr>
 <tr class="row-even"><td><p>stream</p></td>
-<td><p>ACL 流对象</p></td>
+<td><p>[in]</p></td>
+<td><p>ACL 流对象，用于执行排序。传入 <code class="docutils literal notranslate"><span class="pre">None</span></code> 将引发 <code class="docutils literal notranslate"><span class="pre">AclshmemInvalid</span></code> 异常</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值。若 <code class="docutils literal notranslate"><span class="pre">stream</span></code> 为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 则引发 <code class="docutils literal notranslate"><span class="pre">AclshmemInvalid</span></code></p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步接口，在指定的 PE 上对远程信号变量执行原子比较操作，该操作在给定的流上执行</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">signal_wait</span><span class="p">(</span><span class="n">signal_var</span><span class="p">:</span> <span class="n">Buffer</span><span class="p">,</span> <span class="n">signal_val</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">signal_operation</span><span class="p">:</span> <span class="n">ComparisonType</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<li><p>等待对称信号变量满足指定比较条件。等待操作在给定流上执行，调用在 host 侧立即返回。同步流后，条件 <code class="docutils literal notranslate"><span class="pre">signal_var</span></code> <code class="docutils literal notranslate"><span class="pre">cmp</span></code> <code class="docutils literal notranslate"><span class="pre">signal_val</span></code> 保证为真。当前仅支持 MTE（Memory Transfer Engine）。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">signal_wait</span><span class="p">(</span><span class="n">signal_var</span><span class="p">:</span> <span class="n">Buffer</span><span class="p">,</span> <span class="n">signal_val</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">signal_operation</span><span class="p">:</span> <span class="n">ComparisonType</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>signal_var</p></td>
-<td><p>包含信号变量的对称内存缓冲区</p></td>
+<td><p>[in]</p></td>
+<td><p>源信号变量的本地地址</p></td>
 </tr>
 <tr class="row-odd"><td><p>signal_val</p></td>
-<td><p>用于与 signal_var 所指向的值进行比较的数值</p></td>
+<td><p>[in]</p></td>
+<td><p>与 signal_var 所指向值进行比较的值</p></td>
 </tr>
 <tr class="row-even"><td><p>signal_operation</p></td>
-<td><p>用于比较 signal_var 所指向值与 signal_val 的比较操作符</p></td>
+<td><p>[in]</p></td>
+<td><p>比较操作符。支持：<code class="docutils literal notranslate"><span class="pre">ComparisonType.CMP_EQ</span></code> / <code class="docutils literal notranslate"><span class="pre">CMP_NE</span></code> / <code class="docutils literal notranslate"><span class="pre">CMP_GT</span></code> / <code class="docutils literal notranslate"><span class="pre">CMP_GE</span></code> / <code class="docutils literal notranslate"><span class="pre">CMP_LT</span></code> / <code class="docutils literal notranslate"><span class="pre">CMP_LE</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>stream</p></td>
-<td><p>ACL 流对象</p></td>
+<td><p>[in]</p></td>
+<td><p>ACL 流对象，用于执行排序。传入 <code class="docutils literal notranslate"><span class="pre">None</span></code> 将引发 <code class="docutils literal notranslate"><span class="pre">AclshmemInvalid</span></code> 异常</p></td>
+</tr>
+<tr class="row-even"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值。若 <code class="docutils literal notranslate"><span class="pre">stream</span></code> 为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 则引发 <code class="docutils literal notranslate"><span class="pre">AclshmemInvalid</span></code></p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>获取PE值</p>
+<li><p>确保所有先前发出的对称数据操作在给定流上完成。quiet 操作排入指定流中，调用在 host 侧立即返回；调用者需同步流以观测完成。当前仅支持 MTE（Memory Transfer Engine）。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">quiet</span><span class="p">(</span><span class="n">stream</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
+<th class="head"><p>含义</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>stream</p></td>
+<td><p>[in]</p></td>
+<td><p>执行 quiet 操作的 ACL 流。必须传入有效流，<code class="docutils literal notranslate"><span class="pre">None</span></code> 将引发 <code class="docutils literal notranslate"><span class="pre">AclshmemInvalid</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值。若 <code class="docutils literal notranslate"><span class="pre">stream</span></code> 为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 则引发 <code class="docutils literal notranslate"><span class="pre">AclshmemInvalid</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>获取本地 PE 编号。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">my_pe</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>返回值</p></td>
-<td><p>PE值</p></td>
+<td><p>[out]</p></td>
+<td><p>本地 PE 编号</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>获取在特定team中的PE号码</p>
+<li><p>获取当前进程在指定 team 中的 PE 编号。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">team_my_pe</span><span class="p">(</span><span class="n">team</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>team</p></td>
-<td><p>目标team的id</p></td>
+<td><p>[in]</p></td>
+<td><p>目标 team 的 ID</p></td>
 </tr>
 <tr class="row-odd"><td><p>返回值</p></td>
-<td><p>PE值</p></td>
+<td><p>[out]</p></td>
+<td><p>指定 team 中的 PE 编号，若 team 无效则返回 -1</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>程序中运行的PE数量</p>
+<li><p>获取程序中运行的 PE 总数（world team 维度）。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">n_pes</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>返回值</p></td>
-<td><p>PE数量</p></td>
+<td><p>[out]</p></td>
+<td><p>PE 总数</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>获取特定team中的PE数量</p>
+<li><p>获取指定 team 中的 PE 总数。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">team_n_pes</span><span class="p">(</span><span class="n">team</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>team</p></td>
-<td><p>目标team的id</p></td>
+<td><p>[in]</p></td>
+<td><p>目标 team 的 ID</p></td>
 </tr>
 <tr class="row-odd"><td><p>返回值</p></td>
-<td><p>PE数量</p></td>
+<td><p>[out]</p></td>
+<td><p>指定 team 中的 PE 数目，若 team 无效则返回 -1</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>查询共享内存模块的当前初始化状态</p>
+<li><p>查询共享内存模块的当前初始化状态。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">init_status</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">InitStatus</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>返回值</p></td>
-<td><p>返回初始化状态</p></td>
+<td><p>[out]</p></td>
+<td><p>返回初始化状态枚举值：<code class="docutils literal notranslate"><span class="pre">NOT_INITIALIZED</span></code> / <code class="docutils literal notranslate"><span class="pre">SHM_CREATED</span></code> / <code class="docutils literal notranslate"><span class="pre">INITIALIZED</span></code> / <code class="docutils literal notranslate"><span class="pre">INVALID</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -508,7 +641,7 @@
 <section id="id2">
 <h3>类<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
 <ol class="arabic">
-<li><p>UniqueId类</p>
+<li><p>UniqueId 类 — 用于 UID 初始化的唯一标识符句柄。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">UniqueId</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 </pre></div>
@@ -516,26 +649,31 @@
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>属性</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>version</p></td>
+<td><p>[out]</p></td>
 <td><p>版本信息</p></td>
 </tr>
 <tr class="row-odd"><td><p>my_rank</p></td>
-<td><p>当前进程的pe编号</p></td>
+<td><p>[out]</p></td>
+<td><p>当前进程的 PE 编号</p></td>
 </tr>
 <tr class="row-even"><td><p>n_pes</p></td>
-<td><p>所有进程的pe总数</p></td>
+<td><p>[out]</p></td>
+<td><p>所有进程的 PE 总数</p></td>
 </tr>
 <tr class="row-odd"><td><p>internal</p></td>
-<td><p>uid的内部信息</p></td>
+<td><p>[out]</p></td>
+<td><p>UID 的内部信息（字节）</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>InitStatus枚举类</p>
+<li><p>InitStatus 枚举类 — 共享内存模块的初始化状态。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">InitStatus</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="n">NOT_INITIALIZED</span>
     <span class="n">SHM_CREATED</span>
@@ -543,15 +681,51 @@
     <span class="n">INVALID</span>
 </pre></div>
 </div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>枚举值</p></th>
+<th class="head"><p>含义</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NOT_INITIALIZED</p></td>
+<td><p>未初始化</p></td>
+</tr>
+<tr class="row-odd"><td><p>SHM_CREATED</p></td>
+<td><p>共享内存已创建</p></td>
+</tr>
+<tr class="row-even"><td><p>INITIALIZED</p></td>
+<td><p>初始化完成</p></td>
+</tr>
+<tr class="row-odd"><td><p>INVALID</p></td>
+<td><p>无效状态</p></td>
+</tr>
+</tbody>
+</table>
 </li>
-<li><p>SignalOp枚举类</p>
+<li><p>SignalOp 枚举类 — 信号变量原子操作类型。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SignalOp</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="n">SIGNAL_SET</span>
     <span class="n">SIGNAL_ADD</span>
 </pre></div>
 </div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>枚举值</p></th>
+<th class="head"><p>含义</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SIGNAL_SET</p></td>
+<td><p>原子设置：将给定值写入远程信号</p></td>
+</tr>
+<tr class="row-odd"><td><p>SIGNAL_ADD</p></td>
+<td><p>原子加：将给定值加到远程信号现有值上</p></td>
+</tr>
+</tbody>
+</table>
 </li>
-<li><p>ComparisonType枚举类</p>
+<li><p>ComparisonType 枚举类 — 信号等待比较操作类型。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ComparisonType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="n">CMP_EQ</span>
     <span class="n">CMP_NE</span>
@@ -561,6 +735,33 @@
     <span class="n">CMP_LE</span>
 </pre></div>
 </div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>枚举值</p></th>
+<th class="head"><p>含义</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CMP_EQ</p></td>
+<td><p>等于（==）</p></td>
+</tr>
+<tr class="row-odd"><td><p>CMP_NE</p></td>
+<td><p>不等于（!=）</p></td>
+</tr>
+<tr class="row-even"><td><p>CMP_GT</p></td>
+<td><p>大于（&gt;）</p></td>
+</tr>
+<tr class="row-odd"><td><p>CMP_GE</p></td>
+<td><p>大于等于（&gt;=）</p></td>
+</tr>
+<tr class="row-even"><td><p>CMP_LT</p></td>
+<td><p>小于（&lt;）</p></td>
+</tr>
+<tr class="row-odd"><td><p>CMP_LE</p></td>
+<td><p>小于等于（&lt;=）</p></td>
+</tr>
+</tbody>
+</table>
 </li>
 </ol>
 </section>
@@ -570,1578 +771,2117 @@
 <section id="id3">
 <h3>对外接口<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
 <ol class="arabic">
-<li><p>初始化共享内存模块</p>
+<li><p>初始化共享内存模块。这是一个集合（collective）操作。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_init</span><span class="p">(</span><span class="n">mype</span><span class="p">,</span> <span class="n">npes</span><span class="p">,</span> <span class="n">mem_size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>mype</p></td>
-<td><p>本地处理单元索引，范围在 0 ~ npes 之间</p></td>
+<td><p>[in]</p></td>
+<td><p>本地 PE 索引，范围 0 ~ npes-1</p></td>
 </tr>
 <tr class="row-odd"><td><p>npes</p></td>
-<td><p>处理单元总数</p></td>
+<td><p>[in]</p></td>
+<td><p>PE 总数</p></td>
 </tr>
 <tr class="row-even"><td><p>mem_size</p></td>
-<td><p>每个处理单元的内存大小，以字节为单位</p></td>
+<td><p>[in]</p></td>
+<td><p>每个 PE 分配的内存大小（字节）</p></td>
 </tr>
 <tr class="row-odd"><td><p>返回值</p></td>
-<td><p>成功返回0，其他为错误码</p></td>
+<td><p>[out]</p></td>
+<td><p>成功返回 0，失败返回非零错误码</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>完成共享内存模块</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_finalize</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<li><p>销毁共享内存模块，释放所有资源。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_finalize</span><span class="p">(</span><span class="n">instance_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
+<th class="head"><p>含义</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>instance_id</p></td>
+<td><p>[in]</p></td>
+<td><p>实例 ID，默认 0</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
+</tr>
+</tbody>
+</table>
 </li>
-<li><p>查询共享内存模块的当前初始化状态</p>
+<li><p>查询共享内存模块的当前初始化状态。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmemx_init_status</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">InitStatus</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>返回值</p></td>
-<td><p>返回初始化状态。返回 ACLSHMEM_STATUS_IS_INITIALIZED 表示初始化已完成</p></td>
+<td><p>[out]</p></td>
+<td><p>返回初始化状态枚举值。返回 <code class="docutils literal notranslate"><span class="pre">INITIALIZED</span></code> 表示初始化已完成</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>注册一个Python解密处理程序</p>
+<li><p>设置 TLS 私钥与密码，并注册解密回调函数。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">set_conf_store_tls_key</span><span class="p">(</span><span class="n">tls_pk</span><span class="p">,</span> <span class="n">tls_pk_pw</span><span class="p">,</span> <span class="n">py_decrypt_func</span><span class="p">:</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>tls_pk</p></td>
-<td><p>私钥</p></td>
+<td><p>[in]</p></td>
+<td><p>TLS 私钥内容</p></td>
 </tr>
 <tr class="row-odd"><td><p>tls_pk_pw</p></td>
-<td><p>私钥口令</p></td>
+<td><p>[in]</p></td>
+<td><p>TLS 私钥密码内容</p></td>
 </tr>
 <tr class="row-even"><td><p>py_decrypt_func</p></td>
-<td><p>私钥口令解密函数，一个Python函数，接受 (str cipher_text)，并返回 (str plain_text)</p></td>
+<td><p>[in]</p></td>
+<td><p>解密回调函数，接受 <code class="docutils literal notranslate"><span class="pre">(str</span> <span class="pre">cipher_text)</span></code> 返回 <code class="docutils literal notranslate"><span class="pre">(str</span> <span class="pre">plain_text)</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>返回值</p></td>
-<td><p>成功时返回0,失败时返回错误代码</p></td>
+<td><p>[out]</p></td>
+<td><p>成功返回 0，失败返回非零错误码</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>分配内存</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_malloc</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<li><p>分配对称内存。这是一个集合（collective）操作，内嵌隐式 barrier。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_malloc</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>size</p></td>
-<td><p>分配内存大小</p></td>
+<td><p>[in]</p></td>
+<td><p>分配内存大小（字节）</p></td>
 </tr>
 <tr class="row-odd"><td><p>返回值</p></td>
-<td><p>分配成功返回指向已分配内存的指针；该内存未被成功分配或size为0，则返回NULL</p></td>
+<td><p>[out]</p></td>
+<td><p>成功返回指向已分配内存的指针（int），若 size 为 0 或分配失败返回 0 并引发异常</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>为多个元素分配内存</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_calloc</span><span class="p">(</span><span class="n">nmemb</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<li><p>分配零初始化的对称内存。集合操作，内嵌隐式 barrier。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_calloc</span><span class="p">(</span><span class="n">nmemb</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>nmemb</p></td>
+<td><p>[in]</p></td>
 <td><p>元素数量</p></td>
 </tr>
 <tr class="row-odd"><td><p>size</p></td>
-<td><p>每个元素的大小</p></td>
+<td><p>[in]</p></td>
+<td><p>每个元素的大小（字节）</p></td>
 </tr>
 <tr class="row-even"><td><p>返回值</p></td>
-<td><p>分配成功返回指向已分配内存的指针；该内存未被成功分配或size为0，则返回NULL</p></td>
+<td><p>[out]</p></td>
+<td><p>成功返回指向已分配内存的指针（int），若 nmemb 或 size 为 0 返回 0 并引发异常</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>分配指定对齐方式内存</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_align</span><span class="p">(</span><span class="n">alignment</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<li><p>分配指定对齐方式的对称内存。集合操作，内嵌隐式 barrier。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_align</span><span class="p">(</span><span class="n">alignment</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>alignment</p></td>
-<td><p>所需的内存对齐方式（必须是 2 的幂）</p></td>
+<td><p>[in]</p></td>
+<td><p>内存对齐要求（必须是 2 的幂）</p></td>
 </tr>
 <tr class="row-odd"><td><p>size</p></td>
+<td><p>[in]</p></td>
 <td><p>要分配的字节数</p></td>
 </tr>
 <tr class="row-even"><td><p>返回值</p></td>
-<td><p>分配成功返回指向已分配内存的指针；该内存未被成功分配或size为0，则返回NULL</p></td>
+<td><p>[out]</p></td>
+<td><p>成功返回指向已分配内存的指针（int），若分配失败则引发异常</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>释放被分配的内存空间</p>
+<li><p>释放由对称内存分配函数分配的内存空间。集合操作，内嵌隐式 barrier。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_free</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>ptr</p></td>
-<td><p>要释放的内存</p></td>
+<td><p>[in]</p></td>
+<td><p>要释放的内存指针</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>获取可用于在指定PE上直接引用目标地址的地址</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_ptr</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="n">peer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<li><p>获取指定 PE 上对称地址的远程引用地址，可用于直接访问该 PE 上的数据。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_ptr</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="n">peer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>ptr</p></td>
+<td><p>[in]</p></td>
 <td><p>远程可访问数据的对称地址</p></td>
 </tr>
 <tr class="row-odd"><td><p>peer</p></td>
-<td><p>PE编号</p></td>
+<td><p>[in]</p></td>
+<td><p>PE 编号</p></td>
 </tr>
 <tr class="row-even"><td><p>返回值</p></td>
-<td><p>分配成功返回指向已分配内存的指针；该内存未被成功分配或size为0，则返回NULL</p></td>
+<td><p>[out]</p></td>
+<td><p>成功返回远程对称地址（int），若输入地址非法则返回 0</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>获取PE值</p>
+<li><p>获取 PE 编号（world team 维度）。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">my_pe</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>返回值</p></td>
-<td><p>PE值</p></td>
+<td><p>[out]</p></td>
+<td><p>本地 PE 编号</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>获取在特定团队中的PE号码</p>
+<li><p>获取指定 team 中的 PE 编号。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">team_my_pe</span><span class="p">(</span><span class="n">team_id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>team_id</p></td>
-<td><p>team的句柄</p></td>
+<td><p>[in]</p></td>
+<td><p>team 的句柄</p></td>
 </tr>
 <tr class="row-odd"><td><p>返回值</p></td>
-<td><p>PE值</p></td>
+<td><p>[out]</p></td>
+<td><p>指定 team 中 PE 的编号，出错返回 -1</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>程序中运行的PE数量</p>
+<li><p>获取 PE 总数（world team 维度）。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pe_count</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>返回值</p></td>
-<td><p>PE数量</p></td>
+<td><p>[out]</p></td>
+<td><p>PE 总数</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>获取特定团队中的PE数量</p>
+<li><p>获取指定 team 中的 PE 数量。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">team_n_pes</span><span class="p">(</span><span class="n">team_id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>team_id</p></td>
-<td><p>team的句柄</p></td>
+<td><p>[in]</p></td>
+<td><p>team 的句柄</p></td>
 </tr>
 <tr class="row-odd"><td><p>返回值</p></td>
-<td><p>PE数量</p></td>
+<td><p>[out]</p></td>
+<td><p>指定 team 中 PE 的数量，出错返回 -1</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>从现有的父团队中拆分出一个子团队</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">team_split_strided</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stride</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+<li><p>从现有父 team 中按步长拆分子 team。这是一个集合（collective）操作。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">team_split_strided</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stride</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>parent</p></td>
-<td><p>父团队ID</p></td>
+<td><p>[in]</p></td>
+<td><p>父 team ID</p></td>
 </tr>
 <tr class="row-odd"><td><p>start</p></td>
-<td><p>新团队中PE子集的最低PE编号</p></td>
+<td><p>[in]</p></td>
+<td><p>子 team 的起始 PE 编号</p></td>
 </tr>
 <tr class="row-even"><td><p>stride</p></td>
-<td><p>父团队中团队PE编号之间的步长</p></td>
+<td><p>[in]</p></td>
+<td><p>PE 编号之间的步长</p></td>
 </tr>
 <tr class="row-odd"><td><p>size</p></td>
-<td><p>来自父团队的PE数量</p></td>
+<td><p>[in]</p></td>
+<td><p>子 team 包含的 PE 数量</p></td>
 </tr>
 <tr class="row-even"><td><p>返回值</p></td>
-<td><p>成功返回新团队ID</p></td>
+<td><p>[out]</p></td>
+<td><p>成功返回新 team ID，出错返回 -1</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>集体接口</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">team_split_2d</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">x_range</span><span class="p">)</span>
+<li><p>基于二维笛卡尔空间从父 team 中拆分 team。集合操作。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">team_split_2d</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">x_range</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>parent</p></td>
-<td><p>team句柄</p></td>
+<td><p>[in]</p></td>
+<td><p>父 team 句柄</p></td>
 </tr>
 <tr class="row-odd"><td><p>x_range</p></td>
-<td><p>第一维度中的元素数量</p></td>
+<td><p>[in]</p></td>
+<td><p>第一维度的元素数量</p></td>
 </tr>
 <tr class="row-even"><td><p>返回值</p></td>
-<td><p>成功返回0</p></td>
+<td><p>[out]</p></td>
+<td><p>成功返回 (x_team_id, y_team_id) 元组，失败引发异常</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>获取作为团队创建时传入的team配置</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_team_get_config</span><span class="p">(</span><span class="n">team</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
+<li><p>获取创建 team 时传入的 team 配置。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_team_get_config</span><span class="p">(</span><span class="n">team</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TeamConfig</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>team</p></td>
-<td><p>team id</p></td>
+<td><p>[in]</p></td>
+<td><p>team ID</p></td>
 </tr>
 <tr class="row-odd"><td><p>返回值</p></td>
-<td><p>成功返回0</p></td>
+<td><p>[out]</p></td>
+<td><p>成功返回 <code class="docutils literal notranslate"><span class="pre">TeamConfig</span></code> 对象，失败引发异常</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步接口,将内存中连续的数据从本地处理单元（PE）复制到指定PE的地址上</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_putmem</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
+<li><p>将连续数据从本地 PE 复制到指定 PE 的对称地址。同步（blocking）接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_putmem</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>dst</p></td>
-<td><p>远程PE对称地址上的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 对称地址的指针</p></td>
 </tr>
 <tr class="row-odd"><td><p>src</p></td>
-<td><p>源数据本地内存中的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>本地源数据内存的指针</p></td>
 </tr>
 <tr class="row-even"><td><p>elem_size</p></td>
-<td><p>目标地址和源地址中元素的大小</p></td>
+<td><p>[in]</p></td>
+<td><p>目标地址和源地址中元素的总字节数</p></td>
 </tr>
 <tr class="row-odd"><td><p>pe</p></td>
-<td><p>远程PE的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号</p></td>
+</tr>
+<tr class="row-even"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步接口,将对称内存中指定处理单元（PE）上的连续数据复制到本地PE的地址上。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_getmem</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
+<li><p>将对称内存中指定 PE 上的连续数据复制到本地 PE。同步（blocking）接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_getmem</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>dst</p></td>
-<td><p>指向本地内存的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>本地目标内存的指针</p></td>
 </tr>
 <tr class="row-odd"><td><p>src</p></td>
-<td><p>指向远程处理单元（PE）对称地址的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 对称地址的指针</p></td>
 </tr>
 <tr class="row-even"><td><p>elem_size</p></td>
-<td><p>目标地址和源地址中元素的大小</p></td>
+<td><p>[in]</p></td>
+<td><p>目标地址和源地址中元素的总字节数</p></td>
 </tr>
 <tr class="row-odd"><td><p>pe</p></td>
-<td><p>远程PE的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号</p></td>
+</tr>
+<tr class="row-even"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步接口,将本地内存中的数据按照sst的步距从本地处理单元（PE）复制到指定PE的地址上（按照dst的步距）</p>
+<li><p>将本地内存中按 sst 步距排列的数据复制到指定 PE 对称内存的 dst 步距位置。同步（blocking）接口。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_iput</span><span class="p">(</span><span class="n">dest</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">sst</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>TYPE</p></td>
-<td><p>数据类型，可选float/double/int8/int16/int32/int64/uint8/uint16/uint32/uint64/char</p></td>
+<td><p>-</p></td>
+<td><p>数据类型：<code class="docutils literal notranslate"><span class="pre">float</span></code> / <code class="docutils literal notranslate"><span class="pre">double</span></code> / <code class="docutils literal notranslate"><span class="pre">int8</span></code> / <code class="docutils literal notranslate"><span class="pre">int16</span></code> / <code class="docutils literal notranslate"><span class="pre">int32</span></code> / <code class="docutils literal notranslate"><span class="pre">int64</span></code> / <code class="docutils literal notranslate"><span class="pre">uint8</span></code> / <code class="docutils literal notranslate"><span class="pre">uint16</span></code> / <code class="docutils literal notranslate"><span class="pre">uint32</span></code> / <code class="docutils literal notranslate"><span class="pre">uint64</span></code> / <code class="docutils literal notranslate"><span class="pre">char</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>dest</p></td>
-<td><p>指向远程目标（PE）数据的对称内存的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>远程目标数据的对称内存指针</p></td>
 </tr>
 <tr class="row-even"><td><p>source</p></td>
-<td><p>源数据所在本地设备的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>本地源数据的指针</p></td>
 </tr>
 <tr class="row-odd"><td><p>dst</p></td>
+<td><p>[in]</p></td>
 <td><p>目标地址中连续元素之间的步长</p></td>
 </tr>
 <tr class="row-even"><td><p>sst</p></td>
+<td><p>[in]</p></td>
 <td><p>源地址中连续元素之间的步长</p></td>
 </tr>
 <tr class="row-odd"><td><p>nelems</p></td>
+<td><p>[in]</p></td>
 <td><p>连续元素块的个数</p></td>
 </tr>
 <tr class="row-even"><td><p>pe</p></td>
-<td><p>远程PE的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步接口,将对称内存中指定处理单元（PE）上的数据按照sst的步距复制到本地PE的地址上（按照dst的步距）</p>
+<li><p>将远程 PE 对称内存中按 sst 步距排列的数据复制到本地 dst 步距位置。同步（blocking）接口。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_iget</span><span class="p">(</span><span class="n">dest</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">sst</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>TYPE</p></td>
-<td><p>数据类型，可选float/double/int8/int16/int32/int64/uint8/uint16/uint32/uint64/char</p></td>
+<td><p>-</p></td>
+<td><p>数据类型：<code class="docutils literal notranslate"><span class="pre">float</span></code> / <code class="docutils literal notranslate"><span class="pre">double</span></code> / <code class="docutils literal notranslate"><span class="pre">int8</span></code> / <code class="docutils literal notranslate"><span class="pre">int16</span></code> / <code class="docutils literal notranslate"><span class="pre">int32</span></code> / <code class="docutils literal notranslate"><span class="pre">int64</span></code> / <code class="docutils literal notranslate"><span class="pre">uint8</span></code> / <code class="docutils literal notranslate"><span class="pre">uint16</span></code> / <code class="docutils literal notranslate"><span class="pre">uint32</span></code> / <code class="docutils literal notranslate"><span class="pre">uint64</span></code> / <code class="docutils literal notranslate"><span class="pre">char</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>dest</p></td>
-<td><p>目的数据所在本地设备的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>本地目标数据的指针</p></td>
 </tr>
 <tr class="row-even"><td><p>source</p></td>
-<td><p>指向远程源数据的对称内存的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>远程源数据的对称内存指针</p></td>
 </tr>
 <tr class="row-odd"><td><p>dst</p></td>
+<td><p>[in]</p></td>
 <td><p>目标地址中连续元素之间的步长</p></td>
 </tr>
 <tr class="row-even"><td><p>sst</p></td>
+<td><p>[in]</p></td>
 <td><p>源地址中连续元素之间的步长</p></td>
 </tr>
 <tr class="row-odd"><td><p>nelems</p></td>
+<td><p>[in]</p></td>
 <td><p>连续元素块的个数</p></td>
 </tr>
 <tr class="row-even"><td><p>pe</p></td>
-<td><p>远程PE的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步接口,将本地内存中连续的数据从本地处理单元（PE）复制到指定PE的对称内存地址上</p>
+<li><p>将连续数据从本地 PE 复制到指定 PE 的对称内存地址。同步（blocking）接口。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_put</span><span class="p">{</span><span class="n">BITS</span><span class="p">}(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>BITS</p></td>
-<td><p>数据位宽，可选8/16/32/64/128</p></td>
+<td><p>-</p></td>
+<td><p>数据位宽：<code class="docutils literal notranslate"><span class="pre">8</span></code> / <code class="docutils literal notranslate"><span class="pre">16</span></code> / <code class="docutils literal notranslate"><span class="pre">32</span></code> / <code class="docutils literal notranslate"><span class="pre">64</span></code> / <code class="docutils literal notranslate"><span class="pre">128</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>dst</p></td>
-<td><p>远程PE对称地址上的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 对称地址的指针</p></td>
 </tr>
 <tr class="row-even"><td><p>src</p></td>
-<td><p>源数据本地内存中的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>本地源数据内存的指针</p></td>
 </tr>
 <tr class="row-odd"><td><p>elem_size</p></td>
-<td><p>目标地址和源地址中元素的大小</p></td>
+<td><p>[in]</p></td>
+<td><p>目标地址和源地址中元素的总字节数</p></td>
 </tr>
 <tr class="row-even"><td><p>pe</p></td>
-<td><p>远程PE的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步接口,将对称内存中指定处理单元（PE）上的连续数据复制到本地PE的地址上。</p>
+<li><p>将对称内存中指定 PE 上的连续数据复制到本地 PE。同步（blocking）接口。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_get</span><span class="p">{</span><span class="n">BITS</span><span class="p">}(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>BITS</p></td>
-<td><p>数据位宽，可选8/16/32/64/128</p></td>
+<td><p>-</p></td>
+<td><p>数据位宽：<code class="docutils literal notranslate"><span class="pre">8</span></code> / <code class="docutils literal notranslate"><span class="pre">16</span></code> / <code class="docutils literal notranslate"><span class="pre">32</span></code> / <code class="docutils literal notranslate"><span class="pre">64</span></code> / <code class="docutils literal notranslate"><span class="pre">128</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>dst</p></td>
-<td><p>指向本地处理单元（PE）内存的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>本地目标内存的指针</p></td>
 </tr>
 <tr class="row-even"><td><p>src</p></td>
-<td><p>指向远程处理单元（PE）对称地址的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 对称地址的指针</p></td>
 </tr>
 <tr class="row-odd"><td><p>elem_size</p></td>
-<td><p>目标地址和源地址中元素的大小</p></td>
+<td><p>[in]</p></td>
+<td><p>目标地址和源地址中元素的总字节数</p></td>
 </tr>
 <tr class="row-even"><td><p>pe</p></td>
-<td><p>远程PE的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步接口,将对称内存中的数据按照sst的步距从本地处理单元（PE）复制到指定PE对称内存的地址上（按照dst的步距）</p>
+<li><p>将本地内存中按 sst 步距排列的数据复制到指定 PE 的 dst 步距位置（位宽版本）。同步（blocking）接口。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_iput</span><span class="p">{</span><span class="n">BITS</span><span class="p">}(</span><span class="n">dest</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">sst</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>BITS</p></td>
-<td><p>数据位宽，可选8/16/32/64/128</p></td>
+<td><p>-</p></td>
+<td><p>数据位宽：<code class="docutils literal notranslate"><span class="pre">8</span></code> / <code class="docutils literal notranslate"><span class="pre">16</span></code> / <code class="docutils literal notranslate"><span class="pre">32</span></code> / <code class="docutils literal notranslate"><span class="pre">64</span></code> / <code class="docutils literal notranslate"><span class="pre">128</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>dest</p></td>
-<td><p>指向远程目标数据的对称内存的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>远程目标数据的对称内存指针</p></td>
 </tr>
 <tr class="row-even"><td><p>source</p></td>
-<td><p>源数据所在本地设备的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>本地源数据的指针</p></td>
 </tr>
 <tr class="row-odd"><td><p>dst</p></td>
+<td><p>[in]</p></td>
 <td><p>目标地址中连续元素之间的步长</p></td>
 </tr>
 <tr class="row-even"><td><p>sst</p></td>
+<td><p>[in]</p></td>
 <td><p>源地址中连续元素之间的步长</p></td>
 </tr>
 <tr class="row-odd"><td><p>nelems</p></td>
+<td><p>[in]</p></td>
 <td><p>连续元素块的个数</p></td>
 </tr>
 <tr class="row-even"><td><p>pe</p></td>
-<td><p>远程PE的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步接口,将对称内存中指定处理单元（PE）上的数据按照sst的步距复制到本地PE的地址上（按照dst的步距）</p>
+<li><p>将远程 PE 对称内存中按 sst 步距排列的数据复制到本地 dst 步距位置（位宽版本）。同步（blocking）接口。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_iget</span><span class="p">{</span><span class="n">BITS</span><span class="p">}(</span><span class="n">dest</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">sst</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>BITS</p></td>
-<td><p>数据位宽，可选8/16/32/64/128</p></td>
+<td><p>-</p></td>
+<td><p>数据位宽：<code class="docutils literal notranslate"><span class="pre">8</span></code> / <code class="docutils literal notranslate"><span class="pre">16</span></code> / <code class="docutils literal notranslate"><span class="pre">32</span></code> / <code class="docutils literal notranslate"><span class="pre">64</span></code> / <code class="docutils literal notranslate"><span class="pre">128</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>dest</p></td>
-<td><p>目的数据所在本地设备的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>本地目标数据的指针</p></td>
 </tr>
 <tr class="row-even"><td><p>source</p></td>
-<td><p>指向远程源数据的对称内存的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>远程源数据的对称内存指针</p></td>
 </tr>
 <tr class="row-odd"><td><p>dst</p></td>
+<td><p>[in]</p></td>
 <td><p>目标地址中连续元素之间的步长</p></td>
 </tr>
 <tr class="row-even"><td><p>sst</p></td>
+<td><p>[in]</p></td>
 <td><p>源地址中连续元素之间的步长</p></td>
 </tr>
 <tr class="row-odd"><td><p>nelems</p></td>
+<td><p>[in]</p></td>
 <td><p>连续元素块的个数</p></td>
 </tr>
 <tr class="row-even"><td><p>pe</p></td>
-<td><p>远程PE的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>返回主版本号和次版本号</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_info_get_version</span><span class="p">()</span>
+<li><p>返回库的主版本号和次版本号。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_info_get_version</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">tuple</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>返回值</p></td>
-<td><p>返回主版本号和次版本号</p></td>
+<td><p>[out]</p></td>
+<td><p>返回 (major, minor) 元组</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>返回供应商定义的名称字符串</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_info_get_name</span><span class="p">()</span>
+<li><p>返回供应商定义的名称字符串。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_info_get_name</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>返回值</p></td>
-<td><p>返回供应商定义的名称字符串</p></td>
+<td><p>[out]</p></td>
+<td><p>供应商定义的名称字符串</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>将一个团队中的给定PE编号转换为另一个团队中的对应PE编号参数</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">team_translate_pe</span><span class="p">(</span><span class="n">src_team</span><span class="p">,</span> <span class="n">src_pe</span><span class="p">,</span> <span class="n">dest_team</span><span class="p">)</span>
+<li><p>将一个 team 中的给定 PE 编号转换为另一个 team 中的对应 PE 编号。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">team_translate_pe</span><span class="p">(</span><span class="n">src_team</span><span class="p">,</span> <span class="n">src_pe</span><span class="p">,</span> <span class="n">dest_team</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>src_team</p></td>
-<td><p>源团队ID</p></td>
+<td><p>[in]</p></td>
+<td><p>源 team ID</p></td>
 </tr>
 <tr class="row-odd"><td><p>src_pe</p></td>
-<td><p>源PE编号</p></td>
+<td><p>[in]</p></td>
+<td><p>源 PE 编号</p></td>
 </tr>
 <tr class="row-even"><td><p>dest_team</p></td>
-<td><p>目标团队ID</p></td>
+<td><p>[in]</p></td>
+<td><p>目标 team ID</p></td>
 </tr>
 <tr class="row-odd"><td><p>返回值</p></td>
-<td><p>成功时，返回目标团队中指定PE的编号。出错时，返回-1</p></td>
+<td><p>[out]</p></td>
+<td><p>成功返回目标 team 中对应的 PE 编号，出错返回 -1</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>销毁一个team</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">team_destroy</span><span class="p">(</span><span class="n">team</span><span class="p">)</span>
+<li><p>销毁一个 team。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">team_destroy</span><span class="p">(</span><span class="n">team</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>team</p></td>
-<td><p>team ID</p></td>
+<td><p>[in]</p></td>
+<td><p>要销毁的 team ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>获取运行时FFT配置</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_ffts_config</span><span class="p">()</span>
-</pre></div>
-</div>
-</li>
-<li><p>异步接口,将本地处理单元（PE）上的连续数据复制到指定处理单元（PE）上的对称地址</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_putmem_nbi</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
-</pre></div>
-</div>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
-<th class="head"><p>含义</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>dst</p></td>
-<td><p>远程PE对称地址上的指针</p></td>
-</tr>
-<tr class="row-odd"><td><p>src</p></td>
-<td><p>源数据本地内存中的指针</p></td>
-</tr>
-<tr class="row-even"><td><p>elem_size</p></td>
-<td><p>目标地址和源地址中元素的大小</p></td>
-</tr>
-<tr class="row-odd"><td><p>pe</p></td>
-<td><p>远程PE的编号</p></td>
-</tr>
-</tbody>
-</table>
-</li>
-<li><p>异步接口,将对称内存中指定处理单元（PE）上的连续数据复制到本地PE的地址上</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_getmem_nbi</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
+<li><p>获取运行时 FFTS 配置。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_ffts_config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
+<th class="head"><p>含义</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>返回值</p></td>
+<td><p>[out]</p></td>
+<td><p>FFTS 配置字符串</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>将本地 PE 上的连续数据复制到指定 PE 的对称地址。异步（non-blocking）接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_putmem_nbi</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>dst</p></td>
-<td><p>指向本地处理单元（PE）内存的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 对称地址的指针</p></td>
 </tr>
 <tr class="row-odd"><td><p>src</p></td>
-<td><p>指向远程处理单元（PE）对称地址的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>本地源数据内存的指针</p></td>
 </tr>
 <tr class="row-even"><td><p>elem_size</p></td>
-<td><p>目标地址和源地址中元素的大小</p></td>
+<td><p>[in]</p></td>
+<td><p>目标地址和源地址中元素的总字节数</p></td>
 </tr>
 <tr class="row-odd"><td><p>pe</p></td>
-<td><p>远程PE的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号</p></td>
+</tr>
+<tr class="row-even"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>异步接口,将本地处理单元（PE）上的连续数据复制到指定处理单元（PE）上的对称地址</p>
+<li><p>将对称内存中指定 PE 上的连续数据复制到本地 PE。异步（non-blocking）接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_getmem_nbi</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
+<th class="head"><p>含义</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>dst</p></td>
+<td><p>[in]</p></td>
+<td><p>本地目标内存的指针</p></td>
+</tr>
+<tr class="row-odd"><td><p>src</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 对称地址的指针</p></td>
+</tr>
+<tr class="row-even"><td><p>elem_size</p></td>
+<td><p>[in]</p></td>
+<td><p>目标地址和源地址中元素的总字节数</p></td>
+</tr>
+<tr class="row-odd"><td><p>pe</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号</p></td>
+</tr>
+<tr class="row-even"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>将连续数据从本地 PE 复制到指定 PE 的对称内存地址（位宽版本）。异步（non-blocking）接口。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_put</span><span class="p">{</span><span class="n">BITS</span><span class="p">}</span><span class="n">_nbi</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>BITS</p></td>
-<td><p>数据位宽，可选8/16/32/64/128</p></td>
+<td><p>-</p></td>
+<td><p>数据位宽：<code class="docutils literal notranslate"><span class="pre">8</span></code> / <code class="docutils literal notranslate"><span class="pre">16</span></code> / <code class="docutils literal notranslate"><span class="pre">32</span></code> / <code class="docutils literal notranslate"><span class="pre">64</span></code> / <code class="docutils literal notranslate"><span class="pre">128</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>dst</p></td>
-<td><p>远程PE对称地址上的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 对称地址的指针</p></td>
 </tr>
 <tr class="row-even"><td><p>src</p></td>
-<td><p>源数据本地内存中的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>本地源数据内存的指针</p></td>
 </tr>
 <tr class="row-odd"><td><p>elem_size</p></td>
-<td><p>目标地址和源地址中元素的大小</p></td>
+<td><p>[in]</p></td>
+<td><p>目标地址和源地址中元素的总字节数</p></td>
 </tr>
 <tr class="row-even"><td><p>pe</p></td>
-<td><p>远程PE的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>异步接口,将对称内存中指定处理单元（PE）上的连续数据复制到本地PE的地址上</p>
+<li><p>将对称内存中指定 PE 上的连续数据复制到本地 PE（位宽版本）。异步（non-blocking）接口。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_get</span><span class="p">{</span><span class="n">BITS</span><span class="p">}</span><span class="n">_nbi</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>BITS</p></td>
-<td><p>数据位宽，可选8/16/32/64/128</p></td>
+<td><p>-</p></td>
+<td><p>数据位宽：<code class="docutils literal notranslate"><span class="pre">8</span></code> / <code class="docutils literal notranslate"><span class="pre">16</span></code> / <code class="docutils literal notranslate"><span class="pre">32</span></code> / <code class="docutils literal notranslate"><span class="pre">64</span></code> / <code class="docutils literal notranslate"><span class="pre">128</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>dst</p></td>
-<td><p>指向本地处理单元（PE）内存的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>本地目标内存的指针</p></td>
 </tr>
 <tr class="row-even"><td><p>src</p></td>
-<td><p>指向远程处理单元（PE）对称地址的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 对称地址的指针</p></td>
 </tr>
 <tr class="row-odd"><td><p>elem_size</p></td>
-<td><p>目标地址和源地址中元素的大小</p></td>
+<td><p>[in]</p></td>
+<td><p>目标地址和源地址中元素的总字节数</p></td>
 </tr>
 <tr class="row-even"><td><p>pe</p></td>
-<td><p>远程PE的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>异步接口,从本地PE复制对称内存中的连续数据到指定的PE地址</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmemx_putmem_signal_nbi</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">sig</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">sig_op</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
+<li><p>从本地 PE 复制连续数据到指定 PE 的对称地址，并在完成后更新远程信号变量。异步（non-blocking）接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmemx_putmem_signal_nbi</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">sig</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">sig_op</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>dst</p></td>
-<td><p>指向远程处理单元（PE）对称地址的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 对称地址的指针</p></td>
 </tr>
 <tr class="row-odd"><td><p>src</p></td>
-<td><p>指向源数据本地内存的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>本地源数据内存的指针</p></td>
 </tr>
 <tr class="row-even"><td><p>elem_size</p></td>
-<td><p>目标地址和源地址中元素的大小</p></td>
+<td><p>[in]</p></td>
+<td><p>目标地址和源地址中元素的总字节数</p></td>
 </tr>
 <tr class="row-odd"><td><p>sig</p></td>
-<td><p>要更新的信号字的对称地址</p></td>
+<td><p>[in]</p></td>
+<td><p>待更新信号字的对称地址</p></td>
 </tr>
 <tr class="row-even"><td><p>signal</p></td>
-<td><p>用于更新sig_addr的值</p></td>
+<td><p>[in]</p></td>
+<td><p>用于更新信号的值</p></td>
 </tr>
 <tr class="row-odd"><td><p>sig_op</p></td>
-<td><p>用于signal更新sig_addr的操作</p></td>
+<td><p>[in]</p></td>
+<td><p>信号更新操作。支持：<code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_SET</span></code> / <code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_ADD</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p>pe</p></td>
-<td><p>远程PE的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步接口,从本地PE复制对称内存中的连续数据到指定的PE地址</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmemx_putmem_signal</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">sig</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">sig_op</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
+<li><p>从本地 PE 复制连续数据到指定 PE 的对称地址，并更新远程信号变量。同步（blocking）接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmemx_putmem_signal</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">sig</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">sig_op</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>dst</p></td>
-<td><p>指向远程处理单元（PE）对称地址的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 对称地址的指针</p></td>
 </tr>
 <tr class="row-odd"><td><p>src</p></td>
-<td><p>指向源数据本地内存的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>本地源数据内存的指针</p></td>
 </tr>
 <tr class="row-even"><td><p>elem_size</p></td>
-<td><p>目标地址和源地址中元素的大小</p></td>
+<td><p>[in]</p></td>
+<td><p>目标地址和源地址中元素的总字节数</p></td>
 </tr>
 <tr class="row-odd"><td><p>sig</p></td>
-<td><p>要更新的信号字的对称地址</p></td>
+<td><p>[in]</p></td>
+<td><p>待更新信号字的对称地址</p></td>
 </tr>
 <tr class="row-even"><td><p>signal</p></td>
-<td><p>用于更新sig_addr的值</p></td>
+<td><p>[in]</p></td>
+<td><p>用于更新信号的值</p></td>
 </tr>
 <tr class="row-odd"><td><p>sig_op</p></td>
-<td><p>用于signal更新sig_addr的操作</p></td>
+<td><p>[in]</p></td>
+<td><p>信号更新操作。支持：<code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_SET</span></code> / <code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_ADD</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p>pe</p></td>
-<td><p>远程PE的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>异步接口,从本地PE复制内存中的连续数据到指定的PE对称内存的地址</p>
+<li><p>从本地 PE 复制连续数据到指定 PE 对称地址并更新远程信号（位宽版本）。异步（non-blocking）接口。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmemx_put</span><span class="p">{</span><span class="n">BITS</span><span class="p">}</span><span class="n">_signal_nbi</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">sig</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">sig_op</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>BITS</p></td>
-<td><p>数据位宽，可选8/16/32/64/128</p></td>
+<td><p>-</p></td>
+<td><p>数据位宽：<code class="docutils literal notranslate"><span class="pre">8</span></code> / <code class="docutils literal notranslate"><span class="pre">16</span></code> / <code class="docutils literal notranslate"><span class="pre">32</span></code> / <code class="docutils literal notranslate"><span class="pre">64</span></code> / <code class="docutils literal notranslate"><span class="pre">128</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>dst</p></td>
-<td><p>指向远程处理单元（PE）对称地址的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 对称地址的指针</p></td>
 </tr>
 <tr class="row-even"><td><p>src</p></td>
-<td><p>指向源数据本地内存的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>本地源数据内存的指针</p></td>
 </tr>
 <tr class="row-odd"><td><p>elem_size</p></td>
-<td><p>目标地址和源地址中元素的大小</p></td>
+<td><p>[in]</p></td>
+<td><p>目标地址和源地址中元素的总字节数</p></td>
 </tr>
 <tr class="row-even"><td><p>sig</p></td>
-<td><p>要更新的信号字的对称地址</p></td>
+<td><p>[in]</p></td>
+<td><p>待更新信号字的对称地址</p></td>
 </tr>
 <tr class="row-odd"><td><p>signal</p></td>
-<td><p>用于更新sig_addr的值</p></td>
+<td><p>[in]</p></td>
+<td><p>用于更新信号的值</p></td>
 </tr>
 <tr class="row-even"><td><p>sig_op</p></td>
-<td><p>用于signal更新sig_addr的操作</p></td>
+<td><p>[in]</p></td>
+<td><p>信号更新操作。支持：<code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_SET</span></code> / <code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_ADD</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>pe</p></td>
-<td><p>远程PE的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号</p></td>
+</tr>
+<tr class="row-even"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步接口,从本地PE复制对称内存中的连续数据到指定的PE对称内存的地址</p>
+<li><p>从本地 PE 复制连续数据到指定 PE 对称地址并更新远程信号（位宽版本）。同步（blocking）接口。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmemx_put</span><span class="p">{</span><span class="n">BITS</span><span class="p">}</span><span class="n">_signal</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">sig</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">sig_op</span><span class="p">,</span> <span class="n">pe</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>BITS</p></td>
-<td><p>数据位宽，可选8/16/32/64/128</p></td>
+<td><p>-</p></td>
+<td><p>数据位宽：<code class="docutils literal notranslate"><span class="pre">8</span></code> / <code class="docutils literal notranslate"><span class="pre">16</span></code> / <code class="docutils literal notranslate"><span class="pre">32</span></code> / <code class="docutils literal notranslate"><span class="pre">64</span></code> / <code class="docutils literal notranslate"><span class="pre">128</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>dst</p></td>
-<td><p>指向远程处理单元（PE）对称地址的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 对称地址的指针</p></td>
 </tr>
 <tr class="row-even"><td><p>src</p></td>
-<td><p>指向源数据本地内存的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>本地源数据内存的指针</p></td>
 </tr>
 <tr class="row-odd"><td><p>elem_size</p></td>
-<td><p>目标地址和源地址中元素的大小</p></td>
+<td><p>[in]</p></td>
+<td><p>目标地址和源地址中元素的总字节数</p></td>
 </tr>
 <tr class="row-even"><td><p>sig</p></td>
-<td><p>要更新的信号字的对称地址</p></td>
+<td><p>[in]</p></td>
+<td><p>待更新信号字的对称地址</p></td>
 </tr>
 <tr class="row-odd"><td><p>signal</p></td>
-<td><p>用于更新sig_addr的值</p></td>
+<td><p>[in]</p></td>
+<td><p>用于更新信号的值</p></td>
 </tr>
 <tr class="row-even"><td><p>sig_op</p></td>
-<td><p>用于signal更新sig_addr的操作</p></td>
+<td><p>[in]</p></td>
+<td><p>信号更新操作。支持：<code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_SET</span></code> / <code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_ADD</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>pe</p></td>
-<td><p>远程PE的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号</p></td>
+</tr>
+<tr class="row-even"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>所有进程通过广播调用exit()函数退出</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_global_exit</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>
+<li><p>所有 PE 通过广播调用 exit() 退出进程。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_global_exit</span><span class="p">(</span><span class="n">status</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>status</p></td>
-<td><p>传递给exit()函数的状态值</p></td>
+<td><p>[in]</p></td>
+<td><p>传递给 exit() 的状态值</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>获取团队中的PE编号，即PE的索引</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">my_pe</span><span class="p">(</span><span class="n">team</span><span class="p">)</span>
+<li><p>确保所有先前发出的对称数据操作在默认流上完成。quiet 操作排入默认流中，调用在 host 侧立即返回；调用者需同步默认流以观测完成。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_quiet</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
+<th class="head"><p>含义</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>获取指定 team 中的 PE 编号。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">my_pe</span><span class="p">(</span><span class="n">team</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>team</p></td>
-<td><p>team id</p></td>
+<td><p>[in]</p></td>
+<td><p>team ID</p></td>
 </tr>
 <tr class="row-odd"><td><p>返回值</p></td>
-<td><p>返回指定团队中PE的编号，出错时，返回-1</p></td>
+<td><p>[out]</p></td>
+<td><p>指定 team 中 PE 的编号，出错返回 -1</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>获取指定团队中的PE数量</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pe_count</span><span class="p">(</span><span class="n">team</span><span class="p">)</span>
+<li><p>获取指定 team 中的 PE 数量。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pe_count</span><span class="p">(</span><span class="n">team</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>team</p></td>
-<td><p>team id</p></td>
+<td><p>[in]</p></td>
+<td><p>team ID</p></td>
 </tr>
 <tr class="row-odd"><td><p>返回值</p></td>
-<td><p>返回指定团队中PE的数目，出错时，返回-1</p></td>
+<td><p>[out]</p></td>
+<td><p>指定 team 中 PE 的数目，出错返回 -1</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>阻塞式同步原语，用于等待指定 PE 上的信号变量（sig_addr）满足指定比较条件（如等于、大于等）时返回</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_signal_wait_until</span><span class="p">(</span><span class="n">sig_addr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_val</span><span class="p">)</span>
+<li><p>等待信号变量满足比较条件（<code class="docutils literal notranslate"><span class="pre">*sig_addr</span> <span class="pre">cmp</span> <span class="pre">cmp_val</span></code>）时返回。阻塞（blocking）接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_signal_wait_until</span><span class="p">(</span><span class="n">sig_addr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_val</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>sig_addr</p></td>
-<td><p>指向对称内存中一个信号变量的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>源信号变量的本地地址</p></td>
 </tr>
 <tr class="row-odd"><td><p>cmp</p></td>
-<td><p>比较类型</p></td>
+<td><p>[in]</p></td>
+<td><p>比较操作符。支持：<code class="docutils literal notranslate"><span class="pre">CMP_EQ</span></code> / <code class="docutils literal notranslate"><span class="pre">CMP_NE</span></code> / <code class="docutils literal notranslate"><span class="pre">CMP_GT</span></code> / <code class="docutils literal notranslate"><span class="pre">CMP_GE</span></code> / <code class="docutils literal notranslate"><span class="pre">CMP_LT</span></code> / <code class="docutils literal notranslate"><span class="pre">CMP_LE</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p>cmp_val</p></td>
+<td><p>[in]</p></td>
 <td><p>比较值</p></td>
 </tr>
 <tr class="row-odd"><td><p>返回值</p></td>
-<td><p>返回满足比较条件时sig_addr的值</p></td>
+<td><p>[out]</p></td>
+<td><p>满足条件时 <code class="docutils literal notranslate"><span class="pre">sig_addr</span></code> 的值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>阻塞式同步原语，用于等待指定 PE 上的信号变量（ivar）满足指定比较条件（如等于、大于等）时返回</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_wait_until</span><span class="p">(</span><span class="n">ivar</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_val</span><span class="p">)</span>
+<li><p>等待单个元素满足比较条件 <code class="docutils literal notranslate"><span class="pre">ivar</span> <span class="pre">cmp</span> <span class="pre">cmp_val</span></code> 后返回（类型化版本）。阻塞（blocking）接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_wait_until</span><span class="p">(</span><span class="n">ivar</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_val</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>TYPE</p></td>
-<td><p>数据类型，可选float/int8/int16/int32/int64/uint8/uint16/uint32/uint64/char</p></td>
+<td><p>-</p></td>
+<td><p>数据类型：<code class="docutils literal notranslate"><span class="pre">float</span></code> / <code class="docutils literal notranslate"><span class="pre">int8</span></code> / <code class="docutils literal notranslate"><span class="pre">int16</span></code> / <code class="docutils literal notranslate"><span class="pre">int32</span></code> / <code class="docutils literal notranslate"><span class="pre">int64</span></code> / <code class="docutils literal notranslate"><span class="pre">uint8</span></code> / <code class="docutils literal notranslate"><span class="pre">uint16</span></code> / <code class="docutils literal notranslate"><span class="pre">uint32</span></code> / <code class="docutils literal notranslate"><span class="pre">uint64</span></code> / <code class="docutils literal notranslate"><span class="pre">char</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>ivar</p></td>
-<td><p>指向对称内存中一个信号变量的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>对称内存中信号变量的指针</p></td>
 </tr>
 <tr class="row-even"><td><p>cmp</p></td>
-<td><p>比较类型</p></td>
+<td><p>[in]</p></td>
+<td><p>比较操作符</p></td>
 </tr>
 <tr class="row-odd"><td><p>cmp_val</p></td>
+<td><p>[in]</p></td>
 <td><p>比较值</p></td>
+</tr>
+<tr class="row-even"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>阻塞式同步原语，用于等待指定 PE 上的信号变量（ivar）不等于给定比较值cmp_value时返回</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_wait</span><span class="p">(</span><span class="n">ivar</span><span class="p">,</span> <span class="n">cmp_val</span><span class="p">)</span>
+<li><p>等待信号变量不等于给定值时返回。阻塞（blocking）接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_wait</span><span class="p">(</span><span class="n">ivar</span><span class="p">,</span> <span class="n">cmp_val</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
-<th class="head"><p>含义</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>ivar</p></td>
-<td><p>指向对称内存中一个信号变量的指针</p></td>
-</tr>
-<tr class="row-odd"><td><p>cmp_val</p></td>
-<td><p>比较值</p></td>
-</tr>
-</tbody>
-</table>
-</li>
-<li><p>阻塞式同步原语，用于等待指定 PE 上一组变量（ivars）均满足给定的比较条件（ivars[i] cmp cmp_value）时返回</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_wait_until_all</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_val</span><span class="p">)</span>
-</pre></div>
-</div>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>TYPE</p></td>
-<td><p>数据类型，可选float/int8/int16/int32/int64/uint8/uint16/uint32/uint64/char</p></td>
+<td><p>-</p></td>
+<td><p>数据类型：<code class="docutils literal notranslate"><span class="pre">float</span></code> / <code class="docutils literal notranslate"><span class="pre">int8</span></code> / <code class="docutils literal notranslate"><span class="pre">int16</span></code> / <code class="docutils literal notranslate"><span class="pre">int32</span></code> / <code class="docutils literal notranslate"><span class="pre">int64</span></code> / <code class="docutils literal notranslate"><span class="pre">uint8</span></code> / <code class="docutils literal notranslate"><span class="pre">uint16</span></code> / <code class="docutils literal notranslate"><span class="pre">uint32</span></code> / <code class="docutils literal notranslate"><span class="pre">uint64</span></code> / <code class="docutils literal notranslate"><span class="pre">char</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>ivars_ptr</p></td>
-<td><p>指向对称内存中长度为 nelems 的数组</p></td>
-</tr>
-<tr class="row-even"><td><p>nelems</p></td>
-<td><p>数组元素个数</p></td>
-</tr>
-<tr class="row-odd"><td><p>status_ptr</p></td>
-<td><p>可选本地掩码数组</p></td>
-</tr>
-<tr class="row-even"><td><p>cmp</p></td>
-<td><p>比较类型</p></td>
-</tr>
-<tr class="row-odd"><td><p>cmp_val</p></td>
-<td><p>比较值</p></td>
-</tr>
-</tbody>
-</table>
-</li>
-<li><p>阻塞式同步原语，用于等待指定 PE 上一组变量（ivars）中至少有一个变量满足给定的比较条件（ivars[i] cmp cmp_value）时返回</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_wait_until_any</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_val</span><span class="p">,</span> <span class="n">res_out_ptr</span><span class="p">)</span>
-</pre></div>
-</div>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
-<th class="head"><p>含义</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>TYPE</p></td>
-<td><p>数据类型，可选float/int8/int16/int32/int64/uint8/uint16/uint32/uint64/char</p></td>
-</tr>
-<tr class="row-odd"><td><p>ivars_ptr</p></td>
-<td><p>指向对称内存中长度为 nelems 的数组</p></td>
-</tr>
-<tr class="row-even"><td><p>nelems</p></td>
-<td><p>数组元素个数</p></td>
-</tr>
-<tr class="row-odd"><td><p>status_ptr</p></td>
-<td><p>可选本地掩码数组</p></td>
-</tr>
-<tr class="row-even"><td><p>cmp</p></td>
-<td><p>比较类型</p></td>
-</tr>
-<tr class="row-odd"><td><p>cmp_val</p></td>
-<td><p>比较值</p></td>
-</tr>
-<tr class="row-even"><td><p>res_out_ptr</p></td>
-<td><p>接收device侧接口返回值。即满足比较条件的元素索引值</p></td>
-</tr>
-</tbody>
-</table>
-</li>
-<li><p>阻塞式同步原语，用于等待指定 PE 上一组变量（ivars）中至少有一个变量满足给定的比较条件（ivars[i] cmp cmp_value）时返回</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_wait_until_some</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">indices_ptr</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_val</span><span class="p">,</span> <span class="n">res_out_ptr</span><span class="p">)</span>
-</pre></div>
-</div>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
-<th class="head"><p>含义</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>TYPE</p></td>
-<td><p>数据类型，可选float/int8/int16/int32/int64/uint8/uint16/uint32/uint64/char</p></td>
-</tr>
-<tr class="row-odd"><td><p>ivars_ptr</p></td>
-<td><p>指向对称内存中长度为 nelems 的数组</p></td>
-</tr>
-<tr class="row-even"><td><p>nelems</p></td>
-<td><p>数组元素个数</p></td>
-</tr>
-<tr class="row-odd"><td><p>indices_ptr</p></td>
-<td><p>对应 ivars_ptr 中所有满足条件元素的索引值</p></td>
-</tr>
-<tr class="row-even"><td><p>status_ptr</p></td>
-<td><p>可选本地掩码数组</p></td>
-</tr>
-<tr class="row-odd"><td><p>cmp</p></td>
-<td><p>比较类型</p></td>
+<tr class="row-odd"><td><p>ivar</p></td>
+<td><p>[in]</p></td>
+<td><p>对称内存中信号变量的指针</p></td>
 </tr>
 <tr class="row-even"><td><p>cmp_val</p></td>
+<td><p>[in]</p></td>
 <td><p>比较值</p></td>
 </tr>
-<tr class="row-odd"><td><p>res_out_ptr</p></td>
-<td><p>接收device侧接口返回值。即满足比较条件的元素个数</p></td>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>阻塞式同步原语，用于等待指定 PE 上一组变量（ivars）均满足给定的比较条件（ivars[i] cmp cmp_values[i]）时返回</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_wait_until_all_vector</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_values_ptr</span><span class="p">)</span>
+<li><p>等待数组中所有元素均满足比较条件 <code class="docutils literal notranslate"><span class="pre">ivars[i]</span> <span class="pre">cmp</span> <span class="pre">cmp_val</span></code> 后返回。阻塞（blocking）接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_wait_until_all</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_val</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>TYPE</p></td>
-<td><p>数据类型，可选float/int8/int16/int32/int64/uint8/uint16/uint32/uint64/char</p></td>
+<td><p>-</p></td>
+<td><p>数据类型：<code class="docutils literal notranslate"><span class="pre">float</span></code> / <code class="docutils literal notranslate"><span class="pre">int8</span></code> / <code class="docutils literal notranslate"><span class="pre">int16</span></code> / <code class="docutils literal notranslate"><span class="pre">int32</span></code> / <code class="docutils literal notranslate"><span class="pre">int64</span></code> / <code class="docutils literal notranslate"><span class="pre">uint8</span></code> / <code class="docutils literal notranslate"><span class="pre">uint16</span></code> / <code class="docutils literal notranslate"><span class="pre">uint32</span></code> / <code class="docutils literal notranslate"><span class="pre">uint64</span></code> / <code class="docutils literal notranslate"><span class="pre">char</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>ivars_ptr</p></td>
-<td><p>指向对称内存中长度为 nelems 的数组</p></td>
+<td><p>[in]</p></td>
+<td><p>对称内存中长度为 <code class="docutils literal notranslate"><span class="pre">nelems</span></code> 的数组</p></td>
 </tr>
 <tr class="row-even"><td><p>nelems</p></td>
+<td><p>[in]</p></td>
 <td><p>数组元素个数</p></td>
 </tr>
 <tr class="row-odd"><td><p>status_ptr</p></td>
-<td><p>可选本地掩码数组</p></td>
+<td><p>[in]</p></td>
+<td><p>可选本地掩码数组，传入 0 表示不使用</p></td>
 </tr>
 <tr class="row-even"><td><p>cmp</p></td>
-<td><p>比较类型</p></td>
+<td><p>[in]</p></td>
+<td><p>比较操作符</p></td>
 </tr>
-<tr class="row-odd"><td><p>cmp_values_ptr</p></td>
-<td><p>比较值数组</p></td>
+<tr class="row-odd"><td><p>cmp_val</p></td>
+<td><p>[in]</p></td>
+<td><p>比较值</p></td>
+</tr>
+<tr class="row-even"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>阻塞式同步原语，用于等待指定 PE 上一组变量（ivars）中至少有一个变量满足给定的比较条件（ivars[i] cmp cmp_values[i]）时返回</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_wait_until_any_vector</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_val</span><span class="p">,</span> <span class="n">cmp_values_ptr</span><span class="p">,</span> <span class="n">res_out_ptr</span><span class="p">)</span>
+<li><p>等待数组中至少有一个元素满足比较条件 <code class="docutils literal notranslate"><span class="pre">ivars[i]</span> <span class="pre">cmp</span> <span class="pre">cmp_val</span></code> 后返回。阻塞（blocking）接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_wait_until_any</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_val</span><span class="p">,</span> <span class="n">res_out_ptr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>TYPE</p></td>
-<td><p>数据类型，可选float/int8/int16/int32/int64/uint8/uint16/uint32/uint64/char</p></td>
+<td><p>-</p></td>
+<td><p>数据类型：<code class="docutils literal notranslate"><span class="pre">float</span></code> / <code class="docutils literal notranslate"><span class="pre">int8</span></code> / <code class="docutils literal notranslate"><span class="pre">int16</span></code> / <code class="docutils literal notranslate"><span class="pre">int32</span></code> / <code class="docutils literal notranslate"><span class="pre">int64</span></code> / <code class="docutils literal notranslate"><span class="pre">uint8</span></code> / <code class="docutils literal notranslate"><span class="pre">uint16</span></code> / <code class="docutils literal notranslate"><span class="pre">uint32</span></code> / <code class="docutils literal notranslate"><span class="pre">uint64</span></code> / <code class="docutils literal notranslate"><span class="pre">char</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>ivars_ptr</p></td>
-<td><p>指向对称内存中长度为 nelems 的数组</p></td>
+<td><p>[in]</p></td>
+<td><p>对称内存中长度为 <code class="docutils literal notranslate"><span class="pre">nelems</span></code> 的数组</p></td>
 </tr>
 <tr class="row-even"><td><p>nelems</p></td>
+<td><p>[in]</p></td>
 <td><p>数组元素个数</p></td>
 </tr>
 <tr class="row-odd"><td><p>status_ptr</p></td>
-<td><p>可选本地掩码数组</p></td>
+<td><p>[in]</p></td>
+<td><p>可选本地掩码数组，传入 0 表示不使用</p></td>
 </tr>
 <tr class="row-even"><td><p>cmp</p></td>
-<td><p>比较类型</p></td>
+<td><p>[in]</p></td>
+<td><p>比较操作符</p></td>
 </tr>
-<tr class="row-odd"><td><p>cmp_values_ptr</p></td>
-<td><p>比较值数组</p></td>
+<tr class="row-odd"><td><p>cmp_val</p></td>
+<td><p>[in]</p></td>
+<td><p>比较值</p></td>
 </tr>
 <tr class="row-even"><td><p>res_out_ptr</p></td>
-<td><p>接收device侧接口返回值。即满足比较条件的元素索引值</p></td>
+<td><p>[out]</p></td>
+<td><p>接收满足比较条件的元素索引值</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>阻塞式同步原语，用于等待指定 PE 上一组变量（ivars）中至少有一个变量满足给定的比较条件（ivars[i] cmp cmp_values[i]）时返回</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_wait_until_some_vector</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">indices_ptr</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_values_ptr</span><span class="p">,</span> <span class="n">res_out_ptr</span><span class="p">)</span>
+<li><p>等待数组中至少有一个元素满足比较条件，并返回所有满足条件的元素索引。阻塞（blocking）接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_wait_until_some</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">indices_ptr</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_val</span><span class="p">,</span> <span class="n">res_out_ptr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>TYPE</p></td>
-<td><p>数据类型，可选float/int8/int16/int32/int64/uint8/uint16/uint32/uint64/char</p></td>
+<td><p>-</p></td>
+<td><p>数据类型：<code class="docutils literal notranslate"><span class="pre">float</span></code> / <code class="docutils literal notranslate"><span class="pre">int8</span></code> / <code class="docutils literal notranslate"><span class="pre">int16</span></code> / <code class="docutils literal notranslate"><span class="pre">int32</span></code> / <code class="docutils literal notranslate"><span class="pre">int64</span></code> / <code class="docutils literal notranslate"><span class="pre">uint8</span></code> / <code class="docutils literal notranslate"><span class="pre">uint16</span></code> / <code class="docutils literal notranslate"><span class="pre">uint32</span></code> / <code class="docutils literal notranslate"><span class="pre">uint64</span></code> / <code class="docutils literal notranslate"><span class="pre">char</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>ivars_ptr</p></td>
-<td><p>指向对称内存中长度为 nelems 的数组</p></td>
+<td><p>[in]</p></td>
+<td><p>对称内存中长度为 <code class="docutils literal notranslate"><span class="pre">nelems</span></code> 的数组</p></td>
 </tr>
 <tr class="row-even"><td><p>nelems</p></td>
+<td><p>[in]</p></td>
 <td><p>数组元素个数</p></td>
 </tr>
 <tr class="row-odd"><td><p>indices_ptr</p></td>
-<td><p>对应 ivars_ptr 中所有满足条件元素的索引值</p></td>
+<td><p>[out]</p></td>
+<td><p>接收满足条件元素的索引值数组</p></td>
 </tr>
 <tr class="row-even"><td><p>status_ptr</p></td>
-<td><p>可选本地掩码数组</p></td>
+<td><p>[in]</p></td>
+<td><p>可选本地掩码数组，传入 0 表示不使用</p></td>
 </tr>
 <tr class="row-odd"><td><p>cmp</p></td>
-<td><p>比较类型</p></td>
+<td><p>[in]</p></td>
+<td><p>比较操作符</p></td>
 </tr>
-<tr class="row-even"><td><p>cmp_values_ptr</p></td>
-<td><p>比较值数组</p></td>
+<tr class="row-even"><td><p>cmp_val</p></td>
+<td><p>[in]</p></td>
+<td><p>比较值</p></td>
 </tr>
 <tr class="row-odd"><td><p>res_out_ptr</p></td>
-<td><p>接收device侧接口返回值。即满足比较条件的元素个数</p></td>
+<td><p>[out]</p></td>
+<td><p>接收满足比较条件的元素个数</p></td>
+</tr>
+<tr class="row-even"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步原语，用于检查指定 PE 上变量（ivar）是否满足给定的比较条件（ivar cmp cmp_value）</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_test</span><span class="p">(</span><span class="n">ivar</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_value</span><span class="p">,</span> <span class="n">res_out_ptr</span><span class="p">)</span>
+<li><p>等待数组中所有元素均满足向量比较条件 <code class="docutils literal notranslate"><span class="pre">ivars[i]</span> <span class="pre">cmp</span> <span class="pre">cmp_values[i]</span></code> 后返回。阻塞（blocking）接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_wait_until_all_vector</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_values_ptr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>TYPE</p></td>
-<td><p>数据类型，可选float/int8/int16/int32/int64/uint8/uint16/uint32/uint64/char</p></td>
+<td><p>-</p></td>
+<td><p>数据类型：<code class="docutils literal notranslate"><span class="pre">float</span></code> / <code class="docutils literal notranslate"><span class="pre">int8</span></code> / <code class="docutils literal notranslate"><span class="pre">int16</span></code> / <code class="docutils literal notranslate"><span class="pre">int32</span></code> / <code class="docutils literal notranslate"><span class="pre">int64</span></code> / <code class="docutils literal notranslate"><span class="pre">uint8</span></code> / <code class="docutils literal notranslate"><span class="pre">uint16</span></code> / <code class="docutils literal notranslate"><span class="pre">uint32</span></code> / <code class="docutils literal notranslate"><span class="pre">uint64</span></code> / <code class="docutils literal notranslate"><span class="pre">char</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>ivars_ptr</p></td>
+<td><p>[in]</p></td>
+<td><p>对称内存中长度为 <code class="docutils literal notranslate"><span class="pre">nelems</span></code> 的数组</p></td>
+</tr>
+<tr class="row-even"><td><p>nelems</p></td>
+<td><p>[in]</p></td>
+<td><p>数组元素个数</p></td>
+</tr>
+<tr class="row-odd"><td><p>status_ptr</p></td>
+<td><p>[in]</p></td>
+<td><p>可选本地掩码数组，传入 0 表示不使用</p></td>
+</tr>
+<tr class="row-even"><td><p>cmp</p></td>
+<td><p>[in]</p></td>
+<td><p>比较操作符</p></td>
+</tr>
+<tr class="row-odd"><td><p>cmp_values_ptr</p></td>
+<td><p>[in]</p></td>
+<td><p>比较值数组</p></td>
+</tr>
+<tr class="row-even"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>等待数组中至少有一个元素满足向量比较条件 <code class="docutils literal notranslate"><span class="pre">ivars[i]</span> <span class="pre">cmp</span> <span class="pre">cmp_values[i]</span></code> 后返回。阻塞（blocking）接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_wait_until_any_vector</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_values_ptr</span><span class="p">,</span> <span class="n">res_out_ptr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
+<th class="head"><p>含义</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>TYPE</p></td>
+<td><p>-</p></td>
+<td><p>数据类型：<code class="docutils literal notranslate"><span class="pre">float</span></code> / <code class="docutils literal notranslate"><span class="pre">int8</span></code> / <code class="docutils literal notranslate"><span class="pre">int16</span></code> / <code class="docutils literal notranslate"><span class="pre">int32</span></code> / <code class="docutils literal notranslate"><span class="pre">int64</span></code> / <code class="docutils literal notranslate"><span class="pre">uint8</span></code> / <code class="docutils literal notranslate"><span class="pre">uint16</span></code> / <code class="docutils literal notranslate"><span class="pre">uint32</span></code> / <code class="docutils literal notranslate"><span class="pre">uint64</span></code> / <code class="docutils literal notranslate"><span class="pre">char</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>ivars_ptr</p></td>
+<td><p>[in]</p></td>
+<td><p>对称内存中长度为 <code class="docutils literal notranslate"><span class="pre">nelems</span></code> 的数组</p></td>
+</tr>
+<tr class="row-even"><td><p>nelems</p></td>
+<td><p>[in]</p></td>
+<td><p>数组元素个数</p></td>
+</tr>
+<tr class="row-odd"><td><p>status_ptr</p></td>
+<td><p>[in]</p></td>
+<td><p>可选本地掩码数组，传入 0 表示不使用</p></td>
+</tr>
+<tr class="row-even"><td><p>cmp</p></td>
+<td><p>[in]</p></td>
+<td><p>比较操作符</p></td>
+</tr>
+<tr class="row-odd"><td><p>cmp_values_ptr</p></td>
+<td><p>[in]</p></td>
+<td><p>比较值数组</p></td>
+</tr>
+<tr class="row-even"><td><p>res_out_ptr</p></td>
+<td><p>[out]</p></td>
+<td><p>接收满足比较条件的元素索引值</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>等待数组中至少有一个元素满足向量比较条件，并返回所有满足条件的元素索引。阻塞（blocking）接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_wait_until_some_vector</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">indices_ptr</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_values_ptr</span><span class="p">,</span> <span class="n">res_out_ptr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
+<th class="head"><p>含义</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>TYPE</p></td>
+<td><p>-</p></td>
+<td><p>数据类型：<code class="docutils literal notranslate"><span class="pre">float</span></code> / <code class="docutils literal notranslate"><span class="pre">int8</span></code> / <code class="docutils literal notranslate"><span class="pre">int16</span></code> / <code class="docutils literal notranslate"><span class="pre">int32</span></code> / <code class="docutils literal notranslate"><span class="pre">int64</span></code> / <code class="docutils literal notranslate"><span class="pre">uint8</span></code> / <code class="docutils literal notranslate"><span class="pre">uint16</span></code> / <code class="docutils literal notranslate"><span class="pre">uint32</span></code> / <code class="docutils literal notranslate"><span class="pre">uint64</span></code> / <code class="docutils literal notranslate"><span class="pre">char</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>ivars_ptr</p></td>
+<td><p>[in]</p></td>
+<td><p>对称内存中长度为 <code class="docutils literal notranslate"><span class="pre">nelems</span></code> 的数组</p></td>
+</tr>
+<tr class="row-even"><td><p>nelems</p></td>
+<td><p>[in]</p></td>
+<td><p>数组元素个数</p></td>
+</tr>
+<tr class="row-odd"><td><p>indices_ptr</p></td>
+<td><p>[out]</p></td>
+<td><p>接收满足条件元素的索引值数组</p></td>
+</tr>
+<tr class="row-even"><td><p>status_ptr</p></td>
+<td><p>[in]</p></td>
+<td><p>可选本地掩码数组，传入 0 表示不使用</p></td>
+</tr>
+<tr class="row-odd"><td><p>cmp</p></td>
+<td><p>[in]</p></td>
+<td><p>比较操作符</p></td>
+</tr>
+<tr class="row-even"><td><p>cmp_values_ptr</p></td>
+<td><p>[in]</p></td>
+<td><p>比较值数组</p></td>
+</tr>
+<tr class="row-odd"><td><p>res_out_ptr</p></td>
+<td><p>[out]</p></td>
+<td><p>接收满足比较条件的元素个数</p></td>
+</tr>
+<tr class="row-even"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>检查单个元素是否满足比较条件 <code class="docutils literal notranslate"><span class="pre">ivar</span> <span class="pre">cmp</span> <span class="pre">cmp_value</span></code>。非阻塞（non-blocking）查询接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_test</span><span class="p">(</span><span class="n">ivar</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_value</span><span class="p">,</span> <span class="n">res_out_ptr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
+<th class="head"><p>含义</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>TYPE</p></td>
+<td><p>-</p></td>
+<td><p>数据类型：<code class="docutils literal notranslate"><span class="pre">float</span></code> / <code class="docutils literal notranslate"><span class="pre">int8</span></code> / <code class="docutils literal notranslate"><span class="pre">int16</span></code> / <code class="docutils literal notranslate"><span class="pre">int32</span></code> / <code class="docutils literal notranslate"><span class="pre">int64</span></code> / <code class="docutils literal notranslate"><span class="pre">uint8</span></code> / <code class="docutils literal notranslate"><span class="pre">uint16</span></code> / <code class="docutils literal notranslate"><span class="pre">uint32</span></code> / <code class="docutils literal notranslate"><span class="pre">uint64</span></code> / <code class="docutils literal notranslate"><span class="pre">char</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>ivar</p></td>
-<td><p>指向对称内存中一个信号变量的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>对称内存中信号变量的指针</p></td>
 </tr>
 <tr class="row-even"><td><p>cmp</p></td>
-<td><p>比较类型</p></td>
+<td><p>[in]</p></td>
+<td><p>比较操作符</p></td>
 </tr>
 <tr class="row-odd"><td><p>cmp_value</p></td>
+<td><p>[in]</p></td>
 <td><p>比较值</p></td>
 </tr>
 <tr class="row-even"><td><p>res_out_ptr</p></td>
-<td><p>接收device侧接口返回值。满足比较条件返回1，否则返回0</p></td>
+<td><p>[out]</p></td>
+<td><p>满足条件返回 1，否则返回 0</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值，结果通过 <code class="docutils literal notranslate"><span class="pre">res_out_ptr</span></code> 返回</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步原语，用于检查指定 PE 上一组变量（ivars）中是否至少有一个变量满足给定的比较条件（ivars[i] cmp cmp_value）</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_test_any</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_value</span><span class="p">,</span> <span class="n">res_out_ptr</span><span class="p">)</span>
+<li><p>检查数组中是否至少有一个元素满足比较条件 <code class="docutils literal notranslate"><span class="pre">ivars[i]</span> <span class="pre">cmp</span> <span class="pre">cmp_value</span></code>。非阻塞（non-blocking）查询接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_test_any</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_value</span><span class="p">,</span> <span class="n">res_out_ptr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>TYPE</p></td>
-<td><p>数据类型，可选float/int8/int16/int32/int64/uint8/uint16/uint32/uint64/char</p></td>
+<td><p>-</p></td>
+<td><p>数据类型：<code class="docutils literal notranslate"><span class="pre">float</span></code> / <code class="docutils literal notranslate"><span class="pre">int8</span></code> / <code class="docutils literal notranslate"><span class="pre">int16</span></code> / <code class="docutils literal notranslate"><span class="pre">int32</span></code> / <code class="docutils literal notranslate"><span class="pre">int64</span></code> / <code class="docutils literal notranslate"><span class="pre">uint8</span></code> / <code class="docutils literal notranslate"><span class="pre">uint16</span></code> / <code class="docutils literal notranslate"><span class="pre">uint32</span></code> / <code class="docutils literal notranslate"><span class="pre">uint64</span></code> / <code class="docutils literal notranslate"><span class="pre">char</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>ivars_ptr</p></td>
-<td><p>指向对称内存中长度为 nelems 的数组</p></td>
+<td><p>[in]</p></td>
+<td><p>对称内存中长度为 <code class="docutils literal notranslate"><span class="pre">nelems</span></code> 的数组</p></td>
 </tr>
 <tr class="row-even"><td><p>nelems</p></td>
+<td><p>[in]</p></td>
 <td><p>数组元素个数</p></td>
 </tr>
 <tr class="row-odd"><td><p>status_ptr</p></td>
-<td><p>可选本地掩码数组</p></td>
+<td><p>[in]</p></td>
+<td><p>可选本地掩码数组，传入 0 表示不使用</p></td>
 </tr>
 <tr class="row-even"><td><p>cmp</p></td>
-<td><p>比较类型</p></td>
+<td><p>[in]</p></td>
+<td><p>比较操作符</p></td>
 </tr>
 <tr class="row-odd"><td><p>cmp_value</p></td>
+<td><p>[in]</p></td>
 <td><p>比较值</p></td>
 </tr>
 <tr class="row-even"><td><p>res_out_ptr</p></td>
-<td><p>接收device侧接口返回值。即满足比较条件的元素索引值</p></td>
+<td><p>[out]</p></td>
+<td><p>满足条件的元素索引值；若无元素满足或测试集为空则返回 <code class="docutils literal notranslate"><span class="pre">SIZE_MAX</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值，结果通过 <code class="docutils literal notranslate"><span class="pre">res_out_ptr</span></code> 返回</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步原语，用于检查指定 PE 上一组变量（ivars）中是否至少有一个变量满足给定的比较条件（ivars[i] cmp cmp_value）</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_test_some</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">indices_ptr</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_value</span><span class="p">,</span> <span class="n">res_out_ptr</span><span class="p">)</span>
+<li><p>检查数组中是否至少有一个元素满足比较条件，并返回所有满足条件的元素索引。非阻塞（non-blocking）查询接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_test_some</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">indices_ptr</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_value</span><span class="p">,</span> <span class="n">res_out_ptr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>TYPE</p></td>
-<td><p>数据类型，可选float/int8/int16/int32/int64/uint8/uint16/uint32/uint64/char</p></td>
+<td><p>-</p></td>
+<td><p>数据类型：<code class="docutils literal notranslate"><span class="pre">float</span></code> / <code class="docutils literal notranslate"><span class="pre">int8</span></code> / <code class="docutils literal notranslate"><span class="pre">int16</span></code> / <code class="docutils literal notranslate"><span class="pre">int32</span></code> / <code class="docutils literal notranslate"><span class="pre">int64</span></code> / <code class="docutils literal notranslate"><span class="pre">uint8</span></code> / <code class="docutils literal notranslate"><span class="pre">uint16</span></code> / <code class="docutils literal notranslate"><span class="pre">uint32</span></code> / <code class="docutils literal notranslate"><span class="pre">uint64</span></code> / <code class="docutils literal notranslate"><span class="pre">char</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>ivars_ptr</p></td>
-<td><p>指向对称内存中长度为 nelems 的数组</p></td>
+<td><p>[in]</p></td>
+<td><p>对称内存中长度为 <code class="docutils literal notranslate"><span class="pre">nelems</span></code> 的数组</p></td>
 </tr>
 <tr class="row-even"><td><p>nelems</p></td>
+<td><p>[in]</p></td>
 <td><p>数组元素个数</p></td>
 </tr>
 <tr class="row-odd"><td><p>indices_ptr</p></td>
-<td><p>对应 ivars_ptr 中所有满足条件元素的索引值</p></td>
+<td><p>[out]</p></td>
+<td><p>接收满足条件元素的索引值数组</p></td>
 </tr>
 <tr class="row-even"><td><p>status_ptr</p></td>
-<td><p>可选本地掩码数组</p></td>
+<td><p>[in]</p></td>
+<td><p>可选本地掩码数组，传入 0 表示不使用</p></td>
 </tr>
 <tr class="row-odd"><td><p>cmp</p></td>
-<td><p>比较类型</p></td>
+<td><p>[in]</p></td>
+<td><p>比较操作符</p></td>
 </tr>
 <tr class="row-even"><td><p>cmp_value</p></td>
+<td><p>[in]</p></td>
 <td><p>比较值</p></td>
 </tr>
 <tr class="row-odd"><td><p>res_out_ptr</p></td>
-<td><p>接收device侧接口返回值。即满足比较条件的元素个数</p></td>
+<td><p>[out]</p></td>
+<td><p>满足条件的元素个数；若测试集为空则返回 0</p></td>
+</tr>
+<tr class="row-even"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值，结果通过 <code class="docutils literal notranslate"><span class="pre">res_out_ptr</span></code> 和 <code class="docutils literal notranslate"><span class="pre">indices_ptr</span></code> 返回</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步原语，用于检查指定 PE 上一组变量（ivars）是否均满足给定的比较条件（ivars[i] cmp cmp_values[i]）</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_test_all_vector</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_values_ptr</span><span class="p">,</span> <span class="n">res_out_ptr</span><span class="p">)</span>
+<li><p>检查数组中所有元素是否均满足向量比较条件 <code class="docutils literal notranslate"><span class="pre">ivars[i]</span> <span class="pre">cmp</span> <span class="pre">cmp_values[i]</span></code>。非阻塞（non-blocking）查询接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_test_all_vector</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_values_ptr</span><span class="p">,</span> <span class="n">res_out_ptr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>TYPE</p></td>
-<td><p>数据类型，可选float/int8/int16/int32/int64/uint8/uint16/uint32/uint64/char</p></td>
+<td><p>-</p></td>
+<td><p>数据类型：<code class="docutils literal notranslate"><span class="pre">float</span></code> / <code class="docutils literal notranslate"><span class="pre">int8</span></code> / <code class="docutils literal notranslate"><span class="pre">int16</span></code> / <code class="docutils literal notranslate"><span class="pre">int32</span></code> / <code class="docutils literal notranslate"><span class="pre">int64</span></code> / <code class="docutils literal notranslate"><span class="pre">uint8</span></code> / <code class="docutils literal notranslate"><span class="pre">uint16</span></code> / <code class="docutils literal notranslate"><span class="pre">uint32</span></code> / <code class="docutils literal notranslate"><span class="pre">uint64</span></code> / <code class="docutils literal notranslate"><span class="pre">char</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>ivars_ptr</p></td>
-<td><p>指向对称内存中长度为 nelems 的数组</p></td>
+<td><p>[in]</p></td>
+<td><p>对称内存中长度为 <code class="docutils literal notranslate"><span class="pre">nelems</span></code> 的数组</p></td>
 </tr>
 <tr class="row-even"><td><p>nelems</p></td>
+<td><p>[in]</p></td>
 <td><p>数组元素个数</p></td>
 </tr>
 <tr class="row-odd"><td><p>status_ptr</p></td>
-<td><p>可选本地掩码数组</p></td>
+<td><p>[in]</p></td>
+<td><p>可选本地掩码数组，传入 0 表示不使用</p></td>
 </tr>
 <tr class="row-even"><td><p>cmp</p></td>
-<td><p>比较类型</p></td>
+<td><p>[in]</p></td>
+<td><p>比较操作符</p></td>
 </tr>
 <tr class="row-odd"><td><p>cmp_values_ptr</p></td>
+<td><p>[in]</p></td>
 <td><p>比较值数组</p></td>
 </tr>
 <tr class="row-even"><td><p>res_out_ptr</p></td>
-<td><p>接收device侧接口返回值。满足比较条件返回1，否则返回0</p></td>
+<td><p>[out]</p></td>
+<td><p>全部满足或 nelems 为 0 返回 1，否则返回 0</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值，结果通过 <code class="docutils literal notranslate"><span class="pre">res_out_ptr</span></code> 返回</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步原语，用于检查指定 PE 上一组变量（ivars）中是否至少有一个变量满足给定的比较条件（ivars[i] cmp cmp_values[i]）</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_test_any_vector</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_val</span><span class="p">,</span> <span class="n">cmp_values_ptr</span><span class="p">,</span> <span class="n">res_out_ptr</span><span class="p">)</span>
+<li><p>检查数组中是否至少有一个元素满足向量比较条件 <code class="docutils literal notranslate"><span class="pre">ivars[i]</span> <span class="pre">cmp</span> <span class="pre">cmp_values[i]</span></code>。非阻塞（non-blocking）查询接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_test_any_vector</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_values_ptr</span><span class="p">,</span> <span class="n">res_out_ptr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>TYPE</p></td>
-<td><p>数据类型，可选float/int8/int16/int32/int64/uint8/uint16/uint32/uint64/char</p></td>
+<td><p>-</p></td>
+<td><p>数据类型：<code class="docutils literal notranslate"><span class="pre">float</span></code> / <code class="docutils literal notranslate"><span class="pre">int8</span></code> / <code class="docutils literal notranslate"><span class="pre">int16</span></code> / <code class="docutils literal notranslate"><span class="pre">int32</span></code> / <code class="docutils literal notranslate"><span class="pre">int64</span></code> / <code class="docutils literal notranslate"><span class="pre">uint8</span></code> / <code class="docutils literal notranslate"><span class="pre">uint16</span></code> / <code class="docutils literal notranslate"><span class="pre">uint32</span></code> / <code class="docutils literal notranslate"><span class="pre">uint64</span></code> / <code class="docutils literal notranslate"><span class="pre">char</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>ivars_ptr</p></td>
-<td><p>指向对称内存中长度为 nelems 的数组</p></td>
+<td><p>[in]</p></td>
+<td><p>对称内存中长度为 <code class="docutils literal notranslate"><span class="pre">nelems</span></code> 的数组</p></td>
 </tr>
 <tr class="row-even"><td><p>nelems</p></td>
+<td><p>[in]</p></td>
 <td><p>数组元素个数</p></td>
 </tr>
 <tr class="row-odd"><td><p>status_ptr</p></td>
-<td><p>可选本地掩码数组</p></td>
+<td><p>[in]</p></td>
+<td><p>可选本地掩码数组，传入 0 表示不使用</p></td>
 </tr>
 <tr class="row-even"><td><p>cmp</p></td>
-<td><p>比较类型</p></td>
+<td><p>[in]</p></td>
+<td><p>比较操作符</p></td>
 </tr>
 <tr class="row-odd"><td><p>cmp_values_ptr</p></td>
+<td><p>[in]</p></td>
 <td><p>比较值数组</p></td>
 </tr>
 <tr class="row-even"><td><p>res_out_ptr</p></td>
-<td><p>接收device侧接口返回值。即满足比较条件的元素索引值</p></td>
+<td><p>[out]</p></td>
+<td><p>满足条件的第一个元素索引值；若无元素满足或测试集为空则返回 <code class="docutils literal notranslate"><span class="pre">SIZE_MAX</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值，结果通过 <code class="docutils literal notranslate"><span class="pre">res_out_ptr</span></code> 返回</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步原语，用于检查指定 PE 上一组变量（ivars）中是否至少有一个变量满足给定的比较条件（ivars[i] cmp cmp_values[i]）</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_wait_until_some_vector</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">indices_ptr</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_values_ptr</span><span class="p">,</span><span class="n">res_out_ptr</span><span class="p">)</span>
+<li><p>检查数组中是否至少有一个元素满足向量比较条件，并返回所有满足条件的元素索引。非阻塞（non-blocking）查询接口。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmem_</span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="n">_test_some_vector</span><span class="p">(</span><span class="n">ivars_ptr</span><span class="p">,</span> <span class="n">nelems</span><span class="p">,</span> <span class="n">indices_ptr</span><span class="p">,</span> <span class="n">status_ptr</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_values_ptr</span><span class="p">,</span> <span class="n">res_out_ptr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>TYPE</p></td>
-<td><p>数据类型，可选float/int8/int16/int32/int64/uint8/uint16/uint32/uint64/char</p></td>
+<td><p>-</p></td>
+<td><p>数据类型：<code class="docutils literal notranslate"><span class="pre">float</span></code> / <code class="docutils literal notranslate"><span class="pre">int8</span></code> / <code class="docutils literal notranslate"><span class="pre">int16</span></code> / <code class="docutils literal notranslate"><span class="pre">int32</span></code> / <code class="docutils literal notranslate"><span class="pre">int64</span></code> / <code class="docutils literal notranslate"><span class="pre">uint8</span></code> / <code class="docutils literal notranslate"><span class="pre">uint16</span></code> / <code class="docutils literal notranslate"><span class="pre">uint32</span></code> / <code class="docutils literal notranslate"><span class="pre">uint64</span></code> / <code class="docutils literal notranslate"><span class="pre">char</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>ivars_ptr</p></td>
-<td><p>指向对称内存中长度为 nelems 的数组</p></td>
+<td><p>[in]</p></td>
+<td><p>对称内存中长度为 <code class="docutils literal notranslate"><span class="pre">nelems</span></code> 的数组</p></td>
 </tr>
 <tr class="row-even"><td><p>nelems</p></td>
+<td><p>[in]</p></td>
 <td><p>数组元素个数</p></td>
 </tr>
 <tr class="row-odd"><td><p>indices_ptr</p></td>
-<td><p>对应 ivars_ptr 中所有满足条件元素的索引值</p></td>
+<td><p>[out]</p></td>
+<td><p>接收满足条件元素的索引值数组</p></td>
 </tr>
 <tr class="row-even"><td><p>status_ptr</p></td>
-<td><p>可选本地掩码数组</p></td>
+<td><p>[in]</p></td>
+<td><p>可选本地掩码数组，传入 0 表示不使用</p></td>
 </tr>
 <tr class="row-odd"><td><p>cmp</p></td>
-<td><p>比较类型</p></td>
+<td><p>[in]</p></td>
+<td><p>比较操作符</p></td>
 </tr>
 <tr class="row-even"><td><p>cmp_values_ptr</p></td>
+<td><p>[in]</p></td>
 <td><p>比较值数组</p></td>
 </tr>
 <tr class="row-odd"><td><p>res_out_ptr</p></td>
-<td><p>接收device侧接口返回值。即满足比较条件的元素个数</p></td>
+<td><p>[out]</p></td>
+<td><p>满足条件的元素个数；若测试集为空则返回 0</p></td>
+</tr>
+<tr class="row-even"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值，结果通过 <code class="docutils literal notranslate"><span class="pre">res_out_ptr</span></code> 和 <code class="docutils literal notranslate"><span class="pre">indices_ptr</span></code> 返回</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步接口，在指定流上将对称内存中连续的数据从本地处理单元（PE）复制到指定PE的地址上</p>
+<li><p>在指定流上将连续数据从本地 PE 复制到指定 PE 的对称地址。非阻塞（non-blocking）接口。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmemx_putmem_on_stream</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">pe</span><span class="p">,</span> <span class="n">stream</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>dst</p></td>
-<td><p>远程PE对称地址上的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 对称地址的指针</p></td>
 </tr>
 <tr class="row-odd"><td><p>src</p></td>
-<td><p>源数据本地内存中的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>本地源数据内存的指针</p></td>
 </tr>
 <tr class="row-even"><td><p>elem_size</p></td>
-<td><p>目标地址和源地址中元素的大小</p></td>
+<td><p>[in]</p></td>
+<td><p>目标地址和源地址中元素的总字节数</p></td>
 </tr>
 <tr class="row-odd"><td><p>pe</p></td>
-<td><p>远程PE的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号</p></td>
 </tr>
 <tr class="row-even"><td><p>stream</p></td>
-<td><p>使用指定的流进行拷贝（如果 stream 为 NULL，则使用默认流）</p></td>
+<td><p>[in]</p></td>
+<td><p>ACL 流对象。传入 <code class="docutils literal notranslate"><span class="pre">0</span></code> 或 <code class="docutils literal notranslate"><span class="pre">None</span></code> 使用默认流</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步接口，在指定流上将对称内存中指定处理单元（PE）上的连续数据复制到本地PE的地址上</p>
+<li><p>在指定流上将对称内存中指定 PE 上的连续数据复制到本地 PE。非阻塞（non-blocking）接口。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmemx_getmem_on_stream</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">elem_size</span><span class="p">,</span> <span class="n">pe</span><span class="p">,</span> <span class="n">stream</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>dst</p></td>
-<td><p>指向本地处理单元（PE）内存地址的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>本地目标内存的指针</p></td>
 </tr>
 <tr class="row-odd"><td><p>src</p></td>
-<td><p>指向远程处理单元（PE）对称地址的指针</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 对称地址的指针</p></td>
 </tr>
 <tr class="row-even"><td><p>elem_size</p></td>
-<td><p>目标地址和源地址中元素的大小</p></td>
+<td><p>[in]</p></td>
+<td><p>目标地址和源地址中元素的总字节数</p></td>
 </tr>
 <tr class="row-odd"><td><p>pe</p></td>
-<td><p>远程PE的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号</p></td>
 </tr>
 <tr class="row-even"><td><p>stream</p></td>
-<td><p>使用指定的流进行拷贝（如果 stream 为 NULL，则使用默认流）</p></td>
+<td><p>[in]</p></td>
+<td><p>ACL 流对象。传入 <code class="docutils literal notranslate"><span class="pre">0</span></code> 或 <code class="docutils literal notranslate"><span class="pre">None</span></code> 使用默认流</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步接口，在指定的 PE 上对远程信号变量执行原子操作，该操作在给定的流上执行</p>
+<li><p>在指定流上对远程信号变量执行原子操作。当前仅支持 MTE。非阻塞（non-blocking）接口。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmemx_signal_op_on_stream</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">sig_op</span><span class="p">,</span> <span class="n">pe</span><span class="p">,</span> <span class="n">stream</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>sig</p></td>
-<td><p>本地地址，指向源信号变量，该变量在目标 PE 上可访问</p></td>
+<td><p>[in]</p></td>
+<td><p>目标 PE 上可访问的信号变量的本地地址</p></td>
 </tr>
 <tr class="row-odd"><td><p>signal</p></td>
+<td><p>[in]</p></td>
 <td><p>用于原子操作的值</p></td>
 </tr>
 <tr class="row-even"><td><p>sig_op</p></td>
-<td><p>在远程信号变量上执行的操作</p></td>
+<td><p>[in]</p></td>
+<td><p>对远程信号执行的操作。支持：<code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_SET</span></code> / <code class="docutils literal notranslate"><span class="pre">ACLSHMEM_SIGNAL_ADD</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>pe</p></td>
-<td><p>远程PE的编号</p></td>
+<td><p>[in]</p></td>
+<td><p>远程 PE 编号</p></td>
 </tr>
 <tr class="row-even"><td><p>stream</p></td>
-<td><p>使用指定的流进行拷贝（如果 stream 为 NULL，则使用默认流）</p></td>
+<td><p>[in]</p></td>
+<td><p>ACL 流对象。传入 <code class="docutils literal notranslate"><span class="pre">0</span></code> 或 <code class="docutils literal notranslate"><span class="pre">None</span></code> 使用默认流</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>同步接口，在指定的 PE 上对远程信号变量执行原子比较操作，该操作在给定的流上执行</p>
+<li><p>非阻塞（non-blocking）接口。在指定流上等待信号变量满足比较条件。调用在 host 侧立即返回，等待在流上执行。调用者需同步流以确保等待完成。当前仅支持 MTE。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmemx_signal_wait_until_on_stream</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">cmp_val</span><span class="p">,</span> <span class="n">stream</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>sig</p></td>
+<td><p>[in]</p></td>
 <td><p>源信号变量的本地地址</p></td>
 </tr>
 <tr class="row-odd"><td><p>cmp</p></td>
-<td><p>用于比较 sig 所指向值与 cmp_val 的比较操作符</p></td>
+<td><p>[in]</p></td>
+<td><p>比较操作符。支持：<code class="docutils literal notranslate"><span class="pre">ACLSHMEM_CMP_EQ</span></code> / <code class="docutils literal notranslate"><span class="pre">CMP_NE</span></code> / <code class="docutils literal notranslate"><span class="pre">CMP_GT</span></code> / <code class="docutils literal notranslate"><span class="pre">CMP_GE</span></code> / <code class="docutils literal notranslate"><span class="pre">CMP_LT</span></code> / <code class="docutils literal notranslate"><span class="pre">CMP_LE</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p>cmp_val</p></td>
-<td><p>用于与 sig 所指向的值进行比较的数值</p></td>
+<td><p>[in]</p></td>
+<td><p>与 sig 所指向值进行比较的值</p></td>
 </tr>
 <tr class="row-odd"><td><p>stream</p></td>
-<td><p>使用指定的流进行拷贝（如果 stream 为 NULL，则使用默认流）</p></td>
+<td><p>[in]</p></td>
+<td><p>ACL 流对象，用于执行排序。必须传入有效流</p></td>
+</tr>
+<tr class="row-even"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>确保所有先前发出的对称数据操作在给定流上完成。quiet 操作排入指定流中，调用在 host 侧立即返回；调用者需同步流以观测完成。当前仅支持 MTE。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aclshmemx_quiet_on_stream</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>参数/返回值</p></th>
+<th class="head"><p>方向</p></th>
+<th class="head"><p>含义</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>stream</p></td>
+<td><p>[in]</p></td>
+<td><p>执行 quiet 操作的 ACL 流。传入 <code class="docutils literal notranslate"><span class="pre">0</span></code> 或 <code class="docutils literal notranslate"><span class="pre">None</span></code> 使用默认流</p></td>
+</tr>
+<tr class="row-odd"><td><p>返回值</p></td>
+<td><p>-</p></td>
+<td><p>无返回值</p></td>
 </tr>
 </tbody>
 </table>
@@ -2151,7 +2891,7 @@
 <section id="id4">
 <h3>类<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
 <ol class="arabic">
-<li><p>OpEngineType枚举类</p>
+<li><p>OpEngineType 枚举类 — 数据传输引擎类型。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">OpEngineType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="n">MTE</span>
     <span class="n">SDMA</span>
@@ -2159,8 +2899,29 @@
     <span class="n">UDMA</span>
 </pre></div>
 </div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>枚举值</p></th>
+<th class="head"><p>含义</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MTE</p></td>
+<td><p>Memory Transfer Engine</p></td>
+</tr>
+<tr class="row-odd"><td><p>SDMA</p></td>
+<td><p>System DMA</p></td>
+</tr>
+<tr class="row-even"><td><p>ROCE</p></td>
+<td><p>RDMA over Converged Ethernet</p></td>
+</tr>
+<tr class="row-odd"><td><p>UDMA</p></td>
+<td><p>Unified DMA</p></td>
+</tr>
+</tbody>
+</table>
 </li>
-<li><p>OptionalAttr类</p>
+<li><p>OptionalAttr 类 — 初始化可选属性配置。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">OptionalAttr</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 </pre></div>
@@ -2168,29 +2929,39 @@
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>属性</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>version</p></td>
-<td><p>版本</p></td>
+<td><p>[in]</p></td>
+<td><p>配置版本号</p></td>
 </tr>
 <tr class="row-odd"><td><p>data_op_engine_type</p></td>
-<td><p>类型</p></td>
+<td><p>[in]</p></td>
+<td><p>数据传输引擎类型（<code class="docutils literal notranslate"><span class="pre">OpEngineType</span></code> 枚举值）</p></td>
 </tr>
 <tr class="row-even"><td><p>shm_init_timeout</p></td>
-<td><p>init函数的超时时间</p></td>
+<td><p>[in]</p></td>
+<td><p>init 操作的超时时间</p></td>
 </tr>
 <tr class="row-odd"><td><p>shm_create_timeout</p></td>
-<td><p>create函数的超时时间</p></td>
+<td><p>[in]</p></td>
+<td><p>create 操作的超时时间</p></td>
 </tr>
 <tr class="row-even"><td><p>control_operation_timeout</p></td>
+<td><p>[in]</p></td>
 <td><p>控制操作的超时时间</p></td>
+</tr>
+<tr class="row-odd"><td><p>sockFd</p></td>
+<td><p>[in]</p></td>
+<td><p>socket 文件描述符，默认 -1</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>InitAttr类</p>
+<li><p>InitAttr 类 — 初始化属性配置。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">InitAttr</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 </pre></div>
@@ -2198,46 +2969,54 @@
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>属性</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>my_rank</p></td>
-<td><p>当前进程的排名</p></td>
+<td><p>[in]</p></td>
+<td><p>当前进程的 PE 编号</p></td>
 </tr>
 <tr class="row-odd"><td><p>n_ranks</p></td>
-<td><p>所有进程的总排名数</p></td>
+<td><p>[in]</p></td>
+<td><p>PE 总数</p></td>
 </tr>
 <tr class="row-even"><td><p>ip_port</p></td>
-<td><p>通信服务器的ip和端口</p></td>
+<td><p>[in]</p></td>
+<td><p>通信服务器的 IP 和端口</p></td>
 </tr>
 <tr class="row-odd"><td><p>local_mem_size</p></td>
-<td><p>当前占用的共享内存大小</p></td>
+<td><p>[in]</p></td>
+<td><p>当前 PE 分配的对称内存大小（字节）</p></td>
 </tr>
 <tr class="row-even"><td><p>option_attr</p></td>
-<td><p>可选参数</p></td>
+<td><p>[in]</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OptionalAttr</span></code> 可选属性配置</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>TeamConfig类</p>
+<li><p>TeamConfig 类 — Team 配置。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TeamConfig</span><span class="p">:</span>
 </pre></div>
 </div>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>属性</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>num_contexts</p></td>
-<td><p>一个团队（team）中可以同时运行的上下文数量</p></td>
+<td><p>[in]</p></td>
+<td><p>一个 team 中可以同时运行的上下文数量</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>UniqueId类</p>
+<li><p>UniqueId 类 — UID 初始化的唯一标识符句柄。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">UniqueId</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 </pre></div>
@@ -2245,26 +3024,31 @@
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>属性</p></th>
+<th class="head"><p>方向</p></th>
 <th class="head"><p>含义</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>version</p></td>
+<td><p>[out]</p></td>
 <td><p>版本信息</p></td>
 </tr>
-<tr class="row-odd"><td><p>my_rank</p></td>
-<td><p>当前进程的pe编号</p></td>
+<tr class="row-odd"><td><p>my_pe</p></td>
+<td><p>[out]</p></td>
+<td><p>当前进程的 PE 编号</p></td>
 </tr>
 <tr class="row-even"><td><p>n_pes</p></td>
-<td><p>所有进程的pe总数</p></td>
+<td><p>[out]</p></td>
+<td><p>所有进程的 PE 总数</p></td>
 </tr>
 <tr class="row-odd"><td><p>internal</p></td>
-<td><p>uid的内部信息</p></td>
+<td><p>[out]</p></td>
+<td><p>UID 的内部信息（字节）</p></td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>InitStatus枚举类</p>
+<li><p>InitStatus 枚举类 — 共享内存模块初始化状态。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">InitStatus</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="n">NOT_INITIALIZED</span>
     <span class="n">SHM_CREATED</span>
@@ -2272,15 +3056,51 @@
     <span class="n">INVALID</span>
 </pre></div>
 </div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>枚举值</p></th>
+<th class="head"><p>含义</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NOT_INITIALIZED</p></td>
+<td><p>未初始化</p></td>
+</tr>
+<tr class="row-odd"><td><p>SHM_CREATED</p></td>
+<td><p>共享内存已创建</p></td>
+</tr>
+<tr class="row-even"><td><p>INITIALIZED</p></td>
+<td><p>初始化完成</p></td>
+</tr>
+<tr class="row-odd"><td><p>INVALID</p></td>
+<td><p>无效状态</p></td>
+</tr>
+</tbody>
+</table>
 </li>
-<li><p>SignalOp枚举类</p>
+<li><p>SignalOp 枚举类 — 信号变量原子操作类型。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SignalOp</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="n">SIGNAL_SET</span>
     <span class="n">SIGNAL_ADD</span>
 </pre></div>
 </div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>枚举值</p></th>
+<th class="head"><p>含义</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SIGNAL_SET</p></td>
+<td><p>原子设置：将给定值写入远程信号</p></td>
+</tr>
+<tr class="row-odd"><td><p>SIGNAL_ADD</p></td>
+<td><p>原子加：将给定值加到远程信号现有值上</p></td>
+</tr>
+</tbody>
+</table>
 </li>
-<li><p>CmpOp枚举类</p>
+<li><p>CmpOp 枚举类 — 信号比较操作类型。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CmpOp</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="n">CMP_EQ</span>
     <span class="n">CMP_NE</span>
@@ -2290,6 +3110,33 @@
     <span class="n">CMP_LE</span>
 </pre></div>
 </div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>枚举值</p></th>
+<th class="head"><p>含义</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CMP_EQ</p></td>
+<td><p>等于（==）</p></td>
+</tr>
+<tr class="row-odd"><td><p>CMP_NE</p></td>
+<td><p>不等于（!=）</p></td>
+</tr>
+<tr class="row-even"><td><p>CMP_GT</p></td>
+<td><p>大于（&gt;）</p></td>
+</tr>
+<tr class="row-odd"><td><p>CMP_GE</p></td>
+<td><p>大于等于（&gt;=）</p></td>
+</tr>
+<tr class="row-even"><td><p>CMP_LT</p></td>
+<td><p>小于（&lt;）</p></td>
+</tr>
+<tr class="row-odd"><td><p>CMP_LE</p></td>
+<td><p>小于等于（&lt;=）</p></td>
+</tr>
+</tbody>
+</table>
 </li>
 </ol>
 </section>

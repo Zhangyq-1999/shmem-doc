@@ -1,0 +1,308 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pre-commit 代码检查使用指南 &mdash; SHMEM Guidebook 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=d6bf9227" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SHMEM Guidebook
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">快速开始</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compilation_build_guide.html">编译与构建</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Using SHMEM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../example/api_demo.html">SHMEM API 样例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug/log_debug.html">SHMEM日志</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug/tools_debug.html">SHMEM搭配工具算子调测指导</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug/dump_debug.html">在样例工程使用Ascend C算子调测API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/def.html">SHMEM DEF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/host_api.html">HOST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/device_api.html">DEVICE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/pythonAPI.html">SHMEM Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/env_vars_intro.html">SHMEM Env Vars</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Example</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../example/example.html">初始化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example/example.html#allgather">AllGather</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Multi_Instance</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../multi_instance.html">多实例支持</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../principles.html">SHMEM原理概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code_organization.html">代码组织结构</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting And FAQs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../debug/Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug/Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SECURITY.html">安全声明</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SHMEM Guidebook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Pre-commit 代码检查使用指南</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tools/pre-commit_guide.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pre-commit">
+<h1>Pre-commit 代码检查使用指南<a class="headerlink" href="#pre-commit" title="Link to this heading"></a></h1>
+<section id="id1">
+<h2>介绍<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>本项目使用 <a class="reference external" href="https://pre-commit.com/">pre-commit</a> 框架在代码提交前自动执行代码质量检查，确保代码风格一致、无常见错误。</p>
+</section>
+<section id="id2">
+<h2>安装<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3>1. 安装 pre-commit<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pre-commit
+</pre></div>
+</div>
+</section>
+<section id="git-hooks">
+<h3>2. 安装 git hooks（推荐）<a class="headerlink" href="#git-hooks" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>install
+</pre></div>
+</div>
+<p>安装后，每次 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> 会自动运行检查。</p>
+</section>
+</section>
+<section id="id4">
+<h2>使用方式<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<section id="id5">
+<h3>自动检查（推荐）<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>安装 git hooks 后，每次提交代码会自动触发检查：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;your message&quot;</span>
+</pre></div>
+</div>
+<p>如果检查失败，部分工具会自动修复（如 ruff-format、clang-format），修复后重新提交即可。</p>
+</section>
+<section id="id6">
+<h3>手动检查<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>检查暂存的文件：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>run
+</pre></div>
+</div>
+<p>检查指定文件：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>run<span class="w"> </span>ruff-check<span class="w"> </span>--files<span class="w"> </span>path/to/file.py
+pre-commit<span class="w"> </span>run<span class="w"> </span>clang-format<span class="w"> </span>--files<span class="w"> </span>path/to/file.cpp
+</pre></div>
+</div>
+<p>检查单个 hook：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>run<span class="w"> </span>ruff-check
+pre-commit<span class="w"> </span>run<span class="w"> </span>pylint
+pre-commit<span class="w"> </span>run<span class="w"> </span>clang-format
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h3>跳过检查（不推荐）<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>--no-verify<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;your message&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id8">
+<h2>检查工具说明<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>工具</p></th>
+<th class="head"><p>语言</p></th>
+<th class="head"><p>功能</p></th>
+<th class="head"><p>配置文件</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ruff</p></td>
+<td><p>Python</p></td>
+<td><p>代码格式化 + Lint</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tools/pre-commit/pyproject.toml</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>pylint</p></td>
+<td><p>Python</p></td>
+<td><p>代码质量检查</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tools/pre-commit/pyproject.toml</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>bandit</p></td>
+<td><p>Python</p></td>
+<td><p>安全漏洞检查</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tools/pre-commit/pyproject.toml</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>codespell</p></td>
+<td><p>通用</p></td>
+<td><p>拼写检查</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>typos</p></td>
+<td><p>通用</p></td>
+<td><p>拼写检查</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tools/pre-commit/typos.toml</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>clang-format</p></td>
+<td><p>C/C++</p></td>
+<td><p>代码格式化</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.clang-format</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id9">
+<h2>配置文件说明<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<section id="id10">
+<h3>主配置文件<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="#../.pre-commit-config.yaml"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code></span></a> - 定义要运行的检查工具和参数</p>
+</section>
+<section id="python">
+<h3>Python 工具配置<a class="headerlink" href="#python" title="Link to this heading"></a></h3>
+<p><a class="reference download internal" download="" href="../_downloads/072d0d0ce1b38a450bc32c914ba7c5a6/pyproject.toml"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">tools/pre-commit/pyproject.toml</span></code></span></a> - ruff、pylint、bandit 的规则配置</p>
+</section>
+<section id="c">
+<h3>C++ 格式化配置<a class="headerlink" href="#c" title="Link to this heading"></a></h3>
+<p><a class="reference download internal" download="" href="../_downloads/a1edfc15f065ddf2e572062c994e0882/.clang-format"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">.clang-format</span></code></span></a> - clang-format 的格式化规则</p>
+</section>
+<section id="id11">
+<h3>拼写检查白名单<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<p><a class="reference download internal" download="" href="../_downloads/882874b36e011d48ad93036b67a4ebdd/typos.toml"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">tools/pre-commit/typos.toml</span></code></span></a> - typos 工具的误报白名单</p>
+</section>
+</section>
+<section id="id12">
+<h2>常见问题<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
+<section id="q">
+<h3>Q: 检查失败怎么办？<a class="headerlink" href="#q" title="Link to this heading"></a></h3>
+<p>部分工具支持自动修复（如 ruff-format、clang-format），直接重新提交即可。对于需要手动修复的问题，根据错误提示修改代码后重新提交。</p>
+</section>
+<section id="q-pre-commit-hooks">
+<h3>Q: 如何更新 pre-commit hooks？<a class="headerlink" href="#q-pre-commit-hooks" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>autoupdate
+</pre></div>
+</div>
+</section>
+<section id="id13">
+<h3>Q: 如何查看某个工具的详细错误信息？<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>run<span class="w"> </span>pylint<span class="w"> </span>--verbose
+</pre></div>
+</div>
+</section>
+<section id="id14">
+<h3>Q: 如何临时禁用某条规则？<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<p><strong>Python (ruff/pylint):</strong> 在代码行尾添加注释</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># pylint: disable=invalid-name</span>
+</pre></div>
+</div>
+<p><strong>C++ (clang-format):</strong> 使用注释包围</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// clang-format off</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">unformatted_code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="c1">// clang-format on</span>
+</pre></div>
+</div>
+</section>
+<section id="id15">
+<h3>Q: 首次运行很慢怎么办？<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<p>首次运行需要下载和安装各个检查工具的环境，之后会使用缓存，速度会快很多。</p>
+</section>
+</section>
+<section id="id16">
+<h2>最佳实践<a class="headerlink" href="#id16" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>安装 git hooks</strong>：使用 <code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">install</span></code> 自动检查每次提交</p></li>
+<li><p><strong>不要频繁使用 <code class="docutils literal notranslate"><span class="pre">--no-verify</span></code></strong>：跳过检查可能导致问题代码进入仓库</p></li>
+<li><p><strong>及时更新 hooks</strong>：定期运行 <code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">autoupdate</span></code> 获取最新版本</p></li>
+<li><p><strong>配置 IDE 集成</strong>：在 IDE 中配置 ruff、clang-format 插件，实时检查</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright  2025 Huawei Technologies Co., Ltd..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

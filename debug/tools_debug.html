@@ -55,8 +55,11 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">SHMEM搭配工具算子调测指导</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#msprof">msprof</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#mssanitizer">mssanitizer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">一、安装 mssanitizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mstx">二、安装 mstx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shmem-mssanitizer">三、shmem 使能mssanitizer工具能力</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#mssanitizershmemexample">mssanitizer执行SHMEM自带的example样例</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">内存越界日志</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">内存越界日志</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#profiling">profiling</a></li>
@@ -133,13 +136,61 @@
 <ul class="simple">
 <li><p>SDMA/RDMA/UDMA相关接口和用例不支持使用mssanitizer进行内存检测</p></li>
 </ul>
-<p><strong>该功能依赖对应 CANN 版本能力，预计社区版 9.0.0-beta.2 支持</strong>
-<strong>提前尝鲜可自行编译<a class="reference external" href="https://gitcode.com/Ascend/mssanitizer?source_module=search_project">mssanitizer</a>工具，并将编译产物替换CANN包内部<code class="docutils literal notranslate"><span class="pre">tools/mssanitizer</span></code></strong></p>
-<p>使能mssanitizer工具能力，在shmem/目录编译:</p>
+<p><strong>该功能依赖对应 CANN 版本能力，预计社区版 9.1.0 支持</strong></p>
+<p>如果当前使用的 CANN 版本不支持 mssanitizer，可按以下步骤从源码安装：</p>
+<section id="id1">
+<h3>一、安装 mssanitizer<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>参考：<a class="reference external" href="https://gitcode.com/Ascend/mssanitizer/blob/master/docs/zh/install_guide/mssanitizer_install_guide.md">mssanitizer 安装指南</a></p>
+<p>获取源码并编译出包：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://gitcode.com/Ascend/mssanitizer.git
+<span class="nb">cd</span><span class="w"> </span>mssanitizer
+python<span class="w"> </span>build.py
+</pre></div>
+</div>
+<p>安装 run 包：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>output
+chmod<span class="w"> </span>+x<span class="w"> </span>mindstudio-sanitizer_*.run
+./mindstudio-sanitizer_*.run<span class="w"> </span>--run
+</pre></div>
+</div>
+<p>如果已设置 <code class="docutils literal notranslate"><span class="pre">ASCEND_HOME_PATH</span></code> 环境变量，安装至 <code class="docutils literal notranslate"><span class="pre">$ASCEND_HOME_PATH</span></code>；否则安装至默认路径 <code class="docutils literal notranslate"><span class="pre">$HOME/Ascend</span></code>。</p>
+</section>
+<section id="mstx">
+<h3>二、安装 mstx<a class="headerlink" href="#mstx" title="Link to this heading"></a></h3>
+<p>参考：<a class="reference external" href="https://gitcode.com/Ascend/mstx/blob/master/docs/zh/install_guide/mstx_install_guide.md">mstx 安装指南</a></p>
+<p>安装编译依赖：</p>
+<ul class="simple">
+<li><p>openEuler / CentOS 环境：</p></li>
+</ul>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>yum<span class="w"> </span>install<span class="w"> </span>python3-devel
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Ubuntu 环境：</p></li>
+</ul>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>python3-dev
+</pre></div>
+</div>
+<p>获取 mstx 源码并安装 whl 包：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://gitcode.com/Ascend/mstx.git
+<span class="nb">cd</span><span class="w"> </span>mstx
+<span class="nb">cd</span><span class="w"> </span>output
+pip3<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>mstx-xxxxx.whl<span class="w"> </span>--target<span class="w"> </span><span class="si">${</span><span class="nv">ASCEND_HOME_PATH</span><span class="si">}</span>/tools/mstx/
+</pre></div>
+</div>
+</section>
+<section id="shmem-mssanitizer">
+<h3>三、shmem 使能mssanitizer工具能力<a class="headerlink" href="#shmem-mssanitizer" title="Link to this heading"></a></h3>
+<p>在shmem/目录编译:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>-mssanitizer
 </pre></div>
 </div>
-<p>为算子工程在编译时添加<code class="docutils literal notranslate"><span class="pre">-g</span> <span class="pre">--cce-enable-sanitizer</span></code>编译选项。</p>
+<p>不同芯片型号的编译选项有所差异：</p>
+<ul class="simple">
+<li><p><strong>Ascend950</strong>：内存检测所有功能不需要 <code class="docutils literal notranslate"><span class="pre">--cce-enable-sanitizer</span></code> 编译选项，编译时仅添加 <code class="docutils literal notranslate"><span class="pre">-g</span></code> 即可，mssanitizer 功能正常生效。</p></li>
+<li><p><strong>其他芯片型号（如 Ascend910B）</strong>：编译时需添加 <code class="docutils literal notranslate"><span class="pre">-g</span> <span class="pre">--cce-enable-sanitizer</span></code> 编译选项以启用 mssanitizer 插桩。</p></li>
+</ul>
+<p>当前构建脚本会根据 <code class="docutils literal notranslate"><span class="pre">SOC_TYPE</span></code> 自动选择对应的编译选项，无需手动配置。</p>
 <p>工具默认开启内存检测能力，即–tool memcheck，一般情况按如下方式拉起可执行文件即可。</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mssanitizer<span class="w"> </span>--<span class="w"> </span>application<span class="w"> </span>parameter1<span class="w"> </span>parameter2<span class="w"> </span>...
 </pre></div>
@@ -148,6 +199,7 @@
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mssanitizer<span class="w"> </span>&lt;options&gt;<span class="w"> </span>--<span class="w"> </span>&lt;user_program&gt;<span class="w"> </span>&lt;user_options&gt;<span class="w"> </span>
 </pre></div>
 </div>
+</section>
 <section id="mssanitizershmemexample">
 <h3>mssanitizer执行SHMEM自带的example样例<a class="headerlink" href="#mssanitizershmemexample" title="Link to this heading"></a></h3>
 <p>shmem的<a class="reference external" href="https://gitcode.com/cann/shmem/tree/master/examples/allgather">AllGather</a>样例运行脚本提供了tool选项选择拉起工具。</p>
@@ -161,8 +213,8 @@ mssanitizer<span class="w"> </span>--<span class="w"> </span>bash<span class="w"
 </pre></div>
 </div>
 </section>
-<section id="id1">
-<h3>内存越界日志<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<section id="id2">
+<h3>内存越界日志<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
 <p>当内存发生越界时工具会先打屏越界地址，越界内存大小、所属kernel，核号、卡号等信息。</p>
 <p>随后打屏越界代码的调用栈。可以协助开发快速定位越界问题以及排查代码漏洞。</p>
 <p><img alt="image" src="../_images/mssanitizer_example.png" /></p>

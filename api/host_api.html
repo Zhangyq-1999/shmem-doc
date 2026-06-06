@@ -295,7 +295,7 @@
 <dd><p>exit all ranks. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>status</strong> – [in] name </p>
+<dd class="field-odd"><p><strong>status</strong> – [in] exit status code </p>
 </dd>
 </dl>
 </dd></dl>
@@ -1131,6 +1131,21 @@
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Returns 0 on success or an error code on failure. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="shmem__host__rma_8h_1a2bec582c920ee74e6f830a285fe268c6"></span><span class="sig-name descname"><span class="pre">ACLSHMEM_HOST_API</span> <span class="pre">void</span> <span class="pre">aclshmemx_quiet_on_stream</span> <span class="pre">(aclrtStream</span> <span class="pre">stream)</span></span></dt>
+<dd><p>Ensures completion of all previously issued operations on symmetric data objects issued by the calling PE. The quiet is queued on the given stream; the caller must synchronize the stream to observe completion from the host. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Quiet operations are scoped to the issuing context: quiet called from the host ensures completion of host-issued operations; quiet called from a device kernel ensures completion of operations issued by that kernel. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stream</strong> – [in] ACL stream on which to queue the quiet operation. Passing NULL uses the default stream.</p>
 </dd>
 </dl>
 </dd></dl>

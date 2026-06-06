@@ -46,14 +46,44 @@
               <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">快速开始</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id2">介绍</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">软件架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id4">目录结构说明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id5">软件硬件配套说明</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id6">快速上手</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pythontest-pythonapi">python侧test用例     <span class="xref myst">python接口API列表</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#unique-id">unique id 初始化方式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#shmem">SHMEM方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1 介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">2 软件架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">3 目录结构说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">4 环境准备</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">4.1 硬件要求</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">4.2 工具链依赖</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cann">4.3 CANN</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id8">4.3.1 CANN 版本说明</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">4.3.2 CANN 包安装</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pytorchtorch-npu">4.4 安装<code class="docutils literal notranslate"><span class="pre">Pytorch</span></code>框架和<code class="docutils literal notranslate"><span class="pre">torch_npu</span></code>插件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python">4.5 Python 依赖安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">4.6 可选依赖</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">5 快速上手</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id12">5.1 安装方式</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id13">5.1.1 方式一：源码编译</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14">5.1.2 方式二：二进制包安装</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">5.2 样例执行</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debug">5.3 debug 模式使用</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#python-test-python-api">6 Python 侧 test 用例     <span class="xref myst">Python 接口 API 列表</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#unique-id">7 <code class="docutils literal notranslate"><span class="pre">unique</span> <span class="pre">id</span></code> 初始化方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shmem">8 SHMEM 方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id16">9 测试框架</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id17">9.1 运行单元测试</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">9.2 样例编译与执行</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id19">9.3 样例单独执行</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id20">9.4 运行 Python 测试用例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">9.5 自定义测试</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id22">10 配置与调优（可选，进阶使用）</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="compilation_build_guide.html">编译与构建</a></li>
@@ -124,19 +154,19 @@
   <section id="id1">
 <h1>快速开始<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
 <section id="id2">
-<h2>介绍<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<h2>1 介绍<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
 <p>本系统主要面向昇腾平台上的模型和算子开发者，提供便携易用的多机多卡内存访问方式，方便用户开发在卡间同步数据，加速通信或通算融合类算子开发。</p>
 </section>
 <section id="id3">
-<h2>软件架构<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
-<p>共享内存库接口主要分为host和device接口部分：</p>
+<h2>2 软件架构<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>共享内存库接口主要分为 host 和 device 接口部分：</p>
 <ul class="simple">
-<li><p>host侧接口提供初始化、内存管理、通信域管理以及同步功能。</p></li>
-<li><p>device侧接口提供内存访问、同步以及通信域管理功能。</p></li>
+<li><p>host 侧接口提供初始化、内存管理、通信域管理以及同步功能。</p></li>
+<li><p>device 侧接口提供内存访问、同步以及通信域管理功能。</p></li>
 </ul>
 </section>
 <section id="id4">
-<h2>目录结构说明<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<h2>3 目录结构说明<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
 <p>详细介绍见<a class="reference internal" href="code_organization.html"><span class="std std-doc">code_organization</span></a></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── 3rdparty // 依赖的第三方库
 ├── docs     // 文档
@@ -149,56 +179,219 @@
 </div>
 </section>
 <section id="id5">
-<h2>软件硬件配套说明<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<h2>4 环境准备<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<section id="id6">
+<h3>4.1 硬件要求<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>硬件型号支持</p>
-<ul>
-<li><p>Atlas 800I A2/A3 系列产品</p></li>
-<li><p>Atlas 800T A2/A3 系列产品</p></li>
-</ul>
-</li>
-<li><p>平台：aarch64/x86</p></li>
-<li><p>配套软件：驱动固件 Ascend HDK 25.0.RC1.1、 CANN 8.3.RC1 及之后版本。（参考《<a class="reference external" href="https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/83RC1/softwareinst/instg/instg_0000.html?Mode=PmIns&amp;amp;InstallType=local&amp;amp;OS=Ubuntu&amp;amp;Software=cannToolKit">CANN软件安装指南</a>》安装CANN开发套件包以及配套固件和驱动）<br />
-cmake &gt;= 3.19<br />
-GLIBC &gt;= 2.28</p></li>
+<li><p>Atlas 系列：800I A2/A3、800T A2/A3</p></li>
+<li><p>架构兼容：aarch64、x86</p></li>
 </ul>
 </section>
-<section id="id6">
-<h2>快速上手<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
-<ul>
-<li><p>设置CANN环境变量<br></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># root用户安装（默认路径）</span>
-<span class="nb">source</span><span class="w"> </span>/usr/local/Ascend/ascend-toolkit/set_env.sh
+<section id="id7">
+<h3>4.2 工具链依赖<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>gcc &gt;= 7.3.0 / g++ &gt;= 7.3.0 （注意：gcc与g++版本一致）</p></li>
+<li><p>cmake ≥ 3.19</p></li>
+<li><p>GLIBC ≥ 2.28</p></li>
+<li><p>Python &gt;= 3.9.0</p></li>
+</ul>
+</section>
+<section id="cann">
+<h3>4.3 CANN<a class="headerlink" href="#cann" title="Link to this heading"></a></h3>
+<section id="id8">
+<h4>4.3.1 CANN 版本说明<a class="headerlink" href="#id8" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>驱动固件</p></th>
+<th class="head"><p>CANN 版本</p></th>
+<th class="head"><p>D2D</p></th>
+<th class="head"><p>D2H/H2D</p></th>
+<th class="head"><p>D2rH/rH2D</p></th>
+<th class="head"><p>其他依赖</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Ascend HDK 25.0.RC1.1</p></td>
+<td><p>9.0.0-beta.2 及以上<br><a class="reference external" href="https://www.hiascend.com/developer/download/community/result?module=cann">社区版资源</a></p></td>
+<td><p>MTE<br>RDMA<br>SDMA</p></td>
+<td><p>MTE</p></td>
+<td><p>MTE</p></td>
+<td><p>使能 SDMA 需下载社区版 <a class="reference external" href="https://www.hiascend.com/developer/download/community/result?module=cann">ops-legacy 包</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Ascend HDK 25.0.RC1.1</p></td>
+<td><p>9.0.0 及以上<br>尝鲜版 toolkit 包：<a class="reference external" href="https://ascend.devcloud.huaweicloud.com/artifactory/cann-run-mirror/software/legacy/20260305000326487/x86_64/Ascend-cann-toolkit_9.0.0_linux-x86_64.run">x86_64</a> / <a class="reference external" href="https://ascend.devcloud.huaweicloud.com/artifactory/cann-run-mirror/software/legacy/20260305000326487/aarch64/Ascend-cann-toolkit_9.0.0_linux-aarch64.run">aarch64</a></p></td>
+<td><p>MTE<br>RDMA<br>SDMA</p></td>
+<td><p>MTE</p></td>
+<td><p>MTE</p></td>
+<td><p>使能 SDMA 需下载 ops-legacy 包（按硬件平台）：<a class="reference external" href="https://ascend-cann.obs.cn-north-4.myhuaweicloud.com/CANN/20260305_newest/cann-910b-ops-legacy_9.0.0_linux-x86_64.run">A2 x86_64</a> / <a class="reference external" href="https://ascend-cann.obs.cn-north-4.myhuaweicloud.com/CANN/20260305_newest/cann-910b-ops-legacy_9.0.0_linux-aarch64.run">A2 aarch64</a> / <a class="reference external" href="https://ascend-cann.obs.cn-north-4.myhuaweicloud.com/CANN/20260305_newest/cann-A3-ops-legacy_9.0.0_linux-x86_64.run">A3 x86_64</a> / <a class="reference external" href="https://ascend-cann.obs.cn-north-4.myhuaweicloud.com/CANN/20260305_newest/cann-A3-ops-legacy_9.0.0_linux-aarch64.run">A3 aarch64</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Ascend HDK 25.0.RC1.1</p></td>
+<td><p>8.5.0 及以上<br><a class="reference external" href="https://www.hiascend.com/developer/download/community/result?module=cann">社区版资源</a></p></td>
+<td><p>MTE<br>RDMA</p></td>
+<td><p>MTE</p></td>
+<td><p>MTE</p></td>
+<td><p>使能 A3 D2rH/rH2D：LingQu Computing Network <a class="reference external" href="https://support.huawei.com/enterprise/zh/ascend-computing/lingqu-computing-network-pid-258003841/software">1.5.0 版本</a><br>升级指导：<a class="reference external" href="https://support.huawei.com/enterprise/zh/ascend-computing/lingqu-computing-network-pid-258003841">安装指南</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Ascend HDK 25.0.RC1.1</p></td>
+<td><p>8.3.RC1 及以上<br><a class="reference external" href="https://www.hiascend.com/developer/download/community/result?module=cann">社区版资源</a></p></td>
+<td><p>MTE<br>RDMA</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Ascend HDK 25.5.X</p></td>
+<td><p>8.5.0 及以上<br><a class="reference external" href="https://www.hiascend.com/developer/download/community/result?module=cann">社区版资源</a></p></td>
+<td><p>MTE<br>RDMA</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id9">
+<h4>4.3.2 CANN 包安装<a class="headerlink" href="#id9" title="Link to this heading"></a></h4>
+<p>参考<a class="reference external" href="https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/900/softwareinst/instg/instg_0000.html?OS=openEuler&amp;amp;InstallType=local">快速安装 CANN</a></p>
+<p>商发版本只需要安装<code class="docutils literal notranslate"><span class="pre">toolkit</span></code>的<code class="docutils literal notranslate"><span class="pre">.run</span></code>包即可。</p>
+<p>社区版本需要额外安装一个<code class="docutils literal notranslate"><span class="pre">{soc_name}-ops</span></code>的<code class="docutils literal notranslate"><span class="pre">.run</span></code>安装包，需要选择cann版本，选择对应的soc、操作系统、架构的版本。（如果没有<code class="docutils literal notranslate"><span class="pre">{soc_name}-ops</span></code>的算子包，可能会提示缺少<code class="docutils literal notranslate"><span class="pre">libhccl.so</span></code>库文件）。</p>
+<p>社区资源参考：<a class="reference external" href="https://www.hiascend.com/developer/download/community/result?module=cann&amp;amp;cann=9.0.0">CANN 9.0.0 社区版资源</a>。</p>
+<p>soc的信息如下，可以参考安装。</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>soc version</p></th>
+<th class="head"><p>备注</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Ascend 910B</p></td>
+<td><p>A2</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ascend 910C</p></td>
+<td><p>A3</p></td>
+</tr>
+<tr class="row-even"><td><p>Ascend 950</p></td>
+<td><p>无</p></td>
+</tr>
+</tbody>
+</table>
+<p>安装 toolkit 包</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+x<span class="w"> </span>Ascend-cann-toolkit_<span class="si">${</span><span class="nv">cann_version</span><span class="si">}</span>_linux-<span class="k">$(</span>uname<span class="w"> </span>-m<span class="k">)</span>.run
+<span class="c1"># 默认安装路径</span>
+./Ascend-cann-toolkit_<span class="si">${</span><span class="nv">cann_version</span><span class="si">}</span>_linux-<span class="k">$(</span>uname<span class="w"> </span>-m<span class="k">)</span>.run<span class="w"> </span>--install
+<span class="c1"># 自定义安装路径</span>
+./Ascend-cann-toolkit_<span class="si">${</span><span class="nv">cann_version</span><span class="si">}</span>_linux-<span class="k">$(</span>uname<span class="w"> </span>-m<span class="k">)</span>.run<span class="w"> </span>--install<span class="w"> </span>--install-path<span class="o">=</span><span class="si">${</span><span class="nv">install_path</span><span class="si">}</span>
 </pre></div>
 </div>
-</li>
-<li><p>共享内存库编译<br>
-编译共享内存库，设置共享内存库环境变量：</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>shmem
+<p>安装 ops 包</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+x<span class="w"> </span>Ascend-cann-<span class="si">${</span><span class="nv">soc_name</span><span class="si">}</span>-ops_<span class="si">${</span><span class="nv">cann_version</span><span class="si">}</span>_linux-<span class="k">$(</span>uname<span class="w"> </span>-m<span class="k">)</span>.run
+<span class="c1"># 默认安装路径</span>
+./Ascend-cann-<span class="si">${</span><span class="nv">soc_name</span><span class="si">}</span>-ops_<span class="si">${</span><span class="nv">cann_version</span><span class="si">}</span>_linux-<span class="k">$(</span>uname<span class="w"> </span>-m<span class="k">)</span>.run<span class="w"> </span>--install
+<span class="c1"># 自定义安装路径</span>
+./Ascend-cann-<span class="si">${</span><span class="nv">soc_name</span><span class="si">}</span>-ops_<span class="si">${</span><span class="nv">cann_version</span><span class="si">}</span>_linux-<span class="k">$(</span>uname<span class="w"> </span>-m<span class="k">)</span>.run<span class="w"> </span>--install<span class="w"> </span>--install-path<span class="o">=</span><span class="si">${</span><span class="nv">install_path</span><span class="si">}</span>
+</pre></div>
+</div>
+<p>配置 CANN 环境变量（默认安装路径）：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/usr/local/Ascend/ascend-toolkit/set_env.sh
+</pre></div>
+</div>
+<p>配置 CANN 环境变量（自定义安装路径）：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span><span class="si">${</span><span class="nv">install_path</span><span class="si">}</span>/ascend-toolkit/set_env.sh
+</pre></div>
+</div>
+</section>
+</section>
+<section id="pytorchtorch-npu">
+<h3>4.4 安装<code class="docutils literal notranslate"><span class="pre">Pytorch</span></code>框架和<code class="docutils literal notranslate"><span class="pre">torch_npu</span></code>插件<a class="headerlink" href="#pytorchtorch-npu" title="Link to this heading"></a></h3>
+<p>编译运行 torch 输入输出 tensor 的算子时必须安装本包。</p>
+<p>以<code class="docutils literal notranslate"><span class="pre">CANN</span> <span class="pre">9.0.0</span></code>为例，参考 <a class="reference external" href="https://www.hiascend.com/document/detail/zh/Pytorch/2600/configandinstg/instg/docs/zh/installation_guide/installation_via_binary_package.md">Ascend Extension for PyTorch 26.0.0-昇腾社区</a> 文档。</p>
+<p>进入该页面，根据系统架构、CANN版本、Python版本，选择对应的版本。然后参考页面下方提示的安装命令进行安装。</p>
+<p>以<code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">3.11</span></code>，<code class="docutils literal notranslate"><span class="pre">PyTorch</span> <span class="pre">2.7.1</span></code>，<code class="docutils literal notranslate"><span class="pre">torch_npu</span> <span class="pre">26.0.0</span></code>，<code class="docutils literal notranslate"><span class="pre">aarch64</span></code>版本为例。</p>
+<ul class="simple">
+<li><p>安装<code class="docutils literal notranslate"><span class="pre">PyTorch</span></code>框架：</p></li>
+</ul>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># 下载PyTorch框架</span>
+wget<span class="w"> </span>https://download.pytorch.org/whl/cpu/torch-2.7.1%2Bcpu-cp311-cp311-manylinux_2_28_aarch64.whl
+<span class="c1"># 安装</span>
+pip3<span class="w"> </span>install<span class="w"> </span>torch-2.7.1+cpu-cp311-cp311-manylinux_2_28_aarch64.whl
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>安装<code class="docutils literal notranslate"><span class="pre">torch_npu</span></code>插件</p></li>
+</ul>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># 下载torch_npu插件</span>
+wget<span class="w"> </span>https://gitcode.com/Ascend/pytorch/releases/download/v26.0.0-pytorch2.7.1/torch_npu-2.7.1.post4-cp311-cp311-manylinux_2_28_aarch64.whl
+<span class="c1"># 安装命令</span>
+pip3<span class="w"> </span>install<span class="w"> </span>torch_npu-2.7.1.post4-cp311-cp311-manylinux_2_28_aarch64.whl
+</pre></div>
+</div>
+</section>
+<section id="python">
+<h3>4.5 Python 依赖安装<a class="headerlink" href="#python" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 基础依赖（构建期 + 运行期硬依赖）</span>
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="c1"># 运行 Python 示例所需的额外依赖（按需安装）</span>
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements-examples.txt
+</pre></div>
+</div>
+</section>
+<section id="id10">
+<h3>4.6 可选依赖<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>MPI：OpenMPI 4.0+（分布式通信场景）</p></li>
+<li><p>PyTorch：1.12+（Python 示例运行）</p></li>
+</ul>
+</section>
+</section>
+<section id="id11">
+<h2>5 快速上手<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<section id="id12">
+<h3>5.1 安装方式<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<section id="id13">
+<h4>5.1.1 方式一：源码编译<a class="headerlink" href="#id13" title="Link to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 克隆代码仓</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://gitcode.com/cann/shmem.git
+<span class="nb">cd</span><span class="w"> </span>shmem
+
+<span class="c1"># 编译核心库（默认不包含xDMA能力，也不包含示例和测试）</span>
 bash<span class="w"> </span>scripts/build.sh
+
+<span class="c1"># 配置环境变量</span>
 <span class="nb">source</span><span class="w"> </span>install/set_env.sh
 </pre></div>
 </div>
-</li>
-<li><p>run包使用<br>
-软件包名为：SHMEM_{version}_linux-{arch}.run <br>
-其中，{version}表示软件版本号，{arch}表示CPU架构。<br>
-安装run包（需要依赖cann环境）<br></p>
+<p>备注：<a class="reference external" href="http://build.sh">build.sh</a> 的参数可以参考 <a class="reference internal" href="#./docs/compilation_build_guide.md"><span class="xref myst">compilation_build_guide.md</span></a></p>
+</section>
+<section id="id14">
+<h4>5.1.2 方式二：二进制包安装<a class="headerlink" href="#id14" title="Link to this heading"></a></h4>
+<p>获取方式：<code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">scripts/build.sh</span> <span class="pre">-package</span></code></p>
+<p>软件包格式：<code class="docutils literal notranslate"><span class="pre">SHMEM_{version}_linux-{arch}.run</span></code></p>
+<p>其中，<code class="docutils literal notranslate"><span class="pre">{version}</span></code>表示软件版本号，<code class="docutils literal notranslate"><span class="pre">{arch}</span></code>表示<code class="docutils literal notranslate"><span class="pre">CPU</span></code>架构。<br></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+x<span class="w"> </span>软件包名.run<span class="w"> </span><span class="c1"># 增加对软件包的可执行权限</span>
 ./软件包名.run<span class="w"> </span>--check<span class="w"> </span><span class="c1"># 校验软件包安装文件的一致性和完整性</span>
 ./软件包名.run<span class="w"> </span>--install<span class="w"> </span><span class="c1"># 安装软件，可使用--help查询相关安装选项</span>
 </pre></div>
 </div>
 <p>出现提示<code class="docutils literal notranslate"><span class="pre">xxx</span> <span class="pre">install</span> <span class="pre">success!</span></code>则安装成功</p>
-</li>
-</ul>
+<p>配置环境变量：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># 配置环境变量</span>
+<span class="c1"># （默认路径：/usr/local/Ascend/shmem）</span>
+<span class="nb">source</span><span class="w"> </span>/usr/local/Ascend/shmem/latest/set_env.sh
+<span class="c1"># （自定义路径：${install_path}/shmem）</span>
+<span class="nb">source</span><span class="w"> </span><span class="si">${</span><span class="nv">install_path</span><span class="si">}</span>/shmem/latest/set_env.sh
+</pre></div>
+</div>
 <p>shmem 默认开启tls通信加密。如果需要关闭，需要调用接口主动关闭：</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int32_t</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_set_conf_store_tls</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="n">null</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int32_t</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_set_conf_store_tls</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>具体细节详见安全声明章节</p>
-<p>执行一个样例matmul_allreduce算子。<br />
-1.在shmem/目录编译:</p>
+</section>
+</section>
+<section id="id15">
+<h3>5.2 样例执行<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<p>以 <code class="docutils literal notranslate"><span class="pre">matmul_allreduce</span></code> 为例，验证核心功能：</p>
+<p>1.在shmem/目录编译:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>-examples
 </pre></div>
 </div>
@@ -207,38 +400,38 @@ bash<span class="w"> </span>scripts/build.sh
 </pre></div>
 </div>
 <p>注：example及其他样例代码仅供参考，在生产环境中请谨慎使用。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>## 功能自测用例
-
- - 共享内存库接口单元测试
-在工程目录下执行
-```sh
-bash scripts/build.sh -uttests
-bash scripts/run.sh
-</pre></div>
-</div>
-<p>run.sh脚本提供-ranks -ipport -test_filter等参数自定义执行用例的卡数、ip端口、gtest_filter等</p>
+<p><code class="docutils literal notranslate"><span class="pre">run.sh</span></code>脚本提供<code class="docutils literal notranslate"><span class="pre">-ranks</span></code>、<code class="docutils literal notranslate"><span class="pre">-ipport</span></code>、<code class="docutils literal notranslate"><span class="pre">-test_filter</span></code>等参数自定义执行用例的卡数、ip端口、gtest_filter等</p>
 <p>例</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># 8卡，ip:port 127.0.0.1:8666，运行所有*Init*用例</span>
 bash<span class="w"> </span>scripts/run.sh<span class="w"> </span>-ranks<span class="w"> </span><span class="m">8</span><span class="w"> </span>-ipport<span class="w"> </span>tcp://127.0.0.1:8666<span class="w"> </span>-test_filter<span class="w"> </span>Init
 </pre></div>
 </div>
 </section>
-<section id="pythontest-pythonapi">
-<h2>python侧test用例     <a class="reference internal" href="api/pythonAPI.html"><span class="std std-doc">python接口API列表</span></a><a class="headerlink" href="#pythontest-pythonapi" title="Link to this heading"></a></h2>
+<section id="debug">
+<h3>5.3 debug 模式使用<a class="headerlink" href="#debug" title="Link to this heading"></a></h3>
+<p>在源码 shmem/ 目录编译:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>-examples<span class="w"> </span>-debug
+</pre></div>
+</div>
+<p>注意：此处 <code class="docutils literal notranslate"><span class="pre">-examples</span></code> 参数非必选项，仅提供<a class="reference internal" href="debug/Troubleshooting_FAQs.html#SHMEM-常见问题"><span class="std std-ref">使用参考</span></a>。</p>
+</section>
+</section>
+<section id="python-test-python-api">
+<h2>6 Python 侧 test 用例     <a class="reference internal" href="api/pythonAPI.html"><span class="std std-doc">Python 接口 API 列表</span></a><a class="headerlink" href="#python-test-python-api" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
-<li><p>在scripts目录下编译的时候，带上build python的选项</p></li>
+<li><p>在 scripts 目录下编译的时候，带上 build python 的选项</p></li>
 </ol>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>build.sh<span class="w"> </span>-python_extension
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
-<li><p>在install目录下，source环境变量</p></li>
+<li><p>在 install 目录下，source 环境变量</p></li>
 </ol>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>set_env.sh
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
-<li><p>在src/python目录下，进行setup，获取到wheel安装包</p></li>
+<li><p>在 src/python 目录下，进行 setup ，获取到 wheel 安装包</p></li>
 </ol>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>setup.py<span class="w"> </span>bdist_wheel
 </pre></div>
@@ -250,7 +443,7 @@ bash<span class="w"> </span>scripts/run.sh<span class="w"> </span>-ranks<span cl
 </pre></div>
 </div>
 <ol class="arabic simple" start="5">
-<li><p>设置是否开启TLS认证，默认开启，若关闭TLS认证，请使用如下接口</p></li>
+<li><p>设置是否开启 TLS 认证，默认开启，若关闭 TLS 认证，请使用如下接口</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">shmem</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">shm</span>
 <span class="n">shm</span><span class="o">.</span><span class="n">set_conf_store_tls</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>   <span class="c1"># 关闭tls认证</span>
@@ -270,15 +463,15 @@ bash<span class="w"> </span>scripts/run.sh<span class="w"> </span>-ranks<span cl
 <p>看到日志中打印出“<a class="reference external" href="http://test.py">test.py</a> running success!”即为demo运行成功</p>
 </section>
 <section id="unique-id">
-<h2>unique id 初始化方式<a class="headerlink" href="#unique-id" title="Link to this heading"></a></h2>
-<p>注：使用unique id的接口初始化，需要手动配置环境变量SHMEM_UID_SESSION_ID或者SHMEM_UID_SOCK_IFNAME，同时配置时只读SHMEM_UID_SESSION_ID
+<h2>7 <code class="docutils literal notranslate"><span class="pre">unique</span> <span class="pre">id</span></code> 初始化方式<a class="headerlink" href="#unique-id" title="Link to this heading"></a></h2>
+<p>注：使用unique id的接口初始化，可以配置环境变量SHMEM_UID_SESSION_ID或者SHMEM_UID_SOCK_IFNAME，同时配置时只读SHMEM_UID_SESSION_ID，都不配置时会自动搜索可用网口。
 SHMEM_UID_SESSION_ID配置示例：
 SHMEM_UID_SESSION_ID=127.0.0.1:1234
 SHMEM_UID_SESSION_ID=[6666:6666:6666:6666:6666:6666:6666:6666]:886
 SHMEM_UID_SOCK_IFNAME配置示例：
 SHMEM_UID_SOCK_IFNAME=enpxxxx:inet4  取ipv4
 SHMEM_UID_SOCK_IFNAME=enpxxxx:inet6  取ipv6
-不配置默认取eth:inet4</p>
+未配置时可自动搜索可用网口（IPv4/IPv6均可，优先非虚拟网口）。</p>
 <ul class="simple">
 <li><p>python初始化例子</p></li>
 </ul>
@@ -294,7 +487,7 @@ SHMEM_UID_SOCK_IFNAME=enpxxxx:inet6  取ipv6
 </div>
 <p>准备以上启动代码<code class="docutils literal notranslate"><span class="pre">init.py</span></code>后，使用<code class="docutils literal notranslate"><span class="pre">torchrun</span> <span class="pre">--nproc-per-node</span> <span class="pre">8</span> <span class="pre">init.py</span></code>，其中进程数 8 根据实际需要改动，更详细的例子，请参考<code class="docutils literal notranslate"><span class="pre">unique_id_test.py</span></code>文件。</p>
 <ul class="simple">
-<li><p>c++初始化例子</p></li>
+<li><p>c++ 初始化例子</p></li>
 </ul>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">aclshmemx_uniqueid_t</span><span class="w"> </span><span class="n">uid</span><span class="p">;</span>
 <span class="n">aclshmemx_init_attr_t</span><span class="w"> </span><span class="o">*</span><span class="n">attr</span><span class="p">;</span>
@@ -304,8 +497,8 @@ SHMEM_UID_SOCK_IFNAME=enpxxxx:inet6  取ipv6
 </div>
 </section>
 <section id="shmem">
-<h2>SHMEM方式<a class="headerlink" href="#shmem" title="Link to this heading"></a></h2>
-<p>注：使用unique id的接口初始化，可以手动配置环境变量SHMEM_UID_SESSION_ID或者SHMEM_UID_SOCK_IFNAME，同时配置时只读SHMEM_UID_SESSION_ID，都不配置会自动搜索可用网口。
+<h2>8 SHMEM 方式<a class="headerlink" href="#shmem" title="Link to this heading"></a></h2>
+<p>注：使用 unique id 的接口初始化，可以手动配置环境变量SHMEM_UID_SESSION_ID或者SHMEM_UID_SOCK_IFNAME，同时配置时只读SHMEM_UID_SESSION_ID，都不配置会自动搜索可用网口。
 SHMEM_UID_SESSION_ID配置示例：
 SHMEM_UID_SESSION_ID=127.0.0.1:1234
 SHMEM_UID_SESSION_ID=[6666:6666:6666:6666:6666:6666:6666:6666]:886
@@ -313,17 +506,100 @@ SHMEM_UID_SESSION_ID=[6666:6666:6666:6666:6666:6666:6666:6666%eth]:886
 SHMEM_UID_SOCK_IFNAME配置示例：
 SHMEM_UID_SOCK_IFNAME=enpxxxx:inet4  取ipv4
 SHMEM_UID_SOCK_IFNAME=enpxxxx:inet6  取ipv6
-不配置默认取inet4自动搜索可用网口，搜索优先级：非docker、lo&gt;&gt;docker&gt;&gt;lo。</p>
+不配置默认自动搜索可用网口(IPv4/IPv6均可)，搜索优先级：非虚拟网口(排除lo/docker/veth/br-/virbr/tun/tap) &gt;&gt; 虚拟网口。</p>
 <ul class="simple">
-<li><p>c++初始化例子</p></li>
+<li><p>c++ 初始化例子</p></li>
 </ul>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">aclshmemx_uniqueid_t</span><span class="w"> </span><span class="n">uid</span><span class="p">;</span>
 <span class="n">aclshmemx_init_attr_t</span><span class="w"> </span><span class="o">*</span><span class="n">attr</span><span class="p">;</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_get_uniqueid</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uid</span><span class="p">);</span>
-<span class="n">shmemx_set_attr_uniqueid_args</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span><span class="w"> </span><span class="n">rank_size</span><span class="p">,</span><span class="w"> </span><span class="n">local_mem_size</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">);</span>
+<span class="n">aclshmemx_set_attr_uniqueid_args</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span><span class="w"> </span><span class="n">rank_size</span><span class="p">,</span><span class="w"> </span><span class="n">local_mem_size</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">);</span>
 <span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_init_attr</span><span class="p">(</span><span class="n">ACLSHMEMX_INIT_WITH_UNIQUEID</span><span class="p">,</span><span class="w"> </span><span class="n">attributes</span><span class="p">);</span>
 </pre></div>
 </div>
+</section>
+<section id="id16">
+<h2>9 测试框架<a class="headerlink" href="#id16" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>单元测试：</strong> 覆盖核心接口（初始化、内存操作、同步等），位于 <code class="docutils literal notranslate"><span class="pre">tests/unittest/</span></code></p></li>
+<li><p><strong>算子泛化性测试：</strong> 针对 <code class="docutils literal notranslate"><span class="pre">matmul_allreduce</span></code> 等样例，支持动态生成测试数据与精度校验</p></li>
+</ul>
+<section id="id17">
+<h3>9.1 运行单元测试<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 编译并运行单元测试</span>
+bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>-uttests
+bash<span class="w"> </span>scripts/run.sh
+</pre></div>
+</div>
+<p><a class="reference external" href="http://run.sh">run.sh</a> 脚本提供 <code class="docutils literal notranslate"><span class="pre">-ranks</span></code>、<code class="docutils literal notranslate"><span class="pre">-test_filter</span></code> 等参数自定义执行用例的卡数、<code class="docutils literal notranslate"><span class="pre">gtest_filter</span></code> 等，例如：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 8卡，运行所有*Init*用例</span>
+bash<span class="w"> </span>scripts/run.sh<span class="w"> </span>-ranks<span class="w"> </span><span class="m">8</span><span class="w"> </span>-test_filter<span class="w"> </span>Init
+</pre></div>
+</div>
+<p>具体参数请见<a class="reference internal" href="#docs/compilation_build_guide.md#SHMEM%E5%85%B3%E9%94%AE%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="xref myst">相关脚本-run.sh</span></a></p>
+</section>
+<section id="id18">
+<h3>9.2 样例编译与执行<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>-examples
+bash<span class="w"> </span>scripts/run_examples.sh
+</pre></div>
+</div>
+</section>
+<section id="id19">
+<h3>9.3 样例单独执行<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
+<p>可查看 examples 目录下对应的样例目录下的 <a class="reference external" href="http://README.md">README.md</a></p>
+</section>
+<section id="id20">
+<h3>9.4 运行 Python 测试用例<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 编译 Python 扩展</span>
+bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>-python_extension
+<span class="c1"># 安装构建脚本生成的 wheel 包</span>
+pip3<span class="w"> </span>install<span class="w"> </span>dist/shmem-xxx.whl<span class="w"> </span>--force-reinstall
+</pre></div>
+</div>
+<p>也可以在仓库根目录手动构建并安装 wheel 包：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>setup.py<span class="w"> </span>bdist_wheel
+pip3<span class="w"> </span>install<span class="w"> </span>dist/shmem-xxx.whl<span class="w"> </span>--force-reinstall
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2卡运行 Python 测试</span>
+torchrun<span class="w"> </span>--nproc-per-node<span class="o">=</span><span class="m">2</span><span class="w"> </span>examples/python_extension/test/init_test.py
+</pre></div>
+</div>
+</section>
+<section id="id21">
+<h3>9.5 自定义测试<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<p>基于 <code class="docutils literal notranslate"><span class="pre">tests/</span></code> 目录的 gtest 框架，新增测试用例需遵循：</p>
+<ul class="simple">
+<li><p>测试文件命名：<code class="docutils literal notranslate"><span class="pre">{module}_test.cc</span></code></p></li>
+<li><p>测试用例命名：<code class="docutils literal notranslate"><span class="pre">{FunctionName}_{Scenario}_Test</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="id22">
+<h2>10 配置与调优（可选，进阶使用）<a class="headerlink" href="#id22" title="Link to this heading"></a></h2>
+<p><strong>1. 关闭 TLS 加密（提升通信性能）</strong></p>
+<p>默认开启 TLS 加密，若为内网可信环境，可关闭以提升通信速度：</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int32_t</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_set_conf_store_tls</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">shmem</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">shm</span>
+<span class="n">shm</span><span class="o">.</span><span class="n">set_conf_store_tls</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>2. 调整共享内存大小</strong></p>
+<p>初始化时指定共享内存池大小（默认 16GB），适配大内存场景：</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">aclshmemx_init_attr_t</span><span class="w"> </span><span class="n">attr</span><span class="p">;</span>
+<span class="n">attr</span><span class="p">.</span><span class="n">local_mem_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span><span class="w"> </span><span class="c1">// 32GB</span>
+<span class="n">aclshmemx_init_attr</span><span class="p">(</span><span class="n">ACLSHMEMX_INIT_WITH_DEFAULT</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">attr</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>3. 性能调优建议</strong></p>
+<ul class="simple">
+<li><p>优先使用 Device 侧接口（减少 Host-Device 交互）；</p></li>
+<li><p>通信域分组时，按物理机节点划分，减少跨节点通信；</p></li>
+<li><p>大批次数据传输时，开启 RDMA 协议（编译时加 <code class="docutils literal notranslate"><span class="pre">-DSHMEM_RDMA=ON</span></code>）。</p></li>
+</ul>
 </section>
 </section>
 
