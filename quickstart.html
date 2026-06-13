@@ -122,10 +122,6 @@
 <li class="toctree-l1"><a class="reference internal" href="debug/Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
 <li class="toctree-l1"><a class="reference internal" href="debug/Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="SECURITY.html">安全声明</a></li>
-</ul>
 
         </div>
       </div>
@@ -155,7 +151,7 @@
 <h1>快速开始<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
 <section id="id2">
 <h2>1 介绍<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
-<p>本系统主要面向昇腾平台上的模型和算子开发者，提供便携易用的多机多卡内存访问方式，方便用户开发在卡间同步数据，加速通信或通算融合类算子开发。</p>
+<p>本系统主要面向昇腾平台上的模型和算子开发者，提供便捷易用的多机多卡内存访问方式，方便用户开发在卡间同步数据，加速通信或通算融合类算子开发。</p>
 </section>
 <section id="id3">
 <h2>2 软件架构<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
@@ -234,13 +230,6 @@
 </tr>
 <tr class="row-odd"><td><p>Ascend HDK 25.0.RC1.1</p></td>
 <td><p>8.3.RC1 及以上<br><a class="reference external" href="https://www.hiascend.com/developer/download/community/result?module=cann">社区版资源</a></p></td>
-<td><p>MTE<br>RDMA</p></td>
-<td><p></p></td>
-<td><p></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p>Ascend HDK 25.5.X</p></td>
-<td><p>8.5.0 及以上<br><a class="reference external" href="https://www.hiascend.com/developer/download/community/result?module=cann">社区版资源</a></p></td>
 <td><p>MTE<br>RDMA</p></td>
 <td><p></p></td>
 <td><p></p></td>
@@ -360,7 +349,7 @@ bash<span class="w"> </span>scripts/build.sh
 <span class="nb">source</span><span class="w"> </span>install/set_env.sh
 </pre></div>
 </div>
-<p>备注：<a class="reference external" href="http://build.sh">build.sh</a> 的参数可以参考 <a class="reference internal" href="#./docs/compilation_build_guide.md"><span class="xref myst">compilation_build_guide.md</span></a></p>
+<p>备注：<a class="reference external" href="http://build.sh">build.sh</a> 的参数可以参考 <a class="reference internal" href="compilation_build_guide.html"><span class="std std-doc">compilation_build_guide.md</span></a></p>
 </section>
 <section id="id14">
 <h4>5.1.2 方式二：二进制包安装<a class="headerlink" href="#id14" title="Link to this heading"></a></h4>
@@ -413,7 +402,7 @@ bash<span class="w"> </span>scripts/run.sh<span class="w"> </span>-ranks<span cl
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>-examples<span class="w"> </span>-debug
 </pre></div>
 </div>
-<p>注意：此处 <code class="docutils literal notranslate"><span class="pre">-examples</span></code> 参数非必选项，仅提供<a class="reference internal" href="debug/Troubleshooting_FAQs.html#SHMEM-常见问题"><span class="std std-ref">使用参考</span></a>。</p>
+<p>注意：此处 <code class="docutils literal notranslate"><span class="pre">-examples</span></code> 参数非必选项，仅提供<a class="reference internal" href="debug/Troubleshooting_FAQs.html#id1"><span class="std std-ref">使用参考</span></a>。</p>
 </section>
 </section>
 <section id="python-test-python-api">
@@ -457,17 +446,17 @@ bash<span class="w"> </span>scripts/run.sh<span class="w"> </span>-ranks<span cl
 <ol class="arabic simple" start="6">
 <li><p>使用torchrun运行测试demo</p></li>
 </ol>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>torchrun<span class="w"> </span>--nproc-per-node<span class="o">=</span>k<span class="w"> </span>test.py<span class="w"> </span>//<span class="w"> </span>k为想运行的ranksize
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>torchrun<span class="w"> </span>--nproc-per-node<span class="o">=</span>k<span class="w"> </span>test.py<span class="w"> </span><span class="c1"># k为想运行的ranksize</span>
 </pre></div>
 </div>
 <p>看到日志中打印出“<a class="reference external" href="http://test.py">test.py</a> running success!”即为demo运行成功</p>
 </section>
 <section id="unique-id">
 <h2>7 <code class="docutils literal notranslate"><span class="pre">unique</span> <span class="pre">id</span></code> 初始化方式<a class="headerlink" href="#unique-id" title="Link to this heading"></a></h2>
-<p>注：使用unique id的接口初始化，可以配置环境变量SHMEM_UID_SESSION_ID或者SHMEM_UID_SOCK_IFNAME，同时配置时只读SHMEM_UID_SESSION_ID，都不配置时会自动搜索可用网口。
-SHMEM_UID_SESSION_ID配置示例：
+<p>注：使用unique id的接口初始化，可以配置环境变量SHMEM_UID_SESSION_ID或者SHMEM_UID_SOCK_IFNAME，同时配置时只读SHMEM_UID_SESSION_ID，都不配置时会自动搜索可用网口。SHMEM_UID_SESSION_ID支持IPv4地址、IPv6地址和主机名。SHMEM_UID_SESSION_ID配置示例：
 SHMEM_UID_SESSION_ID=127.0.0.1:1234
 SHMEM_UID_SESSION_ID=[6666:6666:6666:6666:6666:6666:6666:6666]:886
+SHMEM_UID_SESSION_ID=localhost:8888
 SHMEM_UID_SOCK_IFNAME配置示例：
 SHMEM_UID_SOCK_IFNAME=enpxxxx:inet4  取ipv4
 SHMEM_UID_SOCK_IFNAME=enpxxxx:inet6  取ipv6
@@ -498,11 +487,12 @@ SHMEM_UID_SOCK_IFNAME=enpxxxx:inet6  取ipv6
 </section>
 <section id="shmem">
 <h2>8 SHMEM 方式<a class="headerlink" href="#shmem" title="Link to this heading"></a></h2>
-<p>注：使用 unique id 的接口初始化，可以手动配置环境变量SHMEM_UID_SESSION_ID或者SHMEM_UID_SOCK_IFNAME，同时配置时只读SHMEM_UID_SESSION_ID，都不配置会自动搜索可用网口。
+<p>注：使用unique id的接口初始化，可以手动配置环境变量SHMEM_UID_SESSION_ID或者SHMEM_UID_SOCK_IFNAME，同时配置时只读SHMEM_UID_SESSION_ID，都不配置会自动搜索可用网口。SHMEM_UID_SESSION_ID支持IPv4地址、IPv6地址和主机名。
 SHMEM_UID_SESSION_ID配置示例：
 SHMEM_UID_SESSION_ID=127.0.0.1:1234
 SHMEM_UID_SESSION_ID=[6666:6666:6666:6666:6666:6666:6666:6666]:886
 SHMEM_UID_SESSION_ID=[6666:6666:6666:6666:6666:6666:6666:6666%eth]:886
+SHMEM_UID_SESSION_ID=localhost:8888
 SHMEM_UID_SOCK_IFNAME配置示例：
 SHMEM_UID_SOCK_IFNAME=enpxxxx:inet4  取ipv4
 SHMEM_UID_SOCK_IFNAME=enpxxxx:inet6  取ipv6

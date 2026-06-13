@@ -20,7 +20,6 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="安全声明" href="../SECURITY.html" />
     <link rel="prev" title="代码组织结构" href="../code_organization.html" /> 
 </head>
 
@@ -107,13 +106,21 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id5">调试相关</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id6">编译问题</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#rdma">RDMA相关问题</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">通信丢包</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#q-rdma-rocev2">Q: 使能RDMA(RoCEv2)后，网络出现丢包现象</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a-tcsl-hccl-rdma-tchccl-rdma-sl">A: 检查交换机和端侧的TC与SL配置是否正确，如果不一致会出现丢包现象。可以参考<span class="xref myst">环境变量说明</span>对环境变量HCCL_RDMA_TC和HCCL_RDMA_SL进行设置。</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">调试相关</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">编译问题</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#q-o0-g-bisheng-error-xxxxx-will-be-ignored-werror-woption-ignored">Q:自行添加”-O0 -g”编译选项调试，编译出错，”bisheng: error: xxxxx will be ignored. [-Werror -Woption-ignored]”</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#a-shmemcmakelists-txt-werror-werror">A:SHMEM根目录的CMakeLists.txt的-Werror选项导致编译器告警被作为错误处理，注释掉-Werror编译选项即可解决。</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">算子问题</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">算子问题</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#q-o0-g-min-stack-size-is-xxx-larger-than-current-process-default-size-32768-please-modify-aclinit-json-and-reboot-process">Q:算子使用”-O0 -g”编译选项编译后，运行出错，”min stack size is xxx, larger than current process default size 32768. Please modify aclInit json, and reboot process.”</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#a-aclinit-json">A:在aclInit()接口传入的json文件中，配置更大的栈空间。</a></li>
 </ul>
@@ -122,10 +129,6 @@
 </li>
 </ul>
 </li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../SECURITY.html">安全声明</a></li>
 </ul>
 
         </div>
@@ -272,6 +275,7 @@
 <ul>
 <li><p>SHMEM_UID_SESSION_ID:</p>
 <p><code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID=127.0.0.1:1234</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID=localhost:8888</span></code></p>
 </li>
 <li><p>SHMEM_UID_SOCK_IFNAME:</p>
 <p><code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SOCK_IFNAME=[6666:6666:6666:6666:6666:6666:6666:6666]:886</span></code></p>
@@ -283,10 +287,22 @@
 </section>
 </section>
 </section>
+<section id="rdma">
+<h2>RDMA相关问题<a class="headerlink" href="#rdma" title="Link to this heading"></a></h2>
 <section id="id5">
-<h2>调试相关<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<h3>通信丢包<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<section id="q-rdma-rocev2">
+<h4>Q: 使能RDMA(RoCEv2)后，网络出现丢包现象<a class="headerlink" href="#q-rdma-rocev2" title="Link to this heading"></a></h4>
+</section>
+<section id="a-tcsl-hccl-rdma-tchccl-rdma-sl">
+<h4>A: 检查交换机和端侧的TC与SL配置是否正确，如果不一致会出现丢包现象。可以参考<a class="reference internal" href="../api/env_vars_intro.html"><span class="std std-doc">环境变量说明</span></a>对环境变量<a class="reference external" href="https://www.hiascend.com/document/detail/zh/canncommercial/900/maintenref/envvar/envref_07_0089.html">HCCL_RDMA_TC</a>和<a class="reference external" href="https://www.hiascend.com/document/detail/zh/canncommercial/900/maintenref/envvar/envref_07_0090.html">HCCL_RDMA_SL</a>进行设置。<a class="headerlink" href="#a-tcsl-hccl-rdma-tchccl-rdma-sl" title="Link to this heading"></a></h4>
+</section>
+</section>
+</section>
 <section id="id6">
-<h3>编译问题<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<h2>调试相关<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<section id="id7">
+<h3>编译问题<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
 <section id="q-o0-g-bisheng-error-xxxxx-will-be-ignored-werror-woption-ignored">
 <h4>Q:自行添加”-O0 -g”编译选项调试，编译出错，”bisheng: error: xxxxx will be ignored. [-Werror -Woption-ignored]”<a class="headerlink" href="#q-o0-g-bisheng-error-xxxxx-will-be-ignored-werror-woption-ignored" title="Link to this heading"></a></h4>
 </section>
@@ -294,8 +310,8 @@
 <h4>A:SHMEM根目录的CMakeLists.txt的-Werror选项导致编译器告警被作为错误处理，注释掉-Werror编译选项即可解决。<a class="headerlink" href="#a-shmemcmakelists-txt-werror-werror" title="Link to this heading"></a></h4>
 </section>
 </section>
-<section id="id7">
-<h3>算子问题<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<section id="id8">
+<h3>算子问题<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
 <section id="q-o0-g-min-stack-size-is-xxx-larger-than-current-process-default-size-32768-please-modify-aclinit-json-and-reboot-process">
 <h4>Q:算子使用”-O0 -g”编译选项编译后，运行出错，”min stack size is xxx, larger than current process default size 32768. Please modify aclInit json, and reboot process.”<a class="headerlink" href="#q-o0-g-min-stack-size-is-xxx-larger-than-current-process-default-size-32768-please-modify-aclinit-json-and-reboot-process" title="Link to this heading"></a></h4>
 </section>
@@ -312,7 +328,6 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../code_organization.html" class="btn btn-neutral float-left" title="代码组织结构" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../SECURITY.html" class="btn btn-neutral float-right" title="安全声明" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

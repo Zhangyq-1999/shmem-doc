@@ -98,10 +98,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../debug/Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../debug/Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../SECURITY.html">安全声明</a></li>
-</ul>
 
         </div>
       </div>
@@ -186,7 +182,7 @@
 <span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclrtSetDevice</span><span class="p">(</span><span class="n">device_id</span><span class="p">);</span>
 
 <span class="n">aclshmemx_init_attr_t</span><span class="o">*</span><span class="w"> </span><span class="n">attributes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">aclshmemx_init_attr_t</span><span class="p">{</span><span class="n">rank_id</span><span class="p">,</span><span class="w"> </span><span class="n">n_ranks</span><span class="p">,</span><span class="w"> </span><span class="n">test_global_ipport</span><span class="p">,</span><span class="w"> </span><span class="n">local_mem_size</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">ACLSHMEM_DATA_OP_MTE</span><span class="p">,</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span><span class="w"> </span><span class="mi">120</span><span class="p">}};</span><span class="w"> </span><span class="c1">// 自定义attr</span>
-<span class="n">aclshmemx_init_attr</span><span class="p">(</span><span class="n">attributes</span><span class="p">);</span>
+<span class="n">aclshmemx_init_attr</span><span class="p">(</span><span class="n">ACLSHMEMX_INIT_WITH_DEFAULT</span><span class="p">,</span><span class="w"> </span><span class="n">attributes</span><span class="p">);</span>
 <span class="k">delete</span><span class="w"> </span><span class="n">attributes</span><span class="p">;</span>
 <span class="n">attributes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
 
@@ -238,7 +234,7 @@
 <span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_set_config_store_tls_key</span><span class="p">(</span><span class="n">pk</span><span class="p">,</span><span class="w"> </span><span class="n">pk_len</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">,</span><span class="w"> </span><span class="n">pw_len</span><span class="p">,</span><span class="w"> </span><span class="n">my_key_password_decrypt_handler</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>如需关闭加密特性，则调用如下接口。关闭后，则无需调用aclshmem_set_config_store_tls_key接口。</p>
+<p>如需关闭加密特性，则调用如下接口。关闭后，则无需调用aclshmemx_set_config_store_tls_key接口。</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aclshmemx_set_conf_store_tls</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="n">nullptr</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
 </pre></div>
 </div>

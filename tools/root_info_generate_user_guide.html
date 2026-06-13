@@ -80,10 +80,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../debug/Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../debug/Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../SECURITY.html">安全声明</a></li>
-</ul>
 
         </div>
       </div>
@@ -391,7 +387,7 @@ ls<span class="w"> </span>-l<span class="w"> </span>build/bin/root_info_generate
 <h2>常见问题与解决方案<a class="headerlink" href="#id22" title="Link to this heading"></a></h2>
 <section id="id23">
 <h3>问题1：工具找不到<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
-<p><strong>症状</strong>:</p>
+<p><strong>现象</strong>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./root_info_generate:<span class="w"> </span><span class="nb">command</span><span class="w"> </span>not<span class="w"> </span>found
 </pre></div>
 </div>
@@ -404,12 +400,12 @@ ls<span class="w"> </span>-l<span class="w"> </span>build/bin/root_info_generate
 </section>
 <section id="id24">
 <h3>问题2：库依赖缺失<a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
-<p><strong>症状</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>error<span class="w"> </span><span class="k">while</span><span class="w"> </span>loading<span class="w"> </span>shared<span class="w"> </span>libraries:<span class="w"> </span>libshmem_rootinfo.so:<span class="w"> </span>cannot<span class="w"> </span>open<span class="w"> </span>shared<span class="w"> </span>object<span class="w"> </span>file
+<p><strong>现象</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>error<span class="w"> </span><span class="k">while</span><span class="w"> </span>loading<span class="w"> </span>shared<span class="w"> </span>libraries:<span class="w"> </span>libshmem.so:<span class="w"> </span>cannot<span class="w"> </span>open<span class="w"> </span>shared<span class="w"> </span>object<span class="w"> </span>file
 </pre></div>
 </div>
 <p><strong>解决方案</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 设置库路径</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># root_info_generate 依赖 SHMEM 主库，设置库路径</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>install/shmem/lib:<span class="nv">$LD_LIBRARY_PATH</span>
 
 <span class="c1"># 或复制库到标准位置</span>
@@ -420,7 +416,7 @@ ldconfig
 </section>
 <section id="id25">
 <h3>问题3：驱动未初始化<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
-<p><strong>症状</strong>:</p>
+<p><strong>现象</strong>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Error:<span class="w"> </span>topo_addr_info_get_size<span class="w"> </span>failed<span class="w"> </span>with<span class="w"> </span><span class="nv">ret</span><span class="o">=</span>-1
 </pre></div>
 </div>
@@ -433,7 +429,7 @@ ldconfig
 </section>
 <section id="id26">
 <h3>问题4：权限拒绝<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
-<p><strong>症状</strong>:</p>
+<p><strong>现象</strong>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Error:<span class="w"> </span>cannot<span class="w"> </span>access<span class="w"> </span>/dev/davinci0
 </pre></div>
 </div>
@@ -451,7 +447,7 @@ sudo<span class="w"> </span>./root_info_generate<span class="w"> </span><span cl
 </section>
 <section id="id27">
 <h3>问题5：无效物理ID<a class="headerlink" href="#id27" title="Link to this heading"></a></h3>
-<p><strong>症状</strong>:</p>
+<p><strong>现象</strong>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Error:<span class="w"> </span>get_mainboard_id<span class="w"> </span>returned<span class="w"> </span>null<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">phy_id</span><span class="o">=</span><span class="m">100</span>
 </pre></div>
 </div>

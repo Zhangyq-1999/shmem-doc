@@ -80,10 +80,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../debug/Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../debug/Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../SECURITY.html">安全声明</a></li>
-</ul>
 
         </div>
       </div>
@@ -243,7 +239,7 @@
 <p>要求：<code class="docutils literal notranslate"><span class="pre">build.sh</span></code>输出目录必须为<code class="docutils literal notranslate"><span class="pre">install/</span></code>，不要使用历史默认输出目录。</p>
 <p>Linux命令（CentOS/Ubuntu）：</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 在项目根目录执行</span>
-bash<span class="w"> </span>build.sh<span class="w"> </span>install
+bash<span class="w"> </span>scripts/build.sh<span class="w"> </span>install
 
 <span class="c1"># 产物检查</span>
 ls<span class="w"> </span>-l<span class="w"> </span>install/lib/*.so

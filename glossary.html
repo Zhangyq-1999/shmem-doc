@@ -1,0 +1,685 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SHMEM 术语表 &mdash; SHMEM Guidebook 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=d6bf9227" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            SHMEM Guidebook
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">快速开始</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compilation_build_guide.html">编译与构建</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Using SHMEM</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example/api_demo.html">SHMEM API 样例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug/log_debug.html">SHMEM日志</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug/tools_debug.html">SHMEM搭配工具算子调测指导</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug/dump_debug.html">在样例工程使用Ascend C算子调测API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/def.html">SHMEM DEF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/host_api.html">HOST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/device_api.html">DEVICE API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pythonAPI.html">SHMEM Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/env_vars_intro.html">SHMEM Env Vars</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Example</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example/example.html">初始化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example/example.html#allgather">AllGather</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Multi_Instance</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="multi_instance.html">多实例支持</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="principles.html">SHMEM原理概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_organization.html">代码组织结构</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting And FAQs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="debug/Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug/Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SHMEM Guidebook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SHMEM 术语表</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/glossary.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="shmem">
+<h1>SHMEM 术语表<a class="headerlink" href="#shmem" title="Link to this heading"></a></h1>
+<p>本文面向使用 SHMEM 的开发者，整理 README、docs、include 和 examples 中常见的缩写与名词。</p>
+<p>说明：</p>
+<ul class="simple">
+<li><p>本项目中的 <code class="docutils literal notranslate"><span class="pre">SHMEM</span></code> 主要围绕“对称内存”通信模型：各 PE 按相同规则分配可远程访问的对称数据对象或对称堆内存。文档中出现“共享内存”时，通常指 SHMEM 管理的可跨 PE 访问内存区域或基于该区域实现的通信能力。</p></li>
+<li><p>除 <code class="docutils literal notranslate"><span class="pre">SHMEM</span></code> 项目特有术语，其他华为/昇腾/CANN 相关术语说明以<a class="reference external" href="https://www.hiascend.com/document/detail/zh/Glossary/gls/gls_0001.html">昇腾</a>、<a class="reference external" href="https://www.hiascend.com/cann">CANN</a>、<a class="reference external" href="https://www.unifiedbus.com/zh">灵衢 UB</a> 官网为准。</p></li>
+</ul>
+<section id="id1">
+<h2>编程模型与接口<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>术语</p></th>
+<th class="head"><p>英文展开</p></th>
+<th class="head"><p>中文说明</p></th>
+<th class="head"><p>项目语境</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SHMEM</span></code></p></td>
+<td><p>Symmetric Hierarchical Memory / Shared Memory</p></td>
+<td><p>对称内存/共享内存通信库</p></td>
+<td><p>本仓项目名，表示面向昇腾平台的多机多卡内存通信库。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">OpenSHMEM</span></code></p></td>
+<td><p>OpenSHMEM Application Programming Interface</p></td>
+<td><p>OpenSHMEM 应用编程接口规范</p></td>
+<td><p>标准化 SHMEM 编程模型的 API 规范，提供 PE、对称数据对象、RMA、AMO、Signal、集合通信等概念。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Host</span> <span class="pre">API</span></code></p></td>
+<td><p>Host-side API</p></td>
+<td><p>Host 侧接口</p></td>
+<td><p>CPU/Host 侧调用的接口，负责初始化、内存管理、通信域管理、同步和任务下发。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Device</span> <span class="pre">API</span></code></p></td>
+<td><p>Device-side API</p></td>
+<td><p>Device 侧接口</p></td>
+<td><p>AICore/kernel 上下文调用的接口，负责远程访存、同步和通信域操作。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PE</span></code></p></td>
+<td><p>Processing Element</p></td>
+<td><p>处理单元</p></td>
+<td><p>SHMEM 通信参与者编号，通常对应一个进程、rank 或设备参与方。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Team</span></code></p></td>
+<td><p>Team</p></td>
+<td><p>通信域/分组</p></td>
+<td><p>一组 PE 组成的通信域，用于限定同步和通信操作范围。<code class="docutils literal notranslate"><span class="pre">ACLSHMEM_TEAM_WORLD</span></code> 是初始化后的默认全局通信域。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Symmetric</span> <span class="pre">Memory</span></code></p></td>
+<td><p>Symmetric Memory</p></td>
+<td><p>对称内存</p></td>
+<td><p>各 PE 按相同规则分配、可通过 SHMEM 接口远程访问的内存区域。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Symmetric</span> <span class="pre">Heap</span></code></p></td>
+<td><p>Symmetric Heap</p></td>
+<td><p>对称堆</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aclshmem_malloc</span></code> / <code class="docutils literal notranslate"><span class="pre">aclshmem_free</span></code> 管理的对称内存堆。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id2">
+<h2>通信语义与同步<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>术语</p></th>
+<th class="head"><p>英文展开</p></th>
+<th class="head"><p>中文说明</p></th>
+<th class="head"><p>项目语境</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">RMA</span></code></p></td>
+<td><p>Remote Memory Access</p></td>
+<td><p>远程内存访问</p></td>
+<td><p>一侧 PE 主动访问另一侧 PE 的对称内存，包含 put/get 等单边访问操作。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">AMO</span></code></p></td>
+<td><p>Atomic Memory Operation</p></td>
+<td><p>原子内存操作</p></td>
+<td><p>对远端或本端对称内存执行 atomic add、fetch、swap、compare-swap 等原子语义操作。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SO</span></code></p></td>
+<td><p>Signal Operation</p></td>
+<td><p>信号变量/信号操作</p></td>
+<td><p>SHMEM 信号变量或信号操作，用于 put-with-signal、signal wait/op 等同步场景。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">P2P</span> <span class="pre">Sync</span></code></p></td>
+<td><p>Point-to-Point Synchronization</p></td>
+<td><p>点对点同步</p></td>
+<td><p>点对点等待、测试和同步接口语义。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CC</span></code></p></td>
+<td><p>Collective Communication</p></td>
+<td><p>集合通信</p></td>
+<td><p>多个 PE 共同参与的通信操作，例如 Barrier、Allgather、Allreduce。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MO</span></code></p></td>
+<td><p>Memory Ordering</p></td>
+<td><p>内存保序</p></td>
+<td><p>同步机制，用于保障跨处理单元的内存读写及阻塞/非阻塞接口操作的执行顺序，并确保操作完成状态可靠送达。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">put</span></code></p></td>
+<td><p>Put operation</p></td>
+<td><p>写远端操作</p></td>
+<td><p>本地 PE 主动将数据写入远端 PE 的对称地址。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get</span></code></p></td>
+<td><p>Get operation</p></td>
+<td><p>读远端操作</p></td>
+<td><p>本地 PE 主动从远端 PE 的对称地址读取数据。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">NBI</span></code></p></td>
+<td><p>Non-Blocking Immediate</p></td>
+<td><p>非阻塞立即操作</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">*_nbi</span></code> API 后缀，表示非阻塞数据操作：调用后立即返回，不等待操作完成；必须配合 <code class="docutils literal notranslate"><span class="pre">quiet()</span></code> 或 <code class="docutils literal notranslate"><span class="pre">fence()</span></code> 等内存序屏障，才能确保操作完成状态的可靠送达与全局顺序。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Blocking</span></code></p></td>
+<td><p>Blocking</p></td>
+<td><p>阻塞操作</p></td>
+<td><p>表示阻塞数据操作：调用会阻塞当前线程，返回时即保证操作完成状态的可靠送达。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Barrier</span></code></p></td>
+<td><p>Barrier Synchronization</p></td>
+<td><p>屏障同步</p></td>
+<td><p>Team 内集合同步。参与 PE 到达同步点后才继续执行，并按接口语义保证此前相关操作完成或可见。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Sync</span></code></p></td>
+<td><p>Synchronization</p></td>
+<td><p>同步</p></td>
+<td><p>与 Barrier 类似，但 <code class="docutils literal notranslate"><span class="pre">Sync</span></code> 只保证此前 memory store 的完成与可见性，不保证 SHMEM 远程更新全部完成。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Quiet</span></code></p></td>
+<td><p>Quiet</p></td>
+<td><p>完成等待</p></td>
+<td><p>等待调用 PE 先前发出的对称数据对象操作完成。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Fence</span></code></p></td>
+<td><p>Fence</p></td>
+<td><p>顺序栅栏</p></td>
+<td><p>OpenSHMEM 语义中用于约束 Put、AMO 和 store 的投递顺序；本项目当前实现与 <code class="docutils literal notranslate"><span class="pre">quiet</span></code> 行为接近，同时保证顺序和完成。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id3">
+<h2>通信引擎、协议与数据通路<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>术语</p></th>
+<th class="head"><p>英文展开</p></th>
+<th class="head"><p>中文说明</p></th>
+<th class="head"><p>项目语境</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MTE</span></code></p></td>
+<td><p>Memory Transfer Engine</p></td>
+<td><p>内存传输引擎</p></td>
+<td><p>昇腾 AICore 侧内存搬运引擎，用于 D2D、D2H、H2D、D2rH、rH2D 等通路。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DMA</span></code></p></td>
+<td><p>Direct Memory Access</p></td>
+<td><p>直接内存访问</p></td>
+<td><p>不经由通用计算单元逐字节搬运的内存访问机制。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xDMA</span></code></p></td>
+<td><p>Direct Memory Access family</p></td>
+<td><p>DMA 类引擎统称</p></td>
+<td><p>对高速 DMA 类传输引擎的统称。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SDMA</span></code></p></td>
+<td><p>System Direct Memory Access</p></td>
+<td><p>系统直接内存访问</p></td>
+<td><p>数据传输引擎，作为 RMA/AMO 的底层传输后端之一。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">UDMA</span></code></p></td>
+<td><p>Unified Direct Memory Access</p></td>
+<td><p>统一直接内存访问</p></td>
+<td><p>数据传输引擎，作为 RMA/AMO 的底层传输后端之一。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RDMA</span></code></p></td>
+<td><p>Remote Direct Memory Access</p></td>
+<td><p>远程直接内存访问</p></td>
+<td><p>数据传输引擎，允许通过网络或设备互联直接访问远端内存的机制，作为 RMA/AMO 的底层传输后端之一。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">HCCS</span></code></p></td>
+<td><p>Huawei Cache Coherent System</p></td>
+<td><p>华为缓存一致性系统</p></td>
+<td><p>昇腾服务器内 CPU/NPU 间高速互联总线。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">UB</span></code> 协议</p></td>
+<td><p>Unified Bus</p></td>
+<td><p>灵衢总线</p></td>
+<td><p>华为新一代互联协议，旨在统一数据中心内部所有互联，提供低时延、高带宽的通信。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">UBMEM</span></code> / <code class="docutils literal notranslate"><span class="pre">UBmem</span></code></p></td>
+<td><p>UBMEM</p></td>
+<td><p>内存语义</p></td>
+<td><p>华为新一代互联协议，提供内存语义通信。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">URMA</span></code></p></td>
+<td><p>Unified Remote Memory Access</p></td>
+<td><p>统一远程内存访问</p></td>
+<td><p>华为新一代互联协议，基于 UB 总线，提供类似本地访问语义的远程内存操作能力。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PCIe</span></code></p></td>
+<td><p>Peripheral Component Interconnect Express</p></td>
+<td><p>高速外设互联总线</p></td>
+<td><p>CPU 与 NPU 等其他外设的连接标准，也用于部分拓扑中的跨组互联。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SIO</span></code></p></td>
+<td><p><strong>S</strong>erial <strong>I</strong>/<strong>O</strong> Link</p></td>
+<td><p>SIO 链路/通路</p></td>
+<td><p>昇腾 910C 处理器片内，两个物理 Die （芯片裸片）之间的高速互联通路。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">RoCE</span></code> / <code class="docutils literal notranslate"><span class="pre">ROCE</span></code></p></td>
+<td><p>RDMA over Converged Ethernet</p></td>
+<td><p>基于融合以太网的 RDMA</p></td>
+<td><p>一种网络协议，允许应用通过以太网实现远程内存直接访问，常用于跨节点的网络通信。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">D2D</span></code></p></td>
+<td><p>Device to Device</p></td>
+<td><p>设备到设备</p></td>
+<td><p>本端 NPU Device 内存与对端 NPU Device 内存之间的数据访问或搬运。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">D2H</span></code></p></td>
+<td><p>Device to Host</p></td>
+<td><p>设备到主机</p></td>
+<td><p>本端 NPU Device 内存到本端 Host 内存的数据通路。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">H2D</span></code></p></td>
+<td><p>Host to Device</p></td>
+<td><p>主机到设备</p></td>
+<td><p>本端 Host 内存到本端 NPU Device 内存的数据通路。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">D2rH</span></code></p></td>
+<td><p>Device to remote Host</p></td>
+<td><p>设备到远端主机</p></td>
+<td><p>本端 NPU Device 内存到远端 PE 所在 Host 内存的数据通路。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rH2D</span></code></p></td>
+<td><p>remote Host to Device</p></td>
+<td><p>远端主机到设备</p></td>
+<td><p>远端 PE 所在 Host 内存到本端 NPU Device 内存的数据通路。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">gm2gm</span></code> / <code class="docutils literal notranslate"><span class="pre">GM2GM</span></code></p></td>
+<td><p>Global Memory to Global Memory</p></td>
+<td><p>全局内存到全局内存</p></td>
+<td><p>Device 侧 AICore 驱动的 GM 到 GM 数据面接口/通路，常用于跨 PE 对称内存访问。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ub2gm</span></code> / <code class="docutils literal notranslate"><span class="pre">UB2GM</span></code></p></td>
+<td><p>Unified Buffer to Global Memory</p></td>
+<td><p>统一缓冲区到全局内存</p></td>
+<td><p>AICore 本地 UB 到远端设备 GM 的数据面接口/通路。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CMO</span></code></p></td>
+<td><p>Cache Maintenance Operation</p></td>
+<td><p>缓存维护操作</p></td>
+<td><p>SDMA 侧公开的缓存维护接口，用于显式控制缓存预取/维护操作，如 GM2L2。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id4">
+<h2>内存、硬件与执行单元<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>术语</p></th>
+<th class="head"><p>英文展开</p></th>
+<th class="head"><p>中文说明</p></th>
+<th class="head"><p>项目语境</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Host</span></code></p></td>
+<td><p>Host</p></td>
+<td><p>主机侧</p></td>
+<td><p>CPU 侧控制面，负责初始化、内存管理、bootstrap、team/sync 管理和 host API 下发。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Device</span></code></p></td>
+<td><p>Device</p></td>
+<td><p>设备侧</p></td>
+<td><p>NPU/AICore 数据面，执行 RMA、同步和通信 kernel。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">NPU</span></code></p></td>
+<td><p>Neural Processing Unit</p></td>
+<td><p>神经网络处理器</p></td>
+<td><p>昇腾 AI 处理器设备。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">AICore</span></code> / <code class="docutils literal notranslate"><span class="pre">AI</span> <span class="pre">Core</span></code></p></td>
+<td><p>AICore</p></td>
+<td><p>昇腾 AICore</p></td>
+<td><p>Device 侧执行自定义算子和通信数据面代码的核心。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">AIV</span></code></p></td>
+<td><p>AIV / Vector Core</p></td>
+<td><p>昇腾向量核</p></td>
+<td><p>分离架构下 Vector Core 的官方名称，承担向量计算与低时延通信。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">AIC</span></code></p></td>
+<td><p>AIC / Cube Core</p></td>
+<td><p>昇腾立方核</p></td>
+<td><p>分离架构下 Cube Core 的官方名称，负责矩阵运算。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VEC</span></code></p></td>
+<td><p>Vector Core</p></td>
+<td><p>向量核</p></td>
+<td><p>与 VECTOR_CORE 同义，指代向量计算单元。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CUBE</span></code></p></td>
+<td><p>Cube Core</p></td>
+<td><p>Cube 核</p></td>
+<td><p>与 Cube Unit 同义，专门执行高算力的矩阵乘加运算。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">GM</span></code></p></td>
+<td><p>Global Memory</p></td>
+<td><p>全局内存</p></td>
+<td><p>Device 侧全局可寻址内存，接口中常以 <code class="docutils literal notranslate"><span class="pre">__gm__</span></code> 标识。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">UB</span></code></p></td>
+<td><p>Unified Buffer</p></td>
+<td><p>统一缓冲区</p></td>
+<td><p>AICore 片上临时缓冲区，接口中常以 <code class="docutils literal notranslate"><span class="pre">__ubuf__</span></code> 或 <code class="docutils literal notranslate"><span class="pre">LocalTensor</span></code> 标识。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">HBM</span></code></p></td>
+<td><p>High Bandwidth Memory</p></td>
+<td><p>高带宽内存</p></td>
+<td><p>NPU 侧高带宽设备内存。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DRAM</span></code></p></td>
+<td><p>Dynamic Random Access Memory</p></td>
+<td><p>动态随机访问内存</p></td>
+<td><p>Host 侧内存。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">L2</span></code></p></td>
+<td><p>Level-2 Cache</p></td>
+<td><p>二级缓存</p></td>
+<td><p>CMO、缓存预取和示例中出现的缓存层级。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id5">
+<h2>平台、环境变量与工具<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>术语</p></th>
+<th class="head"><p>英文展开</p></th>
+<th class="head"><p>中文说明</p></th>
+<th class="head"><p>项目语境</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CANN</span></code></p></td>
+<td><p>Compute Architecture for Neural Networks</p></td>
+<td><p>昇腾异构计算架构软件栈</p></td>
+<td><p>SHMEM 依赖 CANN 编译、运行和设备 API。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ACL</span></code> / <code class="docutils literal notranslate"><span class="pre">AscendCL</span></code></p></td>
+<td><p>Ascend Computing Language</p></td>
+<td><p>昇腾计算语言/运行时 API</p></td>
+<td><p>初始化、内存、stream、Graph 等 Host 侧运行时 API 依赖。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MPI</span></code></p></td>
+<td><p>Message Passing Interface</p></td>
+<td><p>消息传递接口</p></td>
+<td><p>可作为 bootstrap 控制通道后端之一，用于 rank 间 allgather/barrier。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">TLS</span></code></p></td>
+<td><p>Transport Layer Security</p></td>
+<td><p>传输层安全协议</p></td>
+<td><p>SHMEM 默认启用的通信加密机制。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SSL</span></code></p></td>
+<td><p>Secure Sockets Layer</p></td>
+<td><p>安全套接字层</p></td>
+<td><p>安全连接相关依赖和测试中常与 TLS 相关。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">UID</span></code></p></td>
+<td><p>Unique ID</p></td>
+<td><p>唯一标识</p></td>
+<td><p>初始化/bootstrap 通信标识和相关环境变量命名。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">IP</span></code> / <code class="docutils literal notranslate"><span class="pre">IPv4</span></code> / <code class="docutils literal notranslate"><span class="pre">IPv6</span></code></p></td>
+<td><p>Internet Protocol / Internet Protocol version 4 / Internet Protocol version 6</p></td>
+<td><p>网际协议/IPv4/IPv6</p></td>
+<td><p>bootstrap 地址、网口协议和网络配置中使用。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">HCCL</span></code></p></td>
+<td><p>Huawei Collective Communication Library</p></td>
+<td><p>华为集合通信库</p></td>
+<td><p>RDMA 环境变量 <code class="docutils literal notranslate"><span class="pre">HCCL_RDMA_TC</span></code>、<code class="docutils literal notranslate"><span class="pre">HCCL_RDMA_SL</span></code> 复用 HCCL 配置。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">TC</span></code></p></td>
+<td><p>Traffic Class</p></td>
+<td><p>流量类别</p></td>
+<td><p>RDMA 网络 QoS 参数，对应 <code class="docutils literal notranslate"><span class="pre">HCCL_RDMA_TC</span></code>。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SL</span></code></p></td>
+<td><p>Service Level</p></td>
+<td><p>服务等级</p></td>
+<td><p>RDMA 网络服务等级参数，对应 <code class="docutils literal notranslate"><span class="pre">HCCL_RDMA_SL</span></code>。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PFC</span></code></p></td>
+<td><p>Priority Flow Control</p></td>
+<td><p>优先级流控</p></td>
+<td><p>与 RDMA 场景 SL/网络配置相关。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SOC_TYPE</span></code></p></td>
+<td><p>System-on-Chip Type</p></td>
+<td><p>芯片型号类型</p></td>
+<td><p>构建脚本和工具文档中的硬件型号选择参数。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ASCEND_HOME_PATH</span></code></p></td>
+<td><p>Ascend home path</p></td>
+<td><p>Ascend 安装路径</p></td>
+<td><p>CANN/Ascend 安装路径环境变量。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ASCEND_TOOLKIT_HOME</span></code></p></td>
+<td><p>Ascend Toolkit home</p></td>
+<td><p>Ascend Toolkit 安装路径</p></td>
+<td><p>Toolkit 安装路径环境变量。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ASCEND_RT_VISIBLE_DEVICES</span></code></p></td>
+<td><p>Ascend Runtime Visible Devices</p></td>
+<td><p>昇腾运行时可见设备</p></td>
+<td><p>控制当前进程可见 Device 的环境变量。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code></p></td>
+<td><p>Library load path</p></td>
+<td><p>动态库搜索路径</p></td>
+<td><p>运行示例和脚本时配置 SHMEM/CANN 动态库搜索路径。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID</span></code></p></td>
+<td><p>SHMEM Unique ID Session ID</p></td>
+<td><p>SHMEM UID 会话标识</p></td>
+<td><p>指定 PE 0 bootstrap 监听 IP 和端口。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SOCK_IFNAME</span></code></p></td>
+<td><p>SHMEM Unique ID Socket Interface Name</p></td>
+<td><p>SHMEM UID 网口名</p></td>
+<td><p>指定 PE 0 bootstrap 使用的网口名和网络层协议。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SHMEM_INSTANCE_PORT_RANGE</span></code></p></td>
+<td><p>SHMEM Instance Port Range</p></td>
+<td><p>多实例端口范围</p></td>
+<td><p>多实例场景中为各实例 bootstrap 指定可用端口范围。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SHMEM_CYCLE_PROF_PE</span></code></p></td>
+<td><p>SHMEM Cycle Profiling PE</p></td>
+<td><p>SHMEM cycle 采集 PE</p></td>
+<td><p>指定 profiling 采集的 PE。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SHMEM_LOG_LEVEL</span></code></p></td>
+<td><p>SHMEM Log Level</p></td>
+<td><p>SHMEM 日志级别</p></td>
+<td><p>控制 SHMEM 日志输出级别。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ENABLE_ASCENDC_DUMP</span></code></p></td>
+<td><p>Enable AscendC Dump</p></td>
+<td><p>启用 AscendC Dump</p></td>
+<td><p>编译期开关，用于启用 AscendC dump 调试逻辑。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id6">
+<h2>示例、调测与性能术语<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>术语</p></th>
+<th class="head"><p>英文展开</p></th>
+<th class="head"><p>中文说明</p></th>
+<th class="head"><p>项目语境</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/900/programug/Ascendcopdevg/atlas_ascendc_10_10064.html"><code class="docutils literal notranslate"><span class="pre">SIMT</span></code></a></p></td>
+<td><p>Single Instruction Multiple Threads</p></td>
+<td><p>单指令多线程</p></td>
+<td><p>示例中的指令/执行模式。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/900/programug/Ascendcopdevg/atlas_ascendc_10_0015.html"><code class="docutils literal notranslate"><span class="pre">SIMD</span></code></a></p></td>
+<td><p>Single Instruction Multiple Data</p></td>
+<td><p>单指令多数据</p></td>
+<td><p>示例中的指令/执行模式。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/900/programug/Ascendcopdevg/atlas_ascendc_10_10052.html"><code class="docutils literal notranslate"><span class="pre">VF_TYPE</span></code></a></p></td>
+<td><p>Vector Function Type</p></td>
+<td><p>向量功能类型参数</p></td>
+<td><p>SIMT 与 SIMD 混合编程模式，整个执行过程以 VF 为基本调度单位。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DFX</span></code></p></td>
+<td><p>Design for X</p></td>
+<td><p>可诊断性/可维护性等工程能力</p></td>
+<td><p>log、sanitizer、profiling、debug 等能力的统称。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://gitcode.com/Ascend/mssanitizer/blob/master/docs/zh/install_guide/mssanitizer_install_guide.md"><code class="docutils literal notranslate"><span class="pre">mssanitizer</span></code></a></p></td>
+<td><p>MindStudio Sanitizer</p></td>
+<td><p>MindStudio 内存检测工具</p></td>
+<td><p>内存检测工具。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://gitcode.com/Ascend/mstx/blob/master/docs/zh/install_guide/mstx_install_guide.md"><code class="docutils literal notranslate"><span class="pre">MSTX</span></code></a></p></td>
+<td><p>MindStudio Tools Extension</p></td>
+<td><p>MindStudio 工具扩展（性能打点 API）</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mstx</span></code> 工具安装和 mssanitizer 相关流程中出现；CANN 性能分析 API，支持自定义打点定位性能瓶颈。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PROF</span></code> / <code class="docutils literal notranslate"><span class="pre">Profiling</span></code></p></td>
+<td><p>Profiling</p></td>
+<td><p>性能采集/打点</p></td>
+<td><p>cycle profiling、perftest 等性能采集相关术语。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DUMP</span></code></p></td>
+<td><p>Dump</p></td>
+<td><p>数据/运行信息转储</p></td>
+<td><p>AscendC dump 调试能力。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PERF</span></code> / <code class="docutils literal notranslate"><span class="pre">perftest</span></code></p></td>
+<td><p>Performance Test</p></td>
+<td><p>性能测试</p></td>
+<td><p>性能测试示例、脚本和输出指标。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">throughput</span></code></p></td>
+<td><p>Throughput</p></td>
+<td><p>吞吐</p></td>
+<td><p>性能测试输出指标。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bandwidth</span></code></p></td>
+<td><p>Bandwidth</p></td>
+<td><p>带宽</p></td>
+<td><p>性能测试输出指标。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">latency</span></code></p></td>
+<td><p>Latency</p></td>
+<td><p>时延</p></td>
+<td><p>性能测试输出指标。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KB</span></code> / <code class="docutils literal notranslate"><span class="pre">MB</span></code> / <code class="docutils literal notranslate"><span class="pre">GB</span></code></p></td>
+<td><p>Kilobyte / Megabyte / Gigabyte</p></td>
+<td><p>千字节/兆字节/吉字节</p></td>
+<td><p>文档、示例参数和性能输出中的容量单位。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright  2025 Huawei Technologies Co., Ltd..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

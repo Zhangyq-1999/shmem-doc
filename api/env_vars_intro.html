@@ -62,7 +62,10 @@
 <li class="toctree-l1"><a class="reference internal" href="device_api.html">DEVICE API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pythonAPI.html">SHMEM Python API Reference</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">SHMEM Env Vars</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">初始化相关</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">初始化相关</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rdma">RDMA场景</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#id2">多实例相关</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id3">日志相关</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#profiling">Profiling相关</a></li>
@@ -87,10 +90,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../debug/Troubleshooting_FAQs.html">SHMEM 使用限制</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../debug/Troubleshooting_FAQs.html#id1">SHMEM 常见问题</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Security harding and public IP address</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../SECURITY.html">安全声明</a></li>
 </ul>
 
         </div>
@@ -123,16 +122,31 @@
 <h2>初始化相关<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
 <p>使用unique id的接口初始化时，需要手动配置环境变量SHMEM_UID_SESSION_ID或者SHMEM_UID_SOCK_IFNAME，同时配置时只读SHMEM_UID_SESSION_ID。指定SHMEM_UID_SESSION_ID时需保证ip可连通，port空闲。指定SHMEM_UID_SOCK_IFNAME时需保证网口指定的网络协议地址存在。</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID</span></code>:直接指定PE 0的监听socket的ip和端口。
+<li><p><code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID</span></code>:直接指定PE 0的监听socket的ip和端口，支持格式：</p>
+<ul>
+<li><p><strong>IPv4字面量</strong>：<code class="docutils literal notranslate"><span class="pre">ip:port</span></code>，如 <code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID=192.168.1.100:1234</span></code></p></li>
+<li><p><strong>IPv6字面量</strong>：<code class="docutils literal notranslate"><span class="pre">[ip]:port</span></code>，如 <code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID=[::1]:886</span></code></p></li>
+<li><p><strong>主机名</strong>：<code class="docutils literal notranslate"><span class="pre">hostname:port</span></code>，如 <code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SESSION_ID=my-server:5555</span></code>（主机名通过系统名称解析服务（DNS、/etc/hosts 等）解析为实际 IP 地址）
 SHMEM_UID_SESSION_ID配置示例：
 SHMEM_UID_SESSION_ID=127.0.0.1:1234
-SHMEM_UID_SESSION_ID=[6666:6666:6666:6666:6666:6666:6666:6666]:886</p></li>
+SHMEM_UID_SESSION_ID=[6666:6666:6666:6666:6666:6666:6666:6666]:886
+SHMEM_UID_SESSION_ID=localhost:8888</p></li>
+</ul>
+</li>
 <li><p><code class="docutils literal notranslate"><span class="pre">SHMEM_UID_SOCK_IFNAME</span></code>:指定PE 0的监听socket的网口名和网络层协议。
 SHMEM_UID_SOCK_IFNAME配置示例：
 SHMEM_UID_SOCK_IFNAME=enpxxxx:inet4  取ipv4
 SHMEM_UID_SOCK_IFNAME=enpxxxx:inet6  取ipv6</p></li>
 </ul>
 <p>以上两个环境变量均未配置时自动搜索可用网口（IPv4/IPv6均可，跳过lo/docker/veth/br-/virbr/tun/tap等虚拟网口）。</p>
+<section id="rdma">
+<h3>RDMA场景<a class="headerlink" href="#rdma" title="Link to this heading"></a></h3>
+<p>使能RDMA场景下，配置TC和SL</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">HCCL_RDMA_TC</span></code>: 复用HCCL的环境变量，配置RDMA网卡的traffic class。该环境变量的取值范围为[0, 255]，且需要配置为4的整数倍，默认值: 132。<a class="reference external" href="https://www.hiascend.com/document/detail/zh/canncommercial/900/maintenref/envvar/envref_07_0089.html">参考链接</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HCCL_RDMA_SL</span></code>: 复用HCCL的环境变量，配置RDMA网卡的service level。该值需要和网卡配置的PFC优先级保持一致，若配置不一致可能导致性能劣化。该环境变量需要配置为整数，取值范围为[0, 7], 默认值: 4。<a class="reference external" href="https://www.hiascend.com/document/detail/zh/canncommercial/900/maintenref/envvar/envref_07_0090.html">参考链接</a></p></li>
+</ul>
+</section>
 </section>
 <section id="id2">
 <h2>多实例相关<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
